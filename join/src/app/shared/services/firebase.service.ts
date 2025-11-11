@@ -6,7 +6,7 @@ import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 })
 export class FirebaseService {
 
-  firestore = inject(Firestore);
+  firestore: Firestore = inject(Firestore);
   unsubscribe;
 
   constructor() {
@@ -15,6 +15,12 @@ export class FirebaseService {
         console.log("data :", contact.data());
       });
     });
+  }
+
+  ngOnDestroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
 }
