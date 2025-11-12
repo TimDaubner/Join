@@ -1,10 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { Contact } from '../../interfaces/contact.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
+
+  contact: Contact[] = []
 
   firestore: Firestore = inject(Firestore);
   unsubscribe;
@@ -22,5 +25,7 @@ export class FirebaseService {
       this.unsubscribe();
     }
   }
+
+
 
 }

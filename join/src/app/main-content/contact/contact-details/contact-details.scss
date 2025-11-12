@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+#details_head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#headline_span {
+    font-size: 64px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 1);   
+}
+
+#slogan_span {
+    font-size: 27px;
+}
+
+hr {
+    width: 0px;
+    height: 64px;
+    border: 1px solid $secondary;
+    margin: 0 16px;
+}

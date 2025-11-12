@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FirebaseService } from '../../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-contact-details',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class ContactDetails {
 
+
+  constructor() {
+  }
 }
