@@ -2,7 +2,7 @@
 
 #add_contact {
     width: 1300px;
-    height: 700px;
+    height: 550px;
     display: flex;
     margin: 64px;
     border: 2px solid $primary;
@@ -44,7 +44,9 @@
 }
 
 #close_button {
-    margin: 48px;
+    position: absolute;
+    margin-top: 48px;
+    margin-right: 48px;
     background: none;
     border: none;
     align-self: flex-end;
