@@ -21,7 +21,6 @@ export class FirebaseService {
         this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact))
       });
     });
-    
   }
 
   ngOnDestroy() {
@@ -33,20 +32,10 @@ export class FirebaseService {
   setContactObject(idParam:string, obj: Contact): Contact{
     return {
       id: idParam,
-      name: obj.name,
+      surname: obj.surname,
+      lastname: obj.lastname,
       mail: obj.mail,
       phone: obj.phone,
     }
   }
-
-   async getSingleContact(idParam:string) {
-    const contactRef = doc(this.firestore, 'contacts', idParam);
-    const contactSnap = await getDoc(contactRef);
-    if (contactSnap.exists()) {
-      console.log("Document Data: ", contactSnap.data());
-    } else {
-      console.log("no documentoo");
-    }
-  }
-
 }

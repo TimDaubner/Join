@@ -14,17 +14,16 @@
 
 <div>
     <h4>Email</h4>
-    <p>{{singleContact}}</p>
 </div>
 
 <div>
     <h4>Phone</h4>
-    <p>{{singleContact}}</p>
 </div>
 
 @for (item of firebase.contactList; track $index) {
     <div class="contact">
-        <p>{{item.name}}</p>
+        <p>{{item.surname}}</p>
+        <p>{{item.lastname}}</p>
         <p>{{item.mail}}</p>
         <p>{{item.phone}}</p>
     </div>
