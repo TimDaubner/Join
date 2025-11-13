@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, doc, getDoc } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
 import { Contact } from '../../interfaces/contact.interface';
 
 
@@ -10,8 +10,19 @@ export class FirebaseService {
 
   contact: Contact[] = [];
   contactList: Contact[] = [];
+  currentIndex:number | undefined;
 
   firestore: Firestore = inject(Firestore);
+  
+  initials = "";
+  contactSelected = false;
+  currentContact = {
+    surname: "",
+    lastname: "",
+    mail: "",
+    phone: "",
+  };
+
   unsubscribe;
 
   constructor() {
@@ -38,4 +49,25 @@ export class FirebaseService {
       phone: obj.phone,
     }
   }
+
+  showContactDetails($index:number){
+    this.currentContact = this.contactList[$index]
+    this.contactSelected = true;
+    this.getInitials($index);
+    this.currentIndex = $index;
+  }
+
+  getInitials($index:number) {
+    let firstInitial = this.contactList[$index].surname.trim().charAt(0).toUpperCase();
+    let secondInitial = this.contactList[$index].lastname.trim().charAt(0).toUpperCase();
+    this.initials = firstInitial + secondInitial;
+    console.log(this.initials);
+    console.log(this.contactList[$index]);
+  }
+
+  async deleteContact($index:number) {
+    await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
+    this.contactSelected = false;
+  }
+
 }
