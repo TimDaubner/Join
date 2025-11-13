@@ -1,30 +1,38 @@
-<div id="details_head">
-    <span id="headline_span">Contacts</span> <hr> <span id="slogan_span">Better with a team</span>
-</div>
-<div>
-    Placeholder Kreis
-    <div>
+<div id="contact_details">
+    <div id="details_head">
+        <span id="headline_span">Contacts</span> <hr> <span id="slogan_span">Better with a team</span>
+    </div>
+    <div id="contact_content_div" [class.d_none]="!contactSelected">
+        <div id="contact_details_name">
+            <div id="profile_circle">
+                <span>{{initials}}</span>
+            </div>
+            <div>
+                <span>{{currentContact.surname}} </span> <span>{{currentContact.lastname}}</span>
+                <div id="contact_details_button">
+                    <button><img src="./assets/icons/edit.svg" alt="">Edit</button>
+                    <button><img src="./assets/icons/delete.svg" alt="">delete</button>
+                </div>
+            </div>
+        </div>
+        <h3>Contact Information</h3>
+
         <div>
-            <button>edit</button>
-            <button>delete</button>
+            <h4>Email</h4>
+            <a href="mailto:{{currentContact.mail}}">{{currentContact.mail}}</a>
+        </div>
+
+        <div>
+            <h4>Phone</h4>
+            <p>{{currentContact.phone}}</p>
         </div>
     </div>
 </div>
-<h3>Contact Information</h3>
 
-<div>
-    <h4>Email</h4>
-</div>
-
-<div>
-    <h4>Phone</h4>
-</div>
 
 @for (item of firebase.contactList; track $index) {
-    <div class="contact">
-        <p>{{item.surname}}</p>
-        <p>{{item.lastname}}</p>
+    <div class="contact" (click)="showContactDetails($index)">
+        <p>{{item.surname}} {{item.lastname}}</p>
         <p>{{item.mail}}</p>
-        <p>{{item.phone}}</p>
     </div>
 }
