@@ -1,5 +1,5 @@
 ## Für das arbeiten mit branches
-[woring with branches]([url](https://gist.github.com/albert-wissigkeit/ae824b85a3b6629db33379c9344d8ba9))
+[working with branches]([url](https://gist.github.com/albert-wissigkeit/ae824b85a3b6629db33379c9344d8ba9))
 
 # **Merge branches Step-by-Step**:
 
