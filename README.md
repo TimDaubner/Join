@@ -4,17 +4,17 @@
 # **Merge branches step-by-step**:
 
 - fetch all remotes
-- git checkout <branch-name> (branche we want to be merged)
-- git merge merge-branch (merge the current branch with the merge branch)
+- git checkout merge-branch (branche we want to be merged)
+- git merge <branch-name> (merge the current branch with the merge branch)
 - git push origin/merge-branch (to push the changes)
 
 ## **Example commands**:
 
 - ``git fetch --all``
-- ``git checkout tim``
-- ``git pull origin/tim (not necessary)``
-- ``git merge merge-branch``
-- ``git push origin/tim``
+- ``git checkout merge-branch``
+- ``git pull origin/merge-branch (not necessary)``
+- ``git merge tim``
+- ``git push origin/merge-branch``
 
 ### **Squash merge commits**:
 
