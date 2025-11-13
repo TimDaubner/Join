@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
 import { Contact } from '../../interfaces/contact.interface';
 
 
@@ -65,6 +65,12 @@ export class FirebaseService {
     console.log(this.contactList[$index]);
   }
 
+  async addContactToDatabase(contact: Contact) {
+    await addDoc(collection(this.firestore, "contacts"), contact)
+    console.log(this.contactList);
+    
+  }
+  
   async deleteContact($index:number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;

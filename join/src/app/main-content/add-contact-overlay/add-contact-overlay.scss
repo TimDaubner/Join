@@ -1,0 +1,126 @@
+@use 'variables' as *;
+
+#add_contact {
+    width: 1300px;
+    height: 700px;
+    display: flex;
+    margin: 64px;
+    border: 2px solid $primary;
+    border-radius: 32px;
+}
+
+#overlay_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    background-color: $primary;
+    color: $white;
+    flex: 1;
+    border-radius: 28px 0 0 28px;
+    padding: 8px;
+    >img {
+        width: 55px;
+        height: 66px;
+    }
+    >h2 {
+        font-size: 61px;
+        font-weight: 700;
+        margin: 24px 0;
+    }
+    >p {
+        font-size: 21px;
+    }
+    >hr {
+        height: 0;
+        width: 100px;
+        border: 2px solid $secondary;
+    }
+}
+
+#overlay_right {
+    display: flex;
+    flex-direction: column;
+    flex: 2
+}
+
+#close_button {
+    margin: 48px;
+    background: none;
+    border: none;
+    align-self: flex-end;
+    cursor: pointer;
+    >img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+#contact_form_div {
+    display: flex;
+    flex-direction: column;
+}
+
+#profile_picture {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+#overlay_right_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 32px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    >input {
+        width: 422px;
+        height: 50px;
+        border-radius: 8px;
+        padding-left: 8px;
+        font-size: 20px;
+    }
+}
+
+#form_buttons {
+    display: flex;
+    gap: 32px;
+}
+
+#submit_button {
+    width: 214px;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background-color: $primary;
+    color: $white;
+    font-size: 21px;
+    font-weight: 700;
+    border: none;
+}
+
+#cancel_button {
+    width: 126px;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    font-weight: 400;
+    color: black;
+    font-size: 21px;
+    border-radius: 10px;
+}
