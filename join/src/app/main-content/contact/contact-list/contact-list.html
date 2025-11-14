@@ -2,11 +2,10 @@
     <button (click)="openAddNewContact()">Add new contact <img src="" alt=""></button>
     <div class="gray-line"></div>
     <div class="space">
-        @for (contact of contactList; track $index; let i = $index) {
+        @for (contact of firebase.contactList; track $index; let i = $index) {
             <img src="" alt="">
-            @if(contactList[i-1])
-                {
-                    @if(contact.lastname.charAt(0) != contactList[i-1].lastname.charAt(0)){
+            @if(firebase.contactList[i-1]){
+                    @if(contact.lastname.charAt(0) != firebase.contactList[i-1].lastname.charAt(0)){
                     <span>{{contact.lastname.charAt(0)}}</span>
                     <div class="line"></div>
                 }
@@ -21,11 +20,11 @@
                     {{contact.lastname.charAt(0)}}
                 </div>
                 <div>
-                    <div>
-                        <b>{{contact.surname}}</b>
+                    <div (click)="showContact(i)">
+                        <b>{{contact.surname}} </b>
                         <b>{{contact.lastname}}</b>
                     </div>
-                    <a :href="mailto:{{contact.email}}">{{contact.email}}</a>
+                    <a :href="mailto:{{contact.mail}}">{{contact.mail}}</a>
                 </div>
             </div>
         }

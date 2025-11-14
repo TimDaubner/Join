@@ -28,11 +28,3 @@
         </div>
     </div>
 </div>
-
-
-@for (item of firebase.contactList; track $index) {
-    <div class="contact" (click)="firebase.showContactDetails($index)">
-        <p>{{item.surname}} {{item.lastname}}</p>
-        <p>{{item.mail}}</p>
-    </div>
-}

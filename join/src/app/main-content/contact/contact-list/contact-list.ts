@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FirebaseService } from '../../../shared/services/firebase.service';
+import { Contact } from '../../../interfaces/contact.interface';
 
 @Component({
   selector: 'app-contact-list',
@@ -7,58 +9,22 @@ import { Component } from '@angular/core';
   styleUrl: './contact-list.scss',
 })
 export class ContactList {
-  contactList: {
-    surname: string,
-    lastname: string,
-    email: string
-  }[] = [
-      {
-        surname: "Tim",
-        lastname: "Daubner",
-        email: "tim.daubner@outlook.com"
-      },
-      {
-        surname: "Harald",
-        lastname: "Grün",
-        email: "h.gruen@yahoo.com"
-      },
-      {
-        surname: "Jannick",
-        lastname: "Bauer",
-        email: "j-bauer@gmx.com"
-      },
-      {
-        surname: "Davina",
-        lastname: "Lang",
-        email: "lang@service.com"
-      },
-      {
-        surname: "Davina",
-        lastname: "Langenau",
-        email: "lang@service.com"
-      },
-      {
-        surname: "Davina",
-        lastname: "Langs",
-        email: "lang@service.com"
-      },
-      {
-        surname: "Davina",
-        lastname: "Mangs",
-        email: "lang@service.com"
-      },
-      {
-        surname: "Davina",
-        lastname: "Danks",
-        email: "lang@service.com"
-      },
-    ]
+  firebase = inject(FirebaseService)
+  contactList: Contact[] = this.firebase.contactList;
+
+
 
   constructor() {
-    this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
-    console.log(this.contactList);
-    let letter = this.contactList[0].lastname.charAt(0);
-    console.log(letter);
+    this.firebase;
+    this.sortFunc();
+  }
+
+  sortFunc() {
+    this.firebase.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
+  }
+
+  showContact(index: number) {
+    this.firebase.showContactDetails(index);
   }
 
   openAddNewContact() {
