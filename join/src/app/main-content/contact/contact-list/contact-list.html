@@ -1,10 +1,23 @@
-<button>Add new contact <img src="" alt=""></button>
-@for (contact of contactList; track $index) {
+<button (click) = "openAddNewContact()">Add new contact <img src="" alt=""></button>
+@for (contact of contactList; track $index; let i = $index) {
     <div>
         <img src="" alt="">
+        @if(contactList[i-1])
+        {
+            @if(contact.lastname.charAt(0) != contactList[i-1].lastname.charAt(0)){
+                <b>{{contact.lastname.charAt(0)}}</b>
+                <div class="line"></div>
+            }
+        }
+        @else if(i == 0) {
+            <b>{{contact.lastname.charAt(0)}}</b>
+            <div class="line"></div>
+        }
         <div>
-            <b>{{contact.name}}</b>
+            <!-- <b>{{contact.surname}}</b> -->
+            <b>{{contact.lastname}}</b>
             <a :href="mailto:{{contact.email}}">{{contact.email}}</a>
         </div>
     </div>
 }
+<app-contact-overlay/>
