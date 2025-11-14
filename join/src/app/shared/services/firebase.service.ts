@@ -10,7 +10,7 @@ export class FirebaseService {
 
   contact: Contact[] = [];
   contactList: Contact[] = [];
-  currentIndex:number | undefined;
+  currentIndex!:number;
 
   firestore: Firestore = inject(Firestore);
   
