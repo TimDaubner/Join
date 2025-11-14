@@ -4,7 +4,7 @@ import { ContactList } from './contact-list/contact-list';
 
 @Component({
   selector: 'app-contact',
-  imports: [ContactDetails,ContactList],
+  imports: [ContactDetails, ContactList],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
-import { Contact } from '../../../interfaces/contact.interface';
+
 
 
 @Component({
@@ -12,15 +12,15 @@ import { Contact } from '../../../interfaces/contact.interface';
 
 export class ContactDetails {
 firebase = inject(FirebaseService)
-contactSnap = {
-  name: "",
-  mail: "",
-  phone: "",
-};
+
+
 
   constructor() {
     this.firebase;
   }
 
+  
+
+  
 
 }

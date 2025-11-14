@@ -1,0 +1,28 @@
+<div id="add_contact">
+    <div id="overlay_left">
+        <img src="./assets/icons/join_logo_white.svg" alt="">
+        <h2>Add contact</h2>
+        <p>Tasks are better with a team!</p>
+        <hr>
+    </div>
+    <div id="overlay_right">
+        <button id="close_button"><img src="./assets/icons/close.svg" alt=""></button>
+        <div id="overlay_right_content">
+            <div id="profile_picture">
+                <img src="./assets/icons/person.svg" alt="">
+            </div>
+            <div id="contact_form_div">
+                <form (ngSubmit)="submitContact()">
+                    <input name="surname" placeholder="Surname" [(ngModel)]="contact.surname" type="text">
+                    <input name="lastname" placeholder="Lastname" [(ngModel)]="contact.lastname" type="text">
+                    <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text">
+                    <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text">
+                    <div id="form_buttons">
+                        <button id="cancel_button">Cancel <img src="./assets/icons/close.svg" alt=""></button>
+                        <button id="submit_button" type="submit" [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Add Contact <img src="./assets/icons/check.svg" alt=""></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
