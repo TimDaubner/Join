@@ -1,0 +1,56 @@
+@use 'variables' as *;
+
+.header {
+  background-color: $white;
+  color: $black;
+  height: 96px;
+  padding: 0;
+  box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: clamp(180px, 16.1vw, 232px);
+  width: calc(100vw - clamp(180px, 16.1vw, 232px));
+  height: 96px;
+  z-index: 100;
+
+  .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: calc(1920px - clamp(180px, 16.1vw, 232px));
+    margin: 0;
+    padding: 0 40px 0 116px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .header_icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+
+    .btn_help {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      background: url('/assets/img/help.png') no-repeat center;
+      background-size: contain;
+
+      &:hover {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+}

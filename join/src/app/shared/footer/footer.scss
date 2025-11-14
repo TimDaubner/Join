@@ -15,7 +15,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     gap: 114px;
 
     .logo {
@@ -30,6 +30,10 @@
       height: 70%;
     }
 
+    a {
+      cursor: pointer;
+    }
+
     .menu_elements {
       display: flex;
       flex-direction: column;
@@ -38,23 +42,21 @@
       .nav_link {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 10.5px;
+        gap: 10px;
         color: $nav-button;
         font-size: 16px;
-        padding: 8px 0;
+        padding: 8px 0 8px 20%;
         width: 100%;
-        text-align: center;
-
-        cursor: pointer;
+        text-align: left;
 
         img {
           width: 25px;
           height: 25px;
+          flex-shrink: 0;
         }
 
         span {
-          flex: 1;
+          text-align: left;
         }
 
         &:hover {
@@ -76,15 +78,14 @@
   .legal {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 4px;
 
     a {
       color: $nav-button;
       font-size: 16px;
       font-weight: 400;
-      padding: 9px 0;
-      text-align: center;
+      padding: 9px 0 9px 20%;
+      text-align: left;
       cursor: pointer;
       width: 100%;
 
