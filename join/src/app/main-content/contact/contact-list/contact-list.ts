@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ContactOverlay } from "../contact-overlay/contact-overlay";
 
 @Component({
   selector: 'app-contact-list',
-  imports: [ContactOverlay],
+  imports: [],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })
