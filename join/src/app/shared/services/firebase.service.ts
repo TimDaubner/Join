@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
+import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../../interfaces/contact.interface';
 
 
@@ -22,6 +22,13 @@ export class FirebaseService {
     mail: "",
     phone: "",
   };
+
+  editedContact:Contact = {
+    surname: "",
+    lastname: "",
+    mail: "",
+    phone: "",
+  }
 
   unsubscribe;
 
@@ -61,19 +68,33 @@ export class FirebaseService {
     let firstInitial = this.contactList[$index].surname.trim().charAt(0).toUpperCase();
     let secondInitial = this.contactList[$index].lastname.trim().charAt(0).toUpperCase();
     this.initials = firstInitial + secondInitial;
-    console.log(this.initials);
-    console.log(this.contactList[$index]);
+  }
+
+  editContact(index:number) {
+    this.editedContact = {
+      surname: this.contactList[index].surname,
+      lastname: this.contactList[index].lastname,
+      mail: this.contactList[index].mail,
+      phone: this.contactList[index].phone,
+    }
   }
 
   async addContactToDatabase(contact: Contact) {
-    await addDoc(collection(this.firestore, "contacts"), contact)
-    console.log(this.contactList);
-    
+    await addDoc(collection(this.firestore, "contacts"), contact)    
+  }
+
+  async editContactToDatabase($index:number, contact: Contact) {
+    await updateDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!), {
+      surname: contact.surname,
+      lastname: contact.lastname,
+      mail: contact.mail,
+      phone: contact.phone,
+    });
+    this.showContactDetails(this.currentIndex)
   }
   
   async deleteContact($index:number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
-    this.contactSelected = false;
   }
 
 }

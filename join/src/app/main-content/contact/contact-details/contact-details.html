@@ -10,7 +10,7 @@
             <div>
                 <span>{{firebase.currentContact.surname}} </span> <span>{{firebase.currentContact.lastname}}</span>
                 <div id="contact_details_button">
-                    <button><img src="./assets/icons/edit.svg" alt="">Edit</button>
+                    <button><img src="./assets/icons/edit.svg" alt="" (click)="firebase.editContact(firebase.currentIndex)">Edit</button>
                     <button><img src="./assets/icons/delete.svg" alt="" (click)="firebase.deleteContact(firebase.currentIndex)">delete</button>
                 </div>
             </div>
