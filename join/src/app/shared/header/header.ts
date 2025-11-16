@@ -10,6 +10,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
   menu_open: boolean = false;
+  initialsActive: boolean = false;
+
+  toggleInitials() {
+    this.initialsActive = !this.initialsActive;
+  }
 
   toggleMenu() {
     this.menu_open = !this.menu_open;
