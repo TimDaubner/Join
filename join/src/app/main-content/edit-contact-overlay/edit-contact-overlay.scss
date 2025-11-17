@@ -1,6 +1,10 @@
 @use 'variables' as *;
 
-#add_contact {
+button {
+    cursor: pointer;
+}
+
+#edit_contact {
     width: 1300px;
     height: 550px;
     display: flex;
@@ -40,7 +44,9 @@
 #overlay_right {
     display: flex;
     flex-direction: column;
-    flex: 2
+    flex: 2;
+    background: white;
+    border-radius: 0 32px 32px 0 ;
 }
 
 #close_button {

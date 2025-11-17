@@ -10,8 +10,16 @@
             <div>
                 <span>{{firebase.currentContact.surname}} </span> <span>{{firebase.currentContact.lastname}}</span>
                 <div id="contact_details_button">
-                    <button><img src="./assets/icons/edit.svg" alt="" (click)="firebase.editContact(firebase.currentIndex)">Edit</button>
-                    <button><img src="./assets/icons/delete.svg" alt="" (click)="firebase.deleteContact(firebase.currentIndex)">delete</button>
+                    <button
+                     (mouseover)="hoverEdit = true" 
+                     (mouseleave)="hoverEdit = false"
+                     (click)="firebase.editContact(firebase.currentIndex)">
+                    <img [src]="hoverEdit ? './assets/icons/edit_hover.svg' : './assets/icons/edit.svg'" alt="" >Edit</button>
+                    <button 
+                    (mouseover)="hoverDelete = true" 
+                    (mouseleave)="hoverDelete = false"
+                    (click)="firebase.deleteContact(firebase.currentIndex)">
+                    <img [src]="hoverDelete ? './assets/icons/delete_hover.svg' : './assets/icons/delete.svg'" alt="" >delete</button>
                 </div>
             </div>
         </div>
@@ -27,4 +35,9 @@
             <p>{{firebase.currentContact.phone}}</p>
         </div>
     </div>
+    @if (firebase.editing) {
+    <div class="overlay">
+        <app-edit-contact-overlay></app-edit-contact-overlay>
+    </div>
+    }
 </div>

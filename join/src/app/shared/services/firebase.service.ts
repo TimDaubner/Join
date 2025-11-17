@@ -11,6 +11,7 @@ export class FirebaseService {
   contact: Contact[] = [];
   contactList: Contact[] = [];
   currentIndex!:number;
+  editing = false;
 
   firestore: Firestore = inject(Firestore);
   
@@ -72,6 +73,7 @@ export class FirebaseService {
   }
 
   editContact(index:number) {
+    this.editing = true;
     this.editedContact = {
       surname: this.contactList[index].surname,
       lastname: this.contactList[index].lastname,
@@ -91,11 +93,14 @@ export class FirebaseService {
       mail: contact.mail,
       phone: contact.phone,
     });
+    
     this.showContactDetails(this.currentIndex);
   }
   
   async deleteContact($index:number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
+    this.contactSelected = false;
+    this.editing = false;
   }
 
 }

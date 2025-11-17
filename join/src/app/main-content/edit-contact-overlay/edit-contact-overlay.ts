@@ -29,10 +29,19 @@ export class EditContactOverlay {
         mail: "",
         phone: "",
       }
+      this.firebase.editing = false;
     }
 
 
-  
+  closeEdit() {
+    this.firebase.editedContact = {
+        surname: "",
+        lastname: "",
+        mail: "",
+        phone: "",
+      }
+      this.firebase.editing = false;
+  }
 
 
 }

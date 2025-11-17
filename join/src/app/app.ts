@@ -4,10 +4,11 @@ import { FirebaseService } from './shared/services/firebase.service';
 import { Header } from './shared/header/header';
 import { Footer } from './shared/footer/footer';
 import { CommonModule } from '@angular/common';
+import { EditContactOverlay } from './main-content/edit-contact-overlay/edit-contact-overlay';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, Header, Footer],
+  imports: [CommonModule, RouterOutlet, Header, Footer,],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
