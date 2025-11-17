@@ -100,3 +100,59 @@
     }
   }
 }
+
+@media (max-width: 936px) {
+  .navbar_container {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    min-height: fit-content;
+    width: 100vw;
+    z-index: 4;
+    padding: 0;
+
+    .logo_and_menu {
+      height: 100%;
+      width: 100%;
+
+      .logo {
+        display: none;
+      }
+
+      .menu_elements {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .nav_link {
+          border-radius: 10px;
+          width: 100%;
+          height: 90%;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+
+          img {
+            width: 22px;
+            height: 22px;
+          }
+
+          span {
+            flex: 0;
+          }
+        }
+      }
+    }
+
+    .legal {
+      display: none;
+    }
+  }
+}
