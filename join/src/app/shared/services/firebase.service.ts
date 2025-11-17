@@ -90,7 +90,7 @@ export class FirebaseService {
       mail: contact.mail,
       phone: contact.phone,
     });
-    this.showContactDetails(this.currentIndex)
+    this.showContactDetails(this.currentIndex);
   }
   
   async deleteContact($index:number) {

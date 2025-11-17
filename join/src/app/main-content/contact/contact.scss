@@ -2,6 +2,18 @@ section{
     display: flex;
 }
 
+#contact_content{
+    display: flex;
+}
+
 #contact_details{
     display: flex;
+}
+
+app-contact-details{
+    flex: 1;
+}
+
+app-contact-list{
+    box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.1);
 }

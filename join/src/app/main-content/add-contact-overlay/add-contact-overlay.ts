@@ -10,7 +10,7 @@ import { FirebaseService } from '../../shared/services/firebase.service';
 })
 export class AddContactOverlay {
 
-  firebase = inject(FirebaseService)
+  firebase = inject(FirebaseService);
 
   contact = {
     surname: "",
@@ -20,6 +20,6 @@ export class AddContactOverlay {
   }
 
   submitContact() {
-    this.firebase.addContactToDatabase(this.contact)
+    this.firebase.addContactToDatabase(this.contact);
   }
 }
