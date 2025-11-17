@@ -1,4 +1,5 @@
 <div id="contact_content">
     <app-contact-list></app-contact-list>
     <app-contact-details></app-contact-details>
+    <app-add-contact-overlay class="d_none" [ngClass]="{'d_none': !isAddContactOpen}"></app-add-contact-overlay>
 </div>

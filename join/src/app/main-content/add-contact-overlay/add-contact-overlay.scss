@@ -1,12 +1,29 @@
 @use 'variables' as *;
 
 #add_contact {
+    position: fixed;
+    top: 96px;
+    left: 10vw;
     width: 1300px;
     height: 550px;
-    display: flex;
+    display: none;
     margin: 64px;
     border: 2px solid $primary;
     border-radius: 32px;
+    background-color: white;
+    transition: all 175ms ease-in;
+    transform: translateX(100vw);
+
+    animation: slideIn 0.6s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
 #overlay_left {
@@ -18,18 +35,22 @@
     color: $white;
     flex: 1;
     border-radius: 28px 0 0 28px;
+
     >img {
         width: 55px;
         height: 66px;
     }
+
     >h2 {
         font-size: 61px;
         font-weight: 700;
         margin: 16px 0;
     }
+
     >p {
         font-size: 21px;
     }
+
     >hr {
         height: 0;
         width: 100px;
@@ -51,6 +72,7 @@
     border: none;
     align-self: flex-end;
     cursor: pointer;
+
     >img {
         width: 24px;
         height: 24px;
@@ -84,6 +106,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
     >input {
         width: 422px;
         height: 50px;
