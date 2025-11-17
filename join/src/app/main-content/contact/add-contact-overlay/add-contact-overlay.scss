@@ -11,19 +11,6 @@
     border: 2px solid $primary;
     border-radius: 32px;
     background-color: white;
-    transition: all 175ms ease-in;
-    transform: translateX(100vw);
-
-    animation: slideIn 0.6s ease-out forwards;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100vw);
-    }
-    to {
-        transform: translateX(0);
-    }
 }
 
 #overlay_left {
@@ -147,8 +134,4 @@ form {
     color: black;
     font-size: 21px;
     border-radius: 10px;
-}
-
-.d_none{
-    display: none;
 }
