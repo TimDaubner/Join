@@ -6,14 +6,21 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
-  imports: [ContactDetails, ContactList, AddContactOverlay,NgClass],
+  imports: [ContactDetails, ContactList, AddContactOverlay, NgClass],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
 export class Contact {
   isAddContactOpen = false;
-
-  openAddNewContactOverlay(){
+  
+  openAddNewContactOverlay() {
     this.isAddContactOpen = true;
+    console.log(this.isAddContactOpen);
   }
+
+  closeAddNewContactOverlay() {
+    this.isAddContactOpen = false;
+    console.log(this.isAddContactOpen);
+  }
+  
 }

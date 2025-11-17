@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component,EventEmitter,inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Contact } from '../../../interfaces/contact.interface';
 
@@ -12,22 +12,23 @@ export class ContactList {
   firebase = inject(FirebaseService)
   contactList: Contact[] = this.firebase.contactList;
 
-
-
+  
   constructor() {
     this.firebase;
     this.sortFunc();
   }
-
+  
   sortFunc() {
     this.firebase.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
-
+  
   showContact(index: number) {
     this.firebase.showContactDetails(index);
   }
-
-  openAddNewContact() {
-    
-  }
+  
+  @Output() addContact = new EventEmitter<void>();
+  
+  openAddNewContact(){
+    this.addContact.emit();
+  } 
 }
