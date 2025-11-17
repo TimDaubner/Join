@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FirebaseService } from '../../shared/services/firebase.service';
+import { FirebaseService } from '../../../shared/services/firebase.service';
 
 @Component({
   selector: 'app-add-contact-overlay',
@@ -21,5 +21,11 @@ export class AddContactOverlay {
 
   submitContact() {
     this.firebase.addContactToDatabase(this.contact);
+  }
+
+  @Output() closeOverlay = new EventEmitter<void>();
+
+  callCloseOverlay() {
+    this.closeOverlay.emit();
   }
 }

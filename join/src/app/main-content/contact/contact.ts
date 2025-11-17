@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ContactDetails } from './contact-details/contact-details';
 import { ContactList } from './contact-list/contact-list';
-import { AddContactOverlay } from "../add-contact-overlay/add-contact-overlay";
-import { NgClass } from '@angular/common';
+import { AddContactOverlay } from "./add-contact-overlay/add-contact-overlay";
 
 @Component({
   selector: 'app-contact',
-  imports: [ContactDetails, ContactList, AddContactOverlay, NgClass],
+  imports: [ContactDetails, ContactList, AddContactOverlay],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
