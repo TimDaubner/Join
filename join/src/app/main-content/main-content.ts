@@ -3,6 +3,7 @@ import { Contact } from './contact/contact';
 import { AddContactOverlay } from './add-contact-overlay/add-contact-overlay';
 import { ContactList } from './contact/contact-list/contact-list';
 import { EditContactOverlay } from './edit-contact-overlay/edit-contact-overlay';
+import { AddTask } from './add-task/add-task';
 
 @Component({
   selector: 'app-main-content',

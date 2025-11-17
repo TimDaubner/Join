@@ -8,4 +8,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {}
+export class Header {
+  menu_open: boolean = false;
+  initialsActive: boolean = false;
+
+  toggleInitials() {
+    this.initialsActive = !this.initialsActive;
+  }
+
+  toggleMenu() {
+    this.menu_open = !this.menu_open;
+  }
+}
