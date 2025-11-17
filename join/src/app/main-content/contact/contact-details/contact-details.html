@@ -2,7 +2,7 @@
     <div id="details_head">
         <span id="headline_span">Contacts</span> <hr> <span id="slogan_span">Better with a team</span>
     </div>
-    <div id="contact_content_div" [class.d_none]="!firebase.contactSelected">
+    <div id="contact_content_div" [class.d_none]="!firebase.contactSelected" [class.slide_in]="firebase.contactSelected">
         <div id="contact_details_name">
             <div id="profile_circle">
                 <span>{{firebase.initials}}</span>

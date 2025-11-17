@@ -2,8 +2,8 @@
 
 #contact_details {
     height: calc(100vh - 96px);
-    // margin: 16px;
-    padding: 24px;
+    padding-top: 120px;
+    padding-left: 40px;
     background-color: #f6f7f8;
 }
 
@@ -101,4 +101,19 @@ button {
 
 .d_none {
     display: none;
+}
+
+.slide_in {
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
