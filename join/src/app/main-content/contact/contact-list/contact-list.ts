@@ -15,6 +15,7 @@ export class ContactList {
 
   constructor() {
     this.firebase;
+    //TODO-
     this.sortFunc();
     this.addRandomColors();
   }
