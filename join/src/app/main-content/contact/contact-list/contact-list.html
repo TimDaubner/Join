@@ -1,5 +1,7 @@
 <section>
-    <button (click)="openAddNewContact()">Add new contact <img src="" alt=""></button>
+    <div class="background_new_contact">    
+        <button (click)="openAddNewContact()">Add new contact <img src="/assets/icons/person_add.svg" alt="person_add"></button>
+    </div>
     <div class="gray-line"></div>
     <div class="space">
         @for (contact of firebase.contactList; track $index; let i = $index) {
@@ -14,13 +16,12 @@
                 <span>{{contact.lastname.charAt(0)}}</span>
                 <div class="line"></div>
             }
-            <div class="info">
-                <div class="img">
-                    {{contact.surname.charAt(0)}}
-                    {{contact.lastname.charAt(0)}}
+            <div (click)="showContact(i)" class="info">
+                <div class="img" [style.background-color]="_bgColor">
+                    {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}
                 </div>
                 <div>
-                    <div (click)="showContact(i)">
+                    <div>
                         <b>{{contact.surname}} </b>
                         <b>{{contact.lastname}}</b>
                     </div>

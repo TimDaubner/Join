@@ -5,8 +5,9 @@
     height: 550px;
     display: flex;
     margin: 64px;
-    border: 2px solid $primary;
+    // border: 2px solid $primary;
     border-radius: 32px;
+    background-color: white;
 }
 
 #overlay_left {
@@ -18,18 +19,22 @@
     color: $white;
     flex: 1;
     border-radius: 28px 0 0 28px;
+
     >img {
         width: 55px;
         height: 66px;
     }
+
     >h2 {
         font-size: 61px;
         font-weight: 700;
         margin: 16px 0;
     }
+
     >p {
         font-size: 21px;
     }
+
     >hr {
         height: 0;
         width: 100px;
@@ -51,6 +56,7 @@
     border: none;
     align-self: flex-end;
     cursor: pointer;
+
     >img {
         width: 24px;
         height: 24px;
@@ -84,6 +90,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
     >input {
         width: 422px;
         height: 50px;
@@ -124,4 +131,16 @@ form {
     color: black;
     font-size: 21px;
     border-radius: 10px;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    inset: 0;
+    z-index: 150;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

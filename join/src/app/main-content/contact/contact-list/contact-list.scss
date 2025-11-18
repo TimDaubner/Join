@@ -1,18 +1,33 @@
 @use 'variables' as *;
 
+.background_new_contact {
+    width: 20%;
+    height: 10%;
+    position: fixed;
+    top: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
 .line {
     width: 100%;
     height: 1px;
-    background-color: #c4c4c4;
+    background-color:#c4c4c4;;
     margin: 16px 0;
 }
-
-
 
 .info {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
+    padding: 16px;
+
+    &:hover {
+        background-color: #f6f6f6;
+        border-radius: 16px;
+        cursor: pointer;
+    }
 
     >.img {
         display: flex;
@@ -23,8 +38,10 @@
         margin-right: 24px;
         width: 48px;
         height: 48px;
-        background-color: #c4c4c4;
+        background-color: #ffa500;
+        color: white;
         border-radius: 128px;
+        border: 2px solid white;
     }
 
     >div {
@@ -42,26 +59,29 @@ button {
     top: 120px;
     position: fixed;
     border: none;
-    display: flex;
-    align-items: center;
+
     border-radius: 8px;
     background-color: $primary;
     color: white;
     padding: 8px 40px;
     font-size: 21px;
     font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #29abe2;
+    }
 
     >img {
         margin-left: 8px;
         width: 24px;
         height: 24px;
-        background-color: #c4c4c4;
     }
 }
 
 span {
-    padding-left: 24px;
-    margin-bottom: 16px 0;
+    padding-left: 22px;
+    margin: 16px;
 }
 
 .space {
@@ -78,6 +98,7 @@ section {
     flex-direction: column;
     align-items: center;
     overflow: auto;
+    overflow-x: hidden;
 
     ::-webkit-scrollbar {
         width: 10px;
@@ -94,4 +115,8 @@ section {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+}
+
+.d_none {
+    display: none;
 }
