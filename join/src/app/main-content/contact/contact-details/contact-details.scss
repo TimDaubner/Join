@@ -50,8 +50,9 @@
 hr {
     width: 0px;
     height: 64px;
-    border: 1px solid $secondary;
+    border: 2px solid $secondary;
     margin: 0 16px;
+    border-radius: 8px;
 }
 
 h3 {
@@ -134,4 +135,28 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 1236px) {
+    #details_head {
+        display: block;
+    }
+
+    hr {
+        position: relative;
+        top: 40px;
+        width: 120px;
+        height: 0px;
+        border: 2px solid $secondary;
+        margin: 0;
+        border-radius: 8px;
+    }
+
+    #contact_details {
+        padding-left: 16px;
+    }
+
+    #contact_content_div span{
+        font-size: 36px;        
+    }
 }
