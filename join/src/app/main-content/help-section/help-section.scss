@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+.help_container {
+  padding: 0 16px;
+}
+
+.header_back_btn {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+@media (max-width: 936px) {
+  .back_btn {
+    padding-right: 20px;
+  }
+}
