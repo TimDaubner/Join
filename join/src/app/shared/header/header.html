@@ -11,6 +11,7 @@
 
             @if (menu_open) {
             <div class="open_burger_menu">
+                <a routerLink="/help" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()">Help</a>
                 <a routerLink="/legal-notice" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()">Legal
                     Notice</a>
                 <a routerLink="/privacy-policy" routerLinkActive="active" class="btn_menu"
