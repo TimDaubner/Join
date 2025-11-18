@@ -17,6 +17,7 @@ export class EditContactOverlay {
     lastname: "",
     mail: "",
     phone: "",
+    color: "",
   }
 
 
@@ -28,6 +29,7 @@ export class EditContactOverlay {
         lastname: "",
         mail: "",
         phone: "",
+        color: "",
       }
       this.firebase.editing = false;
     }
@@ -39,6 +41,7 @@ export class EditContactOverlay {
         lastname: "",
         mail: "",
         phone: "",
+        color: "",
       }
       this.firebase.editing = false;
   }

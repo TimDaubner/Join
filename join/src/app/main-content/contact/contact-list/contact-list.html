@@ -17,7 +17,7 @@
                 <div class="line"></div>
             }
             <div (click)="showContact(i)" class="info">
-                <div class="img" [style.background-color]="_bgColor">
+                <div class="img" [style.background-color]="contact.color">
                     {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}
                 </div>
                 <div>

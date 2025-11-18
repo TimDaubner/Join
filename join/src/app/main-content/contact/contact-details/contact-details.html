@@ -4,7 +4,7 @@
     </div>
     <div id="contact_content_div" [class.d_none]="!firebase.contactSelected" [class.slide_in]="firebase.contactSelected">
         <div id="contact_details_name">
-            <div id="profile_circle">
+            <div id="profile_circle" [style.background-color]="firebase.currentContact.color">
                 <span>{{firebase.initials}}</span>
             </div>
             <div>

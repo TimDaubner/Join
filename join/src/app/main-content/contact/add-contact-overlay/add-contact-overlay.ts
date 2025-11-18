@@ -12,14 +12,20 @@ export class AddContactOverlay {
 
   firebase = inject(FirebaseService);
 
+
+
   contact = {
     surname: "",
     lastname: "",
     mail: "",
     phone: "",
+    color: "",
   }
 
+
+
   submitContact() {
+    this.contact.color = this.firebase.getRandomColor()
     this.firebase.addContactToDatabase(this.contact);
   }
 

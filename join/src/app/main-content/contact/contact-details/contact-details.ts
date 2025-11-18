@@ -20,10 +20,5 @@ firebase = inject(FirebaseService)
   constructor() {
     this.firebase;
   }
-  
-
-  log() {
-    console.log('hover drüber');
-  }
 
 }
