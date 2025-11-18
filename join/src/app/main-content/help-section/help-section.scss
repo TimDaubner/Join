@@ -1,17 +1,35 @@
 @use 'variables' as *;
 
 .help_container {
-  padding: 0 16px;
+  padding: 96px 40px 20px calc(clamp(180px, 16.1vw, 232px) + 116px);
+}
+
+.help_headline {
+  font-size: 60px;
 }
 
 .header_back_btn {
   display: flex;
   justify-content: space-between;
+}
+
+.back_btn {
   cursor: pointer;
+  padding-right: 30px;
+}
+
+@media (max-width: 1120px) {
+  .help_container {
+    padding: 96px 30px 20px 295px;
+  }
 }
 
 @media (max-width: 936px) {
   .back_btn {
     padding-right: 20px;
+  }
+
+  .help_container {
+    padding: 72px 16px 0 16px;
   }
 }
