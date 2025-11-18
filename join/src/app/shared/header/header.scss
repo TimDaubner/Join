@@ -100,7 +100,6 @@
       border: none;
       text-align: left;
       font-size: 16px;
-      font-family: 'Inter', sans-serif;
       color: $nav-button;
       padding: 13.5px 19px;
       border-radius: 8px;
@@ -113,6 +112,10 @@
         background-color: $menu-button-hover;
         cursor: pointer !important;
       }
+    }
+
+    .btn_menu.help {
+      display: none;
     }
   }
 }
@@ -162,5 +165,9 @@
     .open_burger_menu {
       top: 65px;
     }
+  }
+
+  .open_burger_menu .btn_menu.help {
+    display: block !important;
   }
 }
