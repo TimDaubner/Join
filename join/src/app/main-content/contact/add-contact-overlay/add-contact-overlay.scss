@@ -1,13 +1,11 @@
 @use 'variables' as *;
 
 #add_contact {
-    position: fixed;
-    top: 96px;
-    left: 10vw;
     width: 1300px;
     height: 550px;
     display: flex;
     margin: 64px;
+    // border: 2px solid $primary;
     border-radius: 32px;
     background-color: white;
 }
@@ -135,9 +133,14 @@ form {
     border-radius: 10px;
 }
 
-.overlay{
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.049);
+.overlay {
     width: 100vw;
     height: 100vh;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    inset: 0;
+    z-index: 150;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

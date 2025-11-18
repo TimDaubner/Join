@@ -22,7 +22,7 @@ app-contact-list {
 app-add-contact-overlay{
     position: fixed;
     opacity: 0;
-    transition: all 175ms ease-in-out;
+    transition: all 600ms ease-in-out;
 }
 
 app-add-contact-overlay.show{

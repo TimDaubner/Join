@@ -19,7 +19,7 @@
                         <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text">
                         <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text">
                         <div id="form_buttons">
-                            <button (click)="callCloseOverlay()" id="cancel_button">Cancel <img src="./assets/icons/close.svg" alt=""></button>
+                            <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img src="./assets/icons/close.svg" alt=""></button>
                             <button id="submit_button" type="submit"
                                 [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Add
                                 Contact <img src="./assets/icons/check.svg" alt=""></button>
