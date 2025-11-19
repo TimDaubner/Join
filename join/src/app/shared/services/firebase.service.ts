@@ -63,7 +63,6 @@ export class FirebaseService  {
   }
 
   sortFunc() {
-    console.log("Called");
     this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 

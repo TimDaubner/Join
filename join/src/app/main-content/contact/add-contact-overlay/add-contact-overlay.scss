@@ -162,14 +162,6 @@ form {
     align-items: center;
 }
 
-.black {
-    background: rgba(0, 0, 0, 0.4);
-    position: fixed;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-}
-
 @media(max-width:936px) {
     #add_contact {
         flex-direction: column;

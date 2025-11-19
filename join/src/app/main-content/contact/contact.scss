@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 section {
     display: flex;
 }
@@ -60,4 +62,44 @@ app-add-contact-overlay.hide {
     opacity: 0;
     display: none;
     z-index: 100;
+}
+
+.message{
+    position: fixed;
+    bottom: 100px;
+    right: -100px;
+    width: 50%;
+    max-width: 300px;
+    height: 100px;
+    background-color: $primary;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 24px;
+    opacity: 0;
+}
+
+.message.message-show {
+    animation: slideInOut 3s ease forwards;
+}
+
+@keyframes slideInOut{
+    0% {
+        right: -100px;
+        opacity: 0;
+    }
+    20% {
+        right: 0px;
+        opacity: 1;
+    }
+    80% {
+        right: 0px;
+        opacity: 1;
+    }
+    100% {
+        right: -100px;
+        opacity: 0;
+    }
 }

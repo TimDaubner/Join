@@ -13,7 +13,7 @@ export class AddContactOverlay {
 
   firebase = inject(FirebaseService);
 
-
+  isNewContactAdded = false;
 
   contact = {
     surname: "",
@@ -22,8 +22,6 @@ export class AddContactOverlay {
     phone: "",
     color: "",
   }
-
-
 
   submitContact() {
     this.contact.color = this.firebase.getRandomColor()
@@ -35,6 +33,7 @@ export class AddContactOverlay {
       phone: "",
       color: "",
     }
+    this.isNewContactAdded = true;
     this.callCloseOverlay();
   }
 
