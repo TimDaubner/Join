@@ -20,6 +20,7 @@ export class ContactList{
 
   showContact(index: number) {
     this.selectedIndex = index;
+    this.firebase.detailsOpen = true;
     this.firebase.showContactDetails(index);
   }
 

@@ -103,3 +103,10 @@ app-add-contact-overlay.hide {
         opacity: 0;
     }
 }
+
+@media (max-width: 700px) {
+
+    app-contact-list {
+        width: 100%;
+        }
+}

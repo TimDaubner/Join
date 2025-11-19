@@ -12,6 +12,7 @@ export class FirebaseService  {
   contactList: Contact[] = [];
   currentIndex!: number;
   editing = false;
+  detailsOpen = false;
 
   firestore: Firestore = inject(Firestore);
 
@@ -60,6 +61,11 @@ export class FirebaseService  {
         this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact))
       });
     });
+  }
+
+  closeDetails() {
+    this.detailsOpen = false;
+    
   }
 
   sortFunc() {
@@ -134,6 +140,7 @@ export class FirebaseService  {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;
     this.editing = false;
+    this.detailsOpen = false;
   }
 
 }
