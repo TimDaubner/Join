@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -10,13 +10,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
   menu_open: boolean = false;
-  initialsActive: boolean = false;
-
-  toggleInitials() {
-    this.initialsActive = !this.initialsActive;
-  }
 
   toggleMenu() {
     this.menu_open = !this.menu_open;
+  }
+
+  closeMenu() {
+    this.menu_open = false;
   }
 }
