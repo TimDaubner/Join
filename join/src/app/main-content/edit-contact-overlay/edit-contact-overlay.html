@@ -1,24 +1,47 @@
-<div id="add_contact">
+<div id="edit_contact"> 
     <div id="overlay_left">
-        <img src="./assets/icons/join_logo_white.svg" alt="">
+        <img id="join_logo" src="./assets/icons/join_logo_white.svg" alt="">
         <h2>Edit contact</h2>
         <hr>
     </div>
     <div id="overlay_right">
-        <button id="close_button"><img src="./assets/icons/close.svg" alt=""></button>
+        <button id="close_button_white" (click)="closeEdit()"><img src="./assets/icons/Close_white.svg" alt=""></button> 
+        <button id="close_button" (click)="closeEdit()"><img src="./assets/icons/close.svg" alt=""></button>
         <div id="overlay_right_content">
-            <div id="profile_picture">
-                <img src="./assets/icons/person.svg" alt="">
+            <div id="profile_picture" [style.background-color]="firebase.currentContact.color">
+                <span>{{firebase.initials}}</span>
             </div>
             <div id="contact_form_div">
                 <form (ngSubmit)="saveContact()">
-                    <input name="surname" placeholder="Surname" [(ngModel)]="firebase.editedContact.surname" type="text">
-                    <input name="lastname" placeholder="Lastname" [(ngModel)]="firebase.editedContact.lastname" type="text">
-                    <input name="mail" placeholder="Email" [(ngModel)]="firebase.editedContact.mail" type="text">
-                    <input name="phone" placeholder="Phone" [(ngModel)]="firebase.editedContact.phone" type="text">
+                    <input name="surname" placeholder="First name" [(ngModel)]="firebase.editedContact.surname"
+                        type="text" minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    @if(!firstName.valid && firstName.touched) {
+                    <div class="error_msg"><span>Please enter a valid first name</span></div>
+                    }
+
+                    <input name="lastname" placeholder="Last name" [(ngModel)]="firebase.editedContact.lastname"
+                        type="text" minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    @if(!lastName.valid && lastName.touched) {
+                    <div class="error_msg"><span>Please enter a valid last name</span></div>
+                    }
+
+                    <input name="mail" placeholder="Email" [(ngModel)]="firebase.editedContact.mail" type="text"
+                        required #mail="ngModel" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                    @if(!mail.valid && mail.touched) {
+                    <div class="error_msg"><span>Please enter a valid email address</span></div>
+                    }
+
+                    <input name="phone" placeholder="Phone" [(ngModel)]="firebase.editedContact.phone" type="text"
+                        pattern="^(?:\+|00|0)[1-9]\d{6,14}$" #phone="ngModel" required>
+                    @if(!phone.valid && phone.touched) {
+                    <div class="error_msg"><span>Please enter a valid phone number</span></div>
+                    }
+
                     <div id="form_buttons">
-                        <button id="cancel_button" (click)="firebase.deleteContact(firebase.currentIndex)">Delete</button>
-                        <button id="submit_button" type="submit" >Save <img src="./assets/icons/check.svg" alt=""></button>
+                        <button id="cancel_button" type="button"
+                            (click)="firebase.deleteContact(firebase.currentIndex)">Delete</button>
+                        <button id="submit_button" type="submit">Save <img src="./assets/icons/check.svg"
+                                alt=""></button>
                     </div>
                 </form>
             </div>

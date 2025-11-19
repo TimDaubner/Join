@@ -1,0 +1,65 @@
+<section class="overlay" (click)="callCloseOverlay()">
+    <div id="add_contact" (click)="stopPropagation($event)">
+        <div id="overlay_left">
+            <img class="hide" src="./assets/icons/join_logo_white.svg" alt="">
+            <h2>Add contact</h2>
+            <p>Tasks are better with a team!</p>
+            <hr>
+        </div>
+        <div id="overlay_right">
+            <button (click)="callCloseOverlay()" id="close_button"><img src="./assets/icons/close.svg" alt=""></button>
+            <div id="overlay_right_content">
+                <div id="profile_picture">
+                    <img src="./assets/icons/person.svg" alt="">
+                </div>
+                <div id="contact_form_div">
+                    <form (ngSubmit)="submitContact()">
+                        <div class="input-group">
+                            <input name="surname" placeholder="First name" [(ngModel)]="contact.surname" type="text"
+                                minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
+                        </div>
+                        @if(!firstName.valid && firstName.touched) {
+                        <div class="error_msg"><span>Please enter a valid first name</span></div>
+                        }
+
+                        <div class="input-group">
+                            <input name="lastname" placeholder="Last name" [(ngModel)]="contact.lastname" type="text"
+                                minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
+                        </div>
+                        @if(!lastName.valid && lastName.touched) {
+                        <div class="error_msg"><span>Please enter a valid last name</span></div>
+                        }
+
+                        <div class="input-group">
+                            <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text"
+                                #mail="ngModel" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+                            <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
+                        </div>
+                        @if(!mail.valid && mail.touched) {
+                        <div class="error_msg"><span>Please enter a valid email address</span></div>
+                        }
+
+                        <div class="input-group">
+                            <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text"
+                                pattern="^(?:\+|00|0)[1-9]\d{6,14}$" #phone="ngModel" required>
+                            <img src="./assets/icons/call_gray.svg" alt="Phone Icon" class="input-icon">
+                        </div>
+                        @if(!phone.valid && phone.touched) {
+                        <div class="error_msg"><span>Please enter a valid phone number</span></div>
+                        }
+
+                        <div id="form_buttons">
+                            <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img
+                                    src="./assets/icons/close.svg" alt=""></button>
+                            <button id="submit_button" type="submit"
+                                [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Add
+                                Contact <img src="./assets/icons/check.svg" alt=""></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

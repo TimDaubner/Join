@@ -1,33 +1,32 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Contact } from '../../../interfaces/contact.interface';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })
-export class ContactList {
+export class ContactList{
   firebase = inject(FirebaseService)
   contactList: Contact[] = this.firebase.contactList;
-
-
+  selectedIndex!: number;
 
   constructor() {
     this.firebase;
-    this.sortFunc();
-  }
-
-  sortFunc() {
-    this.firebase.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
   showContact(index: number) {
+    this.selectedIndex = index;
+    this.firebase.detailsOpen = true;
     this.firebase.showContactDetails(index);
   }
 
+  @Output() addContact = new EventEmitter<void>();
+
   openAddNewContact() {
-    
+    this.addContact.emit();
   }
 }
