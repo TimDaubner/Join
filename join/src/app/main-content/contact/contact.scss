@@ -67,7 +67,7 @@ app-add-contact-overlay.hide {
 .message {
     position: fixed;
     bottom: 100px;
-    right: -100px;
+    right: -350px;
     width: 50%;
     max-width: 300px;
     height: 100px;
@@ -82,9 +82,27 @@ app-add-contact-overlay.hide {
     transition: all 1500ms ease-in-out;
 }
 
-.message.show {
-    right: 100px;
-    opacity: 1;
+.message.message-show {
+    animation: slideInOut 3s ease forwards;
+}
+
+@keyframes slideInOut{
+    0% {
+        right: -350px;
+        opacity: 0;
+    }
+    20% {
+        right: 0px;
+        opacity: 1;
+    }
+    80% {
+        right: 0px;
+        opacity: 1;
+    }
+    100% {
+        right: -350px;
+        opacity: 0;
+    }
 }
 
 @media (max-width: 700px) {
