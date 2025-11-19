@@ -60,10 +60,10 @@ export class FirebaseService  {
         this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact))
       });
     });
-    this.sortFunc();
   }
 
   sortFunc() {
+    console.log("Called");
     this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
@@ -79,6 +79,7 @@ export class FirebaseService  {
   }
 
   setContactObject(idParam:string, obj: Contact): Contact{
+    this.sortFunc();
     return {
       id: idParam,
       surname: obj.surname,
@@ -90,7 +91,6 @@ export class FirebaseService  {
   }
 
   showContactDetails($index: number) {
-    //TODO-call this function
     this.contactSelected = false;
     this.currentContact = this.contactList[$index]
     this.contactSelected = true;
@@ -117,7 +117,6 @@ export class FirebaseService  {
 
   async addContactToDatabase(contact: Contact) {
     await addDoc(collection(this.firestore, "contacts"), contact)
-    this.sortFunc();
   }
 
   async editContactToDatabase($index: number, contact: Contact) {
@@ -130,9 +129,8 @@ export class FirebaseService  {
     });
 
     this.showContactDetails(this.currentIndex);
-    this.sortFunc();
   }
-
+  
   async deleteContact($index: number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;
