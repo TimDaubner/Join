@@ -27,6 +27,13 @@ export class AddContactOverlay {
   submitContact() {
     this.contact.color = this.firebase.getRandomColor()
     this.firebase.addContactToDatabase(this.contact);
+    this.contact = {
+      surname: "",
+      lastname: "",
+      mail: "",
+      phone: "",
+      color: "",
+    }
   }
 
   @Output() closeOverlay = new EventEmitter<void>();

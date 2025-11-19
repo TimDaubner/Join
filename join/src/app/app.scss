@@ -22,3 +22,9 @@ app-footer {
     inset: 0;
     background: rgba(0, 0, 0, 0.1)
 }
+
+@media (max-width: 936px) {
+    #main_content {
+        margin-top: 70px;
+    }
+}
