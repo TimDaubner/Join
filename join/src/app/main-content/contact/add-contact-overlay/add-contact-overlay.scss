@@ -8,7 +8,7 @@
     // border: 2px solid $primary;
     border-radius: 32px;
     background-color: white;
-}
+} 
 
 #overlay_left {
     display: flex;
@@ -170,3 +170,20 @@ form {
         opacity: 0;
     }
 }
+
+@media(max-width:936px){
+    #add_contact{
+        flex-direction: column;
+    }
+    #overlay_left {
+        justify-content: center;
+        align-items: center;
+    }
+    .hide{
+        display: none;
+    }
+    hr{
+        position: relative;
+        left:-85px;
+    }
+}  

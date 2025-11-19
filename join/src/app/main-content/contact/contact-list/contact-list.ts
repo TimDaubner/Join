@@ -16,9 +16,12 @@ export class ContactList {
 
   constructor() {
     this.firebase;
-    this.sortFunc();
-    this.addRandomColors();
+    // this.sortFunc();
     //TODO-Sort in ngOnInit();
+  }
+
+  ngOnInit() {
+    this.firebase.sortFunc();
   }
 
   sortFunc() {
@@ -34,18 +37,5 @@ export class ContactList {
 
   openAddNewContact() {
     this.addContact.emit();
-  }
-
-  _bgColor?: string;
-
-  getRandomColor(): string {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-  }
-
-  addRandomColors() {
-    this.firebase.contactList = this.firebase.contactList.map(c => ({
-      ...c,
-      _bgColor: this.getRandomColor()
-    }));
   }
 }

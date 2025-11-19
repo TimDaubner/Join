@@ -17,7 +17,7 @@
                 <div class="line"></div>
             }
             <div (click)="showContact(i)" [ngClass]="{ 'highlighted': selectedIndex === i }" class="info">
-                <div class="img" [style.background-color]="_bgColor">
+                <div class="img">
                     {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}
                 </div>
                 <div>

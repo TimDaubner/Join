@@ -6,7 +6,7 @@ import { Contact } from '../../interfaces/contact.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService {
+export class FirebaseService  {
 
   contact: Contact[] = [];
   contactList: Contact[] = [];
@@ -42,17 +42,17 @@ export class FirebaseService {
     });
     this.sortFunc();
   }
-  
+
   sortFunc() {
     this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
-  
+
   ngOnDestroy() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
   }
-  
+
   setContactObject(idParam: string, obj: Contact): Contact {
     return {
       id: idParam,
@@ -62,7 +62,7 @@ export class FirebaseService {
       phone: obj.phone,
     }
   }
-  
+
   showContactDetails($index: number) {
     //TODO-call this function
     this.contactSelected = false;
@@ -77,7 +77,7 @@ export class FirebaseService {
     let secondInitial = this.contactList[$index].lastname.trim().charAt(0).toUpperCase();
     this.initials = firstInitial + secondInitial;
   }
-  
+
   editContact(index: number) {
     this.editing = true;
     this.editedContact = {
@@ -92,7 +92,7 @@ export class FirebaseService {
     await addDoc(collection(this.firestore, "contacts"), contact)
     this.sortFunc();
   }
-  
+
   async editContactToDatabase($index: number, contact: Contact) {
     await updateDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!), {
       surname: contact.surname,
@@ -104,7 +104,7 @@ export class FirebaseService {
     this.showContactDetails(this.currentIndex);
     this.sortFunc();
   }
-  
+
   async deleteContact($index: number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;
