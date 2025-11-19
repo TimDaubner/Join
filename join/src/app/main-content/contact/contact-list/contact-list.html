@@ -1,8 +1,15 @@
 <section>
+<<<<<<< HEAD
 
     <div class="background_new_contact"></div>
     <button (click)="openAddNewContact()">Add new contact <img src="/assets/icons/person_add.svg" alt="person_add">
     </button>
+=======
+    <div class="background_new_contact">
+        <button (click)="openAddNewContact()">Add new contact <img src="/assets/icons/person_add.svg"
+                alt="person_add"></button>
+    </div>
+>>>>>>> imra
     <div class="gray-line"></div>
     <div class="space">
         @for (contact of firebase.contactList; track $index; let i = $index) {

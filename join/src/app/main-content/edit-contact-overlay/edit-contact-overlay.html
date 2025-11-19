@@ -12,13 +12,17 @@
             </div>
             <div id="contact_form_div">
                 <form (ngSubmit)="saveContact()">
-                    <input name="surname" placeholder="Surname" [(ngModel)]="firebase.editedContact.surname" type="text">
-                    <input name="lastname" placeholder="Lastname" [(ngModel)]="firebase.editedContact.lastname" type="text">
+                    <input name="surname" placeholder="Surname" [(ngModel)]="firebase.editedContact.surname" type="text"
+                        minlength="3" #name="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    <input name="lastname" placeholder="Lastname" [(ngModel)]="firebase.editedContact.lastname"
+                        type="text">
                     <input name="mail" placeholder="Email" [(ngModel)]="firebase.editedContact.mail" type="text">
                     <input name="phone" placeholder="Phone" [(ngModel)]="firebase.editedContact.phone" type="text">
                     <div id="form_buttons">
-                        <button id="cancel_button" type="button" (click)="firebase.deleteContact(firebase.currentIndex)">Delete</button>
-                        <button id="submit_button" type="submit" >Save <img src="./assets/icons/check.svg" alt=""></button>
+                        <button id="cancel_button" type="button"
+                            (click)="firebase.deleteContact(firebase.currentIndex)">Delete</button>
+                        <button id="submit_button" type="submit">Save <img src="./assets/icons/check.svg"
+                                alt=""></button>
                     </div>
                 </form>
             </div>

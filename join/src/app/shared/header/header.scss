@@ -118,6 +118,18 @@
       display: none;
     }
   }
+
+  .menu_overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 80;
+  }
+
+  .open_burger_menu {
+    position: absolute;
+    z-index: 100;
+  }
 }
 
 @media (max-width: 936px) {
