@@ -5,7 +5,6 @@
     height: 550px;
     display: flex;
     margin: 64px;
-    // border: 2px solid $primary;
     border-radius: 32px;
     background-color: white;
 }
@@ -165,31 +164,10 @@ form {
 
 .black {
     background: rgba(0, 0, 0, 0.4);
-    animation: fadeIn 0.25s ease-in-out;
-    position: absolute;
+    position: fixed;
     z-index: -1;
     width: 100%;
     height: 100%;
-}
-
-@keyframes fadeIn {
-    50% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
 }
 
 @media(max-width:936px) {

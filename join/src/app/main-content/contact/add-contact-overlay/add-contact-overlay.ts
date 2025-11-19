@@ -1,10 +1,11 @@
 import { Component, EventEmitter, inject, input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../../shared/services/firebase.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-contact-overlay',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   templateUrl: './add-contact-overlay.html',
   styleUrl: './add-contact-overlay.scss',
 })

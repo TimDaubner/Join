@@ -12,11 +12,11 @@ import { NgClass } from '@angular/common';
 })
 export class Contact {
   isAddContactOpen = false;
-  
+
   openAddNewContactOverlay() {
     this.isAddContactOpen = true;
   }
-
+  
   closeAddNewContactOverlay() {
     this.isAddContactOpen = false;
   }

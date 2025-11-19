@@ -39,13 +39,25 @@ app-add-contact-overlay.hide {
 }
 
 .black {
-    position: fixed;       /* ensures it’s relative to the viewport, not parent */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;          /* full viewport width */
-    height: 100vh;         /* full viewport height */
-    background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
-    z-index: 9999; 
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    transition: all 175ms ease-in-out;
+}
+
+.black.show {
+    opacity: 1;
+    display: flex;
+    z-index: 100;
+}
+
+.black.hide {
+    opacity: 0;
+    display: none;
+    z-index: 100;
 }

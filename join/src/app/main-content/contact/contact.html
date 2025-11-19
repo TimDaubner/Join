@@ -1,5 +1,7 @@
 <div id="contact_content">
     <app-contact-list (addContact)="openAddNewContactOverlay()"></app-contact-list>
     <app-contact-details></app-contact-details>
-    <app-add-contact-overlay (closeOverlay)="closeAddNewContactOverlay()" [ngClass]="{'show' : isAddContactOpen, 'hide': !isAddContactOpen}"></app-add-contact-overlay>
+    <app-add-contact-overlay (closeOverlay)="closeAddNewContactOverlay()"
+        [ngClass]="{'show' : isAddContactOpen, 'hide': !isAddContactOpen}"></app-add-contact-overlay>
+    <div class="black" [ngClass]="{'show' : isAddContactOpen, 'hide': !isAddContactOpen}"></div>
 </div>
