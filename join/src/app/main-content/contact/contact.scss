@@ -49,3 +49,11 @@ app-add-contact-overlay.hide {
     background: rgba(0, 0, 0, 0.4); /* semi-transparent black */
     z-index: 9999; 
 }
+
+@media (max-width: 700px) {
+
+    app-contact-list {
+        width: 100%;
+        }
+    
+}

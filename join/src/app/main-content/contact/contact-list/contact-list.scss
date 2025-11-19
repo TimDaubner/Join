@@ -62,7 +62,6 @@ button {
     top: 120px;
     position: fixed;
     border: none;
-
     border-radius: 8px;
     background-color: $primary;
     color: white;
@@ -141,16 +140,19 @@ section {
     }
 }
 
-@media(max-width:410px) {
+@media(max-width:800px) {
     section {
-        padding: 16px;
+        padding: 8px;
+    }
+
+    .line {
+        margin: 8px 0;
     }
 }
 
-@media(max-width:390px) {
+@media (max-width:700px) {
     section {
-        padding: 0;
-        width: 310px;
+        height: calc(100vh - 152px );
     }
 }
 
