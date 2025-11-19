@@ -118,6 +118,7 @@ export class FirebaseService  {
       phone: this.contactList[index].phone,
       color: this.contactList[index].color,
     }
+    this.sortFunc();
   }
 
   async addContactToDatabase(contact: Contact) {
