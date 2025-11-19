@@ -45,7 +45,7 @@
     cursor: pointer;
     width: 20px;
     height: 20px;
-    background: url('/assets/img/help.png') no-repeat center;
+    background: url('/assets/icons/help.svg') no-repeat center;
     background-size: contain;
 
     &:hover {
@@ -100,7 +100,6 @@
       border: none;
       text-align: left;
       font-size: 16px;
-      font-family: 'Inter', sans-serif;
       color: $nav-button;
       padding: 13.5px 19px;
       border-radius: 8px;
@@ -114,6 +113,10 @@
         cursor: pointer !important;
       }
     }
+
+    .btn_menu.help {
+      display: none;
+    }
   }
 }
 
@@ -124,7 +127,7 @@
     width: 100vw;
     left: 0;
     z-index: 5;
-    padding-right: 40px;
+    padding-right: 16px;
 
     .title {
       display: none;
@@ -156,5 +159,15 @@
 
   .open_burger_menu {
     z-index: 150;
+  }
+
+  .header_icons {
+    .open_burger_menu {
+      top: 65px;
+    }
+  }
+
+  .open_burger_menu .btn_menu.help {
+    display: block !important;
   }
 }
