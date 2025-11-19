@@ -27,6 +27,7 @@
 
     &:hover {
         background-color: #f6f6f6;
+        padding: 8px;
         border-radius: 16px;
         cursor: pointer;
     }
@@ -118,21 +119,16 @@ section {
     }
 }
 
-@media(max-width:970px) {
-    .background_new_contact {
-        top: 50px;
-        height: 15%;
-    }
-}
-
 @media(max-width:936px) {
     section {
+        height: calc(100vh - 152px);
         margin-left: 0;
     }
 }
 
 @media(max-width:800px) {
     section {
+        height: calc(100vh - 152px);
         padding: 8px;
     }
 
@@ -141,9 +137,7 @@ section {
     }
 
     .background_new_contact {
-        top: 50px;
-        height: 15%;
-        width: 360px;
+        top: -10px;
     }
 }
 
@@ -152,10 +146,14 @@ section {
         height: calc(100vh - 152px);
     }
 
-    .background_new_contact {
-        top: 50px;
-        height: 15%;
-        width: 295px;
+    .info {
+        padding: 8px;
+        margin: 24px 0;
+    }
+
+    span {
+        padding-left: 14px;
+        margin: 16px;
     }
 }
 
@@ -166,12 +164,14 @@ section {
 .highlighted {
     background-color: $primary;
     border-radius: 16px;
+    padding: 8px;
     cursor: pointer;
     color: white;
 
     &:hover {
         background-color: $primary;
         border-radius: 16px;
+        padding: 8px;
         cursor: pointer;
         color: white;
     }
