@@ -15,22 +15,41 @@
                 <div id="contact_form_div">
                     <form (ngSubmit)="submitContact()">
                         <div class="input-group">
-                            <input name="surname" placeholder="Surname" [(ngModel)]="contact.surname" type="text" required>
-                            <img src="./assets/icons/person_gray.svg" alt="Email Icon" class="input-icon">
+                            <input name="surname" placeholder="First name" [(ngModel)]="contact.surname" type="text"
+                                minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
                         </div>
+                        @if(!firstName.valid && firstName.touched) {
+                        <div class="error_msg"><span>Please enter a valid first name</span></div>
+                        }
+
                         <div class="input-group">
-                            <input name="lastname" placeholder="Lastname" [(ngModel)]="contact.lastname" type="text" required>
-                            <img src="./assets/icons/person_gray.svg" alt="Email Icon" class="input-icon">
+                            <input name="lastname" placeholder="Last name" [(ngModel)]="contact.lastname" type="text"
+                                minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
                         </div>
+                        @if(!lastName.valid && lastName.touched) {
+                        <div class="error_msg"><span>Please enter a valid last name</span></div>
+                        }
+
                         <div class="input-group">
-                            <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text" required
-                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
-                            <img src="./assets/icons/mail_gray.svg" alt="Phone Icon" class="input-icon">
+                            <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text"
+                                #mail="ngModel" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
+                            <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                         </div>
+                        @if(!mail.valid && mail.touched) {
+                        <div class="error_msg"><span>Please enter a valid email address</span></div>
+                        }
+
                         <div class="input-group">
-                            <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text" required>
+                            <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text"
+                                pattern="^(?:\+|00|0)[1-9]\d{6,14}$" #phone="ngModel" required>
                             <img src="./assets/icons/call_gray.svg" alt="Phone Icon" class="input-icon">
                         </div>
+                        @if(!phone.valid && phone.touched) {
+                        <div class="error_msg"><span>Please enter a valid phone number</span></div>
+                        }
+
                         <div id="form_buttons">
                             <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img
                                     src="./assets/icons/close.svg" alt=""></button>

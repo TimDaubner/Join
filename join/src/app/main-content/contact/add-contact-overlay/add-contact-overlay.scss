@@ -1,109 +1,109 @@
 @use 'variables' as *;
 
 #add_contact {
-    width: 1300px;
-    height: 550px;
-    display: flex;
-    margin: 64px;
-    border-radius: 32px;
-    background-color: white;
+  width: 1300px;
+  height: 550px;
+  display: flex;
+  margin: 64px;
+  border-radius: 32px;
+  background-color: white;
 }
 
 #overlay_left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 40px;
-    background-color: $primary;
-    color: $white;
-    flex: 1;
-    border-radius: 28px 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 40px;
+  background-color: $primary;
+  color: $white;
+  flex: 1;
+  border-radius: 28px 0 0 28px;
 
-    >img {
-        width: 55px;
-        height: 66px;
-    }
+  > img {
+    width: 55px;
+    height: 66px;
+  }
 
-    >h2 {
-        font-size: 61px;
-        font-weight: 700;
-        margin: 16px 0;
-    }
+  > h2 {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 16px 0;
+  }
 
-    >p {
-        font-size: 21px;
-    }
+  > p {
+    font-size: 21px;
+  }
 
-    >hr {
-        height: 0;
-        width: 100px;
-        border: 2px solid $secondary;
-    }
+  > hr {
+    height: 0;
+    width: 100px;
+    border: 2px solid $secondary;
+  }
 }
 
 #overlay_right {
-    display: flex;
-    flex-direction: column;
-    flex: 2
+  display: flex;
+  flex-direction: column;
+  flex: 2;
 }
 
 #close_button {
-    position: absolute;
-    margin-top: 48px;
-    margin-right: 48px;
-    background: none;
-    border: none;
-    align-self: flex-end;
-    cursor: pointer;
+  position: absolute;
+  margin-top: 48px;
+  margin-right: 48px;
+  background: none;
+  border: none;
+  align-self: flex-end;
+  cursor: pointer;
 
-    >img {
-        width: 24px;
-        height: 24px;
-    }
+  > img {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 #contact_form_div {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #profile_picture {
-    width: 150px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px;
-    background-color: rgba(209, 209, 209, 1);
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background-color: rgba(209, 209, 209, 1);
 }
 
 #overlay_right_content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    gap: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 32px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .input-group {
-    position: relative;
+  position: relative;
 
-    >input {
-        width: 422px;
-        height: 50px;
-        border-radius: 8px;
-        padding-left: 16px;
-        font-size: 20px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+  > input {
+    width: 422px;
+    height: 50px;
+    border-radius: 8px;
+    padding-left: 16px;
+    font-size: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 }
 
 .input-group .input-icon {
@@ -117,67 +117,71 @@ form {
 }
 
 #form_buttons {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  gap: 32px;
 }
 
 #submit_button {
-    cursor: pointer;
-    width: 214px;
-    height: 57px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 10px;
-    background-color: $primary;
-    color: $white;
-    font-size: 21px;
-    font-weight: 700;
-    border: none;
+  cursor: pointer;
+  width: 214px;
+  height: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background-color: $primary;
+  color: $white;
+  font-size: 21px;
+  font-weight: 700;
+  border: none;
 }
 
 #cancel_button {
-    cursor: pointer;
-    width: 126px;
-    height: 57px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    font-weight: 400;
-    color: black;
-    font-size: 21px;
-    border-radius: 10px;
+  cursor: pointer;
+  width: 126px;
+  height: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  font-weight: 400;
+  color: black;
+  font-size: 21px;
+  border-radius: 10px;
 }
 
 .overlay {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    inset: 0;
-    z-index: 150;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media(max-width:936px) {
-    #add_contact {
-        flex-direction: column;
-    }
+.error_msg {
+  color: $red;
+}
 
-    #overlay_left {
-        justify-content: center;
-        align-items: center;
-    }
+@media (max-width: 936px) {
+  #add_contact {
+    flex-direction: column;
+  }
 
-    .hide {
-        display: none;
-    }
+  #overlay_left {
+    justify-content: center;
+    align-items: center;
+  }
 
-    hr {
-        position: relative;
-        left: -85px;
-    }
+  .hide {
+    display: none;
+  }
+
+  hr {
+    position: relative;
+    left: -85px;
+  }
 }
