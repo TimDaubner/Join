@@ -137,10 +137,36 @@ form {
     width: 100vw;
     height: 100vh;
     position: absolute;
-    background: rgba(0, 0, 0, 0.4);
     inset: 0;
     z-index: 150;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.black{
+    background: rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.25s ease-in-out;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fadeIn{
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
 }

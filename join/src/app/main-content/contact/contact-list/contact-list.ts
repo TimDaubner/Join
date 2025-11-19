@@ -1,23 +1,24 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Contact } from '../../../interfaces/contact.interface';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-contact-list',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss',
 })
 export class ContactList {
   firebase = inject(FirebaseService)
   contactList: Contact[] = this.firebase.contactList;
-
+  selectedIndex!: number;
 
   constructor() {
     this.firebase;
-    //TODO-
     this.sortFunc();
     this.addRandomColors();
+    //TODO-Sort in ngOnInit();
   }
 
   sortFunc() {
@@ -25,6 +26,7 @@ export class ContactList {
   }
 
   showContact(index: number) {
+    this.selectedIndex = index;
     this.firebase.showContactDetails(index);
   }
 

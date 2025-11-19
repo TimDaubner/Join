@@ -28,4 +28,8 @@ export class AddContactOverlay {
   callCloseOverlay() {
     this.closeOverlay.emit();
   }
+
+  stopPropagation(event : Event) {
+    event.stopPropagation();
+  }
 }

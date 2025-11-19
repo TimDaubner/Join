@@ -1,5 +1,6 @@
-<section class="overlay">
-    <div id="add_contact">
+<section class="overlay" (click)="callCloseOverlay()">
+    <div class="black"></div>
+    <div id="add_contact" (click)="stopPropagation($event)">
         <div id="overlay_left">
             <img src="./assets/icons/join_logo_white.svg" alt="">
             <h2>Add contact</h2>
