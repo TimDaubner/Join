@@ -31,13 +31,13 @@
         </div>
         <div>
             <h4>Phone</h4>
-            <p>{{firebase.currentContact.phone}}</p>
+            <a href="tel:+4915123456789">{{firebase.currentContact.phone}}</a>
         </div>
     </div>
     <div id="burger_edit" (click)="toggleBurger()">
         <img  src="./assets/icons/burger_details.svg" alt="">
     </div>
-    <div class="burger_menu_details" [class.slide_in_burger]="burgerOpen">
+    <div class="burger_menu_details" [class.slide_in_burger]="burgerOpen" [class.slide_out_burger]="!burgerOpen">
         <button
             (mouseover)="hoverEdit = true" 
             (mouseleave)="hoverEdit = false"
@@ -51,7 +51,7 @@
     </div>
     @if (firebase.editing) {
         <div class="overlay">
-            <app-edit-contact-overlay></app-edit-contact-overlay>
+            <app-edit-contact-overlay [class.slide_edit]="firebase.editing" [class.slide_out_edit]="!firebase.editing"></app-edit-contact-overlay>
         </div>
     }
 </div>

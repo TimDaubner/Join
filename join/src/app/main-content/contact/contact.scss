@@ -67,7 +67,7 @@ app-add-contact-overlay.hide {
 .message{
     position: fixed;
     bottom: 100px;
-    right: -100px;
+    right: -350px;
     width: 50%;
     max-width: 300px;
     height: 100px;
@@ -87,7 +87,7 @@ app-add-contact-overlay.hide {
 
 @keyframes slideInOut{
     0% {
-        right: -100px;
+        right: -350px;
         opacity: 0;
     }
     20% {
@@ -99,7 +99,7 @@ app-add-contact-overlay.hide {
         opacity: 1;
     }
     100% {
-        right: -100px;
+        right: -350px;
         opacity: 0;
     }
 }
