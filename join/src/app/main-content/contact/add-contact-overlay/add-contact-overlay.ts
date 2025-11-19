@@ -34,6 +34,7 @@ export class AddContactOverlay {
       phone: "",
       color: "",
     }
+    this.callCloseOverlay();
   }
 
   @Output() closeOverlay = new EventEmitter<void>();

@@ -8,7 +8,7 @@
     // border: 2px solid $primary;
     border-radius: 32px;
     background-color: white;
-} 
+}
 
 #overlay_left {
     display: flex;
@@ -90,14 +90,31 @@ form {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.input-group {
+    position: relative;
 
     >input {
         width: 422px;
         height: 50px;
         border-radius: 8px;
-        padding-left: 8px;
+        padding-left: 16px;
         font-size: 20px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
+}
+
+.input-group .input-icon {
+  position: absolute;
+  left: 90%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px; /* adjust icon size */
+  height: 20px;
+  pointer-events: none; /* allows clicking inside input */
 }
 
 #form_buttons {
@@ -106,6 +123,7 @@ form {
 }
 
 #submit_button {
+    cursor: pointer;
     width: 214px;
     height: 57px;
     display: flex;
@@ -121,6 +139,7 @@ form {
 }
 
 #cancel_button {
+    cursor: pointer;
     width: 126px;
     height: 57px;
     display: flex;
@@ -144,7 +163,7 @@ form {
     align-items: center;
 }
 
-.black{
+.black {
     background: rgba(0, 0, 0, 0.4);
     animation: fadeIn 0.25s ease-in-out;
     position: absolute;
@@ -153,37 +172,42 @@ form {
     height: 100%;
 }
 
-@keyframes fadeIn{
-    50%{
+@keyframes fadeIn {
+    50% {
         opacity: 0;
     }
-    100%{
+
+    100% {
         opacity: 1;
     }
 }
 
-@keyframes fadeOut{
-    from{
+@keyframes fadeOut {
+    from {
         opacity: 1;
     }
-    to{
+
+    to {
         opacity: 0;
     }
 }
 
-@media(max-width:936px){
-    #add_contact{
+@media(max-width:936px) {
+    #add_contact {
         flex-direction: column;
     }
+
     #overlay_left {
         justify-content: center;
         align-items: center;
     }
-    .hide{
+
+    .hide {
         display: none;
     }
-    hr{
+
+    hr {
         position: relative;
-        left:-85px;
+        left: -85px;
     }
-}  
+}

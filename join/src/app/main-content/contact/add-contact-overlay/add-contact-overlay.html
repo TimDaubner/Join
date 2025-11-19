@@ -15,12 +15,26 @@
                 </div>
                 <div id="contact_form_div">
                     <form (ngSubmit)="submitContact()">
-                        <input name="surname" placeholder="Surname" [(ngModel)]="contact.surname" type="text">
-                        <input name="lastname" placeholder="Lastname" [(ngModel)]="contact.lastname" type="text">
-                        <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text">
-                        <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text">
+                        <div class="input-group">
+                            <input name="surname" placeholder="Surname" [(ngModel)]="contact.surname" type="text" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Email Icon" class="input-icon">
+                        </div>
+                        <div class="input-group">
+                            <input name="lastname" placeholder="Lastname" [(ngModel)]="contact.lastname" type="text" required>
+                            <img src="./assets/icons/person_gray.svg" alt="Email Icon" class="input-icon">
+                        </div>
+                        <div class="input-group">
+                            <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text" required
+                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <img src="./assets/icons/mail_gray.svg" alt="Phone Icon" class="input-icon">
+                        </div>
+                        <div class="input-group">
+                            <input name="phone" placeholder="Phone" [(ngModel)]="contact.phone" type="text" required>
+                            <img src="./assets/icons/call_gray.svg" alt="Phone Icon" class="input-icon">
+                        </div>
                         <div id="form_buttons">
-                            <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img src="./assets/icons/close.svg" alt=""></button>
+                            <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img
+                                    src="./assets/icons/close.svg" alt=""></button>
                             <button id="submit_button" type="submit"
                                 [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Add
                                 Contact <img src="./assets/icons/check.svg" alt=""></button>

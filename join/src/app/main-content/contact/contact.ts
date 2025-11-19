@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component} from '@angular/core';
 import { ContactDetails } from './contact-details/contact-details';
 import { ContactList } from './contact-list/contact-list';
 import { AddContactOverlay } from "./add-contact-overlay/add-contact-overlay";
