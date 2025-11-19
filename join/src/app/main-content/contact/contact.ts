@@ -15,12 +15,10 @@ export class Contact {
   
   openAddNewContactOverlay() {
     this.isAddContactOpen = true;
-    console.log(this.isAddContactOpen);
   }
 
   closeAddNewContactOverlay() {
     this.isAddContactOpen = false;
-    console.log(this.isAddContactOpen);
   }
   
 }

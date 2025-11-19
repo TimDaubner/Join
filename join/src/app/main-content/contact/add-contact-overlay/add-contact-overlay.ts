@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 
@@ -40,5 +40,9 @@ export class AddContactOverlay {
 
   callCloseOverlay() {
     this.closeOverlay.emit();
+  }
+
+  stopPropagation(event : Event) {
+    event.stopPropagation();
   }
 }

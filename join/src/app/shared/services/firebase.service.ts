@@ -6,15 +6,15 @@ import { Contact } from '../../interfaces/contact.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService {
+export class FirebaseService  {
 
   contact: Contact[] = [];
   contactList: Contact[] = [];
-  currentIndex!:number;
+  currentIndex!: number;
   editing = false;
 
   firestore: Firestore = inject(Firestore);
-  
+
   initials = "";
   contactSelected = false;
   currentContact = {
@@ -25,7 +25,7 @@ export class FirebaseService {
     color: "",
   };
 
-  editedContact:Contact = {
+  editedContact: Contact = {
     surname: "",
     lastname: "",
     mail: "",
@@ -60,6 +60,11 @@ export class FirebaseService {
         this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact))
       });
     });
+    this.sortFunc();
+  }
+
+  sortFunc() {
+    this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
   ngOnDestroy() {
@@ -84,7 +89,8 @@ export class FirebaseService {
     }
   }
 
-  showContactDetails($index:number){
+  showContactDetails($index: number) {
+    //TODO-call this function
     this.contactSelected = false;
     this.currentContact = this.contactList[$index]
     this.contactSelected = true;
@@ -92,13 +98,13 @@ export class FirebaseService {
     this.currentIndex = $index;
   }
 
-  getInitials($index:number) {
+  getInitials($index: number) {
     let firstInitial = this.contactList[$index].surname.trim().charAt(0).toUpperCase();
     let secondInitial = this.contactList[$index].lastname.trim().charAt(0).toUpperCase();
     this.initials = firstInitial + secondInitial;
   }
 
-  editContact(index:number) {
+  editContact(index: number) {
     this.editing = true;
     this.editedContact = {
       surname: this.contactList[index].surname,
@@ -110,10 +116,11 @@ export class FirebaseService {
   }
 
   async addContactToDatabase(contact: Contact) {
-    await addDoc(collection(this.firestore, "contacts"), contact)    
+    await addDoc(collection(this.firestore, "contacts"), contact)
+    this.sortFunc();
   }
 
-  async editContactToDatabase($index:number, contact: Contact) {
+  async editContactToDatabase($index: number, contact: Contact) {
     await updateDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!), {
       surname: contact.surname,
       lastname: contact.lastname,
@@ -121,11 +128,12 @@ export class FirebaseService {
       phone: contact.phone,
       color: contact.color,
     });
-    
+
     this.showContactDetails(this.currentIndex);
+    this.sortFunc();
   }
-  
-  async deleteContact($index:number) {
+
+  async deleteContact($index: number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;
     this.editing = false;

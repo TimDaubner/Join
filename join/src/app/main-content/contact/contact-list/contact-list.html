@@ -18,6 +18,8 @@
             }
             <div (click)="showContact(i)" class="info">
                 <div class="img" [style.background-color]="contact.color">
+            <div (click)="showContact(i)" [ngClass]="{ 'highlighted': selectedIndex === i }" class="info">
+                <div class="img">
                     {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}
                 </div>
                 <div>
@@ -25,7 +27,7 @@
                         <b>{{contact.surname}} </b>
                         <b>{{contact.lastname}}</b>
                     </div>
-                    <a :href="mailto:{{contact.mail}}">{{contact.mail}}</a>
+                    <div class="link">{{contact.mail}}</div>
                 </div>
             </div>
         }
