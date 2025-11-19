@@ -64,7 +64,7 @@ app-add-contact-overlay.hide {
     z-index: 100;
 }
 
-.message{
+.message {
     position: fixed;
     bottom: 100px;
     right: -100px;
@@ -79,34 +79,17 @@ app-add-contact-overlay.hide {
     padding: 16px;
     border-radius: 24px;
     opacity: 0;
+    transition: all 1500ms ease-in-out;
 }
 
-.message.message-show {
-    animation: slideInOut 3s ease forwards;
-}
-
-@keyframes slideInOut{
-    0% {
-        right: -100px;
-        opacity: 0;
-    }
-    20% {
-        right: 0px;
-        opacity: 1;
-    }
-    80% {
-        right: 0px;
-        opacity: 1;
-    }
-    100% {
-        right: -100px;
-        opacity: 0;
-    }
+.message.show {
+    right: 100px;
+    opacity: 1;
 }
 
 @media (max-width: 700px) {
 
     app-contact-list {
         width: 100%;
-        }
+    }
 }

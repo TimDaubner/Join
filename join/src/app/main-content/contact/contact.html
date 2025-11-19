@@ -4,5 +4,5 @@
     <app-add-contact-overlay (closeOverlay)="closeAddNewContactOverlay()"
         [ngClass]="{'show' : isAddContactOpen, 'hide': !isAddContactOpen}"></app-add-contact-overlay>
     <div class="black" [ngClass]="{'show' : isAddContactOpen, 'hide': !isAddContactOpen}"></div>
-    <div class="message" [ngClass]="{'show-message' : isContactAdded}">Contact succesfully created</div>
+    <div class="message" [ngClass]="{'show' : isContactAdded}">Contact succesfully created</div>
 </div>
