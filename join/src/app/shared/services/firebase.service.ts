@@ -63,6 +63,15 @@ export class FirebaseService  {
     });
   }
 
+  // fetchDatabase(collectionData : string, collectionArray : [], type: any){
+  //   this.unsubscribe = onSnapshot(collection(this.firestore, collectionData), (dataSnapshot) => {
+  //     collectionArray = [];
+  //     dataSnapshot.forEach((data) => {
+  //       collectionArray.push(this.setContactObject(data.id, data.data() as type))
+  //     });
+  //   });
+  // }
+
   closeDetails() {
     this.detailsOpen = false;
     
