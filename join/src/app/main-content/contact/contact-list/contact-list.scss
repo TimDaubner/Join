@@ -180,14 +180,14 @@ section {
 .highlighted {
     background-color: $primary;
     border-radius: 16px;
-    padding: 8px;
+    padding: 16px;
     cursor: pointer;
     color: white;
 
     &:hover {
         background-color: $primary;
         border-radius: 16px;
-        padding: 8px;
+        padding: 16px;
         cursor: pointer;
         color: white;
     }

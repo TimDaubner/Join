@@ -20,7 +20,7 @@
                             <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
                         </div>
                         @if(!firstName.valid && firstName.touched) {
-                        <div class="error_msg"><span>Please enter a valid first name</span></div>
+                                <div class="error_msg"><span>Please enter a valid first name</span></div>
                         }
 
                         <div class="input-group">
@@ -54,8 +54,7 @@
                             <button type="button" (click)="callCloseOverlay()" id="cancel_button">Cancel <img
                                     src="./assets/icons/close.svg" alt=""></button>
                             <button id="submit_button" type="submit"
-                                [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Add
-                                Contact <img src="./assets/icons/check.svg" alt=""></button>
+                                [disabled]="!contact.surname || !contact.lastname || !contact.mail || !contact.phone">Create contact <img src="./assets/icons/check.svg" alt=""></button>
                         </div>
                     </form>
                 </div>

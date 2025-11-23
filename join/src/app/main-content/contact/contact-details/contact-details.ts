@@ -28,6 +28,7 @@ firebase = inject(FirebaseService)
     this.burgerOpen = !this.burgerOpen;
   }
 
+  //TODO - ask how it works
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     if (

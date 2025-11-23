@@ -6,7 +6,7 @@ import { Contact } from '../../interfaces/contact.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService  {
+export class FirebaseService {
 
   contact: Contact[] = [];
   contactList: Contact[] = [];
@@ -31,10 +31,10 @@ export class FirebaseService  {
     lastname: "",
     mail: "",
     phone: "",
-    color:"",
+    color: "",
   }
 
-    colors = [
+  colors = [
     '#FF7A00',
     '#FF5EB3',
     '#6E52FF',
@@ -58,7 +58,8 @@ export class FirebaseService  {
     this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
       this.contactList = []
       contactsSnapshot.forEach((contact) => {
-        this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact))
+        this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact));
+        this.sortFunc();
       });
     });
   }
@@ -74,7 +75,6 @@ export class FirebaseService  {
 
   closeDetails() {
     this.detailsOpen = false;
-    
   }
 
   sortFunc() {
@@ -92,8 +92,7 @@ export class FirebaseService  {
     return this.colors[index];
   }
 
-  setContactObject(idParam:string, obj: Contact): Contact{
-    this.sortFunc();
+  setContactObject(idParam: string, obj: Contact): Contact {
     return {
       id: idParam,
       surname: obj.surname,
@@ -127,7 +126,6 @@ export class FirebaseService  {
       phone: this.contactList[index].phone,
       color: this.contactList[index].color,
     }
-    this.sortFunc();
   }
 
   async addContactToDatabase(contact: Contact) {
@@ -145,7 +143,7 @@ export class FirebaseService  {
 
     this.showContactDetails(this.currentIndex);
   }
-  
+
   async deleteContact($index: number) {
     await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
     this.contactSelected = false;

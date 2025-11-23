@@ -16,6 +16,7 @@
             <span>{{contact.lastname.charAt(0)}}</span>
             <div class="line"></div>
         }
+        <!--TODO - highligthed change functionallity after service reworked -->
         <div (click)="showContact(i)" [ngClass]="{ 'highlighted': selectedIndex === i }" class="info">
             <div class="img" [style.background-color]="contact.color">
                 {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}
