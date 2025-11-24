@@ -1,0 +1,61 @@
+<div class="board_container">
+    <div class="board_header_wrapper">
+        <div class="board_header">
+            <h1 class="header_title">
+                Board
+            </h1>
+
+            <!-- Search + Add button -->
+            <div class="search_controls">
+                <div class="search_bar">
+                    <div class="search_input_wrapper">
+                        <input id="searchInput" type="text" placeholder="Find Task" />
+                        <span class="divider"></span>
+                    </div>
+                    <button class="search_icon">
+                        <img src="./assets/icons/search.svg" alt="Search" />
+                    </button>
+                </div>
+                <button class="add_task_btn">
+                    <span class="add_task_text">Add task</span>
+                    <img class="plus_icon" src="./assets/icons/add.svg" alt="Add task" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content_container">
+        @for (column of columns; track column.title) {
+        <div class="column_wrapper">
+
+            <!-- Header -->
+            <div class="column_header">
+                <h2>{{ column.title }}</h2>
+
+                @if (column.title !== 'Done') {
+                <button class="add_column_btn">
+                    <img src="/assets/icons/add_btn.svg" alt="Add Task" />
+                </button>
+                }
+            </div>
+
+            <!-- Column body -->
+            @if (column.tasks.length === 0) {
+            <div class="no_tasks">
+                No tasks To do
+            </div>
+            } @else {
+            <div class="column_body">
+                @for (task of column.tasks; track task.id) {
+                <div class="example_box" cdkDrag>
+                    <!-- TO DO: task card content -->
+                </div>
+                }
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+
+</div>
