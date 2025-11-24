@@ -1,20 +1,21 @@
 <section>
     <div class="background_new_contact">
-        <button (click)="openAddNewContact()">Add new contact <img src="/assets/icons/person_add.svg" alt="person_add"></button>
+        <button (click)="openAddNewContact()">Add new contact <img src="/assets/icons/person_add.svg"
+                alt="person_add"></button>
     </div>
     <div class="gray-line"></div>
     <div class="space">
         @for (contact of firebase.contactList; track $index; let i = $index) {
-            <img src="" alt="">
-            @if(firebase.contactList[i-1]){
-                @if(contact.lastname.charAt(0) != firebase.contactList[i-1].lastname.charAt(0)){
-                    <span>{{contact.lastname.charAt(0)}}</span>
+        <img src="" alt="">
+        @if(firebase.contactList[i-1]){
+        @if(contact.lastname.charAt(0) != firebase.contactList[i-1].lastname.charAt(0)){
+        <span>{{contact.lastname.charAt(0)}}</span>
         <div class="line"></div>
         }
         }
         @else if(i == 0) {
-            <span>{{contact.lastname.charAt(0)}}</span>
-            <div class="line"></div>
+        <span>{{contact.lastname.charAt(0)}}</span>
+        <div class="line"></div>
         }
         <!--TODO - highligthed change functionallity after service reworked -->
         <div (click)="showContact(i)" [ngClass]="{ 'highlighted': selectedIndex === i }" class="info">
@@ -23,13 +24,13 @@
             </div>
             <div>
                 <div>
-                    <b>{{contact.surname}} </b>
-                    <b>{{contact.lastname}}</b>
+                    <b class="surname">{{contact.surname}} </b>
+                    <b class="lastname">{{contact.lastname}}</b>
                 </div>
                 <div class="link">{{contact.mail}}</div>
-                
+
             </div>
         </div>
-    }
+        }
     </div>
 </section>
