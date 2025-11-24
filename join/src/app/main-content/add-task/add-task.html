@@ -1,1 +1,41 @@
-<p>add-task works!</p>
+<section>
+    <h1>Add Task</h1>
+    <form id="add_task_form" (ngSubmit)="placeholder()">
+        <div id="left_form">
+            <label for="title">Title<span>*</span></label>
+            <input name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" type="text" #title ="ngModel" required>
+        
+            <label for="description">Description</label>
+            <input name="description" placeholder="Enter a description" type="text" [(ngModel)]="newTask.description" #description="ngModel" required>
+
+            <label for="dueDate">Due Date<span>*</span></label>
+            <input type="text" name="dueDate" placeholder="dd/mm/yyyy">
+        </div>
+        <hr>
+        <div id="right_form">
+            <div id="priority">
+                <p>Priority</p>
+                <button type="button" (click)="setTaskPriority('Urgent')">Urgent</button>
+                <button type="button" (click)="setTaskPriority('Medium')">Medium</button>
+                <button type="button" (click)="setTaskPriority('Low')">Low</button>
+            </div>
+
+            <label for="assignedWorker">Assigned to</label>
+            <input name="assignedWorker" type="text" placeholder="wird noch zum dropdown" [(ngModel)]="newTask.assignedTo">
+
+            <label for="Category">Category<span>*</span></label>
+            <input name="Category" type="text" placeholder="wird noch zum dropdown" [(ngModel)]="newTask.taskCategory">
+
+            <label for="Subtask">Subtask</label>
+            <input name="Subtask" type="text" placeholder="Add new subtask">
+
+            @for (task of newTask.subTask; track $index) {
+                <li>{{task}}</li>
+            } @empty {}
+        </div>
+    </form>
+    <div id="form_buttons">
+        <button type="button">Clear</button>
+        <button type="submit" form="add_task_form">Create Task</button>
+    </div>
+</section>

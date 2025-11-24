@@ -1,0 +1,34 @@
+section {
+    margin-top: 96px;
+    margin-left: clamp(180px, 16.1vw, 232px);
+    background-color: #F6F7F8;
+    min-height: calc(100vh - 152px);
+}
+
+span {
+    color: red;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
+}
+
+#left_form {
+    display: flex;
+    flex-direction: column;
+}
+
+#right_form {
+    display: flex;
+    flex-direction: column;
+}
+
+#form_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding-right: 32px;
+    margin-top: 32px;
+}
