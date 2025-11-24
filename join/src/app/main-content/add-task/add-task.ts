@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Task, ColumnCategory} from '../../interfaces/task.interface'
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-task',
@@ -15,7 +16,7 @@ export class AddTask {
   newTask: Task = {
     title: "",
     description: "",
-    dueDate: new Date("2001-01-01"),
+    dueDate: Timestamp.fromDate(new Date("2025-12-31")),
     priority: "Medium",
     assignedTo: "",
     taskCategory: "User Story",
@@ -28,7 +29,7 @@ export class AddTask {
     this.newTask = {
       title: "",
       description: "",
-      dueDate: new Date("2001-01-01"),
+      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
       assignedTo: "",
       taskCategory: "User Story",
@@ -41,7 +42,7 @@ export class AddTask {
     this.newTask = {
       title: "",
       description: "",
-      dueDate: new Date("2001-01-01"),
+      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
       assignedTo: "",
       taskCategory: "User Story",

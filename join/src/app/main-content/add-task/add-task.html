@@ -36,6 +36,6 @@
     </form>
     <div id="form_buttons">
         <button type="button">Clear</button>
-        <button type="submit" form="add_task_form">Create Task</button>
+        <button type="submit" form="add_task_form" [disabled]="!newTask.title || !newTask.dueDate || !newTask.taskCategory" >Create Task</button>
     </div>
 </section>
