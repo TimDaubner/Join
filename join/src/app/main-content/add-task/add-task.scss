@@ -4,6 +4,19 @@ section {
     background-color: #F6F7F8;
     min-height: calc(100vh - 152px);
     font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#max-width {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 32px 0;
 }
 
 span {
@@ -12,10 +25,11 @@ span {
 
 form {
     display: flex;
-    justify-content: space-around;
-    >label {
-        font-size: 20px;
-    }
+    gap: 32px;
+}
+
+mat-form-field {
+    height: 100px;
 }
 
 input {
@@ -46,6 +60,9 @@ textarea {
 #right_form {
     display: flex;
     flex-direction: column;
+    > li {
+        margin-left: 28px;
+    }
 }
 
 #priority button {
@@ -58,6 +75,5 @@ textarea {
     display: flex;
     justify-content: flex-end;
     gap: 16px;
-    padding-right: 32px;
     margin-top: 32px;
 }
