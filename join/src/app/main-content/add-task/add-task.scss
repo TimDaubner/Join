@@ -3,19 +3,39 @@ section {
     margin-left: clamp(180px, 16.1vw, 232px);
     background-color: #F6F7F8;
     min-height: calc(100vh - 152px);
+    font-size: 20px;
 }
 
 span {
-    color: red;
+    color: #FF8190;
 }
 
 form {
     display: flex;
     justify-content: space-around;
+    >label {
+        font-size: 20px;
+    }
 }
 
 input {
     margin-bottom: 16px;
+    width: 440px;
+    height: 48px;
+    border-radius: 10px;
+    padding-left: 8px;
+    border: 1px solid #D1D1D1;
+    font-size: 20px;
+}
+
+textarea {
+    margin-bottom: 16px;
+    width: 440px;
+    height: 136px;
+    border-radius: 10px;
+    padding-left: 8px;
+    border: 1px solid #D1D1D1;
+    font-size: 20px;
 }
 
 #left_form {

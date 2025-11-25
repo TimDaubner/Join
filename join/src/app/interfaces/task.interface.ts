@@ -1,7 +1,7 @@
 import { Timestamp } from "@angular/fire/firestore";
 
 export type ColumnCategory = "To do" | "In progress" | "Await feedback" | "Done";
-export type taskCategory = "Technical Task" | "User Story";
+
 
 export interface Task {
     id?: string;
@@ -9,8 +9,13 @@ export interface Task {
     description: string,
     dueDate: Timestamp,
     priority: string,
-    assignedTo: string,
-    taskCategory: taskCategory,
-    subTask: string[],
+    assignedTo: string[],
+    taskCategory: string,
+    subTask: Subtask[],
     columnCategory: ColumnCategory,
   }
+
+export interface Subtask {
+  status: boolean,
+  subDescription: string,
+}

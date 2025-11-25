@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
-import { Task, ColumnCategory} from '../../interfaces/task.interface'
+import { Task} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatSelectModule],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
 })
@@ -18,9 +20,13 @@ export class AddTask {
     description: "",
     dueDate: Timestamp.fromDate(new Date("2025-12-31")),
     priority: "Medium",
-    assignedTo: "",
-    taskCategory: "User Story",
-    subTask: ["Verträge lesen", "Verträge verstehen", "Verträge ignorieren"],
+    assignedTo: [],
+    taskCategory: "",
+    subTask: [
+      { status: true,  subDescription: "Verträge lesen" },
+      { status: false, subDescription: "Verträge verstehen" },
+      { status: false, subDescription: "Verträge ignorieren" }
+    ],
     columnCategory: "To do",
   };
 
@@ -31,9 +37,13 @@ export class AddTask {
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: "",
-      taskCategory: "User Story",
-      subTask: ["Verträge lesen", "Verträge verstehen", "Verträge ignorieren"],
+      assignedTo: [],
+      taskCategory: "",
+      subTask: [
+        { status: true,  subDescription: "Verträge lesen" },
+        { status: false, subDescription: "Verträge verstehen" },
+        { status: false, subDescription: "Verträge ignorieren" }
+      ],
       columnCategory: "To do",
     };
   };
@@ -44,9 +54,13 @@ export class AddTask {
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: "",
+      assignedTo: [],
       taskCategory: "User Story",
-      subTask: ["Verträge lesen", "Verträge verstehen", "Verträge ignorieren"],
+      subTask: [
+        { status: true,  subDescription: "Verträge lesen" },
+        { status: false, subDescription: "Verträge verstehen" },
+        { status: false, subDescription: "Verträge ignorieren" }
+      ],
       columnCategory: "To do",
     };
   }
