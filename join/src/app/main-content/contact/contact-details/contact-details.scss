@@ -6,6 +6,7 @@ html {
 }
 
 #contact_details {
+  margin-top: 96px;
   height: calc(100vh - 96px);
   padding-top: 120px;
   padding-left: 40px;
@@ -89,10 +90,12 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  > img {
+
+  >img {
     width: 24px;
     height: 24px;
   }
+
   &:hover {
     font-weight: 700;
     color: $secondary;
@@ -101,7 +104,10 @@ button {
 
 #contact_details_button {
   display: flex;
-  gap: 32px;
+  margin-top: 8px;
+  >button{
+    width: 65px;
+  }
 }
 
 .contact {
@@ -138,10 +144,12 @@ button {
   background-color: $primary;
   border-radius: 100px;
   cursor: pointer;
-  > img {
+
+  >img {
     width: 32px;
     height: 32px;
   }
+
   &:hover {
     background-color: $secondary;
   }
@@ -159,7 +167,8 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  > button {
+
+  >button {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -178,19 +187,21 @@ button {
   from {
     right: -120px;
   }
+
   to {
     right: 16px;
   }
 }
 
-.burger_menu_details.slide_out_burger {
-  animation: slideOutBurger 0.4s ease-out forwards;
-}
+// .burger_menu_details.slide_out_burger {
+//   animation: slideOutBurger 0.4s ease-out forwards;
+// }
 
 @keyframes slideOutBurger {
   from {
     right: 16px;
   }
+
   to {
     right: -120px;
   }
@@ -205,6 +216,7 @@ button {
     opacity: 0;
     transform: translateX(150%);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -232,6 +244,7 @@ app-edit-contact-overlay.slide_edit {
     opacity: 0;
     transform: translateY(150%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -247,6 +260,7 @@ app-edit-contact-overlay.slide_out_edit {
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(150%);
@@ -272,8 +286,14 @@ app-edit-contact-overlay.slide_out_edit {
     padding-left: 16px;
   }
 
+  #contact_details {
+    overflow-x: hidden;
+  }
+
   #contact_content_div span {
     font-size: 36px;
+    line-height: 38px;
+    word-break: keep-all;
   }
 
   #profile_circle {
@@ -291,6 +311,11 @@ app-edit-contact-overlay.slide_out_edit {
 }
 
 @media (max-width: 936px) {
+  #contact_details {
+    margin-top: 70px;
+    height: calc(100vh - 160px);
+  }
+
   app-edit-contact-overlay {
     height: 600px;
   }
@@ -299,30 +324,36 @@ app-edit-contact-overlay.slide_out_edit {
 @media (max-width: 700px) {
   #contact_details {
     width: 100%;
-    height: calc(100vh - 152px);
+    height: calc(100vh - 140px);
     display: none;
     padding-top: 20px;
     position: absolute;
-    top: 70px;
+    top: 0;
     left: 0;
-    margin-bottom: 80px;
   }
-
+  
   #burger_edit {
     display: flex;
   }
-
+  
   #arrow_back.open {
     display: flex;
     cursor: pointer;
   }
-
+  
   #contact_details.open {
     display: flex;
     flex-direction: column;
-
+    
     #contact_details_button {
       display: none;
     }
   }
 }
+
+@media (max-width: 500px) {
+  #profile_circle {
+    aspect-ratio: 1/1;
+  }
+}
+

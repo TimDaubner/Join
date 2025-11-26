@@ -31,7 +31,7 @@
     cursor: pointer;
   }
 
-  > .img {
+  >.img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,11 +46,11 @@
     border: 2px solid white;
   }
 
-  > div {
+  >div {
     display: flex;
     flex-direction: column;
 
-    > .gap {
+    >.gap {
       display: flex;
       gap: 8px;
     }
@@ -78,7 +78,7 @@ button {
     background-color: #29abe2;
   }
 
-  > img {
+  >img {
     margin-left: 8px;
     width: 24px;
     height: 24px;
@@ -95,6 +95,7 @@ span {
 }
 
 section {
+  margin-top: 96px;
   box-sizing: border-box;
   box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.1);
   height: calc(100vh - 96px);
@@ -126,14 +127,15 @@ section {
 
 @media (max-width: 936px) {
   section {
-    height: calc(100vh - 152px);
+    height: calc(100vh - 160px);
     margin-left: 0;
+    margin-top: 70px;
   }
 }
 
 @media (max-width: 800px) {
   section {
-    height: calc(100vh - 152px);
+    height: calc(100vh - 160px);
     padding: 8px;
   }
 
@@ -149,14 +151,20 @@ section {
 @media (max-width: 700px) {
   .background_new_contact {
     position: fixed;
-    > button {
+
+    >button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: transparent;
       font-size: 0;
       border-radius: 100px;
-      height: 125px;
-      bottom: 150px;
-      right: 100px;
-      > img {
+      height: 80px;
+      width: 80px;
+      bottom: 105px;
+      right: 25px;
+
+      >img {
         width: 50px;
         height: 50px;
       }
@@ -164,7 +172,7 @@ section {
   }
 
   section {
-    height: calc(100vh - 152px);
+    height: calc(100vh - 160px);
   }
 
   .info {
@@ -197,7 +205,18 @@ section {
     color: white;
   }
 
-  > .link {
+  >.link {
     color: #1184ee;
+  }
+}
+
+@media (max-width: 540px) {
+  section {
+    height: calc(100vh - 140px);
+  }
+  .background_new_contact {
+    >button {
+      bottom: 85px !important;
+    }
   }
 }

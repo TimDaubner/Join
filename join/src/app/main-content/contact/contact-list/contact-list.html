@@ -6,7 +6,6 @@
     <div class="gray-line"></div>
     <div class="space">
         @for (contact of contact_service.contactList; track $index; let i = $index) {
-        <img src="" alt="">
         @if(contact_service.contactList[i-1]){
         @if(contact.lastname.charAt(0) != contact_service.contactList[i-1].lastname.charAt(0)){
         <span>{{contact.lastname.charAt(0)}}</span>
@@ -17,7 +16,6 @@
         <span>{{contact.lastname.charAt(0)}}</span>
         <div class="line"></div>
         }
-        <!--TODO - highligthed change functionallity after service reworked -->
         <div (click)="showContact(i)" [ngClass]="{ 'highlighted': selectedIndex === i }" class="info">
             <div class="img" [style.background-color]="contact.color">
                 {{contact.surname.charAt(0)}}{{contact.lastname.charAt(0)}}

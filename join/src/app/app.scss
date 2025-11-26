@@ -10,10 +10,10 @@ app-footer {
     top: 0;
 }
 
-#main_content {
-    margin-top: 96px;
-    // margin-left: clamp(180px, 16.1vw, 232px);
-}
+// #main_content {
+//     margin-top: 96px;
+//     // margin-left: clamp(180px, 16.1vw, 232px);
+// }
 
 .overlay {
     width: 100%;
@@ -23,8 +23,8 @@ app-footer {
     background: rgba(0, 0, 0, 0.1)
 }
 
-@media (max-width: 936px) {
-    #main_content {
-        margin-top: 70px;
-    }
-}
+// @media (max-width: 936px) {
+//     #main_content {
+//         margin-top: 70px;
+//     }
+// }
