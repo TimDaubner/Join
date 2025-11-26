@@ -5,7 +5,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
 
 @Component({
   selector: 'app-add-contact-overlay',
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule],
   templateUrl: './add-contact-overlay.html',
   styleUrl: './add-contact-overlay.scss',
 })
