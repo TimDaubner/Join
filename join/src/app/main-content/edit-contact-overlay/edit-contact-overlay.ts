@@ -11,7 +11,7 @@ import { ContactService } from '../../shared/services/contact/contact.service';
   styleUrl: './edit-contact-overlay.scss',
 })
 export class EditContactOverlay {
-  firebase = inject(ContactService);
+  contact_service = inject(ContactService);
   contact = {
     surname: '',
     lastname: '',
@@ -29,27 +29,27 @@ export class EditContactOverlay {
   saveContact() {
     if (this.checkCorrectInput()) {
       this.checkInputs();
-      this.firebase.editContactToDatabase(this.firebase.currentIndex, this.firebase.editedContact);
-      this.firebase.editedContact = {
+      this.contact_service.editContactToDatabase(this.contact_service.currentIndex, this.contact_service.editedContact);
+      this.contact_service.editedContact = {
         surname: '',
         lastname: '',
         mail: '',
         phone: '',
         color: '',
       };
-      this.firebase.editing = false;
+      this.contact_service.editing = false;
     }
   }
 
   closeEdit() {
-    this.firebase.editedContact = {
+    this.contact_service.editedContact = {
       surname: '',
       lastname: '',
       mail: '',
       phone: '',
       color: '',
     };
-    this.firebase.editing = false;
+    this.contact_service.editing = false;
     this.resetForm();
   }
 
@@ -61,8 +61,8 @@ export class EditContactOverlay {
   }
 
   checkInputs() {
-    this.firebase.editedContact.surname = this.correctInput(this.firebase.editedContact.surname);
-    this.firebase.editedContact.lastname = this.correctInput(this.firebase.editedContact.lastname);
+    this.contact_service.editedContact.surname = this.correctInput(this.contact_service.editedContact.surname);
+    this.contact_service.editedContact.lastname = this.correctInput(this.contact_service.editedContact.lastname);
   }
 
   correctInput(data: string) {
