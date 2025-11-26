@@ -10,18 +10,18 @@ import { ContactService } from '../../../shared/services/contact/contact.service
   styleUrl: './contact-list.scss',
 })
 export class ContactList{
-  firebase = inject(ContactService)
-  contactList: Contact[] = this.firebase.contactList;
+  contact_service = inject(ContactService)
+  contactList: Contact[] = this.contact_service.contactList;
   selectedIndex!: number;
 
   constructor() {
-    this.firebase;
+    this.contact_service;
   }
 
   showContact(index: number) {
     this.selectedIndex = index;
-    this.firebase.detailsOpen = true;
-    this.firebase.showContactDetails(index);
+    this.contact_service.detailsOpen = true;
+    this.contact_service.showContactDetails(index);
   }
 
   @Output() addContact = new EventEmitter<void>();

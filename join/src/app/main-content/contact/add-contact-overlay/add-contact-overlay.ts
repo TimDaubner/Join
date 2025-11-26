@@ -11,7 +11,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
 })
 export class AddContactOverlay {
 
-  firebase = inject(ContactService);
+  contact_service = inject(ContactService);
 
   isNewContactAdded = false;
 
@@ -31,8 +31,8 @@ export class AddContactOverlay {
   submitContact() {
     if (this.checkCorrectInput()) {
       this.checkInputs();
-      this.contact.color = this.firebase.getRandomColor();
-      this.firebase.addContactToDatabase(this.contact);
+      this.contact.color = this.contact_service.getRandomColor();
+      this.contact_service.addContactToDatabase(this.contact);
       this.clearInputs();
       this.isNewContactAdded = true;
       this.callCloseOverlay();

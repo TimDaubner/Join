@@ -12,7 +12,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
 })
 
 export class ContactDetails {
-firebase = inject(ContactService)
+contact_service = inject(ContactService)
 
   burgerOpen = false;
 
@@ -20,7 +20,7 @@ firebase = inject(ContactService)
   hoverDelete = false;
 
   constructor(private eRef: ElementRef) {
-    this.firebase;
+    this.contact_service;
   }
 
 

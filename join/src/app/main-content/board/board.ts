@@ -13,7 +13,7 @@ import { CardDetails } from './board-card/card-details/card-details';
 })
 
 export class Board {
-  board = inject(BoardService);
+  board_service = inject(BoardService);
   isAddTaskOpen: boolean = false;
 
   constructor(){
@@ -21,13 +21,13 @@ export class Board {
   }
 
   renderTasks(){
-    this.board.taskList.forEach(task => {
+    this.board_service.taskList.forEach(task => {
       console.log(task.titel);
     });
   }
 
   searchTask(keyWord: string) {
-    this.board.taskList.forEach(task => {
+    this.board_service.taskList.forEach(task => {
       if (task.titel.includes(keyWord)) {
         //render Task
       }

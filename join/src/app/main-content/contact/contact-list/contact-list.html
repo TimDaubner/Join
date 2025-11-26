@@ -5,10 +5,10 @@
     </div>
     <div class="gray-line"></div>
     <div class="space">
-        @for (contact of firebase.contactList; track $index; let i = $index) {
+        @for (contact of contact_service.contactList; track $index; let i = $index) {
         <img src="" alt="">
-        @if(firebase.contactList[i-1]){
-        @if(contact.lastname.charAt(0) != firebase.contactList[i-1].lastname.charAt(0)){
+        @if(contact_service.contactList[i-1]){
+        @if(contact.lastname.charAt(0) != contact_service.contactList[i-1].lastname.charAt(0)){
         <span>{{contact.lastname.charAt(0)}}</span>
         <div class="line"></div>
         }
