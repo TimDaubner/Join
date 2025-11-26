@@ -43,20 +43,16 @@
             <!-- cards -->
             <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
                 [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
-
-
                 <!-- Column body -->
                 @if (column.tasks.length === 0) {
                 <div class="no_tasks">
                     No tasks To do
                 </div>
                 }
-
-
+                <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
                 <div class="example_box" cdkDrag>
-                    <!-- Tasks -->
-                    <div class="task_category">{{ task.category }}</div>
+                    <div class="task_category" [ngClass]="task.category.replace(' ', '')">{{ task.category }}</div>
                     <h3 class="task_title">{{ task.title }}</h3>
                     <p class="task_description">{{ task.description }}</p>
                     <!-- Subtask -->

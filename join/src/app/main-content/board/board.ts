@@ -32,7 +32,7 @@ export class Board {
           id: '1',
           title: 'Create login page',
           description: 'Design the UI for the login screen',
-          category: 'Design',
+          category: 'User Story',
           priority: 'medium',
           status: 'todo',
           duedate: Timestamp.now(),
@@ -46,7 +46,7 @@ export class Board {
           id: '2',
           title: 'Setup database',
           description: 'Initialize Firebase project',
-          category: 'Development',
+          category: 'Technical Task',
           priority: 'high',
           status: 'todo',
           duedate: Timestamp.now(),
@@ -63,7 +63,7 @@ export class Board {
           id: '3',
           title: 'Implement Auth',
           description: 'Connect login form with backend',
-          category: 'Development',
+          category: 'Technical Task',
           priority: 'high',
           status: 'in-progress',
           duedate: Timestamp.now(),
@@ -83,7 +83,7 @@ export class Board {
           id: '4',
           title: 'Landing page draft',
           description: 'Waiting for feedback from client',
-          category: 'Design',
+          category: 'User Story',
           priority: 'low',
           status: 'await-feedback',
           duedate: Timestamp.now(),
@@ -100,7 +100,7 @@ export class Board {
           id: '5',
           title: 'Create project repo',
           description: 'Initial commit + .gitignore',
-          category: 'Admin',
+          category: 'Technical Task',
           priority: 'low',
           status: 'done',
           duedate: Timestamp.now(),
@@ -115,6 +115,7 @@ export class Board {
   ];
 
   drop(event: CdkDragDrop<Task[]>, columnTitle: string) {
+    //checking for switching positions in same column
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
