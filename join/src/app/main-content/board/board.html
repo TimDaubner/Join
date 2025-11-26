@@ -52,19 +52,19 @@
                 <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
                 <div class="example_box" cdkDrag>
-                    <div class="task_category" [ngClass]="task.category.replace(' ', '')">{{ task.category }}</div>
+                    <div class="task_category" [ngClass]="task.taskCategory">{{ task.taskCategory }}</div>
                     <h3 class="task_title">{{ task.title }}</h3>
                     <p class="task_description">{{ task.description }}</p>
                     <!-- Subtask -->
-                    @if (task.subtasks.length > 0) {
+                    @if (task.subTask.length > 0) {
                     <div class="subtasks_line">
                         <div class="subtasks_bar">
                             <div class="subtasks_progress"
-                                [style.width.%]="(getCompletedSubtasksCount(task)/task.subtasks.length)*100">
+                                [style.width.%]="(getCompletedSubtasksCount(task)/task.subTask.length)*100">
                             </div>
                         </div>
                         <span class="subtasks_count">
-                            {{ getCompletedSubtasksCount(task) }}/{{ task.subtasks.length }} Subtasks
+                            {{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }} Subtasks
                         </span>
                     </div>
                     }

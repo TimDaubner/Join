@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, Timestamp } from '@angular/fire/firestore';
 import { Task } from '../../../interfaces/task.interface';
 
 @Injectable({
@@ -30,17 +30,15 @@ export class BoardService {
 
   setTaskObject(obj: Task): Task {
     return {
-      assignedTo: "",
-      columnCategory: "",
+      id: "",
+      title: "",
       description: "",
-      dueDate: new Date(),
+      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "",
-      subTask: {
-        test: "",
-        tester: false
-      },
+      assignedTo: [],
       taskCategory: "",
-      titel: "",
+      subTask: [],
+      columnCategory: 'To do',
     }
   }
 }

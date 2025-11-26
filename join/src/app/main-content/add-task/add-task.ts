@@ -5,11 +5,11 @@ import { Task} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FirebaseService } from '../../shared/services/firebase.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { ContactService } from '../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-add-task',
@@ -32,7 +32,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 })
 export class AddTask {
 
-  firebase = inject(FirebaseService)
+  firebase = inject(ContactService)
 
   newTask: Task = {
     title: "",
@@ -42,9 +42,9 @@ export class AddTask {
     assignedTo: [],
     taskCategory: "",
     subTask: [
-      { status: true,  subDescription: "Verträge lesen" },
-      { status: false, subDescription: "Verträge verstehen" },
-      { status: false, subDescription: "Verträge ignorieren" }
+      {id: "", status: true,  subDescription: "Verträge lesen" },
+      {id: "", status: false, subDescription: "Verträge verstehen" },
+      {id: "", status: false, subDescription: "Verträge ignorieren" }
     ],
     columnCategory: "To do",
   };
@@ -59,9 +59,9 @@ export class AddTask {
       assignedTo: [],
       taskCategory: "",
       subTask: [
-        { status: true,  subDescription: "Verträge lesen" },
-        { status: false, subDescription: "Verträge verstehen" },
-        { status: false, subDescription: "Verträge ignorieren" }
+        {id: "", status: true,  subDescription: "Verträge lesen" },
+        {id: "", status: false, subDescription: "Verträge verstehen" },
+        {id: "", status: false, subDescription: "Verträge ignorieren" }
       ],
       columnCategory: "To do",
     };
@@ -76,9 +76,9 @@ export class AddTask {
       assignedTo: [],
       taskCategory: "User Story",
       subTask: [
-        { status: true,  subDescription: "Verträge lesen" },
-        { status: false, subDescription: "Verträge verstehen" },
-        { status: false, subDescription: "Verträge ignorieren" }
+        {id: "" , status: true,  subDescription: "Verträge lesen" },
+        {id: "" , status: false, subDescription: "Verträge verstehen" },
+        {id: "" , status: false, subDescription: "Verträge ignorieren" }
       ],
       columnCategory: "To do",
     };
