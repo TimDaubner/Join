@@ -1,37 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { BoardCard } from "./board-card/board-card";
+import { Task } from './../../interfaces/task.interface';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
-import { CardDetails } from './board-card/card-details/card-details';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, BoardCard, CardDetails],
+  imports: [CommonModule, CdkDrag, CdkDropList],
   templateUrl: './board.html',
-  styleUrl: './board.scss',
+  styleUrls: ['./board.scss'],
 })
-
 export class Board {
   board_service = inject(BoardService);
   isAddTaskOpen: boolean = false;
 
-  constructor(){
+  constructor() {
     this.renderTasks();
   }
 
-  renderTasks(){
-    this.board_service.taskList.forEach(task => {
-      console.log(task.titel);
+  renderTasks() {
+    this.board_service.taskList.forEach((task) => {
+      console.log(task.title);
     });
   }
 
   searchTask(keyWord: string) {
-    this.board_service.taskList.forEach(task => {
-      if (task.titel.includes(keyWord)) {
+    this.board_service.taskList.forEach((task) => {
+      if (task.title.includes(keyWord)) {
         //render Task
-      }
-      else {
+      } else {
         //hide Task
       }
     });
@@ -40,17 +45,128 @@ export class Board {
   showAddTaskComponent() {
     if (!this.isAddTaskOpen) {
       this.isAddTaskOpen = true;
-    }
-    else{
+    } else {
       this.isAddTaskOpen = false;
     }
   }
 
-  updateTasks(type: string) {
+  updateTasks(type: string) {}
 
+  // columns: { title: string; tasks: Task[] }[] = [
+  //   { title: 'To do', tasks: [] },
+  //   { title: 'In progress', tasks: [] },
+  //   { title: 'Await feedback', tasks: [] },
+  //   { title: 'Done', tasks: [] },
+  // ];
+  columns: { title: string; tasks: Task[] }[] = [
+    {
+      title: 'To do',
+      tasks: [
+        {
+          id: '1',
+          title: 'Create login page',
+          description: 'Design the UI for the login screen',
+          category: 'User Story',
+          priority: 'medium',
+          status: 'todo',
+          duedate: Timestamp.now(),
+          assignees: ['John', 'Maria'],
+          subtasks: [
+            { id: '1.1', title: 'Create layout', isdone: false },
+            { id: '1.2', title: 'Add logo', isdone: true },
+          ],
+        },
+        {
+          id: '2',
+          title: 'Setup database',
+          description: 'Initialize Firebase project',
+          category: 'Technical Task',
+          priority: 'high',
+          status: 'todo',
+          duedate: Timestamp.now(),
+          assignees: [],
+          subtasks: [],
+        },
+      ],
+    },
+
+    {
+      title: 'In progress',
+      tasks: [
+        {
+          id: '3',
+          title: 'Implement Auth',
+          description: 'Connect login form with backend',
+          category: 'Technical Task',
+          priority: 'high',
+          status: 'in-progress',
+          duedate: Timestamp.now(),
+          assignees: ['Anna'],
+          subtasks: [
+            { id: '3.1', title: 'Email login', isdone: true },
+            { id: '3.2', title: 'Password reset', isdone: false },
+          ],
+        },
+      ],
+    },
+
+    {
+      title: 'Await feedback',
+      tasks: [
+        {
+          id: '4',
+          title: 'Landing page draft',
+          description: 'Waiting for feedback from client',
+          category: 'User Story',
+          priority: 'low',
+          status: 'await-feedback',
+          duedate: Timestamp.now(),
+          assignees: ['Client'],
+          subtasks: [],
+        },
+      ],
+    },
+
+    {
+      title: 'Done',
+      tasks: [
+        {
+          id: '5',
+          title: 'Create project repo',
+          description: 'Initial commit + .gitignore',
+          category: 'Technical Task',
+          priority: 'low',
+          status: 'done',
+          duedate: Timestamp.now(),
+          assignees: [],
+          subtasks: [
+            { id: '5.1', title: 'Initialize repo', isdone: true },
+            { id: '5.2', title: 'Setup project structure', isdone: true },
+          ],
+        },
+      ],
+    },
+  ];
+
+  drop(event: CdkDragDrop<Task[]>, columnTitle: string) {
+    //checking for switching positions in same column
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
-  dragDrop() {
-    //?here
+  getConnectedColumns() {
+    return this.columns.map((c) => c.title);
+  }
+
+  getCompletedSubtasksCount(task: Task): number {
+    return task.subtasks.filter((sub) => sub.isdone).length;
   }
 }

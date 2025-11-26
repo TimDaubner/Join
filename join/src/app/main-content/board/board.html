@@ -1,2 +1,83 @@
+<<<<<<< HEAD
 <button (click)="showAddTaskComponent()" >Open Overlay</button>
 <div class="d_none" [ngClass]="{'show' : isAddTaskOpen, 'hide': !isAddTaskOpen}">Hello</div>
+=======
+<div class="board_container">
+    <div class="board_header_wrapper">
+        <div class="board_header">
+            <h1 class="header_title">
+                Board
+            </h1>
+
+            <!-- Search + Add button -->
+            <div class="search_controls">
+                <div class="search_bar">
+                    <div class="search_input_wrapper">
+                        <input id="searchInput" type="text" placeholder="Find Task" />
+                        <span class="divider"></span>
+                    </div>
+                    <button class="search_icon">
+                        <img src="./assets/icons/search.svg" alt="Search" />
+                    </button>
+                </div>
+                <button class="add_task_btn">
+                    <span class="add_task_text">Add task</span>
+                    <img class="plus_icon" src="./assets/icons/add.svg" alt="Add task" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content_container">
+        @for (column of columns; track column.title) {
+        <div class="column_wrapper">
+
+            <!-- Header -->
+            <div class="column_header">
+                <h2>{{ column.title }}</h2>
+
+                @if (column.title !== 'Done') {
+                <button class="add_btn">
+                    <img src="/assets/icons/add_btn.svg" alt="Add task" />
+                </button>
+                } @else {
+                <span class="btn_placeholder"></span>
+                }
+            </div>
+            <!-- cards -->
+            <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
+                [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
+                <!-- Column body -->
+                @if (column.tasks.length === 0) {
+                <div class="no_tasks">
+                    No tasks To do
+                </div>
+                }
+                <!-- Tasks -->
+                @for (task of column.tasks; track task.id) {
+                <div class="example_box" cdkDrag>
+                    <div class="task_category" [ngClass]="task.category.replace(' ', '')">{{ task.category }}</div>
+                    <h3 class="task_title">{{ task.title }}</h3>
+                    <p class="task_description">{{ task.description }}</p>
+                    <!-- Subtask -->
+                    @if (task.subtasks.length > 0) {
+                    <div class="subtasks_line">
+                        <div class="subtasks_bar">
+                            <div class="subtasks_progress"
+                                [style.width.%]="(getCompletedSubtasksCount(task)/task.subtasks.length)*100">
+                            </div>
+                        </div>
+                        <span class="subtasks_count">
+                            {{ getCompletedSubtasksCount(task) }}/{{ task.subtasks.length }} Subtasks
+                        </span>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+        }
+    </div>
+
+</div>
+>>>>>>> imra
