@@ -8,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class CardDetails {
 
+    editTask(){
+
+    }
+
+    deleteTask(){
+
+    }
+
+    updateTask(Task : {}){
+      
+    }
 }
