@@ -16,7 +16,6 @@ app-contact-details {
     flex: 1;
 }
 
-//TODO- has to be over header and footer
 app-contact-list {
     box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.1);
 }
@@ -25,22 +24,22 @@ app-add-contact-overlay {
     height: 100vh;
     top: 0;
     position: fixed;
-    z-index: 1000;
+    z-index: 101;
     opacity: 0;
+    // display: none;
     transition: all 600ms ease-in-out;
-    display: none;
 }
 
 app-add-contact-overlay.show {
     transform: translateX(0);
     opacity: 1;
-    display: flex;
+    // display: flex;
 }
 
 app-add-contact-overlay.hide {
     transform: translateX(100vw);
     opacity: 0;
-    display: none;
+    // display: none;
 }
 
 .black {
@@ -53,20 +52,17 @@ app-add-contact-overlay.hide {
     height: 100vh;
     background: rgba(0, 0, 0, 0.4);
     transition: all 175ms ease-in-out;
-    display: none;
 }
 
 .black.show {
     display: flex;
     opacity: 1;
-    display: flex;
     z-index: 100;
 }
 
 .black.hide {
     display: none;
     opacity: 0;
-    display: none;
     z-index: 100;
 }
 
@@ -86,10 +82,10 @@ app-add-contact-overlay.hide {
     border-radius: 24px;
     opacity: 0;
     transition: all 1500ms ease-in-out;
-    display: none;
+    // display: none;
 }
 
-.message.message-show {
+.message.show {
     animation: slideInOut 3s ease forwards;
 }
 
