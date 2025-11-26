@@ -187,8 +187,9 @@ form {
 
     #overlay_left {
         justify-content: center;
-        align-items: left;
         border-radius: 24px 24px 0 0;
+        flex: none;
+        height: 285px;
     }
 
     #add_contact {
@@ -209,20 +210,33 @@ form {
     }
 
     #close_button {
-        top: 100px;
-
+        position: relative;
+        top:-285px;
+        margin-right: 24px;
         >img {
             filter: invert(1);
         }
     }
 
+    #overlay_right_content {
+        flex: none;
+        flex-direction: column;
+    }
+
     #profile_picture {
-        position: absolute;
-        top: 30vh;
+        position: relative;
+        top: -140px;
         width: 125px;
         height: 125px;
         border: 3px solid white;
     }
+
+
+    #contact_form_div{
+        position: relative;
+        top: -140px;
+    }
+    
 }
 
 @media(max-width:550px){
@@ -230,7 +244,6 @@ form {
         margin: 32px;
     }
     #overlay_left{
-        align-items: flex-start;
         h2{
             font-size: 40px;
         }
@@ -256,11 +269,8 @@ form {
             height: 40px;
         }
     }
-    #overlay_right_content{
-        flex-direction: column;
-    }
+    
     #profile_picture{
-        position: relative;
         top: -140px;
     }
     #close_button{
