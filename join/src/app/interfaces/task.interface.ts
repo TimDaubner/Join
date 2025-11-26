@@ -9,4 +9,11 @@ export interface Task {
   status: string;
   duedate: Timestamp;
   assignees: string[];
+  subtasks: Subtask[];
+}
+
+export interface Subtask {
+  id: string;
+  title: string;
+  isdone: boolean;
 }

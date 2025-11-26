@@ -33,29 +33,50 @@
                 <h2>{{ column.title }}</h2>
 
                 @if (column.title !== 'Done') {
-                <button class="add_column_btn">
+                <button class="add_btn">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
+                } @else {
+                <span class="btn_placeholder"></span>
                 }
             </div>
+            <!-- cards -->
+            <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
+                [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
 
-            <!-- Column body -->
-            @if (column.tasks.length === 0) {
-            <div class="no_tasks">
-                No tasks To do
-            </div>
-            } @else {
-            <div class="column_body">
+
+                <!-- Column body -->
+                @if (column.tasks.length === 0) {
+                <div class="no_tasks">
+                    No tasks To do
+                </div>
+                }
+
+
                 @for (task of column.tasks; track task.id) {
                 <div class="example_box" cdkDrag>
-                    <!-- TO DO: task card content -->
+                    <!-- Tasks -->
+                    <div class="task_category">{{ task.category }}</div>
+                    <h3 class="task_title">{{ task.title }}</h3>
+                    <p class="task_description">{{ task.description }}</p>
+                    <!-- Subtask -->
+                    @if (task.subtasks.length > 0) {
+                    <div class="subtasks_line">
+                        <div class="subtasks_bar">
+                            <div class="subtasks_progress"
+                                [style.width.%]="(getCompletedSubtasksCount(task)/task.subtasks.length)*100">
+                            </div>
+                        </div>
+                        <span class="subtasks_count">
+                            {{ getCompletedSubtasksCount(task) }}/{{ task.subtasks.length }} Subtasks
+                        </span>
+                    </div>
+                    }
                 </div>
                 }
             </div>
-            }
         </div>
         }
     </div>
-
 
 </div>
