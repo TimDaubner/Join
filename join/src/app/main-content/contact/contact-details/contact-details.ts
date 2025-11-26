@@ -1,6 +1,6 @@
 import { Component, inject, ElementRef, HostListener } from '@angular/core';
-import { FirebaseService } from '../../../shared/services/firebase.service';
 import { EditContactOverlay } from '../../edit-contact-overlay/edit-contact-overlay';
+import { ContactService } from '../../../shared/services/contact/contact.service';
 
 
 
@@ -12,7 +12,7 @@ import { EditContactOverlay } from '../../edit-contact-overlay/edit-contact-over
 })
 
 export class ContactDetails {
-firebase = inject(FirebaseService)
+firebase = inject(ContactService)
 
   burgerOpen = false;
 

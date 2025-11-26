@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Contact } from '../../../interfaces/contact.interface';
 import { NgClass } from '@angular/common';
+import { ContactService } from '../../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -10,7 +10,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './contact-list.scss',
 })
 export class ContactList{
-  firebase = inject(FirebaseService)
+  firebase = inject(ContactService)
   contactList: Contact[] = this.firebase.contactList;
   selectedIndex!: number;
 

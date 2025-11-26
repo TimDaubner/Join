@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FirebaseService } from './shared/services/firebase.service';
+// import { FirebaseService } from './shared/services/firebase.service';
 import { Header } from './shared/header/header';
 import { Footer } from './shared/footer/footer';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { ContactService } from './shared/services/contact/contact.service';
 })
 export class App {
   protected readonly title = signal('join');
-  firebase = inject(FirebaseService);
+  // firebase = inject(FirebaseService);
   board = inject(BoardService);
-  // contact = inject(ContactService);
+  contact = inject(ContactService);
 }

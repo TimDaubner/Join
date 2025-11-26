@@ -1,8 +1,8 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { FirebaseService } from '../../shared/services/firebase.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Contact } from '../../interfaces/contact.interface';
 import { CommonModule } from '@angular/common';
+import { ContactService } from '../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-edit-contact-overlay',
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './edit-contact-overlay.scss',
 })
 export class EditContactOverlay {
-  firebase = inject(FirebaseService);
+  firebase = inject(ContactService);
   contact = {
     surname: '',
     lastname: '',
