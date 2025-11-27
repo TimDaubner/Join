@@ -104,7 +104,7 @@ button {
 
 #contact_details_button {
   display: flex;
-  margin-top: 8px;
+  margin-top: 16px;
   >button{
     width: 70px;
   }
@@ -271,6 +271,10 @@ app-edit-contact-overlay.slide_out_edit {
   #details_head {
     display: block;
   }
+
+ #contact_details_button {
+  margin-top: 8px;
+ }
 
   hr {
     position: relative;
