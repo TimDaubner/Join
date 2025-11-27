@@ -200,19 +200,23 @@
     justify-content: center;
   }
 
-  // .header {
-  //   position: static;
-  //   max-width: 1920px;
-  //   width: 100%;
-  //   margin-bottom: 0;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  //   left: 0;
-  // }
+  .header {
+    z-index: -1;
+    left: 40.2vw;
+    width: calc(25vw);
+    position: fixed;
+  }
+}
+
+@media (min-width: 3900px) {
+  .header_container {
+    justify-content: center;
+  }
 
   .header {
-    left: 38.7vw;
-    width: calc(50vw - 20vw);
+    z-index: -1;
+    left: 39.2vw;
+    width: calc(25vw);
     position: fixed;
   }
 }
