@@ -1,5 +1,16 @@
 @use 'variables' as *;
 
+.limitation {
+  max-width: 1920px;
+}
+
+// .responsive4k {
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+//   height: 100%;
+// }
+
 .header {
   background-color: $white;
   color: $black;
@@ -181,5 +192,27 @@
 
   .open_burger_menu .btn_menu.help {
     display: block !important;
+  }
+}
+
+@media (min-width: 1980px) {
+  .header_container {
+    justify-content: center;
+  }
+
+  // .header {
+  //   position: static;
+  //   max-width: 1920px;
+  //   width: 100%;
+  //   margin-bottom: 0;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  //   left: 0;
+  // }
+
+  .header {
+    left: 38.7vw;
+    width: calc(50vw - 20vw);
+    position: fixed;
   }
 }
