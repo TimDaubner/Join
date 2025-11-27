@@ -98,14 +98,10 @@ section {
   margin-top: 96px;
   box-sizing: border-box;
   box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 20px);
+  height: calc(100vh - 96px);
   margin-left: clamp(180px, 16.1vw, 232px);
   padding: 0 24px;
   box-sizing: border-box;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: stretch;
-  // overflow: auto;
   overflow-x: hidden;
 
   ::-webkit-scrollbar {
