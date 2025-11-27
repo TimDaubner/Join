@@ -106,7 +106,7 @@ button {
   display: flex;
   margin-top: 8px;
   >button{
-    width: 65px;
+    width: 70px;
   }
 }
 
@@ -314,10 +314,6 @@ app-edit-contact-overlay.slide_out_edit {
   #contact_details {
     margin-top: 70px;
     height: calc(100vh - 160px);
-  }
-
-  app-edit-contact-overlay {
-    height: 600px;
   }
 }
 
