@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject,} from '@angular/core';
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Task} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
@@ -12,6 +12,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { ContactService } from '../../shared/services/contact/contact.service';
 import { BoardService } from '../../shared/services/board/board.service';
 
+
 @Component({
   selector: 'app-add-task',
   standalone: true,
@@ -21,9 +22,8 @@ import { BoardService } from '../../shared/services/board/board.service';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
@@ -34,7 +34,9 @@ import { BoardService } from '../../shared/services/board/board.service';
 export class AddTask {
 
   firebase = inject(ContactService);
-  taskService = inject(BoardService)
+  taskService = inject(BoardService);
+
+  workerDropdown = false;
 
   newTask: Task = {
     title: "",
@@ -85,6 +87,10 @@ export class AddTask {
       ],
       columnCategory: "To do",
     };
+  }
+
+  toggleDropdown() {
+    this.workerDropdown = !this.workerDropdown
   }
 
   setTaskPriority(prio:string) {
