@@ -19,9 +19,12 @@ export class BoardService {
     this.unsubscribe = onSnapshot(collection(this.firestore, "tasks"), (tasksSnapshot) => {
       this.taskList = []
       tasksSnapshot.forEach((task) => {
-        this.taskList.push(this.setTaskObject(task.data() as Task));
+        this.taskList.push(this.setTaskObject(task.id,task.data() as Task));
       });
     });
+    setTimeout(()=>{
+    console.log(this.taskList);
+    },3000);
   }
 
   ngOnDestroy() {
@@ -32,17 +35,17 @@ export class BoardService {
 
   // sortTasks
 
-  setTaskObject(obj: Task): Task {
+  setTaskObject(idParam: string,obj: Task): Task {
     return {
-      id: "",
-      title: "",
-      description: "",
-      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
-      priority: "",
-      assignedTo: [],
-      taskCategory: "",
-      subTask: [],
-      columnCategory: 'To do',
+      id: idParam,
+      assignedTo: obj.assignedTo,
+      columnCategory: obj.columnCategory,
+      description: obj.description,
+      dueDate: obj.dueDate,
+      priority: obj.priority,
+      subTask: obj.subTask,
+      taskCategory: obj.taskCategory,
+      title: obj.title,
     }
   }
 

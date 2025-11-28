@@ -23,12 +23,49 @@ export class Board {
   isAddTaskOpen: boolean = false;
 
   constructor() {
-    this.renderTasks();
+    setTimeout(()=>{
+      this.renderTasks();
+    },1000);
   }
 
+  tasksToDo: Task[] = [];
+  tasksInProgress: Task[] = [];
+  tasksAwaitFeedback: Task[] = [];
+  tasksDone: Task[] = [];
+
   renderTasks() {
+    
+    console.log(this.board_service.taskList);
+
+    //SORT in HTML with class or boolean
+    // check in which columnCategory
     this.board_service.taskList.forEach((task) => {
-      console.log(task.title);
+      this.columns.forEach(column => {
+        switch (column.title) {
+          case 'To Do':
+            this.tasksToDo.push(task);
+            this.tasksToDo.forEach(element => {
+            });
+            break;
+            case 'In progress':
+            this.tasksInProgress.push(task);
+            this.tasksInProgress.forEach(element => {
+            });
+            break;
+            case 'Await feedback':
+              this.tasksAwaitFeedback.push(task);
+              this.tasksAwaitFeedback.forEach(element => {
+              });
+              break;
+              case 'Done':
+                this.tasksDone.push(task);
+                this.tasksDone.forEach(element => {
+                });
+            break;
+          default:
+            break;
+        }
+      });
     });
   }
 
@@ -50,8 +87,9 @@ export class Board {
     }
   }
 
-  updateTasks(type: string) {}
+  updateTasks(type: string) { }
 
+  // #region dummy data
   // columns: { title: string; tasks: Task[] }[] = [
   //   { title: 'To do', tasks: [] },
   //   { title: 'In progress', tasks: [] },
@@ -169,4 +207,5 @@ export class Board {
   getCompletedSubtasksCount(task: Task): number {
     return task.subTask.filter((sub) => sub.status).length;
   }
+  // #endregion dummy data
 }
