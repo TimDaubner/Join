@@ -30,6 +30,8 @@ export class BoardService {
     }
   }
 
+  // sortTasks
+
   setTaskObject(obj: Task): Task {
     return {
       id: "",
