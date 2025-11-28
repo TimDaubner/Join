@@ -35,38 +35,38 @@ export class Board {
 
   renderTasks() {
     
-    console.log(this.board_service.taskList);
+    console.log(this.board_service.taskList[0].id);
 
     //SORT in HTML with class or boolean
     // check in which columnCategory
-    this.board_service.taskList.forEach((task) => {
-      this.columns.forEach(column => {
-        switch (column.title) {
-          case 'To Do':
-            this.tasksToDo.push(task);
-            this.tasksToDo.forEach(element => {
-            });
-            break;
-            case 'In progress':
-            this.tasksInProgress.push(task);
-            this.tasksInProgress.forEach(element => {
-            });
-            break;
-            case 'Await feedback':
-              this.tasksAwaitFeedback.push(task);
-              this.tasksAwaitFeedback.forEach(element => {
-              });
-              break;
-              case 'Done':
-                this.tasksDone.push(task);
-                this.tasksDone.forEach(element => {
-                });
-            break;
-          default:
-            break;
-        }
-      });
-    });
+    // this.board_service.taskList.forEach((task) => {
+    //   this.columns.forEach(column => {
+    //     switch (column.title) {
+    //       case 'To Do':
+    //         this.tasksToDo.push(task);
+    //         this.tasksToDo.forEach(element => {
+    //         });
+    //         break;
+    //         case 'In progress':
+    //         this.tasksInProgress.push(task);
+    //         this.tasksInProgress.forEach(element => {
+    //         });
+    //         break;
+    //         case 'Await feedback':
+    //           this.tasksAwaitFeedback.push(task);
+    //           this.tasksAwaitFeedback.forEach(element => {
+    //           });
+    //           break;
+    //           case 'Done':
+    //             this.tasksDone.push(task);
+    //             this.tasksDone.forEach(element => {
+    //             });
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //   });
+    // });
   }
 
   searchTask(keyWord: string) {
