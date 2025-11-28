@@ -169,4 +169,17 @@ export class Board {
   getCompletedSubtasksCount(task: Task): number {
     return task.subTask.filter((sub) => sub.status).length;
   }
+
+  getPriorityIcon(priority: string): string {
+    switch (priority.toLowerCase()) {
+      case 'urgent':
+        return './assets/icons/prio_urgent.svg';
+      case 'medium':
+        return './assets/icons/prio_medium.svg';
+      case 'low':
+        return './assets/icons/prio_low.svg';
+      default:
+        return '';
+    }
+  }
 }

@@ -15,8 +15,7 @@
 .board_header_wrapper {
   width: 100%;
   max-width: 1056px;
-  margin: 0 auto;
-  padding: 80px 40px 68px 40px;
+  padding: 150px 50px 68px 50px;
 }
 
 .board_header {
@@ -26,7 +25,6 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0 16px;
 }
 
 .header_title {
@@ -132,11 +130,10 @@
 
 // columns
 .content_container {
-  max-width: 1056px;
-  margin: 0 auto;
-  padding: 0 40px;
+  max-width: 2000px;
+  margin: 0 50px;
   display: flex;
-  gap: 24px;
+  gap: 10px;
   align-items: flex-start;
 }
 
@@ -164,7 +161,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0 6px;
+  padding-right: 30px;
 
   img {
     width: 20px;
@@ -226,6 +223,7 @@
   border-radius: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: move;
+  position: relative;
 }
 
 // content of cards
@@ -277,6 +275,13 @@
   text-overflow: ellipsis;
 }
 
+.priority_icon {
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .subtasks_line {
   display: flex;
   align-items: center;
@@ -298,7 +303,14 @@
   }
 
   .subtasks_count {
-    font: 400 12px;
     color: black;
+    display: flex;
+    gap: 10px;
   }
+}
+
+.task_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

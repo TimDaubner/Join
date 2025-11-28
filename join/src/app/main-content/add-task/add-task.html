@@ -3,34 +3,39 @@
         <h1>Add Task</h1>
         <form id="add_task_form" (ngSubmit)="placeholder()">
             <div id="left_form">
-                
+
                 <p>Title<span>*</span></p>
                 <input name="title" placeholder="Enter a title" [(ngModel)]="newTask.title">
-            
+
                 <p>Description</p>
-                <textarea name="description" placeholder="Enter a description" [(ngModel)]="newTask.description"></textarea>
+                <textarea name="description" placeholder="Enter a description"
+                    [(ngModel)]="newTask.description"></textarea>
 
                 <p>Due date<span>*</span></p>
                 <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                
+
 
             </div>
             <hr>
             <div id="right_form">
                 <div id="priority">
                     <p>Priority</p>
-                    <button type="button" (click)="setTaskPriority('Urgent')">Urgent <img src="./assets/icons/Prio alta.svg" alt=""></button>
-                    <button type="button" (click)="setTaskPriority('Medium')">Medium <img src="./assets/icons/Prio media.svg" alt=""></button>
-                    <button type="button" (click)="setTaskPriority('Low')">Low <img src="./assets/icons/Prio baja.svg" alt=""></button>
+                    <button type="button" (click)="setTaskPriority('Urgent')">Urgent <img
+                            src="./assets/icons/prio_urgent.svg" alt="Priority urgent"></button>
+                    <button type="button" (click)="setTaskPriority('Medium')">Medium <img
+                            src="./assets/icons/prio_medium.svg" alt="Priority medium"></button>
+                    <button type="button" (click)="setTaskPriority('Low')">Low <img src="./assets/icons/prio_low.svg"
+                            alt="Priority low"></button>
                 </div>
-                
+
                 <mat-form-field appearance="outline">
                     <mat-label>Select contacts to assign</mat-label>
-                    <mat-select  multiple name="assignedWorker" [(ngModel)]="newTask.assignedTo">
+                    <mat-select multiple name="assignedWorker" [(ngModel)]="newTask.assignedTo">
                         @for (contact of firebase.contactList; track $index) {
-                        <mat-option>{{firebase.contactList[$index].surname}} {{firebase.contactList[$index].lastname}}</mat-option>
+                        <mat-option>{{firebase.contactList[$index].surname}}
+                            {{firebase.contactList[$index].lastname}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
@@ -48,14 +53,14 @@
                 <input name="Subtask" type="text" placeholder="Add new subtask">
 
                 @for (task of newTask.subTask; track $index) {
-                    <li>{{task.subDescription}}</li>
+                <li>{{task.subDescription}}</li>
                 } @empty {}
             </div>
         </form>
         <div id="form_buttons">
             <button type="button">Clear</button>
-            <button type="submit" form="add_task_form" >Create Task</button>
+            <button type="submit" form="add_task_form">Create Task</button>
         </div>
     </div>
-    
+
 </section>

@@ -64,11 +64,28 @@
                                 [style.width.%]="(getCompletedSubtasksCount(task)/task.subTask.length)*100">
                             </div>
                         </div>
-                        <span class="subtasks_count">
-                            {{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }} Subtasks
-                        </span>
+                        <div class="subtasks_count">
+                            <div class="count_number">{{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }}
+                            </div>
+                            <div class="count_text">
+                                Subtasks</div>
+                        </div>
                     </div>
                     }
+
+                    <!-- Initial icons -->
+                    <div class="task_footer">
+                        <div class="assignees">
+                            <span class="initials">Placeholder icon
+                            </span>
+                        </div>
+                        <!-- Priority icon -->
+                        @if (task.priority) {
+                        <span class="priority_icon">
+                            <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                        </span>
+                        }
+                    </div>
                 </div>
                 }
             </div>
