@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, Timestamp } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, Timestamp, addDoc } from '@angular/fire/firestore';
 import { Task } from '../../../interfaces/task.interface';
 import { ContactService } from '../contact/contact.service';
 
@@ -44,6 +44,13 @@ export class BoardService {
       subTask: [],
       columnCategory: 'To do',
     }
+  }
+
+    async addTaskToDatabase(task: Task) {
+      await addDoc(collection(this.firestore, "tasks"), task)
+      console.log(" Task ist hochgeladen");
+      console.log(task);
+      
   }
 
   getInitials(index: number) {
