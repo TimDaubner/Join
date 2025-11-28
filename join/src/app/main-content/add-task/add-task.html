@@ -31,9 +31,14 @@
                     <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
                     <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
                         @for (contact of firebase.contactList; track $index) {
-                            <div class="single_contact_dd">
+                            <div class="single_contact_dd" (click)="toggleContact(contact.surname + ' ' + contact.lastname, checkbox, $event)">
                                 <p (click)="logID(contact.id)">{{contact.surname}} {{contact.lastname}}</p>
-                                <input class="checkbox" type="checkbox">
+                                <input
+                                    #checkbox
+                                    class="checkbox"
+                                    type="checkbox"
+                                    (click)="$event.stopPropagation()"
+                                >
                             </div>
                         }
                     </div>

@@ -107,12 +107,12 @@ textarea {
     width: 300px;
     height: 200px;
     position: absolute;
-    top: 55%;             /* Direkt unter dem Input */
+    top: 55%;
     left: 0;
     width: 100%;
     background: white;
-    border: 1px solid #ccc;
-    z-index: 10;           /* Über anderen Elementen */
+    border: 1px solid #D1D1D1;
+    z-index: 10;
     overflow-y: scroll;
 }
 
@@ -124,6 +124,8 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 8px;
+    padding-right: 12px;
     >.checkbox {
         width: 24px;
         height: 24px;
