@@ -10,7 +10,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
   styleUrl: './contact-list.scss',
 })
 export class ContactList{
-  contact_service = inject(ContactService)
+  contact_service = inject(ContactService);
   contactList: Contact[] = this.contact_service.contactList;
   selectedIndex!: number;
 

@@ -31,7 +31,7 @@
     cursor: pointer;
   }
 
-  > .img {
+  >.img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,11 +46,11 @@
     border: 2px solid white;
   }
 
-  > div {
+  >div {
     display: flex;
     flex-direction: column;
 
-    > .gap {
+    >.gap {
       display: flex;
       gap: 8px;
     }
@@ -78,7 +78,7 @@ button {
     background-color: #29abe2;
   }
 
-  > img {
+  >img {
     margin-left: 8px;
     width: 24px;
     height: 24px;
@@ -98,14 +98,10 @@ section {
   margin-top: 96px;
   box-sizing: border-box;
   box-shadow: 0 20px 20px 0px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 20px);
+  height: calc(100vh - 96px);
   margin-left: clamp(180px, 16.1vw, 232px);
   padding: 0 24px;
   box-sizing: border-box;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: stretch;
-  // overflow: auto;
   overflow-x: hidden;
 
   ::-webkit-scrollbar {
@@ -152,7 +148,7 @@ section {
   .background_new_contact {
     position: fixed;
 
-    > button {
+    >button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -164,7 +160,7 @@ section {
       bottom: 105px;
       right: 25px;
 
-      > img {
+      >img {
         width: 50px;
         height: 50px;
       }
@@ -205,17 +201,22 @@ section {
     color: white;
   }
 
-  > .link {
+  >.link {
     color: #1184ee;
   }
+}
+
+.link {
+  color: #1184ee;
 }
 
 @media (max-width: 540px) {
   section {
     height: calc(100vh - 140px);
   }
+
   .background_new_contact {
-    > button {
+    >button {
       bottom: 85px !important;
     }
   }

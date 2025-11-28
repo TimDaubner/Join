@@ -11,6 +11,7 @@ export class ContactService {
   currentIndex!: number;
   editing = false;
   detailsOpen = false;
+  isAdded = false;
 
   firestore: Firestore = inject(Firestore);
 
@@ -127,7 +128,11 @@ export class ContactService {
   }
 
   async addContactToDatabase(contact: Contact) {
-    await addDoc(collection(this.firestore, "contacts"), contact)
+    this.isAdded = true;
+    setTimeout(()=>{
+      this.isAdded = false;
+    },3000);
+    await addDoc(collection(this.firestore, "contacts"), contact);
   }
 
   async editContactToDatabase($index: number, contact: Contact) {

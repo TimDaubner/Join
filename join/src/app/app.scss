@@ -10,20 +10,24 @@ app-footer {
   top: 0;
 }
 
-@media(min-width:1980px){
+#main-content {
+  margin-top: 96px;
+}
+
+@media(min-width:1980px) {
   .responsive4k {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-    #main_content {
-      display: flex;
-      justify-content: center;
-      margin-top: 96px;
-      max-width: 1920px;
-      // margin-left: clamp(180px, 16.1vw, 232px);
-    }
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
+
+  #main_content {
+    display: flex;
+    justify-content: center;
+    max-width: 1920px;
+    // margin-left: clamp(180px, 16.1vw, 232px);
+  }
+}
 
 
 .overlay {
