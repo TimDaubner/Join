@@ -52,7 +52,8 @@
                 <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
                 <div class="example_box" cdkDrag>
-                    <div class="task_category" [ngClass]="task.taskCategory">{{ task.taskCategory }}</div>
+                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
+                    </div>
                     <h3 class="task_title">{{ task.title }}</h3>
                     <p class="task_description">{{ task.description }}</p>
                     <!-- Subtask -->
@@ -63,11 +64,28 @@
                                 [style.width.%]="(getCompletedSubtasksCount(task)/task.subTask.length)*100">
                             </div>
                         </div>
-                        <span class="subtasks_count">
-                            {{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }} Subtasks
-                        </span>
+                        <div class="subtasks_count">
+                            <div class="count_number">{{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }}
+                            </div>
+                            <div class="count_text">
+                                Subtasks</div>
+                        </div>
                     </div>
                     }
+
+                    <!-- Initial icons -->
+                    <div class="task_footer">
+                        <div class="assignees">
+                            <span class="initials">Placeholder icon
+                            </span>
+                        </div>
+                        <!-- Priority icon -->
+                        @if (task.priority) {
+                        <span class="priority_icon">
+                            <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                        </span>
+                        }
+                    </div>
                 </div>
                 }
             </div>
