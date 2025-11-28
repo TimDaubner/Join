@@ -5,21 +5,16 @@
             <div id="left_form">
                 
                 <p>Title<span>*</span></p>
-                <mat-form-field appearance="outline">
-                    <input matInput name="title" placeholder="Enter a title" [(ngModel)]="newTask.title">
-                </mat-form-field>
+                <input name="title" placeholder="Enter a title" [(ngModel)]="newTask.title">
             
                 <p>Description</p>
-                <mat-form-field appearance="outline">
-                    <textarea matInput name="description" placeholder="Enter a description" [(ngModel)]="newTask.description"></textarea>
-                </mat-form-field>
+                <textarea name="description" placeholder="Enter a description" [(ngModel)]="newTask.description"></textarea>
 
                 <p>Due date<span>*</span></p>
-                <mat-form-field appearance="outline">
-                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                
 
             </div>
             <hr>

@@ -9,7 +9,6 @@ button {
   height: 550px;
   display: flex;
   margin: 64px;
-  
   border-radius: 32px;
 }
 
@@ -127,9 +126,9 @@ form {
 #close_button_white {
     display: none;
     position: relative;
-    top: -180px;
+    top: -165px;
     align-self: flex-end;
-    right: 0px;
+    right: 15px;
     background: none;
     border: none;
     cursor: pointer;
@@ -166,10 +165,11 @@ form {
 
 @media(max-width:936px) {
     #edit_contact {
-        width: auto;
-        height: 666px;
+        width: 600px;
+        height: 780px;
         flex-direction: column;
-        margin:0;
+        margin:16px;
+        ;
     }
 
     #overlay_left {
@@ -183,6 +183,10 @@ form {
             font-size: 47px;
             
         }
+    }
+
+    #close_button_white {
+      display: flex;
     }
 
     #overlay_right {
@@ -213,7 +217,7 @@ form {
 
     #profile_picture {
         position: relative;
-        top: -116px;
+        top: -70px;
         height: 120px;
         width: 120px;
         border: 2px solid white;
@@ -255,10 +259,20 @@ form {
         margin-top: 16px;
     }
 
+    @media(max-width:620px) {
+      #edit_contact {
+        width: 315px;
+      }
+    }
+
     @media(max-width:400px) {
         #edit_contact {
             height: 666px;
             margin:0;
+        }
+
+        #overlay_right {
+          max-height: 486px;
         }
     }
 
