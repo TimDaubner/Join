@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject,} from '@angular/core';
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Task} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
@@ -10,6 +10,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ContactService } from '../../shared/services/contact/contact.service';
+import { BoardService } from '../../shared/services/board/board.service';
+
 
 @Component({
   selector: 'app-add-task',
@@ -20,9 +22,8 @@ import { ContactService } from '../../shared/services/contact/contact.service';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss',
@@ -32,14 +33,17 @@ import { ContactService } from '../../shared/services/contact/contact.service';
 })
 export class AddTask {
 
-  firebase = inject(ContactService)
+  firebase = inject(ContactService);
+  taskService = inject(BoardService);
+
+  workerDropdown = false;
 
   newTask: Task = {
     title: "",
     description: "",
     dueDate: Timestamp.fromDate(new Date("2025-12-31")),
     priority: "Medium",
-    assignedTo: [],
+    assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
     taskCategory: "",
     subTask: [
       {id: "", status: true,  subDescription: "Verträge lesen" },
@@ -49,14 +53,15 @@ export class AddTask {
     columnCategory: "To do",
   };
 
-  placeholder() {
+  submitTask() {
     console.log(this.newTask);
+    this.taskService.addTaskToDatabase(this.newTask)
     this.newTask = {
       title: "",
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: [],
+      assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
       taskCategory: "",
       subTask: [
         {id: "", status: true,  subDescription: "Verträge lesen" },
@@ -73,7 +78,7 @@ export class AddTask {
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: [],
+      assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
       taskCategory: "User Story",
       subTask: [
         {id: "" , status: true,  subDescription: "Verträge lesen" },
@@ -82,6 +87,10 @@ export class AddTask {
       ],
       columnCategory: "To do",
     };
+  }
+
+  toggleDropdown() {
+    this.workerDropdown = !this.workerDropdown
   }
 
   setTaskPriority(prio:string) {

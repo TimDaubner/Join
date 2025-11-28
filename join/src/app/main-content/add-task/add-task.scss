@@ -60,6 +60,7 @@ textarea {
 #right_form {
     display: flex;
     flex-direction: column;
+    gap: 16px;
     > li {
         margin-left: 28px;
     }
@@ -76,4 +77,48 @@ textarea {
     justify-content: flex-end;
     gap: 16px;
     margin-top: 32px;
+}
+
+#dateIcon {
+    position: relative;
+    left: 90%;
+    top: -13.5%;
+}
+
+.dropdown_icon {
+    width: 24px;
+    position: relative;
+    left: 90%;
+    top: -11%;
+    border-radius: 100px;
+    &:hover {
+        background: #D1D1D1;
+    }
+}
+
+#assigned_dropdown {
+    max-height: 300px;
+    overflow-y: scroll;
+    position: absolute;
+    top: -80px;
+    background-color: white;
+
+}
+
+.single_contact_dd {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    >.checkbox {
+        width: 24px;
+        height: 24px;
+        align-self: flex-end;
+        padding-right: 4px;
+    }
+}
+
+.d_none {
+    display: none;
 }

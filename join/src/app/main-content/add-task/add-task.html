@@ -1,7 +1,7 @@
 <section>
     <div id="max-width">
         <h1>Add Task</h1>
-        <form id="add_task_form" (ngSubmit)="placeholder()">
+        <form id="add_task_form" (ngSubmit)="submitTask()">
             <div id="left_form">
                 
                 <p>Title<span>*</span></p>
@@ -11,10 +11,9 @@
                 <textarea name="description" placeholder="Enter a description" [(ngModel)]="newTask.description"></textarea>
 
                 <p>Due date<span>*</span></p>
-                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                
+                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" name="dueDate" [(ngModel)]="newTask.dueDate">
+                <mat-datepicker-toggle  matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker id="dateIcon" #picker></mat-datepicker>
 
             </div>
             <hr>
@@ -25,16 +24,18 @@
                     <button type="button" (click)="setTaskPriority('Medium')">Medium <img src="./assets/icons/Prio media.svg" alt=""></button>
                     <button type="button" (click)="setTaskPriority('Low')">Low <img src="./assets/icons/Prio baja.svg" alt=""></button>
                 </div>
-                
-                <mat-form-field appearance="outline">
-                    <mat-label>Select contacts to assign</mat-label>
-                    <mat-select  multiple name="assignedWorker" [(ngModel)]="newTask.assignedTo">
-                        @for (contact of firebase.contactList; track $index) {
-                        <mat-option>{{firebase.contactList[$index].surname}} {{firebase.contactList[$index].lastname}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
 
+                <label for="assignedWorker">Assigned to</label>
+                <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
+                <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
+                    @for (contact of firebase.contactList; track $index) {
+                        <div class="single_contact_dd">
+                            <p>{{contact.surname}} {{contact.lastname}}</p>
+                            <input class="checkbox" type="checkbox">
+                        </div>
+                    }
+                </div>
 
                 <label for="Category">Category<span>*</span></label>
                 <mat-form-field appearance="outline">
