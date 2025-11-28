@@ -25,16 +25,18 @@
                     <button type="button" (click)="setTaskPriority('Low')">Low <img src="./assets/icons/Prio baja.svg" alt=""></button>
                 </div>
 
-                <label for="assignedWorker">Assigned to</label>
-                <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
-                <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
-                <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
-                    @for (contact of firebase.contactList; track $index) {
-                        <div class="single_contact_dd">
-                            <p>{{contact.surname}} {{contact.lastname}}</p>
-                            <input class="checkbox" type="checkbox">
-                        </div>
-                    }
+                <div class="input-wrapper">
+                    <label for="assignedWorker">Assigned to</label>
+                    <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                    <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
+                    <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
+                        @for (contact of firebase.contactList; track $index) {
+                            <div class="single_contact_dd">
+                                <p (click)="logID(contact.id)">{{contact.surname}} {{contact.lastname}}</p>
+                                <input class="checkbox" type="checkbox">
+                            </div>
+                        }
+                    </div>
                 </div>
 
                 <label for="Category">Category<span>*</span></label>

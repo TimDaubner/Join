@@ -97,4 +97,10 @@ export class AddTask {
     this.newTask.priority = prio
     console.log(this.newTask.priority);
   }
+
+  logID(id:string | undefined) {
+    console.log(id);
+    
+  }
+
 }

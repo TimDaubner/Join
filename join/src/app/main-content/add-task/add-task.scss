@@ -96,14 +96,27 @@ textarea {
     }
 }
 
-#assigned_dropdown {
-    max-height: 300px;
-    overflow-y: scroll;
-    position: absolute;
-    top: -80px;
-    background-color: white;
-
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
+#assigned_dropdown {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 55%;             /* Direkt unter dem Input */
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 10;           /* Über anderen Elementen */
+    overflow-y: scroll;
+}
+
+
 
 .single_contact_dd {
     width: 100%;
