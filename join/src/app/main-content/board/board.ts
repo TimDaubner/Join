@@ -21,6 +21,8 @@ import { BoardService } from '../../shared/services/board/board.service';
 export class Board {
   board_service = inject(BoardService);
   isAddTaskOpen: boolean = false;
+  selectedTask: Task | null = null;
+  isTaskDetailsOpen: boolean = false;
 
   constructor() {
     this.renderTasks();
@@ -48,6 +50,16 @@ export class Board {
     } else {
       this.isAddTaskOpen = false;
     }
+  }
+
+  openTaskDetails(task: Task) {
+    this.selectedTask = task;
+    this.isTaskDetailsOpen = true;
+  }
+
+  closeTaskDetails() {
+    this.isTaskDetailsOpen = false;
+    this.selectedTask = null;
   }
 
   updateTasks(type: string) {}
