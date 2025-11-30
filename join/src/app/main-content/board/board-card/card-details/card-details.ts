@@ -39,9 +39,19 @@ export class CardDetails {
     sub.status = !sub.status;
   }
 
-  editTask() {}
+  isEditOverlayOpen = false;
 
-  deleteTask() {}
+  editedTask: any = null; // task clicked to edit
 
-  updateTask(Task: {}) {}
+  // Open Task Details overlay
+  openTaskDetails(task: any) {
+    this.selectedTask = task;
+    this.isTaskDetailsOpen = true;
+  }
+
+  // Open Edit overlay
+  openEditOverlay(task: any) {
+    this.editedTask = { ...task }; // clone to avoid direct mutation
+    this.isEditOverlayOpen = true;
+  }
 }

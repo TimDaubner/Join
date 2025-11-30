@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.task_details {
+  width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: $white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: slideInRight 0.1s ease-out forwards;
+}
+
+.category_and_close_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close_btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
