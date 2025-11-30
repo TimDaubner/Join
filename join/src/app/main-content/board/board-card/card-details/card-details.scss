@@ -42,14 +42,26 @@
   }
 }
 
-.task_category_badge {
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 12px;
+.task_category {
+  padding: 4px 12px;
+  margin-bottom: 8px;
+  color: $white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  font-size: 14px;
   font-weight: 600;
   border-radius: 8px;
-  color: white;
-  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.task_category.TechnicalTask {
+  background-color: $board-green;
+}
+
+.task_category.UserStory {
+  background-color: $board-blue;
 }
 
 .task_title_large {
@@ -99,8 +111,8 @@
 }
 
 .checkbox_icon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
   margin-right: 10px;
 }
@@ -135,8 +147,8 @@
 }
 
 .edit_delete button img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .edit_delete .divider {
@@ -144,4 +156,15 @@
   height: 24px;
   background-color: #dcdcdc;
   display: inline-block;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
