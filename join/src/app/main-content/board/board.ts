@@ -10,11 +10,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
+import { CardDetails } from './board-card/card-details/card-details';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDrag, CdkDropList],
+  imports: [CommonModule, CdkDrag, CdkDropList, CardDetails],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
@@ -182,7 +183,8 @@ export class Board {
     return task.subTask.filter((sub) => sub.status).length;
   }
 
-  getPriorityIcon(priority: string): string {
+  getPriorityIcon(priority?: string): string {
+    if (!priority) return '';
     switch (priority.toLowerCase()) {
       case 'urgent':
         return './assets/icons/prio_urgent.svg';
@@ -193,5 +195,11 @@ export class Board {
       default:
         return '';
     }
+  }
+
+  toggleSubtask(sub: { id: string; subDescription: string; status: boolean }, event: Event) {
+    event.preventDefault();
+
+    sub.status = !sub.status;
   }
 }
