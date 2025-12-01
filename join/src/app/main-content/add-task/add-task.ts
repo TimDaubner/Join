@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ContactService } from '../../shared/services/contact/contact.service';
 import { BoardService } from '../../shared/services/board/board.service';
+import { Contact } from '../contact/contact';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class AddTask {
     description: "",
     dueDate: Timestamp.fromDate(new Date("2025-12-31")),
     priority: "Medium",
-    assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
+    assignedTo: [],
     taskCategory: "",
     subTask: [
       {id: "", status: true,  subDescription: "Verträge lesen" },
@@ -61,7 +62,7 @@ export class AddTask {
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
+      assignedTo: [],
       taskCategory: "",
       subTask: [
         {id: "", status: true,  subDescription: "Verträge lesen" },
@@ -78,7 +79,7 @@ export class AddTask {
       description: "",
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
-      assignedTo: [this.firebase.contactList[2].surname + ' ' + this.firebase.contactList[2].lastname],
+      assignedTo: [],
       taskCategory: "User Story",
       subTask: [
         {id: "" , status: true,  subDescription: "Verträge lesen" },
@@ -97,4 +98,29 @@ export class AddTask {
     this.newTask.priority = prio
     console.log(this.newTask.priority);
   }
+
+  logID(id:string | undefined) {
+    console.log(id);
+    
+  }
+
+
+  // funzt soweit, nur klappt es nicht wenn man direkt auf die checkbox klickt. 
+  toggleContact(contact: string, checkbox: HTMLInputElement, event: MouseEvent) {
+    checkbox.checked = !checkbox.checked
+
+    if (checkbox.checked) {
+    if (!this.newTask.assignedTo.includes(contact)) {
+      this.newTask.assignedTo.push(contact);
+    }
+    console.log( this.newTask.assignedTo);
+    
+  } else {
+    this.newTask.assignedTo = this.newTask.assignedTo.filter(
+      c => c !== contact
+    );
+    console.log( this.newTask.assignedTo);
+  }
+}
+
 }

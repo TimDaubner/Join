@@ -30,26 +30,23 @@
                             alt="Priority low"></button>
                 </div>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Select contacts to assign</mat-label>
-                    <mat-select multiple name="assignedWorker" [(ngModel)]="newTask.assignedTo">
+                <div class="input-wrapper">
+                    <label for="assignedWorker">Assigned to</label>
+                    <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                    <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
+                    <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
                         @for (contact of firebase.contactList; track $index) {
-                        <mat-option>{{firebase.contactList[$index].surname}}
-                            {{firebase.contactList[$index].lastname}}</mat-option>
+                            <div class="single_contact_dd" (click)="toggleContact(contact.surname + ' ' + contact.lastname, checkbox, $event)">
+                                <p (click)="logID(contact.id)">{{contact.surname}} {{contact.lastname}}</p>
+                                <input
+                                    #checkbox
+                                    class="checkbox"
+                                    type="checkbox"
+                                    (click)="$event.stopPropagation()"
+                                >
+                            </div>
                         }
-                    </mat-select>
-                </mat-form-field>
-
-                <label for="assignedWorker">Assigned to</label>
-                <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
-                <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
-                <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
-                    @for (contact of firebase.contactList; track $index) {
-                        <div class="single_contact_dd">
-                            <p>{{contact.surname}} {{contact.lastname}}</p>
-                            <input class="checkbox" type="checkbox">
-                        </div>
-                    }
+                    </div>
                 </div>
 
                 <label for="Category">Category<span>*</span></label>
