@@ -48,7 +48,6 @@ export class Board {
         // this.allTasks.forEach(task => {
         //   task.
         // });
-
         //render Task
       } else {
         //hide Task
@@ -193,7 +192,7 @@ export class Board {
 
   getPriorityIcon(priority: string): string {
     switch (priority.toLowerCase()) {
-      case 'urgent':
+      case 'high':
         return './assets/icons/prio_urgent.svg';
       case 'medium':
         return './assets/icons/prio_medium.svg';

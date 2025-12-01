@@ -44,6 +44,7 @@
             <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
                 [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
                 <!-- Column body -->
+                 <!-- TODO - hover change (onmouseover) -->
                 @if (column.tasks.length === 0) {
                 <div class="no_tasks">
                     No tasks {{ column.title }}
