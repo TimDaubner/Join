@@ -33,7 +33,7 @@
                 <h2>{{ column.title }}</h2>
 
                 @if (column.title !== 'Done') {
-                <button class="add_btn">
+                <button class="add_btn" (click)="showAddTaskComponent()">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
                 } @else {
@@ -52,7 +52,11 @@
                 }
                 <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
+<<<<<<< HEAD
                 <div class="example_box" cdkDrag [cdkDragData]="task" [ngClass]="{'show' : isVisible, 'hide': !isVisible}">
+=======
+                <div class="example_box" cdkDrag (click)="openTaskDetails(task)">
+>>>>>>> imra
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
                     </div>
                     <h3 class="task_title">{{ task.title }}</h3>
@@ -94,5 +98,7 @@
         <div [ngClass]="{isAddTaskOpen}"></div>
         }
     </div>
+    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
+        (close)="closeTaskDetails()"></app-card-details>
 
 </div>

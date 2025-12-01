@@ -1,0 +1,39 @@
+<div class="overlay" (click)="closeEdit()">
+    <div class="task_details" (click)="$event.stopPropagation()">
+
+        <div class="close_btn_container">
+            <button class="close_btn">
+                <img src="/assets/icons/close.svg" alt="Close">
+            </button>
+        </div>
+
+        <h2 class="task_title_large"></h2>
+
+        <div class="edit_fields">
+            <label>Title</label>
+
+            <label>Description</label>
+
+            <label>Due date</label>
+
+            <label>Priority</label>
+            <div class="priority_buttons">
+
+            </div>
+
+            <label>Assigned to</label>
+            <div class="assigned_contacts">
+
+            </div>
+
+            <label>Subtasks</label>
+            <div class="subtasks">
+
+            </div>
+        </div>
+
+        <div class="ok_btn_container">
+            <button class="ok_btn">Ok</button>
+        </div>
+    </div>
+</div>

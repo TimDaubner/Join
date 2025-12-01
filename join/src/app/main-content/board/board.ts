@@ -10,18 +10,28 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
+<<<<<<< HEAD
 import { FormsModule } from "@angular/forms";
+=======
+import { CardDetails } from './board-card/card-details/card-details';
+>>>>>>> imra
 
 @Component({
   selector: 'app-board',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, CdkDrag, CdkDropList, FormsModule],
+=======
+  imports: [CommonModule, CdkDrag, CdkDropList, CardDetails],
+>>>>>>> imra
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
 export class Board {
   board_service = inject(BoardService);
   isAddTaskOpen: boolean = false;
+  selectedTask: Task | null = null;
+  isTaskDetailsOpen: boolean = false;
 
   constructor() {
     this.init();
@@ -63,7 +73,21 @@ export class Board {
     }
   }
 
+<<<<<<< HEAD
   updateTasks(type: string) { }
+=======
+  openTaskDetails(task: Task) {
+    this.selectedTask = task;
+    this.isTaskDetailsOpen = true;
+  }
+
+  closeTaskDetails() {
+    this.isTaskDetailsOpen = false;
+    this.selectedTask = null;
+  }
+
+  updateTasks(type: string) {}
+>>>>>>> imra
 
   // #region dummy data
   // columns: { title: string; tasks: Task[] }[] = [
@@ -190,7 +214,8 @@ export class Board {
     return task.subTask.filter((sub) => sub.status).length;
   }
 
-  getPriorityIcon(priority: string): string {
+  getPriorityIcon(priority?: string): string {
+    if (!priority) return '';
     switch (priority.toLowerCase()) {
       case 'high':
         return './assets/icons/prio_urgent.svg';
@@ -201,6 +226,12 @@ export class Board {
       default:
         return '';
     }
+  }
+
+  toggleSubtask(sub: { id: string; subDescription: string; status: boolean }, event: Event) {
+    event.preventDefault();
+
+    sub.status = !sub.status;
   }
 }
 
