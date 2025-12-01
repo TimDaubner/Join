@@ -44,7 +44,7 @@
             <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
                 [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
                 <!-- Column body -->
-                 <!-- TODO - hover change (onmouseover) -->
+                <!-- TODO - hover change (onmouseover) -->
                 @if (column.tasks.length === 0) {
                 <div class="no_tasks">
                     No tasks {{ column.title }}
@@ -52,11 +52,7 @@
                 }
                 <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
-<<<<<<< HEAD
-                <div class="example_box" cdkDrag [cdkDragData]="task" [ngClass]="{'show' : isVisible, 'hide': !isVisible}">
-=======
                 <div class="example_box" cdkDrag (click)="openTaskDetails(task)">
->>>>>>> imra
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
                     </div>
                     <h3 class="task_title">{{ task.title }}</h3>

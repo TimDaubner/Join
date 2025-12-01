@@ -10,20 +10,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
-<<<<<<< HEAD
-import { FormsModule } from "@angular/forms";
-=======
 import { CardDetails } from './board-card/card-details/card-details';
->>>>>>> imra
 
 @Component({
   selector: 'app-board',
   standalone: true,
-<<<<<<< HEAD
-  imports: [CommonModule, CdkDrag, CdkDropList, FormsModule],
-=======
   imports: [CommonModule, CdkDrag, CdkDropList, CardDetails],
->>>>>>> imra
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
@@ -44,7 +36,7 @@ export class Board {
   isVisible: boolean = false;
 
   async init() {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     this.renderTasks();
   }
 
@@ -73,9 +65,6 @@ export class Board {
     }
   }
 
-<<<<<<< HEAD
-  updateTasks(type: string) { }
-=======
   openTaskDetails(task: Task) {
     this.selectedTask = task;
     this.isTaskDetailsOpen = true;
@@ -87,7 +76,6 @@ export class Board {
   }
 
   updateTasks(type: string) {}
->>>>>>> imra
 
   // #region dummy data
   // columns: { title: string; tasks: Task[] }[] = [
@@ -234,8 +222,6 @@ export class Board {
     sub.status = !sub.status;
   }
 }
-
-
 
 //SORT in HTML with class or boolean
 // check in which columnCategory
