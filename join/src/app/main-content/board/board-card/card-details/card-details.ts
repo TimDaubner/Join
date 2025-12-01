@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../../../interfaces/task.interface';
+import { EditCardDetails } from '../edit-card-details/edit-card-details';
 
 @Component({
   selector: 'app-card-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EditCardDetails],
   templateUrl: './card-details.html',
   styleUrl: './card-details.scss',
 })
 export class CardDetails {
+  isEditOverlayOpen = false;
+  editedTask: any = null;
+
   @Input() selectedTask: Task | null = null;
   @Input() isTaskDetailsOpen: boolean = false;
 
@@ -39,19 +43,8 @@ export class CardDetails {
     sub.status = !sub.status;
   }
 
-  isEditOverlayOpen = false;
-
-  editedTask: any = null; // task clicked to edit
-
-  // Open Task Details overlay
-  openTaskDetails(task: any) {
-    this.selectedTask = task;
-    this.isTaskDetailsOpen = true;
-  }
-
-  // Open Edit overlay
   openEditOverlay(task: any) {
-    this.editedTask = { ...task }; // clone to avoid direct mutation
+    this.editedTask = { ...task };
     this.isEditOverlayOpen = true;
   }
 }

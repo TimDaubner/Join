@@ -22,9 +22,9 @@
   animation: slideInRight 0.1s ease-out forwards;
 }
 
-.category_and_close_btn {
+.close_btn_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 

@@ -24,7 +24,7 @@
         </p>
         <div class="detail_row">
             <span class="label">Due date:</span>
-            <span> Placeholder</span>
+            <span> </span>
         </div>
         <div class="detail_row priority">
             <span class="label">Priority:</span>
@@ -64,4 +64,9 @@
         </div>
     </div>
 </div>
+}
+
+@if (isEditOverlayOpen) {
+<app-edit-card-details [task]="editedTask" (close)="isEditOverlayOpen = false">
+</app-edit-card-details>
 }
