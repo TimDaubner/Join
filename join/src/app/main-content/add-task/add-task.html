@@ -22,12 +22,27 @@
             <div id="right_form">
                 <div id="priority">
                     <p>Priority</p>
-                    <button type="button" (click)="setTaskPriority('Urgent')">Urgent <img
-                            src="./assets/icons/prio_urgent.svg" alt="Priority urgent"></button>
-                    <button type="button" (click)="setTaskPriority('Medium')">Medium <img
-                            src="./assets/icons/prio_medium.svg" alt="Priority medium"></button>
-                    <button type="button" (click)="setTaskPriority('Low')">Low <img src="./assets/icons/prio_low.svg"
-                            alt="Priority low"></button>
+                    <button
+                        type="button"
+                        (click)="setTaskPriority('Urgent')"
+                        [ngClass]="{ 'urgent_active': newTask.priority === 'Urgent' }">
+                        Urgent
+                        <img [src]="getIcon('Urgent')" alt="Priority urgent">
+                    </button>
+                    <button
+                        type="button"
+                        (click)="setTaskPriority('Medium')"
+                        [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
+                        Medium
+                        <img [src]="getIcon('Medium')" alt="Priority medium">
+                    </button>
+                    <button
+                        type="button"
+                        (click)="setTaskPriority('Low')"
+                        [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
+                        Low
+                        <img [src]="getIcon('Low')" alt="Priority low">
+                    </button>
                 </div>
 
                 <div class="input-wrapper">
@@ -36,33 +51,67 @@
                     <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
                     <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
                         @for (contact of firebase.contactList; track $index) {
-                            <div class="single_contact_dd" (click)="toggleContact(contact.surname + ' ' + contact.lastname, checkbox, $event)">
-                                <p (click)="logID(contact.id)">{{contact.surname}} {{contact.lastname}}</p>
-                                <input
-                                    #checkbox
-                                    class="checkbox"
-                                    type="checkbox"
-                                    (click)="$event.stopPropagation()"
-                                >
+                            <div
+                                class="single_contact_dd"
+                                [class.selected]="isSelected(contact)"
+                                (click)="toggleContact(contact)"
+                            >
+                                <p>{{ contact.surname }} {{ contact.lastname }}</p>
+
+                                <img
+                                class="checkbox-icon"
+                                [src]="isSelected(contact) ? 'assets/icons/checkbox_checked.svg' : 'assets/icons/checkbox_unchecked.svg'"
+                                alt="checkbox"
+                                />
                             </div>
                         }
                     </div>
                 </div>
 
-                <label for="Category">Category<span>*</span></label>
-                <mat-form-field appearance="outline">
-                    <mat-select name="Category" placeholder="Select category" [(ngModel)]="newTask.taskCategory">
-                        <mat-option value="User Story">User Story</mat-option>
-                        <mat-option value="Technical Task">Technical Task</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <div class="task_category">
+                    <div class="select_display" (click)="categoryDropdown = !categoryDropdown">
+                        {{ newTask.taskCategory || 'Select category' }}
+                        <img class="dropdown-icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
+                    </div>
+                    @if(categoryDropdown) {
+                        <div class="select-dropdown">
+                            <div class="option" (click)="selectCategory('User Story')">User Story</div>
+                            <div class="option" (click)="selectCategory('Technical Task')">Technical Task</div>
+                        </div>
+                    }
+                </div>
 
                 <label for="Subtask">Subtask</label>
-                <input name="Subtask" type="text" placeholder="Add new subtask">
+                <input name="Subtask" type="text" placeholder="Add new subtask" [(ngModel)]="subtaskInput">
+                @if(subtaskInput) {
+                    <div id="subtask_buttons">
+                        <button type = button (click)="clearSubtaskInput()"><img src="./assets/icons/subtask_clear.svg" alt=""></button>
+                        <button type = button (click)="addSubtask()"><img src="./assets/icons/subtask_check.svg" alt=""></button>
+                    </div>
+                }
 
-                @for (task of newTask.subTask; track $index) {
-                <li>{{task.subDescription}}</li>
-                } @empty {}
+                @for (task of newTask.subTask; track task.id) {
+                    <li class="subtask_item">
+
+                        @if (!editingState[task.id]) {
+                        <span> • {{ task.subDescription }}</span>
+
+                        <div class="sub_actions">
+                            <button type=button (click)="startEdit(task.id)"><img src="./assets/icons/edit.svg" alt=""></button>
+                            <hr>
+                            <button type=button (click)="deleteSubtask(task.id)"><img src="./assets/icons/delete.svg" alt=""></button>
+                        </div>
+                        }
+
+                        @if (editingState[task.id]) {
+                        <input class="edit_input_window" name=edit [(ngModel)]="task.subDescription" />
+
+                        <button type=button (click)="stopEdit(task.id)"><img src="./assets/icons/done.svg" alt=""></button>
+                        <hr>
+                        <button type=button (click)="deleteSubtask(task.id)"><img src="./assets/icons/delete.svg" alt=""></button>
+                        }
+                    </li>
+                }
             </div>
         </form>
         <div id="form_buttons">
