@@ -51,7 +51,7 @@
                 }
                 <!-- Tasks -->
                 @for (task of column.tasks; track task.id) {
-                <div class="example_box" cdkDrag>
+                <div class="example_box" cdkDrag [cdkDragData]="task" [ngClass]="{'show' : isVisible, 'hide': !isVisible}">
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
                     </div>
                     <h3 class="task_title">{{ task.title }}</h3>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Task } from './../../interfaces/task.interface';
+import { ColumnCategory, Task } from './../../interfaces/task.interface';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -10,11 +10,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDrag, CdkDropList],
+  imports: [CommonModule, CdkDrag, CdkDropList, FormsModule],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
@@ -23,55 +24,31 @@ export class Board {
   isAddTaskOpen: boolean = false;
 
   constructor() {
-    setTimeout(()=>{
-      this.renderTasks();
-    },1000);
+    this.init();
   }
-
+  allTasks: Task[] = [];
   tasksToDo: Task[] = [];
   tasksInProgress: Task[] = [];
   tasksAwaitFeedback: Task[] = [];
   tasksDone: Task[] = [];
+  isVisible: boolean = false;
+
+  async init() {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    this.renderTasks();
+  }
 
   renderTasks() {
-    
     console.log(this.board_service.taskList[0].id);
-
-    //SORT in HTML with class or boolean
-    // check in which columnCategory
-    // this.board_service.taskList.forEach((task) => {
-    //   this.columns.forEach(column => {
-    //     switch (column.title) {
-    //       case 'To Do':
-    //         this.tasksToDo.push(task);
-    //         this.tasksToDo.forEach(element => {
-    //         });
-    //         break;
-    //         case 'In progress':
-    //         this.tasksInProgress.push(task);
-    //         this.tasksInProgress.forEach(element => {
-    //         });
-    //         break;
-    //         case 'Await feedback':
-    //           this.tasksAwaitFeedback.push(task);
-    //           this.tasksAwaitFeedback.forEach(element => {
-    //           });
-    //           break;
-    //           case 'Done':
-    //             this.tasksDone.push(task);
-    //             this.tasksDone.forEach(element => {
-    //             });
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   });
-    // });
   }
 
   searchTask(keyWord: string) {
     this.board_service.taskList.forEach((task) => {
-      if (task.title.includes(keyWord)) {
+      if (task.title.toLocaleLowerCase().includes(keyWord.toLowerCase())) {
+        // this.allTasks.forEach(task => {
+        //   task.
+        // });
+
         //render Task
       } else {
         //hide Task
@@ -187,6 +164,7 @@ export class Board {
   ];
 
   drop(event: CdkDragDrop<Task[]>, columnTitle: string) {
+    const task: Task = event.item.data;
     //checking for switching positions in same column
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -197,7 +175,12 @@ export class Board {
         event.previousIndex,
         event.currentIndex
       );
+      this.changeColumnType(event.container.id, task);
     }
+  }
+
+  changeColumnType(id: string, task: Task) {
+    task.columnCategory = id as ColumnCategory;
   }
 
   getConnectedColumns() {
@@ -221,3 +204,36 @@ export class Board {
     }
   }
 }
+
+
+
+//SORT in HTML with class or boolean
+// check in which columnCategory
+// this.board_service.taskList.forEach((task) => {
+//   this.columns.forEach(column => {
+//     switch (column.title) {
+//       case 'To Do':
+//         this.tasksToDo.push(task);
+//         this.tasksToDo.forEach(element => {
+//         });
+//         break;
+//         case 'In progress':
+//         this.tasksInProgress.push(task);
+//         this.tasksInProgress.forEach(element => {
+//         });
+//         break;
+//         case 'Await feedback':
+//           this.tasksAwaitFeedback.push(task);
+//           this.tasksAwaitFeedback.forEach(element => {
+//           });
+//           break;
+//           case 'Done':
+//             this.tasksDone.push(task);
+//             this.tasksDone.forEach(element => {
+//             });
+//         break;
+//       default:
+//         break;
+//     }
+//   });
+// });
