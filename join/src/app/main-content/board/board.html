@@ -40,7 +40,6 @@
                 <span class="btn_placeholder"></span>
                 }
             </div>
-            <!-- cards -->
             <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
                 [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
                 <!-- Column body -->

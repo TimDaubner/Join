@@ -2,6 +2,8 @@
 <div class="overlay" (click)="closeTaskDetails()">
     <div class="task_details" (click)="$event.stopPropagation()">
 
+        @if (!isEditOverlayOpen) {
+
         <div class="category_and_close_btn">
             <!-- Category badge -->
             <div class="task_category" [ngClass]="(selectedTask?.taskCategory ?? '').replace(' ', '')">
@@ -62,11 +64,11 @@
             <span class="divider"></span>
             <button (click)="openEditOverlay(selectedTask)"><img src="/assets/icons/edit.svg" alt="Edit">Edit</button>
         </div>
+        } @else {
+        <app-edit-card-details [task]="editedTask" (close)="closeEditOverlay()">
+        </app-edit-card-details>
+        }
+
     </div>
 </div>
-}
-
-@if (isEditOverlayOpen) {
-<app-edit-card-details [task]="editedTask" (close)="isEditOverlayOpen = false">
-</app-edit-card-details>
 }

@@ -146,9 +146,18 @@
   cursor: pointer;
 }
 
+.edit_delete button:hover {
+  color: $secondary;
+}
+
 .edit_delete button img {
   width: 18px;
   height: 18px;
+}
+
+.edit_delete button:hover img {
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
+    brightness(96%) contrast(97%);
 }
 
 .edit_delete .divider {
