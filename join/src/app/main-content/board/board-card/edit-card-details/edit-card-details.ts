@@ -29,4 +29,14 @@ export class EditCardDetails {
       { id: '', status: false, subDescription: 'Start Page layout' },
     ],
   };
+
+  isClosing = false;
+
+  closeEditOnX() {
+    this.isClosing = true;
+    setTimeout(() => {
+      this.close.emit(); // now tell parent to hide overlay
+      this.isClosing = false; // reset for next time
+    }, 300);
+  }
 }

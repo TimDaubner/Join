@@ -1,7 +1,7 @@
-<div class="edit_view_container">
+<div class="edit_view_container" [class.slide-out]="isClosing">
 
     <div class="close_btn_container">
-        <button class="close_btn" (click)="closeEdit()">
+        <button class="close_btn" (click)="closeEditOnX()">
             <img src="/assets/icons/close.svg" alt="Close">
         </button>
     </div>
@@ -26,7 +26,6 @@
 
         <label>Subtasks</label>
         <div class="subtasks">
-
         </div>
     </div>
     <div class="btn_footer">
