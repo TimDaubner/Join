@@ -1,6 +1,6 @@
 @if (isTaskDetailsOpen) {
 <div class="overlay" (click)="closeTaskDetails()">
-    <div class="task_details" (click)="$event.stopPropagation()">
+    <div class="task_details" [ngClass]="overlayAnimation" (click)="$event.stopPropagation()">
 
         @if (!isEditOverlayOpen) {
 

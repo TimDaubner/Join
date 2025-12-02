@@ -19,6 +19,9 @@
   padding: 32px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   position: relative;
+}
+
+.slide-in {
   animation: slideInRight 0.1s ease-out forwards;
 }
 
@@ -176,4 +179,19 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.slide-out {
+  animation: slideOutRight 0.1s ease-out forwards;
 }

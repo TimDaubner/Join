@@ -101,6 +101,10 @@
   padding-right: 8px;
 }
 
+.backwards-animation {
+  animation: fade-blur-to-middle-close 0.4s ease-out forwards;
+}
+
 @keyframes slideOutRight {
   0% {
     transform: translateX(0);
@@ -113,5 +117,5 @@
 }
 
 .slide-out {
-  animation: slideOutRight 0.3s forwards;
+  animation: slideOutRight 0.1s ease-out forwards;
 }
