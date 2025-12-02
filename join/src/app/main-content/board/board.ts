@@ -20,6 +20,7 @@ import { CardDetails } from './board-card/card-details/card-details';
   styleUrls: ['./board.scss'],
 })
 export class Board {
+  //TODO - change due Date to date Month/Day/Year
   board_service = inject(BoardService);
   isAddTaskOpen: boolean = false;
   selectedTask: Task | null = null;
