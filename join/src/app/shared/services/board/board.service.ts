@@ -56,14 +56,16 @@ export class BoardService {
       
   }
 
-  getInitials(index: number) {
-    let arrayAssignedTo = this.taskList[index].assignedTo;
+  getInitials(names: string[]) {
+    let arrayAssignedTo = names;
     let firstInitial = [];
     let secondInitial = [];
+    this.initials = [];
     for (let i = 0; i < arrayAssignedTo.length; i++) {
       firstInitial[i] = arrayAssignedTo[i].charAt(0);
       secondInitial[i] = arrayAssignedTo[i].charAt(arrayAssignedTo[i].indexOf(" ") + 1);
-      this.initials[i] = firstInitial[i] + secondInitial[i];
+      return this.initials[i] = firstInitial[i] + secondInitial[i];
     }
+    return;
   }
 }

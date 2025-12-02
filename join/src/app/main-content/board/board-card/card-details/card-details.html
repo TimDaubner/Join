@@ -23,7 +23,7 @@
             {{ selectedTask?.description }}
         </p>
         <div class="detail_row">
-            <span class="label">Due date:</span>
+            <span class="label">Due date: {{selectedTask?.dueDate}}</span>
             <span> </span>
         </div>
         <div class="detail_row priority">
@@ -37,7 +37,21 @@
 
         <!-- Assigned To -->
         <div class="assignedTo_section">
-            <span class="label">Assigned To:</span>
+            <span class="label">Assigned To:
+                @if (selectedTask?.assignedTo) {
+                    @for (assignees of selectedTask.assignedTo; track $index; let index = $index) {
+                    
+                        @if(selectedTask.assignedTo.length < 3){
+                            <span class="initials">{{ this.getInitials(assignees) }}</span>
+                        }
+                        @else if(selectedTask.assignedTo.length == 3) {
+                            +{{ selectedTask.assignedTo.length - 3 }}
+                        }
+                    }
+                }
+
+                {{ selectedTask?.assignedTo }}
+</span>
         </div>
 
         <!-- Checkboxes subtasks -->

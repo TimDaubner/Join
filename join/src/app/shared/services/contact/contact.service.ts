@@ -104,7 +104,7 @@ export class ContactService {
 
   showContactDetails($index: number) {
     this.contactSelected = false;
-    this.currentContact = this.contactList[$index]
+    this.currentContact = this.contactList[$index];
     this.contactSelected = true;
     this.getInitials($index);
     this.currentIndex = $index;

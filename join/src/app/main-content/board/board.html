@@ -25,14 +25,14 @@
     </div>
 
     <div class="content_container">
-        @for (column of columns; track column.title) {
+        @for (task of this.board_service.taskList; track task) {
         <div class="column_wrapper">
 
             <!-- Header -->
             <div class="column_header">
-                <h2>{{ column.title }}</h2>
+                <h2>{{ task.columnCategory }}</h2>
 
-                @if (column.title !== 'Done') {
+                @if (task.taskCategory !== 'Done') {
                 <button class="add_btn" (click)="showAddTaskComponent()">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
@@ -41,17 +41,18 @@
                 }
             </div>
             <!-- cards -->
-            <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
-                [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
+            <div class="example_list" cdkDropList [id]="task.columnCategory"
+                [cdkDropListData]="this.board_service.taskList" [cdkDropListConnectedTo]="getConnectedColumns()"
+                (cdkDropListDropped)="drop($event, task.columnCategory)">
                 <!-- Column body -->
                 <!-- TODO - hover change (onmouseover) -->
-                @if (column.tasks.length === 0) {
+                @if (this.board_service.taskList.length === 0) {
                 <div class="no_tasks">
-                    No tasks {{ column.title }}
+                    No tasks {{ task.columnCategory }}
                 </div>
                 }
                 <!-- Tasks -->
-                @for (task of column.tasks; track task.id) {
+                @for (task of this.board_service.taskList; track task) {
                 <div class="example_box" cdkDrag (click)="openTaskDetails(task)">
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
                     </div>
@@ -77,8 +78,23 @@
                     <!-- Initial icons -->
                     <div class="task_footer">
                         <div class="assignees">
-                            <span class="initials">Placeholder icon
+                            @for (assignees of task.assignedTo; track $index; let index = $index) {
+                            @if(task.assignedTo.length > 3){
+                            @if(index == 3){
+                            +{{task.assignedTo.length - 3}}
+                            }
+                            @else if(index > 3){
+                            }
+                            @else {
+                            <span class="initials">{{getInitials(assignees)}}
                             </span>
+                            }
+                            }
+                            @else {
+                            <span class="initials">{{getInitials(assignees)}}
+                            </span>
+                            }
+                            }
                         </div>
                         <!-- Priority icon -->
                         @if (task.priority) {

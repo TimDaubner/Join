@@ -37,6 +37,15 @@ export class CardDetails {
     }
   }
 
+  getInitials(name: string) {
+    let firstInitial = "";
+    let secondInitial = "";
+    firstInitial = name.charAt(0);
+    secondInitial = name.charAt(name.indexOf(" ") + 1);
+    let initials = firstInitial + secondInitial;
+    return initials;
+  }
+
   toggleSubtask(sub: { id: string; subDescription: string; status: boolean }, event: Event) {
     event.preventDefault();
 

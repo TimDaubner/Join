@@ -77,6 +77,15 @@ export class Board {
 
   updateTasks(type: string) {}
 
+  getInitials(name:string) {
+    let firstInitial = "";
+    let secondInitial = "";
+      firstInitial = name.charAt(0);
+      secondInitial = name.charAt(name.indexOf(" ") + 1);
+      let initials = firstInitial + secondInitial;
+      return initials;
+  }
+
   // #region dummy data
   // columns: { title: string; tasks: Task[] }[] = [
   //   { title: 'To do', tasks: [] },
@@ -205,7 +214,7 @@ export class Board {
   getPriorityIcon(priority?: string): string {
     if (!priority) return '';
     switch (priority.toLowerCase()) {
-      case 'high':
+      case 'urgent':
         return './assets/icons/prio_urgent.svg';
       case 'medium':
         return './assets/icons/prio_medium.svg';
