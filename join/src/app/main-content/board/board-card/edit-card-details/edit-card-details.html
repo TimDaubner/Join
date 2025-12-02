@@ -1,39 +1,38 @@
-<div class="overlay" (click)="closeEdit()">
-    <div class="task_details" (click)="$event.stopPropagation()">
+<div class="edit_view_container" [class.slide-out]="isClosing">
 
-        <div class="close_btn_container">
-            <button class="close_btn">
-                <img src="/assets/icons/close.svg" alt="Close">
-            </button>
+    <div class="close_btn_container">
+        <button class="close_btn" (click)="closeEditOnX()">
+            <img src="/assets/icons/close.svg" alt="Close">
+        </button>
+    </div>
+    <h2 class="task_title_large"></h2>
+
+    <div class="edit_fields">
+        <label>Title</label>
+
+        <label>Description</label>
+
+        <label>Due date</label>
+
+        <label><span class="prio_text">Priority</span></label>
+        <div class="priority_buttons">
+
         </div>
 
-        <h2 class="task_title_large"></h2>
+        <label>Assigned to</label>
+        <div class="assigned_contacts">
 
-        <div class="edit_fields">
-            <label>Title</label>
-
-            <label>Description</label>
-
-            <label>Due date</label>
-
-            <label>Priority</label>
-            <div class="priority_buttons">
-
-            </div>
-
-            <label>Assigned to</label>
-            <div class="assigned_contacts">
-
-            </div>
-
-            <label>Subtasks</label>
-            <div class="subtasks">
-
-            </div>
         </div>
 
-        <div class="ok_btn_container">
-            <button class="ok_btn">Ok</button>
+        <label>Subtasks</label>
+        <div class="subtasks">
         </div>
     </div>
+    <div class="btn_footer">
+        <div class="ok_btn_container">
+            <button class="ok_btn" (click)="closeEdit()">Ok <img id="ok_check" src="/assets/icons/check.svg"
+                    alt="Check"></button>
+        </div>
+    </div>
+
 </div>

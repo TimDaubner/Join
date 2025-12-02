@@ -26,7 +26,7 @@ export class CardDetails {
   getPriorityIcon(priority?: string): string {
     if (!priority) return '';
     switch (priority.toLowerCase()) {
-      case 'urgent':
+      case 'high':
         return './assets/icons/prio_urgent.svg';
       case 'medium':
         return './assets/icons/prio_medium.svg';
@@ -55,5 +55,9 @@ export class CardDetails {
   openEditOverlay(task: any) {
     this.editedTask = { ...task };
     this.isEditOverlayOpen = true;
+  }
+
+  closeEditOverlay() {
+    this.isEditOverlayOpen = false;
   }
 }
