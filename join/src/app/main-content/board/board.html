@@ -25,14 +25,14 @@
     </div>
 
     <div class="content_container">
-        @for (task of this.board_service.taskList; track task) {
+        @for (titel of columnsTitel; track titel) {
         <div class="column_wrapper">
 
             <!-- Header -->
             <div class="column_header">
-                <h2>{{ task.columnCategory }}</h2>
+                <h2>{{ titel }}</h2>
 
-                @if (task.taskCategory !== 'Done') {
+                @if (titel !== 'Done') {
                 <button class="add_btn" (click)="showAddTaskComponent()">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
@@ -41,6 +41,7 @@
                 }
             </div>
             <!-- cards -->
+            @for (task of this.board_service.taskList; track $index) {
             <div class="example_list" cdkDropList [id]="task.columnCategory"
                 [cdkDropListData]="this.board_service.taskList" [cdkDropListConnectedTo]="getConnectedColumns()"
                 (cdkDropListDropped)="drop($event, task.columnCategory)">
@@ -78,14 +79,6 @@
                     <!-- Initial icons -->
                     <div class="task_footer">
                         <div class="assignees">
-
-                            <!-- @for (contact of this.contact_service.contactList; track $index; let index = $index) {
-                            @if(assignee.includes(this.getFullName(contact.surname,contact.lastname))){
-                            <div >
-                                {{this.getInitials(assignee)}}
-                            </div>
-                            }
-                            } -->
                             @for (assignees of task.assignedTo; track $index; let index = $index) {
                             @if(task.assignedTo.length > 3){
                             @if(index == 3){
@@ -94,16 +87,13 @@
                             @else if(index > 3){
                             }
                             @else {
-                            <!-- <span class="initials" class="img" [style.background-color]="contact.color">{{getInitials(assignees)}} -->
-                            <!-- </span> -->
-                            @for (contact of this.contact_service.contactList; track $index; let index = $index) {
-                            @if(assignees == this.getFullName(contact.surname,contact.lastname)){
-                            <span class="initials" class="img" [style.background-color]="contact.color">
-                                {{getInitials(assignees)}}
+                            <span class="initials">{{getInitials(assignees)}}
                             </span>
                             }
                             }
-                            }
+                            @else {
+                            <span class="initials">{{getInitials(assignees)}}
+                            </span>
                             }
                             }
                         </div>
@@ -117,6 +107,7 @@
                 </div>
                 }
             </div>
+            }
         </div>
         <div [ngClass]="{isAddTaskOpen}"></div>
         }

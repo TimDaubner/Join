@@ -31,6 +31,8 @@ export class Board {
   constructor() {
     this.init();
   }
+
+  columnsTitel: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   allTasks: Task[] = [];
   tasksToDo: Task[] = [];
   tasksInProgress: Task[] = [];
