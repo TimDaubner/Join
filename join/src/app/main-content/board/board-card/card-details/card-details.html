@@ -64,7 +64,7 @@
                 }
 
                 <div class="edit_delete">
-                    <button><img src="/assets/icons/delete.svg" alt="Delete">Delete</button>
+                    <button [disabled]="!selectedTask" (click)="selectedTask && deleteTask(selectedTask)"><img src="/assets/icons/delete.svg" alt="Delete">Delete</button>
                     <span class="divider"></span>
                     <button (click)="openEditOverlay(selectedTask)"><img src="/assets/icons/edit.svg"
                             alt="Edit">Edit</button>

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, Timestamp, addDoc } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, Timestamp, addDoc, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
 import { Task } from '../../../interfaces/task.interface';
 import { ContactService } from '../contact/contact.service';
 
@@ -19,12 +19,12 @@ export class BoardService {
     this.unsubscribe = onSnapshot(collection(this.firestore, "tasks"), (tasksSnapshot) => {
       this.taskList = []
       tasksSnapshot.forEach((task) => {
-        this.taskList.push(this.setTaskObject(task.id,task.data() as Task));
+        this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
     });
-    setTimeout(()=>{
-    console.log(this.taskList);
-    },3000);
+    setTimeout(() => {
+      console.log(this.taskList);
+    }, 3000);
   }
 
   ngOnDestroy() {
@@ -35,7 +35,7 @@ export class BoardService {
 
   // sortTasks
 
-  setTaskObject(idParam: string,obj: Task): Task {
+  setTaskObject(idParam: string, obj: Task): Task {
     return {
       id: idParam,
       assignedTo: obj.assignedTo,
@@ -49,11 +49,10 @@ export class BoardService {
     }
   }
 
-    async addTaskToDatabase(task: Task) {
-      await addDoc(collection(this.firestore, "tasks"), task)
-      console.log(" Task ist hochgeladen");
-      console.log(task);
-      
+  async addTaskToDatabase(task: Task) {
+    await addDoc(collection(this.firestore, "tasks"), task)
+    console.log(" Task ist hochgeladen");
+    console.log(task);
   }
 
   getInitials(names: string[]) {
@@ -67,5 +66,24 @@ export class BoardService {
       return this.initials[i] = firstInitial[i] + secondInitial[i];
     }
     return;
+  }
+
+  async editTaskToDatabase($index: number, task: Task) {
+    await updateDoc(doc(this.firestore, 'tasks', this.taskList[$index].id!), {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      dueDate: task.dueDate,
+      priority: task.priority,
+      assignedTo: task.assignedTo,
+      taskCategory: task.taskCategory,
+      subTask: task.subTask,
+      columnCategory: task.columnCategory,
+    });
+  }
+
+   async deleteTask(task:Task) {
+    const index = this.taskList.findIndex(t => t.id === task.id);
+    await deleteDoc(doc(this.firestore, 'tasks', this.taskList[index].id!));
   }
 }

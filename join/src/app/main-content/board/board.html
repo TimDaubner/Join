@@ -25,14 +25,15 @@
     </div>
 
     <div class="content_container">
-        @for (titel of columnsTitel; track titel) {
+        @for (title of columnsTitel; track title)
+        {
         <div class="column_wrapper">
 
             <!-- Header -->
             <div class="column_header">
-                <h2>{{ titel }}</h2>
+                <h2>{{ title }}</h2>
 
-                @if (titel !== 'Done') {
+                @if (title !== 'Done') {
                 <button class="add_btn" (click)="showAddTaskComponent()">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
@@ -40,26 +41,88 @@
                 <span class="btn_placeholder"></span>
                 }
             </div>
-            <!-- cards -->
-            @for (task of this.board_service.taskList; track $index) {
-            <div class="example_list" cdkDropList [id]="task.columnCategory"
-                [cdkDropListData]="this.board_service.taskList" [cdkDropListConnectedTo]="getConnectedColumns()"
-                (cdkDropListDropped)="drop($event, task.columnCategory)">
-                <!-- Column body -->
-                <!-- TODO - hover change (onmouseover) -->
+
+            <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
+                [cdkDropListConnectedTo]="columnsTitel" (cdkDropListDropped)="drop($event, title)">
+
+                @for (task of getTasksForColumn(title); track $index; let index=$index) {
+
+                <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
+
+                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">
+                        {{ task.taskCategory }}
+                    </div>
+
+                    <h3 class="task_title">{{ task.title }}</h3>
+                    <p class="task_description">{{ task.description }}</p>
+
+                    @if (task.subTask.length > 0) {
+                    <div class="subtasks_line">
+                        <div class="subtasks_bar">
+                            <div class="subtasks_progress"
+                                [style.width.%]="(getCompletedSubtasksCount(task) / task.subTask.length) * 100">
+                            </div>
+                        </div>
+                        <div class="subtasks_count">
+                            <div class="count_number">
+                                {{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }}
+                            </div>
+                            <div class="count_text">Subtasks</div>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="task_footer">
+                        <div class="assignees">
+                            @for (user of task.assignedTo; track $index; let i = $index) {
+                            @if(task.assignedTo.length > 3) {
+                            @if(i == 3) {
+                            +{{ task.assignedTo.length - 3 }}
+                            }
+                            @else if(i < 3) { <span class="initials">{{ getInitials(user) }}</span>
+                                }
+                                }
+                                @else {
+                                <span class="initials">{{ getInitials(user) }}</span>
+                                }
+                                }
+                        </div>
+
+                        @if (task.priority) {
+                        <span class="priority_icon">
+                            {{task.priority}}
+                            <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                        </span>
+                        }
+                    </div>
+                </div>
+
+                }
+            </div>
+        </div>
+        }
+        <div [ngClass]="{isAddTaskOpen}"></div>
+    </div>
+    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
+        (close)="closeTaskDetails()"></app-card-details>
+
+</div>
+
+<!-- <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
+                [cdkDropListConnectedTo]="this.columnsTitel" (cdkDropListDropped)="drop($event, title)">
+                @for (task of getTasksForColumn(title); track $index) {
+                @if(title == task.columnCategory){
                 @if (this.board_service.taskList.length === 0) {
                 <div class="no_tasks">
-                    No tasks {{ task.columnCategory }}
+                    No tasks {{ title }}
                 </div>
                 }
-                <!-- Tasks -->
-                @for (task of this.board_service.taskList; track task) {
-                <div class="example_box" cdkDrag (click)="openTaskDetails(task)">
-                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory }}
+                <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
+                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory
+                        }}
                     </div>
                     <h3 class="task_title">{{ task.title }}</h3>
                     <p class="task_description">{{ task.description }}</p>
-                    <!-- Subtask -->
                     @if (task.subTask.length > 0) {
                     <div class="subtasks_line">
                         <div class="subtasks_bar">
@@ -68,7 +131,8 @@
                             </div>
                         </div>
                         <div class="subtasks_count">
-                            <div class="count_number">{{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }}
+                            <div class="count_number">{{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length
+                                }}
                             </div>
                             <div class="count_text">
                                 Subtasks</div>
@@ -76,7 +140,6 @@
                     </div>
                     }
 
-                    <!-- Initial icons -->
                     <div class="task_footer">
                         <div class="assignees">
                             @for (assignees of task.assignedTo; track $index; let index = $index) {
@@ -97,7 +160,6 @@
                             }
                             }
                         </div>
-                        <!-- Priority icon -->
                         @if (task.priority) {
                         <span class="priority_icon">
                             {{task.priority}}<img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
@@ -106,13 +168,5 @@
                     </div>
                 </div>
                 }
-            </div>
-            }
-        </div>
-        <div [ngClass]="{isAddTaskOpen}"></div>
-        }
-    </div>
-    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
-        (close)="closeTaskDetails()"></app-card-details>
-
-</div>
+                }
+            </div> -->

@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Task } from '../../../../interfaces/task.interface';
 import { EditCardDetails } from '../edit-card-details/edit-card-details';
 import { ContactService } from '../../../../shared/services/contact/contact.service';
+import { BoardService } from '../../../../shared/services/board/board.service';
 
 @Component({
   selector: 'app-card-details',
@@ -13,6 +14,7 @@ import { ContactService } from '../../../../shared/services/contact/contact.serv
 })
 export class CardDetails {
   contact_service = inject(ContactService);
+  board_service = inject(BoardService);
   isEditOverlayOpen = false;
   editedTask: any = null;
 
@@ -58,15 +60,20 @@ export class CardDetails {
     this.editedTask = { ...task };
     this.isEditOverlayOpen = true;
   }
-
+  
   closeEditOverlay() {
     this.isEditOverlayOpen = false;
-    console.log('fine');
   }
-
+  
   // overlayAnimation = 'slide-in';
-
+  
   closeTaskDetails() {
     this.close.emit();
+  }
+
+  deleteTask(task:Task){
+      this.board_service.deleteTask(task);
+      this.isEditOverlayOpen = false;
+      this.closeTaskDetails();
   }
 }

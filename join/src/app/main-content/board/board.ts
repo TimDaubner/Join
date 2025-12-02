@@ -95,106 +95,8 @@ export class Board {
     return surname + " " + lastname;
   }
 
-  // #region dummy data
-  // columns: { title: string; tasks: Task[] }[] = [
-  //   { title: 'To do', tasks: [] },
-  //   { title: 'In progress', tasks: [] },
-  //   { title: 'Await feedback', tasks: [] },
-  //   { title: 'Done', tasks: [] },
-  // ];
-  columns: { title: string; tasks: Task[] }[] = [
-    {
-      title: 'To do',
-      tasks: [
-        {
-          id: '1',
-          title: 'Create login page',
-          description: 'Design the UI for the login screen',
-          taskCategory: 'User Story',
-          priority: 'medium',
-          columnCategory: 'To do',
-          dueDate: Timestamp.now(),
-          assignedTo: ['John', 'Maria'],
-          subTask: [
-            { id: '1.1', subDescription: 'Create layout', status: false },
-            { id: '1.2', subDescription: 'Add logo', status: true },
-          ],
-        },
-        {
-          id: '2',
-          title: 'Setup database',
-          description: 'Initialize Firebase project',
-          taskCategory: 'Technical Task',
-          priority: 'high',
-          columnCategory: 'To do',
-          dueDate: Timestamp.now(),
-          assignedTo: [],
-          subTask: [],
-        },
-      ],
-    },
-
-    {
-      title: 'In progress',
-      tasks: [
-        {
-          id: '3',
-          title: 'Implement Auth',
-          description: 'Connect login form with backend',
-          taskCategory: 'Technical Task',
-          priority: 'high',
-          columnCategory: 'To do',
-          dueDate: Timestamp.now(),
-          assignedTo: ['Anna'],
-          subTask: [
-            { id: '3.1', subDescription: 'Email login', status: true },
-            { id: '3.2', subDescription: 'Password reset', status: false },
-          ],
-        },
-      ],
-    },
-
-    {
-      title: 'Await feedback',
-      tasks: [
-        {
-          id: '4',
-          title: 'Landing page draft',
-          description: 'Waiting for feedback from client',
-          taskCategory: 'User Story',
-          priority: 'low',
-          columnCategory: 'To do',
-          dueDate: Timestamp.now(),
-          assignedTo: ['Client'],
-          subTask: [],
-        },
-      ],
-    },
-
-    {
-      title: 'Done',
-      tasks: [
-        {
-          id: '5',
-          title: 'Create project repo',
-          description: 'Initial commit + .gitignore',
-          taskCategory: 'Technical Task',
-          priority: 'low',
-          columnCategory: 'To do',
-          dueDate: Timestamp.now(),
-          assignedTo: [],
-          subTask: [
-            { id: '5.1', subDescription: 'Initialize repo', status: true },
-            { id: '5.2', subDescription: 'Setup project structure', status: true },
-          ],
-        },
-      ],
-    },
-  ];
-
   drop(event: CdkDragDrop<Task[]>, columnTitle: string) {
     const task: Task = event.item.data;
-    //checking for switching positions in same column
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -204,16 +106,18 @@ export class Board {
         event.previousIndex,
         event.currentIndex
       );
-      this.changeColumnType(event.container.id, task);
+      this.changeColumnType(columnTitle, task);
     }
   }
 
   changeColumnType(id: string, task: Task) {
+    const index = this.board_service.taskList.findIndex(t => t.id === task.id);
     task.columnCategory = id as ColumnCategory;
+    this.board_service.editTaskToDatabase(index,task);
   }
 
-  getConnectedColumns() {
-    return this.columns.map((c) => c.title);
+  getTasksForColumn(title: string) {
+    return this.board_service.taskList.filter(t => t.columnCategory === title);
   }
 
   getCompletedSubtasksCount(task: Task): number {
