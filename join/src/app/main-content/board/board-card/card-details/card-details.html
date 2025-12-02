@@ -38,20 +38,8 @@
         <!-- Assigned To -->
         <div class="assignedTo_section">
             <span class="label">Assigned To:
-                @if (selectedTask?.assignedTo) {
-                    @for (assignees of selectedTask.assignedTo; track $index; let index = $index) {
-                    
-                        @if(selectedTask.assignedTo.length < 3){
-                            <span class="initials">{{ this.getInitials(assignees) }}</span>
-                        }
-                        @else if(selectedTask.assignedTo.length == 3) {
-                            +{{ selectedTask.assignedTo.length - 3 }}
-                        }
-                    }
-                }
-
                 {{ selectedTask?.assignedTo }}
-</span>
+            </span>
         </div>
 
         <!-- Checkboxes subtasks -->
