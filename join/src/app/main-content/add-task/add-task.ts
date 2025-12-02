@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject,} from '@angular/core';
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Task} from '../../interfaces/task.interface'
+import { Task, Subtask} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -37,7 +37,12 @@ export class AddTask {
   firebase = inject(ContactService);
   taskService = inject(BoardService);
 
+  categoryDropdown = false;
   workerDropdown = false;
+  selectedContacts: string[] = [];
+  subtaskInput = "";
+  isEditing = "";
+  
 
   newTask: Task = {
     title: "",
@@ -46,11 +51,7 @@ export class AddTask {
     priority: "Medium",
     assignedTo: [],
     taskCategory: "",
-    subTask: [
-      {id: "", status: true,  subDescription: "Verträge lesen" },
-      {id: "", status: false, subDescription: "Verträge verstehen" },
-      {id: "", status: false, subDescription: "Verträge ignorieren" }
-    ],
+    subTask: [],
     columnCategory: "To do",
   };
 
@@ -64,14 +65,14 @@ export class AddTask {
       priority: "Medium",
       assignedTo: [],
       taskCategory: "",
-      subTask: [
-        {id: "", status: true,  subDescription: "Verträge lesen" },
-        {id: "", status: false, subDescription: "Verträge verstehen" },
-        {id: "", status: false, subDescription: "Verträge ignorieren" }
-      ],
+      subTask: [],
       columnCategory: "To do",
     };
   };
+
+  isSelected(contact: any): boolean {
+    return this.selectedContacts.includes(contact.surname + ' ' + contact.lastname);
+  }
 
   clearForm() {
     this.newTask = {
@@ -80,14 +81,19 @@ export class AddTask {
       dueDate: Timestamp.fromDate(new Date("2025-12-31")),
       priority: "Medium",
       assignedTo: [],
-      taskCategory: "User Story",
-      subTask: [
-        {id: "" , status: true,  subDescription: "Verträge lesen" },
-        {id: "" , status: false, subDescription: "Verträge verstehen" },
-        {id: "" , status: false, subDescription: "Verträge ignorieren" }
-      ],
+      taskCategory: "",
+      subTask: [],
       columnCategory: "To do",
     };
+  }
+
+  
+
+  selectCategory(value: string) {
+    this.newTask.taskCategory = value;
+    this.categoryDropdown = false;
+    console.log(this.newTask.taskCategory);
+    
   }
 
   toggleDropdown() {
@@ -104,23 +110,60 @@ export class AddTask {
     
   }
 
-
-  // funzt soweit, nur klappt es nicht wenn man direkt auf die checkbox klickt. 
-  toggleContact(contact: string, checkbox: HTMLInputElement, event: MouseEvent) {
-    checkbox.checked = !checkbox.checked
-
-    if (checkbox.checked) {
-    if (!this.newTask.assignedTo.includes(contact)) {
-      this.newTask.assignedTo.push(contact);
-    }
-    console.log( this.newTask.assignedTo);
-    
-  } else {
-    this.newTask.assignedTo = this.newTask.assignedTo.filter(
-      c => c !== contact
-    );
-    console.log( this.newTask.assignedTo);
+  getIcon(prio: string) {
+  switch (prio) {
+    case 'Urgent': return this.newTask.priority === 'Urgent'
+      ? './assets/icons/prio_urgent_white.svg'
+      : './assets/icons/prio_urgent.svg';
+    case 'Medium': return this.newTask.priority === 'Medium'
+      ? './assets/icons/prio_medium_white.svg'
+      : './assets/icons/prio_medium.svg';
+    case 'Low': return this.newTask.priority === 'Low'
+      ? './assets/icons/prio_low_white.svg'
+      : './assets/icons/prio_low.svg';
+    default:
+      return '';
   }
 }
 
+  toggleContact(contact: any) {
+  const name = contact.surname + ' ' + contact.lastname;
+
+  if (this.selectedContacts.includes(name)) {
+    this.selectedContacts = this.selectedContacts.filter(c => c !== name);
+  } else {
+    this.selectedContacts.push(name);
+  }
+  this.newTask.assignedTo = [...this.selectedContacts];
+  console.log(this.newTask.assignedTo); 
+  }
+
+  clearSubtaskInput() {
+    this.subtaskInput = "";
+  }
+
+  addSubtask() {
+    let newId = this.newTask.subTask.length;
+    this.newTask.subTask.push(
+    {
+      id: newId.toString(),
+      status: false, 
+      subDescription: this.subtaskInput,})
+    this.subtaskInput = "";
+    console.log(this.newTask.subTask);
+  }
+
+  deleteSubtask(id: string) {
+    this.newTask.subTask = this.newTask.subTask.filter(s => s.id !== id);
+  }
+
+
+  editingState: Record<string, boolean> = {};
+  startEdit(id: string) {
+    this.editingState[id] = true;
+  }
+
+  stopEdit(id: string) {
+    this.editingState[id] = false;
+  }
 }
