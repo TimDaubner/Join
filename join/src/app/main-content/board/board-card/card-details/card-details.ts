@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Task } from '../../../../interfaces/task.interface';
 import { EditCardDetails } from '../edit-card-details/edit-card-details';
+import { ContactService } from '../../../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-card-details',
@@ -11,6 +12,7 @@ import { EditCardDetails } from '../edit-card-details/edit-card-details';
   styleUrl: './card-details.scss',
 })
 export class CardDetails {
+  contact_service = inject(ContactService);
   isEditOverlayOpen = false;
   editedTask: any = null;
 
@@ -26,7 +28,7 @@ export class CardDetails {
   getPriorityIcon(priority?: string): string {
     if (!priority) return '';
     switch (priority.toLowerCase()) {
-      case 'high':
+      case 'urgent':
         return './assets/icons/prio_urgent.svg';
       case 'medium':
         return './assets/icons/prio_medium.svg';
@@ -44,6 +46,10 @@ export class CardDetails {
     secondInitial = name.charAt(name.indexOf(" ") + 1);
     let initials = firstInitial + secondInitial;
     return initials;
+  }
+
+  getFullName(surname: string, lastname: string) {
+    return surname + " " + lastname;
   }
 
   toggleSubtask(sub: { id: string; subDescription: string; status: boolean }, event: Event) {

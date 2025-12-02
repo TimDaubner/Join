@@ -32,16 +32,26 @@
             <span class="label">Priority:</span>
             @if (selectedTask?.priority) {
             <span class="priority_icon">
-                <img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon">
+                {{selectedTask?.priority}}<img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon">
             </span>
             }
         </div>
 
         <!-- Assigned To -->
         <div class="assignedTo_section">
-            <span class="label">Assigned To:
-                {{ selectedTask?.assignedTo }}
+            <b class="assigned">Assigned To:</b>
+            @for (assignee of selectedTask?.assignedTo; track $index) {
+            <span class="label column">
+                @for (contact of this.contact_service.contactList; track $index; let index = $index) {
+                    @if(assignee == this.getFullName(contact.surname,contact.lastname)){
+                        <div class="img" [style.background-color]="contact.color">
+                            {{this.getInitials(assignee)}}
+                        </div>
+                    }
+                }
+                <div>{{ assignee }}</div>
             </span>
+            }
         </div>
 
         <!-- Checkboxes subtasks -->
