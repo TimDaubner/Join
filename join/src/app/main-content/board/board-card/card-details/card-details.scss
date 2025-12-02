@@ -10,11 +10,11 @@
   z-index: 200;
 }
 
-app-add-details-overlay {
+app-card-details {
   transition: all 800ms ease-in-out;
 }
 
-app-add-details-overlay.hide {
+app-card-details.hide {
   transform: translateX(100vw);
   opacity: 0;
 }
