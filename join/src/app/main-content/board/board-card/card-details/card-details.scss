@@ -131,6 +131,26 @@ app-card-details.show {
   font-size: 16px;
 }
 
+.assigned{
+  color: #4b5a75;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.column{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.inits{
+  width: 25px;
+  height: 25px;
+  background-color: #dcdcdc;
+  margin-right: 16px;
+}
+
 /* Subtasks section */
 .label.header_subtasks {
   margin: 16px 0 8px 0;

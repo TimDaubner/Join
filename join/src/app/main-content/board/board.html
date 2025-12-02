@@ -78,6 +78,14 @@
                     <!-- Initial icons -->
                     <div class="task_footer">
                         <div class="assignees">
+
+                            <!-- @for (contact of this.contact_service.contactList; track $index; let index = $index) {
+                            @if(assignee.includes(this.getFullName(contact.surname,contact.lastname))){
+                            <div >
+                                {{this.getInitials(assignee)}}
+                            </div>
+                            }
+                            } -->
                             @for (assignees of task.assignedTo; track $index; let index = $index) {
                             @if(task.assignedTo.length > 3){
                             @if(index == 3){
@@ -86,20 +94,23 @@
                             @else if(index > 3){
                             }
                             @else {
-                            <span class="initials">{{getInitials(assignees)}}
+                            <!-- <span class="initials" class="img" [style.background-color]="contact.color">{{getInitials(assignees)}} -->
+                            <!-- </span> -->
+                            @for (contact of this.contact_service.contactList; track $index; let index = $index) {
+                            @if(assignees == this.getFullName(contact.surname,contact.lastname)){
+                            <span class="initials" class="img" [style.background-color]="contact.color">
+                                {{getInitials(assignees)}}
                             </span>
                             }
                             }
-                            @else {
-                            <span class="initials">{{getInitials(assignees)}}
-                            </span>
+                            }
                             }
                             }
                         </div>
                         <!-- Priority icon -->
                         @if (task.priority) {
                         <span class="priority_icon">
-                            <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                            {{task.priority}}<img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
                         </span>
                         }
                     </div>

@@ -11,6 +11,7 @@ import {
 import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
 import { CardDetails } from './board-card/card-details/card-details';
+import { ContactService } from '../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-board',
@@ -22,6 +23,7 @@ import { CardDetails } from './board-card/card-details/card-details';
 export class Board {
   //TODO - change due Date to date Month/Day/Year
   board_service = inject(BoardService);
+  contact_service = inject(ContactService);
   isAddTaskOpen: boolean = false;
   selectedTask: Task | null = null;
   isTaskDetailsOpen: boolean = false;
@@ -76,15 +78,19 @@ export class Board {
     this.selectedTask = null;
   }
 
-  updateTasks(type: string) {}
+  updateTasks(type: string) { }
 
-  getInitials(name:string) {
+  getInitials(name: string) {
     let firstInitial = "";
     let secondInitial = "";
-      firstInitial = name.charAt(0);
-      secondInitial = name.charAt(name.indexOf(" ") + 1);
-      let initials = firstInitial + secondInitial;
-      return initials;
+    firstInitial = name.charAt(0);
+    secondInitial = name.charAt(name.indexOf(" ") + 1);
+    let initials = firstInitial + secondInitial;
+    return initials;
+  }
+
+  getFullName(surname: string, lastname: string) {
+    return surname + " " + lastname;
   }
 
   // #region dummy data
