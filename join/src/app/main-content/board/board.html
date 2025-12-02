@@ -40,15 +40,10 @@
                 <span class="btn_placeholder"></span>
                 }
             </div>
-<<<<<<< HEAD
             <!-- cards -->
             <div class="example_list" cdkDropList [id]="task.columnCategory"
                 [cdkDropListData]="this.board_service.taskList" [cdkDropListConnectedTo]="getConnectedColumns()"
                 (cdkDropListDropped)="drop($event, task.columnCategory)">
-=======
-            <div class="example_list" cdkDropList [id]="column.title" [cdkDropListData]="column.tasks"
-                [cdkDropListConnectedTo]="getConnectedColumns()" (cdkDropListDropped)="drop($event, column.title)">
->>>>>>> imra
                 <!-- Column body -->
                 <!-- TODO - hover change (onmouseover) -->
                 @if (this.board_service.taskList.length === 0) {
