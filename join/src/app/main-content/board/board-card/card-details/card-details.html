@@ -1,75 +1,82 @@
 @if (isTaskDetailsOpen) {
 <div class="overlay" (click)="closeTaskDetails()">
-    <div class="task_details" [ngClass]="overlayAnimation" (click)="$event.stopPropagation()">
-
-        @if (!isEditOverlayOpen) {
-
-        <div class="category_and_close_btn">
-            <!-- Category badge -->
-            <div class="task_category" [ngClass]="(selectedTask?.taskCategory ?? '').replace(' ', '')">
-                {{
-                selectedTask?.taskCategory }}
-            </div>
-
+    <div class="task_details" (click)="$event.stopPropagation()">
+        <div class="close_container">
             <button class="close_btn" (click)="closeTaskDetails()"><img src="/assets/icons/close.svg"
                     alt="Close"></button>
+
         </div>
+        <div class="slide_right" [ngClass]="{'show' : !isEditOverlayOpen, 'hide': isEditOverlayOpen}">
 
-        <!-- Title -->
-        <h2 class="task_title_large">
-            {{ selectedTask?.title }}
-        </h2>
 
-        <!-- Description -->
-        <p class="task_description_large">
-            {{ selectedTask?.description }}
-        </p>
-        <div class="detail_row">
-            <span class="label">Due date: {{selectedTask?.dueDate}}</span>
-            <span> </span>
-        </div>
-        <div class="detail_row priority">
-            <span class="label">Priority:</span>
-            @if (selectedTask?.priority) {
-            <span class="priority_icon">
-                <img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon">
-            </span>
-            }
-        </div>
+            <div class="frame_card_details">
 
-        <!-- Assigned To -->
-        <div class="assignedTo_section">
-            <span class="label">Assigned To:
-                {{ selectedTask?.assignedTo }}
-            </span>
-        </div>
+                <div class="category">
+                    <div class="task_category" [ngClass]="(selectedTask?.taskCategory ?? '').replace(' ', '')">
+                        {{
+                        selectedTask?.taskCategory }}
+                    </div>
+                </div>
 
-        <!-- Checkboxes subtasks -->
-        @if (selectedTask?.subTask?.length) {
-        <div class="label header_subtasks">Subtasks</div>
+                <h2 class="task_title_large">
+                    {{ selectedTask?.title }}
+                </h2>
 
-        <div class="subtask_list">
-            @for (sub of selectedTask?.subTask ?? []; track sub.id) {
-            <label class="subtask_item" (click)="toggleSubtask(sub, $event)">
-                <img class="checkbox_icon" [src]="sub.status 
+                <!-- Description -->
+                <p class="task_description_large">
+                    {{ selectedTask?.description }}
+                </p>
+                <div class="detail_row">
+                    <span class="label">Due date: {{selectedTask?.dueDate}}</span>
+                    <span> </span>
+                </div>
+                <div class="detail_row priority">
+                    <span class="label">Priority:</span>
+                    @if (selectedTask?.priority) {
+                    <span class="priority_icon">
+                        <img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon">
+                    </span>
+                    }
+                </div>
+
+                <!-- Assigned To -->
+                <div class="assignedTo_section">
+                    <span class="label">Assigned To:
+                        {{ selectedTask?.assignedTo }}
+                    </span>
+                </div>
+
+                <!-- Checkboxes subtasks -->
+                @if (selectedTask?.subTask?.length) {
+                <div class="label header_subtasks">Subtasks</div>
+
+                <div class="subtask_list">
+                    @for (sub of selectedTask?.subTask ?? []; track sub.id) {
+                    <label class="subtask_item" (click)="toggleSubtask(sub, $event)">
+                        <img class="checkbox_icon" [src]="sub.status 
             ? '/assets/icons/checked.svg' 
             : '/assets/icons/unchecked.svg'" alt="Checkbox"
-                    (click)="$event.stopPropagation(); toggleSubtask(sub, $event)" /> <span
-                    class="subtask_description">{{ sub.subDescription }}</span>
-            </label>
-            }
-        </div>
-        }
+                            (click)="$event.stopPropagation(); toggleSubtask(sub, $event)" /> <span
+                            class="subtask_description">{{ sub.subDescription }}</span>
+                    </label>
+                    }
+                </div>
+                }
 
-        <div class="edit_delete">
-            <button><img src="/assets/icons/delete.svg" alt="Delete">Delete</button>
-            <span class="divider"></span>
-            <button (click)="openEditOverlay(selectedTask)"><img src="/assets/icons/edit.svg" alt="Edit">Edit</button>
+                <div class="edit_delete">
+                    <button><img src="/assets/icons/delete.svg" alt="Delete">Delete</button>
+                    <span class="divider"></span>
+                    <button (click)="openEditOverlay(selectedTask)"><img src="/assets/icons/edit.svg"
+                            alt="Edit">Edit</button>
+                </div>
+
+            </div>
+
         </div>
-        } @else {
-        <app-edit-card-details [task]="editedTask" (close)="closeEditOverlay()">
+        <app-edit-card-details [task]="editedTask" (close)="closeEditOverlay()"
+            [ngClass]="{'show' : isEditOverlayOpen, 'hide': !isEditOverlayOpen}">
         </app-edit-card-details>
-        }
+
 
     </div>
 </div>

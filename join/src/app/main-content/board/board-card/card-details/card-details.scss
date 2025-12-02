@@ -10,6 +10,36 @@
   z-index: 200;
 }
 
+app-add-details-overlay {
+  transition: all 800ms ease-in-out;
+}
+
+app-add-details-overlay.hide {
+  transform: translateX(100vw);
+  opacity: 0;
+}
+
+app-card-details.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide_right {
+  transition: all 175ms ease-in-out;
+}
+
+.slide_right.show {
+  display: flex;
+  opacity: 1;
+  z-index: 100;
+}
+
+.slide_right.hide {
+  display: none;
+  opacity: 0;
+  z-index: 100;
+}
+
 .task_details {
   width: 420px;
   max-height: 85vh;
@@ -21,13 +51,18 @@
   position: relative;
 }
 
+.close_container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .slide-in {
   animation: slideInRight 0.1s ease-out forwards;
 }
 
-.category_and_close_btn {
+.category {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -194,4 +229,12 @@
 
 .slide-out {
   animation: slideOutRight 0.1s ease-out forwards;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

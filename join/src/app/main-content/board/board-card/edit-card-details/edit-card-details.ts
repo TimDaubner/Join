@@ -14,10 +14,6 @@ export class EditCardDetails {
   @Input() task: Task | null = null;
   @Output() close = new EventEmitter<void>();
 
-  closeEdit() {
-    this.close.emit();
-  }
-
   newTask = {
     title: 'Contact Form & Imprint',
     description: 'Create a contact form and imprint page',
@@ -32,11 +28,18 @@ export class EditCardDetails {
 
   isClosing = false;
 
-  closeEditOnX() {
+  closeWithAnimation() {
     this.isClosing = true;
     setTimeout(() => {
-      this.close.emit(); // now tell parent to hide overlay
-      this.isClosing = false; // reset for next time
-    }, 300);
+      this.isClosing = false;
+    }, 200);
+  }
+
+  closeEdit() {
+    this.close.emit();
+  }
+
+  closeEditOnX() {
+    this.close.emit();
   }
 }

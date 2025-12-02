@@ -55,16 +55,12 @@ export class CardDetails {
 
   closeEditOverlay() {
     this.isEditOverlayOpen = false;
+    console.log('fine');
   }
 
-  overlayAnimation = 'slide-in';
+  // overlayAnimation = 'slide-in';
 
   closeTaskDetails() {
-    this.overlayAnimation = 'slide-out';
-
-    setTimeout(() => {
-      this.close.emit();
-      this.overlayAnimation = 'slide-in';
-    }, 300);
+    this.close.emit();
   }
 }
