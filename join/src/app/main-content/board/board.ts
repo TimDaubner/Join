@@ -34,6 +34,7 @@ export class Board {
 
   columnsTitel: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   allTasks: Task[] = [];
+  filteredTasks: Task[] = [];
   tasksToDo: Task[] = [];
   tasksInProgress: Task[] = [];
   tasksAwaitFeedback: Task[] = [];
@@ -50,16 +51,15 @@ export class Board {
   }
 
   searchTask(keyWord: string) {
-    this.board_service.taskList.forEach((task) => {
-      if (task.title.toLocaleLowerCase().includes(keyWord.toLowerCase())) {
-        // this.allTasks.forEach(task => {
-        //   task.
-        // });
-        //render Task
-      } else {
-        //hide Task
-      }
-    });
+    if(keyWord === ''){
+      this.filteredTasks = this.board_service.taskList;
+    }
+    else{
+      this.filteredTasks = this.board_service.taskList.filter(task =>
+        task.title.toLowerCase().includes(keyWord) ||
+        task.description.toLowerCase().includes(keyWord)
+      );
+    }
   }
 
   showAddTaskComponent() {
@@ -117,7 +117,12 @@ export class Board {
   }
 
   getTasksForColumn(title: string) {
-    return this.board_service.taskList.filter(t => t.columnCategory === title);
+    if(this.filteredTasks.length > 0){
+      return this.filteredTasks.filter(task => task.columnCategory === title);
+    }
+    else{
+      return this.board_service.taskList.filter(t => t.columnCategory === title);
+    }
   }
 
   getCompletedSubtasksCount(task: Task): number {
