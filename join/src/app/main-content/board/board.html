@@ -44,11 +44,15 @@
 
             <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
                 [cdkDropListConnectedTo]="columnsTitel" (cdkDropListDropped)="drop($event, title)">
-
+                 @if (getTasksForColumn(title).length === 0) {
+                    <div class="no_tasks">
+                        No tasks {{ title }}
+                    </div>
+                    }
                 @for (task of getTasksForColumn(title); track $index; let index=$index) {
 
                 <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
-
+                   
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">
                         {{ task.taskCategory }}
                     </div>
@@ -102,6 +106,7 @@
         </div>
         }
     </div>
+
     <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
         (close)="closeTaskDetails()"></app-card-details>
 
