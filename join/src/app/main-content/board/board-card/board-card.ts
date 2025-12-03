@@ -15,5 +15,5 @@ export class BoardCard {
   //(dragover)
   //https://angular.dev/guide/drag-drop
 
-  showCardDetails() {}
+  showCardDetails() {} 
 }

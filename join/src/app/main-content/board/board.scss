@@ -141,6 +141,7 @@
   width: 320px;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 300px);
 }
 
 .column_header {
@@ -170,8 +171,7 @@
 }
 
 .add_btn:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
-    brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
 .column_body {
@@ -314,7 +314,7 @@
   align-items: center;
 }
 
-.initials{
+.initials {
   width: 10px;
   height: 10px;
   background-color: #4589ff;
