@@ -10,34 +10,24 @@
   z-index: 200;
 }
 
-.task_details {
-  transition: all 800ms ease-in-out;
+.show {
+  display: block;
 }
 
-.task_details.hide {
-  transform: translateX(100vw);
-  opacity: 0;
-}
-
-.task_details.show {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.slide_right {
-  transition: all 175ms ease-in-out;
-}
-
-.slide_right.show {
-  display: flex;
-  opacity: 1;
-  z-index: 100;
-}
-
-.slide_right.hide {
+.hide {
   display: none;
-  opacity: 0;
-  z-index: 100;
+}
+
+.overlay.show {
+  animation: fadeIn 600ms forwards;
+}
+
+.overlay.hide {
+  animation: fadeOut 600ms forwards;
+}
+
+.slide_out_right {
+  animation: slide_out_right 0.4s ease-out forwards;
 }
 
 .task_details {
@@ -49,15 +39,20 @@
   padding: 32px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   position: relative;
+  animation: slide_in_right 0.4s ease-out forwards;
+}
+
+.task_details.show {
+  animation: slide_in_right 600ms forwards ease;
+}
+
+.task_details.hide {
+  animation: slide_out_right 600ms forwards ease;
 }
 
 .close_container {
   display: flex;
   justify-content: flex-end;
-}
-
-.slide-in {
-  animation: slideInRight 0.1s ease-out forwards;
 }
 
 .category {
@@ -225,36 +220,24 @@
   display: inline-block;
 }
 
-@keyframes slideInRight {
-  0% {
+@keyframes slide_in_right {
+  from {
     transform: translateX(100%);
     opacity: 0;
   }
-  100% {
+  to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
-@keyframes slideOutRight {
-  0% {
+@keyframes slide_out_right {
+  from {
     transform: translateX(0);
     opacity: 1;
   }
-  100% {
+  to {
     transform: translateX(100%);
     opacity: 0;
   }
-}
-
-.slide-out {
-  animation: slideOutRight 0.1s ease-out forwards;
-}
-
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
 }

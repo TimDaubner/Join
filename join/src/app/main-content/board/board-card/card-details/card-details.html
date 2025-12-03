@@ -1,10 +1,12 @@
 @if (isTaskDetailsOpen) {
 <div class="overlay" (click)="closeTaskDetails()">
-    <div class="task_details" (click)="$event.stopPropagation()">
+    <div class="task_details" [ngClass]="{
+    'slide_out_right': isClosing,
+    'slide_in_right': !isClosing
+  }" (click)="$event.stopPropagation()">
         <div class="close_container">
             <button class="close_btn" (click)="closeTaskDetails()"><img src="/assets/icons/close.svg"
                     alt="Close"></button>
-
         </div>
         <div class="slide_right" [ngClass]="{'show' : !isEditOverlayOpen, 'hide': isEditOverlayOpen}">
 
@@ -64,7 +66,8 @@
                 }
 
                 <div class="edit_delete">
-                    <button [disabled]="!selectedTask" (click)="selectedTask && deleteTask(selectedTask)"><img src="/assets/icons/delete.svg" alt="Delete">Delete</button>
+                    <button [disabled]="!selectedTask" (click)="selectedTask && deleteTask(selectedTask)"><img
+                            src="/assets/icons/delete.svg" alt="Delete">Delete</button>
                     <span class="divider"></span>
                     <button (click)="openEditOverlay(selectedTask)"><img src="/assets/icons/edit.svg"
                             alt="Edit">Edit</button>

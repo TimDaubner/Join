@@ -17,6 +17,7 @@ export class CardDetails {
   board_service = inject(BoardService);
   isEditOverlayOpen = false;
   editedTask: any = null;
+  isClosing = false;
 
   @Input() selectedTask: Task | null = null;
   @Input() isTaskDetailsOpen: boolean = false;
@@ -47,7 +48,7 @@ export class CardDetails {
   }
 
   getFullName(surname: string, lastname: string) {
-    return surname + " " + lastname;
+    return surname + ' ' + lastname;
   }
 
   toggleSubtask(sub: { id: string; subDescription: string; status: boolean }, event: Event) {
@@ -60,20 +61,18 @@ export class CardDetails {
     this.editedTask = { ...task };
     this.isEditOverlayOpen = true;
   }
-  
+
   closeEditOverlay() {
     this.isEditOverlayOpen = false;
   }
-  
-  // overlayAnimation = 'slide-in';
-  
+
   closeTaskDetails() {
     this.close.emit();
   }
 
-  deleteTask(task:Task){
-      this.board_service.deleteTask(task);
-      this.isEditOverlayOpen = false;
-      this.closeTaskDetails();
+  deleteTask(task: Task) {
+    this.board_service.deleteTask(task);
+    this.isEditOverlayOpen = false;
+    this.closeTaskDetails();
   }
 }
