@@ -3,51 +3,51 @@
         <h1>Add Task</h1>
         <form id="add_task_form" (ngSubmit)="submitTask()">
             <div id="left_form">
-
-                <p>Title<span>*</span></p>
+                <p class="label_p">Title<span>*</span></p>
                 <input name="title" placeholder="Enter a title" [(ngModel)]="newTask.title">
 
-                <p>Description</p>
-                <textarea name="description" placeholder="Enter a description"
+                <p class="label_p">Description</p>
+                <textarea class="textarea_desciption" name="description" placeholder="Enter a description"
                     [(ngModel)]="newTask.description"></textarea>
 
-                <p>Due date<span>*</span></p>
+                <p class="label_p">Due date<span>*</span></p>
                 <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-
 
             </div>
             <hr>
             <div id="right_form">
                 <div id="priority">
-                    <p>Priority</p>
-                    <button
-                        type="button"
-                        (click)="setTaskPriority('Urgent')"
-                        [ngClass]="{ 'urgent_active': newTask.priority === 'Urgent' }">
-                        Urgent
-                        <img [src]="getIcon('Urgent')" alt="Priority urgent">
-                    </button>
-                    <button
-                        type="button"
-                        (click)="setTaskPriority('Medium')"
-                        [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
-                        Medium
-                        <img [src]="getIcon('Medium')" alt="Priority medium">
-                    </button>
-                    <button
-                        type="button"
-                        (click)="setTaskPriority('Low')"
-                        [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
-                        Low
-                        <img [src]="getIcon('Low')" alt="Priority low">
-                    </button>
+                    <p class="label_p">Priority</p>
+                    <div class="prio_buttons">
+                        <button
+                            type="button"
+                            (click)="setTaskPriority('Urgent')"
+                            [ngClass]="{ 'urgent_active': newTask.priority === 'Urgent' }">
+                            Urgent
+                            <img [src]="getIcon('Urgent')" alt="Priority urgent">
+                        </button>
+                        <button
+                            type="button"
+                            (click)="setTaskPriority('Medium')"
+                            [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
+                            Medium
+                            <img [src]="getIcon('Medium')" alt="Priority medium">
+                        </button>
+                        <button
+                            type="button"
+                            (click)="setTaskPriority('Low')"
+                            [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
+                            Low
+                            <img [src]="getIcon('Low')" alt="Priority low">
+                        </button>
+                    </div>
                 </div>
 
-                <div class="input-wrapper">
-                    <label for="assignedWorker">Assigned to</label>
-                    <input type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                <div class="assigned_worker">
+                    <label class="label_p" for="assignedWorker">Assigned to</label>
+                    <input id="assigned_worker_input" type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
                     <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
                     <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
                         @for (contact of firebase.contactList; track $index) {
@@ -69,6 +69,7 @@
                 </div>
 
                 <div class="task_category">
+                    <p class="label_p">Category<span>*</span></p>
                     <div class="select_display" (click)="categoryDropdown = !categoryDropdown">
                         {{ newTask.taskCategory || 'Select category' }}
                         <img class="dropdown-icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
