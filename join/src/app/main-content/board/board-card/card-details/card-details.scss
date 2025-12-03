@@ -10,16 +10,16 @@
   z-index: 200;
 }
 
-app-card-details {
+.task_details {
   transition: all 800ms ease-in-out;
 }
 
-app-card-details.hide {
+.task_details.hide {
   transform: translateX(100vw);
   opacity: 0;
 }
 
-app-card-details.show {
+.task_details.show {
   transform: translateX(0);
   opacity: 1;
 }
@@ -131,20 +131,20 @@ app-card-details.show {
   font-size: 16px;
 }
 
-.assigned{
+.assigned {
   color: #4b5a75;
   font-weight: 600;
   font-size: 16px;
 }
 
-.column{
+.column {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-.inits{
+.inits {
   width: 25px;
   height: 25px;
   background-color: #dcdcdc;
