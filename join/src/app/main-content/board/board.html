@@ -50,7 +50,11 @@
 
             <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
                 [cdkDropListConnectedTo]="columnsTitel" (cdkDropListDropped)="drop($event, title)">
-
+                @if (getTasksForColumn(title).length === 0) {
+                <div class="no_tasks">
+                    No tasks {{ title }}
+                </div>
+                }
                 @for (task of getTasksForColumn(title); track $index; let index=$index) {
 
                 <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
@@ -80,23 +84,43 @@
 
                     <div class="task_footer">
                         <div class="assignees">
-                            @for (user of task.assignedTo; track $index; let i = $index) {
-                            @if(task.assignedTo.length > 3) {
-                            @if(i == 3) {
-                            +{{ task.assignedTo.length - 3 }}
+                        @for (assignee of task.assignedTo; track $index; let i = $index) 
+                        {
+                            @for (contact of this.contact_service.contactList; track $index; let index = $index)
+                            {
+                                @if(task.assignedTo.length > 3) 
+                                {
+                                    @if(i == 3 && index == 3) 
+                                    {   
+                                        +{{ task.assignedTo.length - 3 }}
+                                    }
+                                    @else if(i < 3) 
+                                    { 
+                                        @if(assignee==this.getFullName(contact.surname,contact.lastname))
+                                        { 
+                                            <div class="frame-initials">
+                                                <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</span>
+                                            </div>
+                                        }
+                                
+                                    }
+                                
+                                }
+                                @else 
+                                {
+                                    @if(assignee == this.getFullName(contact.surname,contact.lastname))
+                                    {
+                                        <div class="frame-initials">
+                                            <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee)}}</span>
+                                        </div>
+                                    }
+                                }
                             }
-                            @else if(i < 3) { <span class="initials">{{ getInitials(user) }}</span>
-                                }
-                                }
-                                @else {
-                                <span class="initials">{{ getInitials(user) }}</span>
-                                }
-                                }
+                        }
                         </div>
 
                         @if (task.priority) {
                         <span class="priority_icon">
-                            {{task.priority}}
                             <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
                         </span>
                         }
@@ -107,8 +131,8 @@
             </div>
         </div>
         }
-        <div [ngClass]="{isAddTaskOpen}"></div>
     </div>
+
     <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
         (close)="closeTaskDetails()"></app-card-details>
 

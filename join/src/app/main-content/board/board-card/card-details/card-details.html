@@ -28,22 +28,34 @@
                     {{ selectedTask?.description }}
                 </p>
                 <div class="detail_row">
-                    <span class="label">Due date: {{selectedTask?.dueDate}}</span>
+                        <span class="label">Due date: {{getDueDate(selectedTask?.dueDate)}}</span>
                     <span> </span>
                 </div>
                 <div class="detail_row priority">
                     <span class="label">Priority:</span>
                     @if (selectedTask?.priority) {
                     <span class="priority_icon">
-                        <img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon">
+                        {{selectedTask?.priority}} <img [src]="getPriorityIcon(selectedTask?.priority)" alt="Priority icon"> 
                     </span>
                     }
                 </div>
 
                 <!-- Assigned To -->
-                <div class="assignedTo_section">
-                    <span class="label">Assigned To:
-                        {{ selectedTask?.assignedTo }}
+                <div class="label">
+                    <div class="assigned-to margin-btm">Assigned To:</div>
+                    <span class="label assigned-worker">
+                        @for(assignee of selectedTask?.assignedTo; track $index; let index = $index)
+                        {
+                            @for (contact of this.contact_service.contactList; track $index; let index = $index)
+                            {
+                                @if(assignee == this.getFullName(contact.surname,contact.lastname))
+                                {
+                                    <span class="frame-initials">
+                                        <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</span> <b class="worker">{{assignee}}</b>
+                                    </span>
+                                }
+                            }
+                        }
                     </span>
                 </div>
 

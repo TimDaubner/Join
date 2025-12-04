@@ -50,7 +50,7 @@ export class AddTask {
   newTask: Task = {
     title: "",
     description: "",
-    dueDate: Timestamp.fromDate(new Date("2025-12-31")),
+    dueDate: Timestamp.fromDate(new Date()),
     priority: "Medium",
     assignedTo: [],
     taskCategory: "",
@@ -64,7 +64,7 @@ export class AddTask {
     this.newTask = {
       title: "",
       description: "",
-      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
+      dueDate: Timestamp.fromDate(new Date()),
       priority: "Medium",
       assignedTo: [],
       taskCategory: "",
@@ -85,7 +85,7 @@ export class AddTask {
     this.newTask = {
       title: "",
       description: "",
-      dueDate: Timestamp.fromDate(new Date("2025-12-31")),
+      dueDate: Timestamp.fromDate(new Date()),
       priority: "Medium",
       assignedTo: [],
       taskCategory: "",

@@ -4,6 +4,7 @@ import { Task } from '../../../../interfaces/task.interface';
 import { EditCardDetails } from '../edit-card-details/edit-card-details';
 import { ContactService } from '../../../../shared/services/contact/contact.service';
 import { BoardService } from '../../../../shared/services/board/board.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-card-details',
@@ -76,5 +77,11 @@ export class CardDetails {
     this.board_service.deleteTask(task);
     this.isEditOverlayOpen = false;
     this.closeTaskDetails();
+  }
+
+  getDueDate(date: any){
+    console.log(date.toDate().toLocaleDateString('en-UK'));
+    
+    return date.toDate().toLocaleDateString('en-UK');
   }
 }

@@ -132,6 +132,41 @@
   font-size: 16px;
 }
 
+.margin-btm{
+   margin-bottom: 16px;
+}
+
+.assigned-worker {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.worker{
+  background-color: none;
+}
+
+.frame-initials{
+  display: flex;
+  align-items: center;
+}
+
+.initials {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 4px;
+    margin-right: 24px;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    background-color: #ffa500;
+    color: white;
+    border-radius: 128px;
+    border: 2px solid white;
+}
+
 .assigned {
   color: #4b5a75;
   font-weight: 600;
@@ -215,8 +250,7 @@
 }
 
 .edit_delete button:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
-    brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
 .edit_delete .divider {
