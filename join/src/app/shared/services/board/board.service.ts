@@ -1,23 +1,33 @@
 import { inject, Injectable } from '@angular/core';
-import { collection, Firestore, onSnapshot, Timestamp, addDoc, updateDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import {
+  collection,
+  Firestore,
+  onSnapshot,
+  Timestamp,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { Task } from '../../../interfaces/task.interface';
 import { ContactService } from '../contact/contact.service';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class BoardService {
-
   firestore: Firestore = inject(Firestore);
   contact_service: ContactService = inject(ContactService);
   initials: string[] = [];
   unsubscribe;
   taskList: Task[] = [];
 
+  // Overlay
+  isClosing: boolean = true;
+
   constructor() {
-    this.unsubscribe = onSnapshot(collection(this.firestore, "tasks"), (tasksSnapshot) => {
-      this.taskList = []
+    this.unsubscribe = onSnapshot(collection(this.firestore, 'tasks'), (tasksSnapshot) => {
+      this.taskList = [];
       tasksSnapshot.forEach((task) => {
         this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
@@ -46,12 +56,12 @@ export class BoardService {
       subTask: obj.subTask,
       taskCategory: obj.taskCategory,
       title: obj.title,
-    }
+    };
   }
 
   async addTaskToDatabase(task: Task) {
-    await addDoc(collection(this.firestore, "tasks"), task)
-    console.log(" Task ist hochgeladen");
+    await addDoc(collection(this.firestore, 'tasks'), task);
+    console.log(' Task ist hochgeladen');
     console.log(task);
   }
 
@@ -62,8 +72,8 @@ export class BoardService {
     this.initials = [];
     for (let i = 0; i < arrayAssignedTo.length; i++) {
       firstInitial[i] = arrayAssignedTo[i].charAt(0);
-      secondInitial[i] = arrayAssignedTo[i].charAt(arrayAssignedTo[i].indexOf(" ") + 1);
-      return this.initials[i] = firstInitial[i] + secondInitial[i];
+      secondInitial[i] = arrayAssignedTo[i].charAt(arrayAssignedTo[i].indexOf(' ') + 1);
+      return (this.initials[i] = firstInitial[i] + secondInitial[i]);
     }
     return;
   }
@@ -82,8 +92,8 @@ export class BoardService {
     });
   }
 
-   async deleteTask(task:Task) {
-    const index = this.taskList.findIndex(t => t.id === task.id);
+  async deleteTask(task: Task) {
+    const index = this.taskList.findIndex((t) => t.id === task.id);
     await deleteDoc(doc(this.firestore, 'tasks', this.taskList[index].id!));
   }
 }

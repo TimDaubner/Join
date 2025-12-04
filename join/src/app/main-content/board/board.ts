@@ -71,6 +71,7 @@ export class Board {
   }
 
   openTaskDetails(task: Task) {
+    this.board_service.isClosing = false;
     this.selectedTask = task;
     this.isTaskDetailsOpen = true;
   }
@@ -80,19 +81,19 @@ export class Board {
     this.selectedTask = null;
   }
 
-  updateTasks(type: string) { }
+  updateTasks(type: string) {}
 
   getInitials(name: string) {
-    let firstInitial = "";
-    let secondInitial = "";
+    let firstInitial = '';
+    let secondInitial = '';
     firstInitial = name.charAt(0);
-    secondInitial = name.charAt(name.indexOf(" ") + 1);
+    secondInitial = name.charAt(name.indexOf(' ') + 1);
     let initials = firstInitial + secondInitial;
     return initials;
   }
 
   getFullName(surname: string, lastname: string) {
-    return surname + " " + lastname;
+    return surname + ' ' + lastname;
   }
 
   drop(event: CdkDragDrop<Task[]>, columnTitle: string) {
@@ -111,13 +112,13 @@ export class Board {
   }
 
   changeColumnType(id: string, task: Task) {
-    const index = this.board_service.taskList.findIndex(t => t.id === task.id);
+    const index = this.board_service.taskList.findIndex((t) => t.id === task.id);
     task.columnCategory = id as ColumnCategory;
-    this.board_service.editTaskToDatabase(index,task);
+    this.board_service.editTaskToDatabase(index, task);
   }
 
   getTasksForColumn(title: string) {
-    return this.board_service.taskList.filter(t => t.columnCategory === title);
+    return this.board_service.taskList.filter((t) => t.columnCategory === title);
   }
 
   getCompletedSubtasksCount(task: Task): number {

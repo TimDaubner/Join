@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Task } from '../../../../interfaces/task.interface';
 import { Timestamp } from '@angular/fire/firestore';
+import { BoardService } from '../../../../shared/services/board/board.service';
 
 @Component({
   selector: 'app-edit-card-details',
@@ -13,6 +14,7 @@ import { Timestamp } from '@angular/fire/firestore';
 export class EditCardDetails {
   @Input() task: Task | null = null;
   @Output() close = new EventEmitter<void>();
+  board_service: BoardService = inject(BoardService);
 
   newTask = {
     title: 'Contact Form & Imprint',
@@ -26,14 +28,12 @@ export class EditCardDetails {
     ],
   };
 
-  isClosing = false;
-
-  closeWithAnimation() {
-    this.isClosing = true;
-    setTimeout(() => {
-      this.isClosing = false;
-    }, 200);
-  }
+  // closeWithAnimation() {
+  //   this.isClosing = true;
+  //   setTimeout(() => {
+  //     this.isClosing = false;
+  //   }, 200);
+  // }
 
   closeEdit() {
     this.close.emit();

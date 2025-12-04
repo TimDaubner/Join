@@ -47,8 +47,8 @@
 .header_icons {
   display: flex;
   align-items: center;
-  gap: 16px;
   position: relative;
+  gap: 16px;
 
   .btn_help {
     border: none;
@@ -146,11 +146,10 @@
 @media (max-width: 936px) {
   .header {
     height: 72px;
-    padding: 0 16px;
-    width: 100vw;
+    padding: 0 20px;
+    width: 100%;
     left: 0;
     z-index: 5;
-    padding-right: 16px;
 
     .title {
       display: none;
@@ -165,15 +164,17 @@
       width: 32px;
       height: 39.02px;
     }
+  }
 
-    .header_container {
-      padding: 0;
-    }
+  .header_container {
+    padding: 0 !important;
   }
 
   .link_initials {
     position: relative;
     z-index: 200;
+    padding-right: 0;
+    margin-right: 0;
   }
 
   .btn_help {
@@ -192,6 +193,10 @@
 
   .open_burger_menu .btn_menu.help {
     display: block !important;
+  }
+
+  .header_icons {
+    padding-right: 0 !important;
   }
 }
 
