@@ -12,6 +12,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { ContactService } from '../../shared/services/contact/contact.service';
 import { BoardService } from '../../shared/services/board/board.service';
 import { Contact } from '../contact/contact';
+import {RouterLink, Router} from '@angular/router';
 
 
 @Component({
@@ -33,6 +34,8 @@ import { Contact } from '../contact/contact';
   ]
 })
 export class AddTask {
+
+  private router = inject(Router);
 
   firebase = inject(ContactService);
   taskService = inject(BoardService);
@@ -68,6 +71,10 @@ export class AddTask {
       subTask: [],
       columnCategory: "To do",
     };
+    setTimeout(() => {
+      this.router.navigate(['/board']);
+    }, 3000);
+    
   };
 
   isSelected(contact: any): boolean {
@@ -100,6 +107,10 @@ export class AddTask {
     this.workerDropdown = !this.workerDropdown
   }
 
+  getFullName(surname: string, lastname: string) {
+    return surname + " " + lastname;
+  }
+
   setTaskPriority(prio:string) {
     this.newTask.priority = prio
     console.log(this.newTask.priority);
@@ -108,6 +119,15 @@ export class AddTask {
   logID(id:string | undefined) {
     console.log(id);
     
+  }
+
+   getInitials(name: string) {
+    let firstInitial = "";
+    let secondInitial = "";
+    firstInitial = name.charAt(0);
+    secondInitial = name.charAt(name.indexOf(" ") + 1);
+    let initials = firstInitial + secondInitial;
+    return initials;
   }
 
   getIcon(prio: string) {
@@ -128,6 +148,7 @@ export class AddTask {
 
   toggleContact(contact: any) {
   const name = contact.surname + ' ' + contact.lastname;
+  
 
   if (this.selectedContacts.includes(name)) {
     this.selectedContacts = this.selectedContacts.filter(c => c !== name);

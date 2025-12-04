@@ -12,17 +12,37 @@ section {
     align-items: center;
 }
 
+button {
+    cursor: pointer;
+}
+
 #max-width {
     display: flex;
     flex-direction: column;
 }
 
 h1 {
-    margin: 32px 0;
+    font-size: 61px;
+    margin-bottom: 64px;
+}
+
+.margin_bottom_8 {
+    margin-bottom: 8px;
+}
+
+.margin_bottom_16 {
+    margin-bottom: 16px;
+}
+
+.textarea_desciption{
+    padding-top: 16px;
+    padding-left: 8px;
+    margin-bottom: 16px;
 }
 
 span {
     color: #FF8190;
+    font-size: 16px;
 }
 
 form {
@@ -35,7 +55,6 @@ mat-form-field {
 }
 
 input {
-    margin-bottom: 16px;
     width: 440px;
     height: 48px;
     border-radius: 10px;
@@ -57,7 +76,19 @@ textarea {
 #left_form {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
+
+.datepicker {
+    position: relative;
+}
+
+mat-datepicker-toggle {
+    position: absolute;
+    top: 33px;
+    right: 4px;
+}
+
 
 #right_form {
     display: flex;
@@ -65,17 +96,65 @@ textarea {
     gap: 16px;
 }
 
+.prio_buttons{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
 #priority button {
+    width: 145px;
+    height: 56px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     padding: 8px 16px;
-    margin: 8px 16px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray
 }
 
 #form_buttons {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 16px;
     margin-top: 32px;
+    font-size: 20px;
+}
+
+#form_clear_button {
+    width: 110px;
+    height: 56px;
+    background: none;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+#buttons_form_div {
+    display: flex;
+}
+
+#form_submit_button {
+    width: 183px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 21px;
+    font-weight: 700;
+    border-radius: 10px;
+    margin-left: 8px;
+    background-color: $primary;
+    color: white;
+    >img {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 #dateIcon {
@@ -87,26 +166,30 @@ textarea {
 .dropdown_icon {
     width: 24px;
     position: relative;
-    left: 90%;
-    top: -11%;
+    left: 93%;
+    top: -46%;
     border-radius: 100px;
     &:hover {
         background: #D1D1D1;
     }
 }
 
-.input-wrapper {
+.assigned_worker {
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
+#assigned_worker_input {
+    width: 100%;
+}
+
 #assigned_dropdown {
     width: 300px;
     height: 200px;
     position: absolute;
-    top: 55%;
+    top: 58%;
     left: 0;
     width: 100%;
     background: white;
@@ -133,22 +216,38 @@ textarea {
     }
 }
 
-.urgent_active {
+#priority button.urgent_active {
     color: white;
     font-weight: 700;
     background-color: #FF3D00;
 }
 
-.medium_active {
+#priority button.medium_active {
     color: white;
     font-weight: 700;
     background-color: #FFA800;
 }
 
-.low_active {
+#priority button.low_active {
     color: white;
     font-weight: 700;
     background-color: #7AE229;
+}
+
+.list_assigned {
+    display: flex;
+    gap: 4px;
+    >p {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #7AE229;
+        font-size: 16px;
+        border-radius: 100px;
+        border: 2px solid white;
+    }
 }
 
 .single_contact_dd {
@@ -170,25 +269,26 @@ textarea {
 }
 
 .task_category {
-  position: relative;
-  width: 200px;
-  font-family: sans-serif;
+    position: relative;
+    font-family: sans-serif;
 }
 
 .select_display {
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 4px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .select-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
+  width: 100%;
+  top: 75%;
   right: 0;
   border: 1px solid #ccc;
   border-top: none;
@@ -205,11 +305,49 @@ textarea {
   background: #f0f0f0;
 }
 
+.subtask {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    >input {
+        width: 100%;
+    }
+    >label {
+        margin-bottom: 8px;
+    }
+}
+
 .subtask_item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 16px;
+  >input {
+    width: 100%;
+  }
+  >input {
+    padding-left: 0;
+  }
+}
+
+#subtask_buttons {
+    display: flex;
+    position: absolute;
+    top:40px;
+    right: 10px;
+    gap: 4px;
+    >button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 100px;
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
 }
 
 .sub_actions {
@@ -251,6 +389,36 @@ textarea {
 .edit_input_window{
     width: 100%;
     height: 32px;
+    font-size: 16px;
+}
+
+.editing_subtask {
+    width: 100%;
+    position: relative;
+    >input {
+        border-radius: 0;
+    }
+}
+
+.edit_on_button {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    top: 8px;
+    right: 4px;
+    >button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        >img {
+            width: 16px;
+            height: 16px;
+        }
+    >input {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+    }
 }
 
 .d_none {
