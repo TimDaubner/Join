@@ -1,15 +1,14 @@
 @if (isTaskDetailsOpen) {
 <div class="overlay" (click)="closeTaskDetails()">
     <div class="task_details" [ngClass]="{
-    'slide_out_right': isClosing,
-    'slide_in_right': !isClosing
+    'slide_out_right': board_service.isClosing,
+    'slide_in_right': !board_service.isClosing 
   }" (click)="$event.stopPropagation()">
         <div class="close_container">
             <button class="close_btn" (click)="closeTaskDetails()"><img src="/assets/icons/close.svg"
                     alt="Close"></button>
         </div>
         <div class="slide_right" [ngClass]="{'show' : !isEditOverlayOpen, 'hide': isEditOverlayOpen}">
-
 
             <div class="frame_card_details">
 

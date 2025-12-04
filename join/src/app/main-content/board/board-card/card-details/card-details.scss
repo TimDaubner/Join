@@ -26,8 +26,14 @@
   animation: fadeOut 600ms forwards;
 }
 
+.slide_in_right {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
 .slide_out_right {
-  animation: slide_out_right 0.4s ease-out forwards;
+  opacity: 0;
+  transform: translateX(1000px);
 }
 
 .task_details {
@@ -39,7 +45,7 @@
   padding: 32px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   position: relative;
-  animation: slide_in_right 0.4s ease-out forwards;
+  transition: all 400ms ease-in-out;
 }
 
 .task_details.show {

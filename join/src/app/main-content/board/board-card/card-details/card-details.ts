@@ -17,7 +17,6 @@ export class CardDetails {
   board_service = inject(BoardService);
   isEditOverlayOpen = false;
   editedTask: any = null;
-  isClosing = false;
 
   @Input() selectedTask: Task | null = null;
   @Input() isTaskDetailsOpen: boolean = false;
@@ -67,7 +66,10 @@ export class CardDetails {
   }
 
   closeTaskDetails() {
-    this.close.emit();
+    this.board_service.isClosing = true;
+    setTimeout(() => {
+      this.close.emit();
+    }, 4000);
   }
 
   deleteTask(task: Task) {
