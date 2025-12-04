@@ -344,8 +344,13 @@
     width: 100%;
   }
 
+  .add_btn img {
+    width: 30px;
+    height: 30px;
+  }
+
   .add_btn {
-    padding-right: 0;
+    padding: 0;
   }
 
   .column_wrapper {
@@ -353,13 +358,18 @@
     min-width: 100%;
   }
 
+  .column_header {
+    padding: 10px 0;
+  }
+
   .example_list {
     flex-direction: row;
     overflow-x: scroll;
     overflow-y: hidden;
     scrollbar-width: thin;
-    padding-right: 0;
+    padding-right: 0 !important;
     width: 100%;
+    scrollbar-gutter: auto !important;
   }
 
   .add_task_btn {
