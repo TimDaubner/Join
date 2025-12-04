@@ -7,20 +7,21 @@
 }
 
 .board_container {
-  margin-left: clamp(180px, 16.1vw, 232px);
+  margin-left: 220px;
   padding-top: 26px;
   background-color: $secondary-bg;
 }
 
 .board_header_wrapper {
   width: 100%;
-  max-width: 1056px;
-  padding: 150px 50px 68px 50px;
+  max-width: 100%;
+  padding: 0 50px 0 50px;
+  margin: 220px 0 60px 0;
 }
 
 .board_header {
-  max-width: 1056px;
-  margin: 0 auto;
+  // max-width: 1056px;
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -212,8 +213,6 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  scrollbar-gutter: stable;
-  padding-right: 10px;
 }
 
 .example_box {
@@ -326,21 +325,27 @@
 
 @media (max-width: 1440px) {
   .board_container {
-    padding: 120px 20px 96px 20px;
-    margin-left: 0;
+    padding: 60px 20px 96px 20px;
     margin-right: 0;
-    width: 100%;
+  }
+
+  .example_list {
+    scrollbar-gutter: stable;
   }
 }
 
 @media (max-width: 1050px) {
+  .board_container {
+    padding: 0 20px 96px 20px;
+  }
+
   .content_container {
     flex-direction: column;
     gap: 32px;
     overflow-y: scroll;
     scrollbar-width: none;
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     width: 100%;
   }
 
@@ -383,12 +388,14 @@
   .board_header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch !important;
     width: 100%;
+    gap: 20px;
   }
 
   .board_header_wrapper {
     padding: 20px 0;
+    margin-bottom: 0;
   }
 
   .title_btn {
@@ -402,15 +409,50 @@
     display: block;
   }
 
-  .search_controls {
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
+  .column_header h2 {
+    font-size: 34px;
   }
 
-  .search_controls .search_bar {
+  .search_controls {
     width: 100%;
-    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search_bar {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 48px;
+    border-radius: 10px;
+    padding-left: 16px;
+  }
+
+  .search_input_wrapper {
+    padding: 0;
+  }
+
+  input {
+    width: 100%;
+    padding-right: 48px;
+  }
+
+  .search_icon {
+    position: absolute;
+    right: 16px;
+  }
+}
+
+@media (max-width: 936px) {
+  .board_container {
+    margin-left: 0;
+  }
+
+  .board_header_wrapper {
+    margin-top: 120px;
+  }
+
+  .board_header {
+    gap: 40px;
   }
 }
