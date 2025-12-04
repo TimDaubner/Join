@@ -32,9 +32,6 @@ export class BoardService {
         this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
     });
-    setTimeout(() => {
-      console.log(this.taskList);
-    }, 3000);
   }
 
   ngOnDestroy() {

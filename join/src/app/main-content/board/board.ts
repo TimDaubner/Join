@@ -71,9 +71,11 @@ export class Board {
   }
 
   openTaskDetails(task: Task) {
-    this.board_service.isClosing = false;
     this.selectedTask = task;
     this.isTaskDetailsOpen = true;
+    setTimeout(()=>{
+      this.board_service.isClosing = false;
+    },100);
   }
 
   closeTaskDetails() {

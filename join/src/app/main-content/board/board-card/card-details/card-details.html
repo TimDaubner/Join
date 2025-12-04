@@ -51,7 +51,7 @@
                                 @if(assignee == this.getFullName(contact.surname,contact.lastname))
                                 {
                                     <span class="frame-initials">
-                                        <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</span> <b class="worker">{{assignee}}</b>
+                                        <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</span> <div class="worker">{{assignee}}</div>
                                     </span>
                                 }
                             }
