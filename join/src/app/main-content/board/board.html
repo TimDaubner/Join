@@ -15,7 +15,8 @@
             <div class="search_controls">
                 <div class="search_bar">
                     <div class="search_input_wrapper">
-                        <input #searchInput (input)="searchTask(searchInput.value)" id="searchInput" type="text" placeholder="Find Task" />
+                        <input #searchInput (input)="searchTask(searchInput.value)" id="searchInput" type="text"
+                            placeholder="Find Task" />
                         <span class="divider"></span>
                     </div>
                     <button class="search_icon">
@@ -83,61 +84,62 @@
 
                     <div class="task_footer">
                         <div class="assignees">
-                        @for (assignee of task.assignedTo; track $index; let i = $index) 
-                        {
+                            @for (assignee of task.assignedTo; track $index; let i = $index)
+                            {
                             @for (contact of this.contact_service.contactList; track $index; let index = $index)
                             {
-                                @if(task.assignedTo.length > 3) 
-                                {
-                                    @if(i == 3 && index == 3) 
-                                    {   
-                                        +{{ task.assignedTo.length - 3 }}
-                                    }
-                                    @else if(i < 3) 
-                                    { 
-                                        @if(assignee==this.getFullName(contact.surname,contact.lastname))
-                                        { 
-                                            <div class="frame-initials">
-                                                <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</span>
-                                            </div>
-                                        }
-                                
-                                    }
-                                
-                                }
-                                @else 
-                                {
-                                    @if(assignee == this.getFullName(contact.surname,contact.lastname))
-                                    {
-                                        <div class="frame-initials">
-                                            <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee)}}</span>
-                                        </div>
-                                    }
-                                }
+                            @if(task.assignedTo.length > 3)
+                            {
+                            @if(i == 3 && index == 3)
+                            {
+                            +{{ task.assignedTo.length - 3 }}
                             }
-                        }
+                            @else if(i < 3) { @if(assignee==this.getFullName(contact.surname,contact.lastname)) { <div
+                                class="frame-initials">
+                                <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee)
+                                    }}</span>
                         </div>
+                        }
 
-                        @if (task.priority) {
-                        <span class="priority_icon">
-                            <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
-                        </span>
+                        }
+
+                        }
+                        @else
+                        {
+                        @if(assignee == this.getFullName(contact.surname,contact.lastname))
+                        {
+                        <div class="frame-initials">
+                            <span class="initials" [style.background-color]="contact.color">{{
+                                getInitials(assignee)}}</span>
+                        </div>
+                        }
+                        }
+                        }
                         }
                     </div>
+
+                    @if (task.priority) {
+                    <span class="priority_icon">
+                        <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                    </span>
+                    }
                 </div>
-
-                }
             </div>
-        </div>
-        }
-    </div>
 
-    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen" (close)="closeTaskDetails()"></app-card-details>
-    <div class="overlay" (click)="closeAddTaskComponent()" [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}">
-        <div class="add_task_frame">
-            <app-add-task (click)="$event.stopPropagation()" class="frame" [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}"></app-add-task>
+            }
         </div>
     </div>
+    }
+</div>
+
+<app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
+    (close)="closeTaskDetails()"></app-card-details>
+<div class="overlay" (click)="closeAddTaskComponent()" [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}">
+    <div class="add_task_frame">
+        <app-add-task (click)="$event.stopPropagation()" class="frame"
+            [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}"></app-add-task>
+    </div>
+</div>
 
 </div>
 
