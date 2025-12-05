@@ -16,7 +16,7 @@
   width: 100%;
   max-width: 100%;
   padding: 0 50px 0 50px;
-  margin: 220px 0 60px 0;
+  margin-top: 146px;
 }
 
 .board_header {
@@ -138,6 +138,7 @@
 }
 
 .column_wrapper {
+  max-height: calc(100vh - 230px);
   width: 320px;
   display: flex;
   flex-direction: column;
@@ -263,6 +264,7 @@
   max-width: 290px;
   max-height: 260px;
   overflow: hidden;
+  min-height: 25vh;
 }
 
 // content of cards
@@ -347,16 +349,37 @@
   }
 }
 
+.assignees {
+  display: flex;
+  align-items: center;
+}
+
 .task_footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.frame-initials {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .initials {
-  width: 10px;
-  height: 10px;
-  background-color: #4589ff;
+   font-weight: 400;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  background-color: #ffa500;
+  color: white;
+  border-radius: 128px;
+  border: 2px solid white;
 }
 
 .plus_icon_responsive {
@@ -439,7 +462,7 @@
   .example_list {
     flex-direction: row;
     gap: 16px;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
