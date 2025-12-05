@@ -69,8 +69,10 @@
                                 [class.selected]="isSelected(contact)"
                                 (click)="toggleContact(contact)"
                             >
-                                <p>{{ contact.surname }} {{ contact.lastname }}</p>
-
+                                <div class="contacts_in_dropdown">
+                                    <div class="initials" [style.background-color]="contact.color">{{ getInitials(contact.surname + ' ' + contact.lastname) }} </div>
+                                    <p>{{ contact.surname }} {{ contact.lastname }}</p>
+                                </div>               
                                 <img
                                 class="checkbox-icon"
                                 [src]="isSelected(contact) ? 'assets/icons/checkbox_checked.svg' : 'assets/icons/checkbox_unchecked.svg'"
@@ -81,7 +83,7 @@
                     </div>
                     <div class="list_assigned">
                         @for (assignee of newTask.assignedTo; track newTask.id) {
-                    
+                
                             @for (contact of this.firebase.contactList; track $index; let index = $index)
                             {
                                 @if(assignee == this.getFullName(contact.surname,contact.lastname))
