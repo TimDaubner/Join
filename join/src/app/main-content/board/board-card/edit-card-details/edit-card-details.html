@@ -2,32 +2,123 @@
 
     <h2 class="task_title_large"></h2>
 
-    <div class="edit_fields">
-        <label>Title</label>
+        <form id="add_task_form" (ngSubmit)="submitTask()">
+            <label>Title</label>
+            <input #taskTitle="ngModel" name="title" (ngModel)="task?.title" required>
+            <label>Description</label>
+             <textarea class="textarea_desciption" name="description" placeholder="Enter a description"
+            [(ngModel)]="newTask.description"></textarea>
+            
+            <label>Due date</label>
+             <input matInput #taskDate="ngModel" name="dueDate"  [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="newTask.dueDate" required>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            
+            <label><span class="prio_text">Priority</span></label>
+            <div class="priority_buttons">
+                <button
+                    type="button"
+                    (click)="setTaskPriority('Urgent')"
+                    [ngClass]="{ 'urgent_active': newTask.priority === 'Urgent' }">
+                    Urgent
+                    <img [src]="getIcon('Urgent')" alt="Priority urgent">
+                </button>
+                <button
+                    type="button"
+                    (click)="setTaskPriority('Medium')"
+                    [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
+                    Medium
+                    <img [src]="getIcon('Medium')" alt="Priority medium">
+                </button>
+                <button
+                    type="button"
+                    (click)="setTaskPriority('Low')"
+                    [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
+                    Low
+                    <img [src]="getIcon('Low')" alt="Priority low">
+                </button>
+            </div>
+            
+            <label>Assigned to</label>
+            <div class="assigned_contacts">
+                <input id="assigned_worker_input" class="margin_bottom_16" type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                    <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
+                    <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
+                        @for (contact of contact_service.contactList; track $index) {
+                            <div
+                                class="single_contact_dd"
+                                [class.selected]="isSelected(contact)"
+                                (click)="toggleContact(contact)"
+                            >
+                                <p>{{ contact.surname }} {{ contact.lastname }}</p>
 
-        <label>Description</label>
+                                <img
+                                class="checkbox-icon"
+                                [src]="isSelected(contact) ? 'assets/icons/checkbox_checked.svg' : 'assets/icons/checkbox_unchecked.svg'"
+                                alt="checkbox"
+                                />
+                            </div>
+                        }
+                    </div>
+            </div>
+            <div class="list_assigned">
+                        @for (assignee of newTask.assignedTo; track $index) {
+                    
+                            @for (contact of contact_service.contactList; track $index; let index = $index)
+                            {
+                                @if(assignee == getFullName(contact.surname,contact.lastname))
+                                {
+                                    <span class="frame-initials">
+                                        <div class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</div>
+                                    </span>
+                                }
+                            }
+                        }
+                        
+            </div>
+            
+            <label>Subtasks</label>
+            <div class="subtasks">
+                 <input class="margin_bottom_16" name="Subtask" type="text" placeholder="Add new subtask" [(ngModel)]="subtaskInput">
+                    <!-- @if(subtaskInput) {
+                        <div id="subtask_buttons">
+                            <button type = button (click)="clearSubtaskInput()"><img src="./assets/icons/subtask_clear.svg" alt=""></button>
+                            <hr>
+                            <button type = button (click)="addSubtask()"><img src="./assets/icons/subtask_check.svg" alt=""></button>
+                        </div>
+                    }
 
-        <label>Due date</label>
+                    @for (task of newTask.priority; track $index) {
+                        <li class="subtask_item">
 
-        <label><span class="prio_text">Priority</span></label>
-        <div class="priority_buttons">
+                            @if (!editingState[task.id]) {
+                            <span> • {{ task.subDescription }}</span>
 
-        </div>
+                            <div class="sub_actions">
+                                <button type=button (click)="startEdit(task.id)"><img src="./assets/icons/edit.svg" alt=""></button>
+                                <hr>
+                                <button type=button (click)="deleteSubtask(task.id)"><img src="./assets/icons/delete.svg" alt=""></button>
+                            </div>
+                            }
 
-        <label>Assigned to</label>
-        <div class="assigned_contacts">
-
-        </div>
-
-        <label>Subtasks</label>
-        <div class="subtasks">
-        </div>
+                            @if (editingState[task.id]) {
+                            <div class="editing_subtask">
+                                <input class="edit_input_window" name=edit [(ngModel)]="task.subDescription" />
+                                <div class="edit_on_button">
+                                    <button type=button (click)="stopEdit(task.id)"><img src="./assets/icons/done.svg" alt=""></button>
+                                    <hr>
+                                    <button type=button (click)="deleteSubtask(task.id)"><img src="./assets/icons/delete.svg" alt=""></button>
+                                </div>
+                            </div>    
+                        }
+                            
+                        </li>
+                    } -->
+            </div>
+        </form>
     </div>
     <div class="btn_footer">
         <div class="ok_btn_container">
-            <button class="ok_btn" (click)="closeEdit()">Ok <img id="ok_check" src="/assets/icons/check.svg"
-                    alt="Check"></button>
+            <button (click)="closeEdit()" class="ok_btn" id="form_submit_button" type="submit" form="add_task_form" [disabled]="!newTask.title || !newTask.dueDate || !newTask">Ok <img src="./assets/icons/check.svg" alt=""></button>
         </div>
     </div>
-
-</div>

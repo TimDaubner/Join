@@ -79,9 +79,7 @@ export class CardDetails {
     this.closeTaskDetails();
   }
 
-  getDueDate(date: any) {
-    console.log(date.toDate().toLocaleDateString('en-UK'));
-
+  getDueDate(date: any){
     return date.toDate().toLocaleDateString('en-UK');
   }
 }

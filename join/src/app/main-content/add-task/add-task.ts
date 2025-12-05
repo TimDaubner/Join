@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
 import { Component, inject, ViewChild} from '@angular/core';
+=======
+import { Component, inject, } from '@angular/core';
+>>>>>>> tim
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Task, Subtask} from '../../interfaces/task.interface'
+import { Task, Subtask } from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,7 +16,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { ContactService } from '../../shared/services/contact/contact.service';
 import { BoardService } from '../../shared/services/board/board.service';
 import { Contact } from '../contact/contact';
-import {RouterLink, Router} from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 
 @Component({
@@ -51,8 +55,12 @@ export class AddTask {
   selectedContacts: string[] = [];
   subtaskInput = "";
   isEditing = "";
+<<<<<<< HEAD
   taskAdded = false;
   
+=======
+
+>>>>>>> tim
 
   newTask: Task = {
     title: "",
@@ -88,7 +96,7 @@ export class AddTask {
     setTimeout(() => {
       this.router.navigate(['/board']);
     }, 3000);
-    
+
   };
 
   isSelected(contact: any): boolean {
@@ -108,6 +116,7 @@ export class AddTask {
     };
   }
 
+<<<<<<< HEAD
   resetForm() {
     this.taskTitle.control.markAsUntouched();
     this.taskTitle.control.markAsPristine();
@@ -116,12 +125,15 @@ export class AddTask {
   //   this.mail.control.markAsUntouched();
   //   this.mail.control.markAsPristine();
   }
+=======
+
+>>>>>>> tim
 
   selectCategory(value: string) {
     this.newTask.taskCategory = value;
     this.categoryDropdown = false;
     console.log(this.newTask.taskCategory);
-    
+
   }
 
   toggleDropdown() {
@@ -132,17 +144,17 @@ export class AddTask {
     return surname + " " + lastname;
   }
 
-  setTaskPriority(prio:string) {
+  setTaskPriority(prio: string) {
     this.newTask.priority = prio
     console.log(this.newTask.priority);
   }
 
-  logID(id:string | undefined) {
+  logID(id: string | undefined) {
     console.log(id);
-    
+
   }
 
-   getInitials(name: string) {
+  getInitials(name: string) {
     let firstInitial = "";
     let secondInitial = "";
     firstInitial = name.charAt(0);
@@ -152,6 +164,7 @@ export class AddTask {
   }
 
   getIcon(prio: string) {
+<<<<<<< HEAD
   switch (prio) {
     case 'Urgent': return this.newTask.priority === 'Urgent'
       ? './assets/icons/prio_urgent_white.svg'
@@ -164,20 +177,34 @@ export class AddTask {
       : './assets/icons/prio_low.svg';
     default:
       return '';
+=======
+    switch (prio) {
+      case 'Urgent': return this.newTask.priority === 'Urgent'
+        ? './assets/icons/prio_urgent_white.svg'
+        : './assets/icons/prio_urgent.svg';
+      case 'Medium': return this.newTask.priority === 'Medium'
+        ? './assets/icons/prio_medium_white.svg'
+        : './assets/icons/prio_medium.svg';
+      case 'Low': return this.newTask.priority === 'Low'
+        ? './assets/icons/prio_low_white.svg'
+        : './assets/icons/prio_low.svg';
+      default:
+        return '';
+>>>>>>> tim
     }
   }
 
   toggleContact(contact: any) {
-  const name = contact.surname + ' ' + contact.lastname;
-  
+    const name = contact.surname + ' ' + contact.lastname;
 
-  if (this.selectedContacts.includes(name)) {
-    this.selectedContacts = this.selectedContacts.filter(c => c !== name);
-  } else {
-    this.selectedContacts.push(name);
-  }
-  this.newTask.assignedTo = [...this.selectedContacts];
-  console.log(this.newTask.assignedTo); 
+
+    if (this.selectedContacts.includes(name)) {
+      this.selectedContacts = this.selectedContacts.filter(c => c !== name);
+    } else {
+      this.selectedContacts.push(name);
+    }
+    this.newTask.assignedTo = [...this.selectedContacts];
+    console.log(this.newTask.assignedTo);
   }
 
   clearSubtaskInput() {
@@ -187,10 +214,11 @@ export class AddTask {
   addSubtask() {
     let newId = this.newTask.subTask.length;
     this.newTask.subTask.push(
-    {
-      id: newId.toString(),
-      status: false, 
-      subDescription: this.subtaskInput,})
+      {
+        id: newId.toString(),
+        status: false,
+        subDescription: this.subtaskInput,
+      })
     this.subtaskInput = "";
     console.log(this.newTask.subTask);
   }
