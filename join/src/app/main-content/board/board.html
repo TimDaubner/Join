@@ -22,7 +22,7 @@
                         <img src="./assets/icons/search.svg" alt="Search" />
                     </button>
                 </div>
-                <button class="add_task_btn">
+                <button class="add_task_btn" (click)="showAddTaskComponent()">
                     <span class="add_task_text">Add task</span>
                     <img class="plus_icon" src="./assets/icons/add.svg" alt="Add task" />
                 </button>
@@ -132,8 +132,12 @@
         }
     </div>
 
-    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
-        (close)="closeTaskDetails()"></app-card-details>
+    <app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen" (close)="closeTaskDetails()"></app-card-details>
+    <div class="overlay" (click)="closeAddTaskComponent()" [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}">
+        <div class="add_task_frame">
+            <app-add-task (click)="$event.stopPropagation()" class="frame" [ngClass]="{'show': isAddTaskOpen , 'hide': !isAddTaskOpen}"></app-add-task>
+        </div>
+    </div>
 
 </div>
 

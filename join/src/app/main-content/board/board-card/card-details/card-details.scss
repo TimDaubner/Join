@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   z-index: 200;
+  transition: all 400ms ease-in-out;
 }
 
 .task_details {
@@ -31,11 +32,11 @@
 }
 
 .overlay.show {
-  animation: fadeIn 600ms forwards;
+  opacity: 1;
 }
 
 .overlay.hide {
-  animation: fadeOut 600ms forwards;
+  opacity: 0;
 }
 
 .slide_in_right {

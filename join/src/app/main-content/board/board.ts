@@ -12,16 +12,16 @@ import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
 import { CardDetails } from './board-card/card-details/card-details';
 import { ContactService } from '../../shared/services/contact/contact.service';
+import { AddTask } from "../add-task/add-task";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDrag, CdkDropList, CardDetails],
+  imports: [CommonModule, CdkDrag, CdkDropList, CardDetails, AddTask],
   templateUrl: './board.html',
   styleUrls: ['./board.scss'],
 })
 export class Board {
-  //TODO - change due Date to date Month/Day/Year
   board_service = inject(BoardService);
   contact_service = inject(ContactService);
   isAddTaskOpen: boolean = false;
@@ -51,10 +51,10 @@ export class Board {
   }
 
   searchTask(keyWord: string) {
-    if(keyWord.trim() === ''){
+    if (keyWord.trim() === '') {
       this.filteredTasks = this.board_service.taskList;
     }
-    else{
+    else {
       keyWord = keyWord.toLowerCase();
       this.filteredTasks = this.board_service.taskList.filter(task =>
         task.title.toLowerCase().includes(keyWord) ||
@@ -71,20 +71,26 @@ export class Board {
     }
   }
 
+  closeAddTaskComponent() {
+    this.isAddTaskOpen = false;
+  }
+
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
   openTaskDetails(task: Task) {
     this.selectedTask = task;
     this.isTaskDetailsOpen = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.board_service.isClosing = false;
-    },100);
+    }, 100);
   }
 
   closeTaskDetails() {
     this.isTaskDetailsOpen = false;
     this.selectedTask = null;
   }
-
-  updateTasks(type: string) {}
 
   getInitials(name: string) {
     let firstInitial = '';
@@ -121,10 +127,10 @@ export class Board {
   }
 
   getTasksForColumn(title: string) {
-    if(this.filteredTasks.length > 0){
+    if (this.filteredTasks.length > 0) {
       return this.filteredTasks.filter(task => task.columnCategory === title);
     }
-    else{
+    else {
       return this.board_service.taskList.filter(t => t.columnCategory === title);
     }
   }
