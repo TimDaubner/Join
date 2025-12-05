@@ -15,7 +15,7 @@
             <div class="search_controls">
                 <div class="search_bar">
                     <div class="search_input_wrapper">
-                        <input id="searchInput" type="text" placeholder="Find Task" />
+                        <input #searchInput (input)="searchTask(searchInput.value)" id="searchInput" type="text" placeholder="Find Task" />
                         <span class="divider"></span>
                     </div>
                     <button class="search_icon">
@@ -56,7 +56,6 @@
                 </div>
                 }
                 @for (task of getTasksForColumn(title); track $index; let index=$index) {
-
                 <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
 
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">

@@ -51,10 +51,11 @@ export class Board {
   }
 
   searchTask(keyWord: string) {
-    if(keyWord === ''){
+    if(keyWord.trim() === ''){
       this.filteredTasks = this.board_service.taskList;
     }
     else{
+      keyWord = keyWord.toLowerCase();
       this.filteredTasks = this.board_service.taskList.filter(task =>
         task.title.toLowerCase().includes(keyWord) ||
         task.description.toLowerCase().includes(keyWord)
