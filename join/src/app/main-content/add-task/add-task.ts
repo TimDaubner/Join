@@ -1,9 +1,5 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { Component, inject, ViewChild} from '@angular/core';
-=======
-import { Component, inject, } from '@angular/core';
->>>>>>> tim
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Task, Subtask } from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
@@ -55,12 +51,8 @@ export class AddTask {
   selectedContacts: string[] = [];
   subtaskInput = "";
   isEditing = "";
-<<<<<<< HEAD
   taskAdded = false;
   
-=======
-
->>>>>>> tim
 
   newTask: Task = {
     title: "",
@@ -116,7 +108,6 @@ export class AddTask {
     };
   }
 
-<<<<<<< HEAD
   resetForm() {
     this.taskTitle.control.markAsUntouched();
     this.taskTitle.control.markAsPristine();
@@ -125,9 +116,6 @@ export class AddTask {
   //   this.mail.control.markAsUntouched();
   //   this.mail.control.markAsPristine();
   }
-=======
-
->>>>>>> tim
 
   selectCategory(value: string) {
     this.newTask.taskCategory = value;
@@ -164,7 +152,6 @@ export class AddTask {
   }
 
   getIcon(prio: string) {
-<<<<<<< HEAD
   switch (prio) {
     case 'Urgent': return this.newTask.priority === 'Urgent'
       ? './assets/icons/prio_urgent_white.svg'
@@ -177,20 +164,6 @@ export class AddTask {
       : './assets/icons/prio_low.svg';
     default:
       return '';
-=======
-    switch (prio) {
-      case 'Urgent': return this.newTask.priority === 'Urgent'
-        ? './assets/icons/prio_urgent_white.svg'
-        : './assets/icons/prio_urgent.svg';
-      case 'Medium': return this.newTask.priority === 'Medium'
-        ? './assets/icons/prio_medium_white.svg'
-        : './assets/icons/prio_medium.svg';
-      case 'Low': return this.newTask.priority === 'Low'
-        ? './assets/icons/prio_low_white.svg'
-        : './assets/icons/prio_low.svg';
-      default:
-        return '';
->>>>>>> tim
     }
   }
 

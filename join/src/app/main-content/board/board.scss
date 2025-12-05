@@ -353,20 +353,6 @@
   align-items: center;
 }
 
-<<<<<<< HEAD
-=======
-.assignees {
-  display: flex;
-  align-items: center;
-}
-
-.frame-initials {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
-
->>>>>>> tim
 .initials {
   width: 10px;
   height: 10px;
@@ -552,7 +538,6 @@
   .board_header {
     gap: 40px;
   }
-<<<<<<< HEAD
 
   @media (max-width: 336px) {
     .column_header h2 {
@@ -560,6 +545,3 @@
     }
   }
 }
-=======
-}
->>>>>>> tim
