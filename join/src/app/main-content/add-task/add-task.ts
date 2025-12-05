@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject,} from '@angular/core';
+import { Component, inject, ViewChild} from '@angular/core';
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Task, Subtask} from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
@@ -37,6 +37,12 @@ export class AddTask {
 
   private router = inject(Router);
 
+
+  @ViewChild('taskTitle') taskTitle!: NgModel;
+  @ViewChild('taskDate') taskDate!: NgModel;
+  // @ViewChild('taskCategory') taskCategory!: NgModel;
+  
+
   firebase = inject(ContactService);
   taskService = inject(BoardService);
 
@@ -45,6 +51,7 @@ export class AddTask {
   selectedContacts: string[] = [];
   subtaskInput = "";
   isEditing = "";
+  taskAdded = false;
   
 
   newTask: Task = {
@@ -71,6 +78,13 @@ export class AddTask {
       subTask: [],
       columnCategory: "To do",
     };
+    this.resetForm()
+    this.taskAdded = true;
+
+    // Nach 1.5 Sekunden ausblenden
+    setTimeout(() => {
+        this.taskAdded = false;
+    }, 2900);
     setTimeout(() => {
       this.router.navigate(['/board']);
     }, 3000);
@@ -94,7 +108,14 @@ export class AddTask {
     };
   }
 
-  
+  resetForm() {
+    this.taskTitle.control.markAsUntouched();
+    this.taskTitle.control.markAsPristine();
+    this.taskDate.control.markAsUntouched();
+    this.taskDate.control.markAsPristine();
+  //   this.mail.control.markAsUntouched();
+  //   this.mail.control.markAsPristine();
+  }
 
   selectCategory(value: string) {
     this.newTask.taskCategory = value;
@@ -143,8 +164,8 @@ export class AddTask {
       : './assets/icons/prio_low.svg';
     default:
       return '';
+    }
   }
-}
 
   toggleContact(contact: any) {
   const name = contact.surname + ' ' + contact.lastname;

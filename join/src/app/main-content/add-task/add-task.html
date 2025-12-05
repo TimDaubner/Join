@@ -20,7 +20,7 @@
                 <div class="margin_bottom_16">
                     <div class="datepicker">
                         <p class="margin_bottom_8">Due date<span>*</span></p>
-                        <input matInput #taskDate="ngModel" name="dueDate"  [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="newTask.dueDate" required>
+                        <input matInput #taskDate="ngModel" name="taskDate"  [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="newTask.dueDate" required>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </div>
@@ -158,6 +158,10 @@
                 <button (click)="clearForm()" type="button" id="form_clear_button">Clear</button>
                 <button id="form_submit_button" type="submit" form="add_task_form" [disabled]="!newTask.title || !newTask.dueDate || !newTask.taskCategory">Create Task <img src="./assets/icons/check.svg" alt=""></button>
             </div>
+        </div>
+        <div class="task_added_message" [class.show]="taskAdded">
+            <p>Task added to board</p>
+            <img src="./assets/icons/board.svg" alt="">
         </div>
     </div>
 
