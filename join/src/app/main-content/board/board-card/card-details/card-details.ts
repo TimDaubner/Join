@@ -70,7 +70,7 @@ export class CardDetails {
     this.board_service.isClosing = true;
     setTimeout(() => {
       this.close.emit();
-    }, 4000);
+    }, 400);
   }
 
   deleteTask(task: Task) {
@@ -79,9 +79,9 @@ export class CardDetails {
     this.closeTaskDetails();
   }
 
-  getDueDate(date: any){
+  getDueDate(date: any) {
     console.log(date.toDate().toLocaleDateString('en-UK'));
-    
+
     return date.toDate().toLocaleDateString('en-UK');
   }
 }
