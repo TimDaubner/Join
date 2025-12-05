@@ -177,14 +177,16 @@
 
 .add_task_frame {
   position: absolute;
-  top: 0;
-  left: 40px;
+  top: 10vh;
+  left: 15vw;
   border-radius: 24px;
   padding: 16px;
   transition: all 400ms ease-in-out;
   ::ng-deep app-add-task section {
    padding: 55px;
    border-radius: 24px;
+   margin-left:0;
+   margin-top:0;
   }
 }
 
@@ -350,6 +352,7 @@
 
 .assignees {
   display: flex;
+  align-items: center;
 }
 
 .frame-initials {
