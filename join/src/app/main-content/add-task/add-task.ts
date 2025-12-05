@@ -106,6 +106,7 @@ export class AddTask {
       subTask: [],
       columnCategory: "To do",
     };
+    this.resetForm()
   }
 
   resetForm() {
