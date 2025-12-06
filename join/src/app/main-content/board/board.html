@@ -56,7 +56,8 @@
                 </div>
                 }
                 @for (task of getTasksForColumn(title); track $index; let index=$index) {
-                <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
+                <div class="example_box" cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStarted()"
+     (cdkDragEnded)="onDragEnded(task)" (click)="openTaskDetails(task)">
 
                     <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">
                         {{ task.taskCategory }}

@@ -40,6 +40,7 @@ export class Board {
   tasksAwaitFeedback: Task[] = [];
   tasksDone: Task[] = [];
   isVisible: boolean = false;
+  isDragging: boolean = false;
 
   async init() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -80,11 +81,13 @@ export class Board {
   }
 
   openTaskDetails(task: Task) {
-    this.selectedTask = task;
-    this.isTaskDetailsOpen = true;
-    setTimeout(() => {
-      this.board_service.isClosing = false;
-    }, 100);
+    if (!this.isDragging) {
+      this.selectedTask = task;
+      this.isTaskDetailsOpen = true;
+      setTimeout(() => {
+        this.board_service.isClosing = false;
+      }, 100);
+    }
   }
 
   closeTaskDetails() {
@@ -118,6 +121,14 @@ export class Board {
       );
       this.changeColumnType(columnTitle, task);
     }
+  }
+
+  onDragStarted() {
+    this.isDragging = true;
+  }
+
+  onDragEnded(task: any) {
+    setTimeout(() => this.isDragging = false, 50);
   }
 
   changeColumnType(id: string, task: Task) {
