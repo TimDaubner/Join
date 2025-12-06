@@ -141,6 +141,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-y: auto;
+  max-height: 115px;
 }
 
 .worker {
@@ -199,6 +201,8 @@
   gap: 10px;
   margin-bottom: 8px;
   font-size: 14px;
+  overflow-y: auto;
+  max-height: 115px;
 }
 
 .subtask_item {
