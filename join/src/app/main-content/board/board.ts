@@ -24,7 +24,6 @@ import { AddTask } from "../add-task/add-task";
 export class Board {
   board_service = inject(BoardService);
   contact_service = inject(ContactService);
-  isAddTaskOpen: boolean = false;
   selectedTask: Task | null = null;
   isTaskDetailsOpen: boolean = false;
 
@@ -32,7 +31,7 @@ export class Board {
     this.init();
   }
 
-  columnsTitel: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
+  columnsTitel: ColumnCategory[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   allTasks: Task[] = [];
   filteredTasks: Task[] = [];
   tasksToDo: Task[] = [];
@@ -64,16 +63,17 @@ export class Board {
     }
   }
 
-  showAddTaskComponent() {
-    if (!this.isAddTaskOpen) {
-      this.isAddTaskOpen = true;
+  showAddTaskComponent(title:ColumnCategory) {
+    if (!this.board_service.isAddTaskOpen) {
+      this.board_service.setTaskColumnType(title);
+      this.board_service.isAddTaskOpen = true;
     } else {
-      this.isAddTaskOpen = false;
+      this.board_service.isAddTaskOpen = false;
     }
   }
 
   closeAddTaskComponent() {
-    this.isAddTaskOpen = false;
+    this.board_service.isAddTaskOpen = false;
   }
 
   stopPropagation(event: Event) {

@@ -67,7 +67,9 @@ export class AddTask {
 
   submitTask() {
     console.log(this.newTask);
-    this.taskService.addTaskToDatabase(this.newTask)
+    this.taskService.addTaskToDatabase(this.newTask);
+    console.log(this.taskService.taskColumnType);
+    
     this.newTask = {
       title: "",
       description: "",
@@ -76,7 +78,7 @@ export class AddTask {
       assignedTo: [],
       taskCategory: "",
       subTask: [],
-      columnCategory: "To do",
+      columnCategory: this.taskService.taskColumnType,
     };
     this.resetForm()
     this.taskAdded = true;

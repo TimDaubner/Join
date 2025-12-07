@@ -9,7 +9,7 @@ import {
   doc,
   deleteDoc,
 } from '@angular/fire/firestore';
-import { Task } from '../../../interfaces/task.interface';
+import { ColumnCategory, Task } from '../../../interfaces/task.interface';
 import { ContactService } from '../contact/contact.service';
 
 @Injectable({
@@ -21,6 +21,8 @@ export class BoardService {
   initials: string[] = [];
   unsubscribe;
   taskList: Task[] = [];
+  taskColumnType: ColumnCategory = 'To do'
+  isAddTaskOpen:boolean = false;
 
   // Overlay
   isClosing: boolean = true;
@@ -51,12 +53,18 @@ export class BoardService {
       dueDate: obj.dueDate,
       priority: obj.priority,
       subTask: obj.subTask,
-      taskCategory: obj.taskCategory,
+      taskCategory: this.taskColumnType,
       title: obj.title,
     };
   }
 
+  setTaskColumnType(type: ColumnCategory) {
+    this.taskColumnType = type;
+  }
+
   async addTaskToDatabase(task: Task) {
+    task.columnCategory = this.taskColumnType;
+    this.isAddTaskOpen = false;
     await addDoc(collection(this.firestore, 'tasks'), task);
     console.log(' Task ist hochgeladen');
     console.log(task);
