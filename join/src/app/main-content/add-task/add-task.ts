@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, ViewChild} from '@angular/core';
+import { Component, inject, ViewChild, HostListener, ElementRef} from '@angular/core';
 import { FormsModule, NgModel, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Task, Subtask } from '../../interfaces/task.interface'
 import { Timestamp } from '@angular/fire/firestore';
@@ -52,6 +52,7 @@ export class AddTask {
   subtaskInput = "";
   isEditing = "";
   taskAdded = false;
+  categoryTouched = false;
   
 
   newTask: Task = {
@@ -81,7 +82,6 @@ export class AddTask {
     this.resetForm()
     this.taskAdded = true;
 
-    // Nach 1.5 Sekunden ausblenden
     setTimeout(() => {
         this.taskAdded = false;
     }, 2900);
@@ -106,6 +106,7 @@ export class AddTask {
       subTask: [],
       columnCategory: "To do",
     };
+    this.selectedContacts = []
     this.resetForm()
   }
 
@@ -152,6 +153,10 @@ export class AddTask {
     return initials;
   }
 
+  getShortName(name: string) {
+    return name.length > 18 ? name.slice(0, 18) + '…' : name;
+}
+
   getIcon(prio: string) {
   switch (prio) {
     case 'Urgent': return this.newTask.priority === 'Urgent'
@@ -185,6 +190,7 @@ export class AddTask {
     this.subtaskInput = "";
   }
 
+  //note (hier könnte die ID probleme aufwerfen weil sie nicht eindeutig ist)
   addSubtask() {
     let newId = this.newTask.subTask.length;
     this.newTask.subTask.push(
@@ -210,4 +216,28 @@ export class AddTask {
   stopEdit(id: string) {
     this.editingState[id] = false;
   }
+
+  @HostListener('document:click', ['$event'])
+    onClickOutside(event: Event) {
+      const workerDD = this.dropdownRef?.nativeElement;
+      const categoryDD = this.categoryDropdownRef?.nativeElement;
+      const categoryTrigger = this.categoryTriggerRef?.nativeElement;
+
+      if (workerDD && !workerDD.contains(event.target)) {
+        this.workerDropdown = false;
+      }
+
+      if (
+        categoryDD &&
+        !categoryDD.contains(event.target) &&
+        !categoryTrigger.contains(event.target)
+      ) {
+        this.categoryDropdown = false;
+      }
+    }
+
+  @ViewChild('assigned_dropdown') dropdownRef!: ElementRef;
+  @ViewChild('category_dropdown') categoryDropdownRef!: ElementRef;
+  @ViewChild('category_trigger') categoryTriggerRef!: ElementRef;
+
 }
