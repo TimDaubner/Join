@@ -67,6 +67,7 @@ export class CardDetails {
   }
 
   closeTaskDetails() {
+    this.isEditOverlayOpen = false;
     this.board_service.isClosing = true;
     setTimeout(() => {
       this.close.emit();

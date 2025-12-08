@@ -3,20 +3,27 @@
     <h2 class="task_title_large"></h2>
 
         <form id="add_task_form" (ngSubmit)="submitTask()">
-            <label>Title</label>
-            <input #taskTitle="ngModel" name="title" (ngModel)="task?.title" required>
-            <label>Description</label>
-             <textarea class="textarea_desciption" name="description" placeholder="Enter a description"
-            [(ngModel)]="newTask.description"></textarea>
+            <div class="frame">
+                <label>Title</label>
+                <input #taskTitle="ngModel" name="title" (ngModel)="task?.title" required>
+            </div>
+            <div class="frame">
+                <label>Description</label>
+                <textarea class="textarea_desciption" name="description" placeholder="Enter a description"
+                [(ngModel)]="newTask.description"></textarea>
+            </div>
             
-            <label>Due date</label>
-             <input matInput #taskDate="ngModel" name="dueDate"  [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="newTask.dueDate" required>
+            <div class="frame">
+                <label>Due date</label>
+                <input matInput #taskDate="ngModel" name="dueDate"  [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="newTask.dueDate" required>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+            </div>
             
-            <label><span class="prio_text">Priority</span></label>
-            <div class="priority_buttons">
-                <button
+            <div class="frame">
+                <label><span class="prio_text">Priority</span></label>
+                <div class="priority_buttons">
+                    <button
                     type="button"
                     (click)="setTaskPriority('Urgent')"
                     [ngClass]="{ 'urgent_active': newTask.priority === 'Urgent' }">
@@ -24,24 +31,25 @@
                     <img [src]="getIcon('Urgent')" alt="Priority urgent">
                 </button>
                 <button
-                    type="button"
-                    (click)="setTaskPriority('Medium')"
-                    [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
-                    Medium
-                    <img [src]="getIcon('Medium')" alt="Priority medium">
-                </button>
-                <button
-                    type="button"
-                    (click)="setTaskPriority('Low')"
-                    [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
-                    Low
-                    <img [src]="getIcon('Low')" alt="Priority low">
-                </button>
-            </div>
-            
-            <label>Assigned to</label>
-            <div class="assigned_contacts">
-                <input id="assigned_worker_input" class="margin_bottom_16" type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
+                type="button"
+                (click)="setTaskPriority('Medium')"
+                [ngClass]="{ 'medium_active': newTask.priority === 'Medium' }">
+                Medium
+                <img [src]="getIcon('Medium')" alt="Priority medium">
+            </button>
+            <button
+            type="button"
+            (click)="setTaskPriority('Low')"
+            [ngClass]="{ 'low_active': newTask.priority === 'Low' }">
+            Low
+            <img [src]="getIcon('Low')" alt="Priority low">
+        </button>
+    </div>
+    </div>
+    
+    <label>Assigned to</label>
+    <div class="assigned_contacts">
+        <input id="assigned_worker_input" class="margin_bottom_16" type="text" value="Select contacts to assign" readonly (click)="toggleDropdown()">
                     <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="">
                     <div id="assigned_dropdown"  [class.d_none]="!workerDropdown">
                         @for (contact of contact_service.contactList; track $index) {
