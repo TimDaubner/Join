@@ -82,16 +82,24 @@
                         }
                     </div>
                     <div class="list_assigned">
-                        @for (assignee of newTask.assignedTo; track newTask.id) {
+                        @for (assignee of newTask.assignedTo; track newTask.id; let i = $index) {
                 
                             @for (contact of this.firebase.contactList; track $index; let index = $index)
                             {
-                                @if(assignee == this.getFullName(contact.surname,contact.lastname))
+                                @if(i == assigneesInitialsCount && index == assigneesInitialsCount)
                                 {
-                                    <span class="frame-initials">
-                                        <div class="initials" [style.background-color]="contact.color">{{ getInitials(assignee) }}</div>
-                                    </span>
+                                    +{{ newTask.assignedTo.length - assigneesInitialsCount }}
                                 }
+                                @else if(i < assigneesInitialsCount) 
+                                { 
+                                    @if(assignee==this.getFullName(contact.surname,contact.lastname)) 
+                                    { 
+                                        <div class="frame-initials">
+                                        <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee)}}</span>
+                                        </div>
+                                    }
+                                }
+
                             }
                         }
                         

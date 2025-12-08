@@ -53,6 +53,7 @@ export class AddTask {
   isEditing = "";
   taskAdded = false;
   categoryTouched = false;
+  assigneesInitialsCount:number = 5;
   
 
   newTask: Task = {
