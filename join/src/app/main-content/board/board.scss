@@ -138,7 +138,7 @@
 }
 
 .column_wrapper {
-  max-height: calc(100vh - 230px);
+  height: calc(100vh - 330px);
   width: 320px;
   display: flex;
   flex-direction: column;
@@ -239,10 +239,8 @@
   height: 24px;
 }
 
-// drag-drop
 .example_list {
   border: solid 1px #000000;
-  // height: 680px;
   min-height: 60px;
   background: transparent;
   border: none;
@@ -270,7 +268,6 @@
   min-height: 25vh;
 }
 
-// content of cards
 .task_category {
   padding: 4px 12px;
   margin-bottom: 8px;
@@ -370,7 +367,7 @@
 }
 
 .initials {
-   font-weight: 400;
+  font-weight: 400;
   font-size: 10px;
   display: flex;
   justify-content: center;
@@ -456,6 +453,7 @@
   .column_wrapper {
     max-width: 100%;
     min-width: 100%;
+    height: auto;
   }
 
   .column_header {
@@ -468,7 +466,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    flex: none;
   }
 
   .example_box {
