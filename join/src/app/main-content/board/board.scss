@@ -384,6 +384,7 @@
 .assignees {
   display: flex;
   align-items: center;
+  margin-left: 8px;
 }
 
 .task_footer {
@@ -396,6 +397,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-left: -8px;
 }
 
 .initials {
