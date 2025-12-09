@@ -53,7 +53,7 @@ export class BoardService {
       dueDate: obj.dueDate,
       priority: obj.priority,
       subTask: obj.subTask,
-      taskCategory: this.taskColumnType,
+      taskCategory: obj.taskCategory,
       title: obj.title,
     };
   }

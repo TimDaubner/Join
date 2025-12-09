@@ -40,7 +40,6 @@ export class AddTask {
 
   @ViewChild('taskTitle') taskTitle!: NgModel;
   @ViewChild('taskDate') taskDate!: NgModel;
-  // @ViewChild('taskCategory') taskCategory!: NgModel;
   
 
   firebase = inject(ContactService);

@@ -2,30 +2,30 @@
 
 :host {
   display: block;
-  min-height: 100vh;
-  background-color: $secondary-bg;
+  // min-height: 100vh;
+  // background-color: $secondary-bg;
 }
 
 .board_container {
-  margin-left: 220px;
-  padding-top: 26px;
+  margin-left: 232px;
+  margin-right: 24px;
+  padding-left: 24px;
   background-color: $secondary-bg;
 }
 
 .board_header_wrapper {
   width: 100%;
   max-width: 100%;
-  padding: 0 50px 0 50px;
   margin-top: 146px;
 }
 
 .board_header {
-  // max-width: 1056px;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  margin-bottom: 24px;
 }
 
 .header_title {
@@ -102,7 +102,7 @@
   }
 }
 
-.add_task_btn_responsive_small{
+.add_task_btn_responsive_small {
   display: none;
 }
 
@@ -135,14 +135,13 @@
 
 .content_container {
   max-width: 2000px;
-  margin: 0 50px;
   display: flex;
   gap: 20px;
   align-items: flex-start;
 }
 
 .column_wrapper {
-  height: calc(100vh - 330px);
+  height: calc(100vh - 220px);
   width: 320px;
   display: flex;
   flex-direction: column;
@@ -152,7 +151,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 4px;
+  margin-bottom: 16px;
 
   h2 {
     margin: 0;
@@ -450,14 +449,6 @@
 }
 
 @media (max-width: 1440px) {
-  .board_container {
-    padding: 60px 20px 96px 20px;
-    margin-right: 0;
-  }
-
-  .board_container {
-    padding-top: 20px;
-  }
 
   .board_header_wrapper {
     padding: 0;
@@ -474,9 +465,6 @@
 }
 
 @media (max-width: 1050px) {
-  .board_container {
-    padding: 0 20px 96px 20px;
-  }
 
   .content_container {
     flex-direction: column;
@@ -595,10 +583,17 @@
   }
 }
 
+@media (min-width: 2300px) {
+  .board_container{
+    margin-left: 180px;
+    width: 900px;
+  }
+}
+
 @media (max-width: 936px) {
+
   .board_container {
     margin-left: 0;
-    padding-bottom: 140px;
   }
 
   .board_header_wrapper {
@@ -612,16 +607,16 @@
   .add_btn {
     display: none;
   }
-  
+
   .add_btn_responsive {
     display: flex;
   }
 
-  .add_task_btn_responsive{
+  .add_task_btn_responsive {
     display: none;
   }
 
-  .add_task_btn_responsive_small{
+  .add_task_btn_responsive_small {
     display: flex;
   }
 }
