@@ -1,11 +1,14 @@
 @use 'variables' as *;
 
 .help_container {
-  padding: 96px 40px 20px calc(clamp(180px, 16.1vw, 232px) + 116px);
+  margin-top: 100px;
+  margin-left: 320px;
 }
 
 .help_headline {
   font-size: 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .header_back_btn {
@@ -16,6 +19,18 @@
 .back_btn {
   cursor: pointer;
   padding-right: 30px;
+}
+
+.welcome {
+  padding-bottom: 20px;
+}
+
+b {
+  color: $secondary;
+}
+
+.help_container ol li::marker {
+  font-weight: bold;
 }
 
 @media (max-width: 1120px) {
