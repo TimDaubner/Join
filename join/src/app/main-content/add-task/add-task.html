@@ -140,7 +140,7 @@
                             @for (task of newTask.subTask; track task.id) {
                                 <li class="subtask_item">
                                     @if (!editingState[task.id]) {
-                                        <span>• {{ task.subDescription }}</span>
+                                        <span> &#8226; {{ task.subDescription }}</span>
                                         <div class="sub_actions">
                                             <button type="button" (click)="startEdit(task.id)"><img src="./assets/icons/edit.svg" alt=""></button>
                                             <hr>

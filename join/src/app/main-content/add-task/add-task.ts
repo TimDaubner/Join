@@ -82,6 +82,7 @@ export class AddTask {
       subTask: [],
       columnCategory: this.taskService.taskColumnType,
     };
+    
     this.resetForm()
     this.taskAdded = true;
 
@@ -118,8 +119,7 @@ export class AddTask {
     this.taskTitle.control.markAsPristine();
     this.taskDate.control.markAsUntouched();
     this.taskDate.control.markAsPristine();
-  //   this.mail.control.markAsUntouched();
-  //   this.mail.control.markAsPristine();
+    this.categoryTouched = false;
   }
 
   selectCategory(value: string) {
@@ -212,6 +212,7 @@ export class AddTask {
 
 
   editingState: Record<string, boolean> = {};
+  
   startEdit(id: string) {
     this.editingState[id] = true;
   }
