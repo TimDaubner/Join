@@ -355,6 +355,7 @@ mat-datepicker-toggle {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-width: 467px;
 }
 
 .subtask_item {
@@ -362,15 +363,13 @@ mat-datepicker-toggle {
   align-items: center;
   justify-content: space-between;
   word-break: break-word;
-  overflow-wrap: break-word;
   padding-left: 16px;
   >input {
     width: 100%;
-  }
-  >input {
     padding-left: 0;
   }
 }
+
 
 #subtask_buttons {
     display: flex;
@@ -454,10 +453,13 @@ mat-datepicker-toggle {
 }
 
 .subtask_list_container {
-    max-height: 100px; 
+    max-height: 100px;
     overflow-y: auto;
     list-style: none;
     padding-left: 0;
+    >ul {
+        width: 100% ;
+    }
 }
 
 .edit_input_window{
