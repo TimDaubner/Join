@@ -170,8 +170,7 @@
 }
 
 .add_btn:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
-    brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
 .add_task_frame {
@@ -181,6 +180,7 @@
   border-radius: 24px;
   padding: 16px;
   transition: all 400ms ease-in-out;
+
   ::ng-deep app-add-task section {
     padding: 55px;
     border-radius: 24px;
@@ -190,7 +190,7 @@
 }
 
 .overlay {
-  width: calc(100vw - 15px);
+  width: calc(100vw);
   height: 100vh;
   position: absolute;
   inset: 0;
@@ -400,6 +400,20 @@
 
 .cdk-drop-list {
   cursor: grabbing;
+}
+
+@media(min-width:2300px) {
+  .add_task_frame {
+    top: 10vh;
+    left: 40vw;
+
+    ::ng-deep app-add-task section {
+      padding: 55px;
+      border-radius: 24px;
+      margin-left: 0;
+      margin-top: 0;
+    }
+  }
 }
 
 @media (max-width: 1440px) {
