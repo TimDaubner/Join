@@ -194,10 +194,10 @@
   }
 }
 
-@media (min-width: 1980px) {
-  .navbar_container {
-    left: calc(33vw + 120px);
-    position: fixed;
-    z-index: 106;
+@media (min-width: 2300px) {
+
+  .limitation{
+    position: absolute;
+    left: calc(50vw - 232px * 2.7);
   }
 }
