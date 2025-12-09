@@ -140,7 +140,7 @@
 <div class="overlay" (click)="closeAddTaskComponent()"
     [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}">
     <div class="add_task_frame">
-        <app-add-task (click)="$event.stopPropagation()" class="frame"
+        <app-add-task #taskRef (click)="$event.stopPropagation()" class="frame"
             [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}"></app-add-task>
     </div>
 </div>

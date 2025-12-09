@@ -176,7 +176,7 @@
 .add_task_frame {
   position: absolute;
   top: 10vh;
-  left: 15vw;
+  left: 14vw;
   border-radius: 24px;
   padding: 16px;
   transition: all 400ms ease-in-out;
@@ -406,7 +406,6 @@
   .add_task_frame {
     top: 10vh;
     left: 40vw;
-
     ::ng-deep app-add-task section {
       padding: 55px;
       border-radius: 24px;

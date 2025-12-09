@@ -118,8 +118,6 @@ export class AddTask {
     this.taskTitle.control.markAsPristine();
     this.taskDate.control.markAsUntouched();
     this.taskDate.control.markAsPristine();
-  //   this.mail.control.markAsUntouched();
-  //   this.mail.control.markAsPristine();
   }
 
   selectCategory(value: string) {

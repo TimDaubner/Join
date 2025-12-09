@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ColumnCategory, Task } from './../../interfaces/task.interface';
 import {
   CdkDrag,
@@ -26,18 +26,14 @@ export class Board {
   contact_service = inject(ContactService);
   selectedTask: Task | null = null;
   isTaskDetailsOpen: boolean = false;
+  @ViewChild('taskRef') task!: AddTask;
 
   constructor() {
     this.init();
   }
 
   columnsTitel: ColumnCategory[] = ['To do', 'In progress', 'Await feedback', 'Done'];
-  allTasks: Task[] = [];
   filteredTasks: Task[] = [];
-  tasksToDo: Task[] = [];
-  tasksInProgress: Task[] = [];
-  tasksAwaitFeedback: Task[] = [];
-  tasksDone: Task[] = [];
   isVisible: boolean = false;
   isDragging: boolean = false;
 
@@ -74,6 +70,8 @@ export class Board {
 
   closeAddTaskComponent() {
     this.board_service.isAddTaskOpen = false;
+    this.task.resetForm();   
+    this.task.clearForm();    
   }
 
   stopPropagation(event: Event) {
@@ -170,34 +168,3 @@ export class Board {
     sub.status = !sub.status;
   }
 }
-
-//SORT in HTML with class or boolean
-// check in which columnCategory
-// this.board_service.taskList.forEach((task) => {
-//   this.columns.forEach(column => {
-//     switch (column.title) {
-//       case 'To Do':
-//         this.tasksToDo.push(task);
-//         this.tasksToDo.forEach(element => {
-//         });
-//         break;
-//         case 'In progress':
-//         this.tasksInProgress.push(task);
-//         this.tasksInProgress.forEach(element => {
-//         });
-//         break;
-//         case 'Await feedback':
-//           this.tasksAwaitFeedback.push(task);
-//           this.tasksAwaitFeedback.forEach(element => {
-//           });
-//           break;
-//           case 'Done':
-//             this.tasksDone.push(task);
-//             this.tasksDone.forEach(element => {
-//             });
-//         break;
-//       default:
-//         break;
-//     }
-//   });
-// });
