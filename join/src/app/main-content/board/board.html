@@ -9,6 +9,9 @@
                 <div class="add_task_btn_responsive" (click)="showAddTaskComponent('To do')">
                     <img class="plus_icon_responsive" src="./assets/icons/add_task_responsive.svg" alt="Add task" />
                 </div>
+                <div class="add_task_btn_responsive_small" (click)="openAddTaskComponent()">
+                    <img class="plus_icon_responsive" src="./assets/icons/add_task_responsive.svg" alt="Add task" />
+                </div>
             </div>
 
             <!-- Search + Add button -->
@@ -42,6 +45,9 @@
 
                 @if (title !== 'Done') {
                 <button class="add_btn" (click)="showAddTaskComponent(title)">
+                    <img src="/assets/icons/add_btn.svg" alt="Add task" />
+                </button>
+                <button class="add_btn_responsive" (click)="openAddTaskComponent()">
                     <img src="/assets/icons/add_btn.svg" alt="Add task" />
                 </button>
                 } @else {
@@ -140,6 +146,7 @@
 <div class="overlay" (click)="closeAddTaskComponent()"
     [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}">
     <div class="add_task_frame">
+        <button class="close_btn" (click)="closeAddTaskComponent()"><img src="./assets/icons/close.svg" alt=""></button>
         <app-add-task #taskRef (click)="$event.stopPropagation()" class="frame"
             [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}"></app-add-task>
     </div>

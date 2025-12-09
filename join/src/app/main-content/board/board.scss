@@ -102,6 +102,10 @@
   }
 }
 
+.add_task_btn_responsive_small{
+  display: none;
+}
+
 .add_task_btn {
   width: 160px;
   height: 48px;
@@ -169,7 +173,23 @@
   }
 }
 
+.add_btn_responsive {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .add_btn:hover img {
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
+}
+
+.add_btn_responsive:hover img {
   filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
@@ -187,6 +207,19 @@
     margin-left: 0;
     margin-top: 0;
   }
+}
+
+.close_btn {
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .overlay {
@@ -406,6 +439,7 @@
   .add_task_frame {
     top: 10vh;
     left: 40vw;
+
     ::ng-deep app-add-task section {
       padding: 55px;
       border-radius: 24px;
@@ -573,6 +607,22 @@
 
   .board_header {
     gap: 40px;
+  }
+
+  .add_btn {
+    display: none;
+  }
+  
+  .add_btn_responsive {
+    display: flex;
+  }
+
+  .add_task_btn_responsive{
+    display: none;
+  }
+
+  .add_task_btn_responsive_small{
+    display: flex;
   }
 }
 

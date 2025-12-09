@@ -13,6 +13,7 @@ import { BoardService } from '../../shared/services/board/board.service';
 import { CardDetails } from './board-card/card-details/card-details';
 import { ContactService } from '../../shared/services/contact/contact.service';
 import { AddTask } from "../add-task/add-task";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -26,6 +27,7 @@ export class Board {
   contact_service = inject(ContactService);
   selectedTask: Task | null = null;
   isTaskDetailsOpen: boolean = false;
+  private router = inject(Router);
   @ViewChild('taskRef') task!: AddTask;
 
   constructor() {
@@ -57,6 +59,10 @@ export class Board {
         task.description.toLowerCase().includes(keyWord)
       );
     }
+  }
+
+  openAddTaskComponent(){
+    this.router.navigate(['/add-task']);
   }
 
   showAddTaskComponent(title:ColumnCategory) {
