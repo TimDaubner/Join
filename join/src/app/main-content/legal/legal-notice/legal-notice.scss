@@ -1,9 +1,7 @@
 @use 'variables' as *;
 
-.legal_container {
-  margin-top: 190px;
-  margin-left: 320px;
-  margin-right: 100px;
+.main_container {
+  margin: 190px 100px 30px 320px;
 }
 
 .legal_headline {
@@ -34,4 +32,8 @@ a {
 
 .mail {
   color: black;
+}
+
+.join {
+  color: $secondary;
 }
