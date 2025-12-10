@@ -626,6 +626,7 @@
 @media (max-width: 376px) {
   .example_list::-webkit-scrollbar {
     height: 12px;
+    background-color: #e0e0e0;
   }
 
   .example_list::-webkit-scrollbar-thumb {
