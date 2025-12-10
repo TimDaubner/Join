@@ -40,7 +40,6 @@ export class AddTask {
 
   @ViewChild('taskTitle') taskTitle!: NgModel;
   @ViewChild('taskDate') taskDate!: NgModel;
-  // @ViewChild('taskCategory') taskCategory!: NgModel;
   
 
   firebase = inject(ContactService);
@@ -110,8 +109,8 @@ export class AddTask {
       subTask: [],
       columnCategory: "To do",
     };
-    this.selectedContacts = []
-    this.resetForm()
+    this.selectedContacts = [];
+    this.resetForm();
   }
 
   resetForm() {
