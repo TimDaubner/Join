@@ -83,6 +83,14 @@ li {
   margin-top: 0;
 }
 
+.mail {
+  color: black;
+}
+
+.mail:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 936px) {
   .back_btn {
     padding-right: 20px;
