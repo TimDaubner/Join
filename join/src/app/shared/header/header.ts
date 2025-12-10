@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
   menu_open: boolean = false;
+  auth_service = inject(AuthService);
+  private router = inject(Router);
+
 
   toggleMenu() {
     this.menu_open = !this.menu_open;
@@ -17,5 +21,12 @@ export class Header {
 
   closeMenu() {
     this.menu_open = false;
+  }
+
+  logoutFromJoin(){
+    if(this.auth_service.isLoggedIn()){
+      this.router.navigate(['/']);
+      this.auth_service.logout();
+    }
   }
 }
