@@ -6,9 +6,11 @@ import { HelpSection } from './main-content/help-section/help-section';
 import { Summary } from './main-content/summary/summary';
 import { AddTask } from './main-content/add-task/add-task';
 import { Board } from './main-content/board/board';
+import { Contact } from './main-content/contact/contact';
 
 export const routes: Routes = [
-  { path: 'contacts', component: MainContent },
+  { path: '', component: MainContent },
+  { path: 'contacts', component: Contact },
   { path: 'summary', component: Summary },
   { path: 'add-task', component: AddTask },
   { path: 'board', component: Board },

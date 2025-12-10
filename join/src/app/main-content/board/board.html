@@ -1,1 +1,218 @@
-<p>board works!</p>
+<div class="board_container">
+    <div class="board_header_wrapper">
+        <div class="board_header">
+
+            <div class="title_btn">
+                <h1 class="header_title">
+                    Board
+                </h1>
+                <div class="add_task_btn_responsive" (click)="showAddTaskComponent('To do')">
+                    <img class="plus_icon_responsive" src="./assets/icons/add_task_responsive.svg" alt="Add task" />
+                </div>
+                <div class="add_task_btn_responsive_small" (click)="openAddTaskComponent()">
+                    <img class="plus_icon_responsive" src="./assets/icons/add_task_responsive.svg" alt="Add task" />
+                </div>
+            </div>
+
+            <!-- Search + Add button -->
+            <div class="search_controls">
+                <div class="search_bar">
+                    <div class="search_input_wrapper">
+                        <input #searchInput (input)="searchTask(searchInput.value)" id="searchInput" type="text"
+                            placeholder="Find Task" />
+                        <span class="divider"></span>
+                    </div>
+                    <button class="search_icon">
+                        <img src="./assets/icons/search.svg" alt="Search" />
+                    </button>
+                </div>
+                <button class="add_task_btn" (click)="showAddTaskComponent('To do')">
+                    <span class="add_task_text">Add task</span>
+                    <img class="plus_icon" src="./assets/icons/add.svg" alt="Add task" />
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content_container">
+        @for (title of columnsTitel; track title)
+        {
+        <div class="column_wrapper">
+
+            <!-- Header -->
+            <div class="column_header">
+                <h2>{{ title }}</h2>
+
+                @if (title !== 'Done') {
+                <button class="add_btn" (click)="showAddTaskComponent(title)">
+                    <img src="/assets/icons/add_btn.svg" alt="Add task" />
+                </button>
+                <button class="add_btn_responsive" (click)="openAddTaskComponent()">
+                    <img src="/assets/icons/add_btn.svg" alt="Add task" />
+                </button>
+                } @else {
+                <span class="btn_placeholder"></span>
+                }
+            </div>
+
+            <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
+                [cdkDropListConnectedTo]="columnsTitel" (cdkDropListDropped)="drop($event, title)">
+                @if (getTasksForColumn(title).length === 0) {
+                <div class="no_tasks">
+                    No tasks {{ title }}
+                </div>
+                }
+                @for (task of getTasksForColumn(title); track $index; let index=$index) {
+                <div class="example_box" cdkDrag [cdkDragData]="task" (cdkDragStarted)="onDragStarted()"
+                    (cdkDragEnded)="onDragEnded(task)" (click)="openTaskDetails(task)">
+
+                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">
+                        {{ task.taskCategory }}
+                    </div>
+
+                    <h3 class="task_title">{{ task.title }}</h3>
+                    <p class="task_description">{{ task.description }}</p>
+
+                    @if (task.subTask.length > 0) {
+                    <div class="subtasks_line">
+                        <div class="subtasks_bar">
+                            <div class="subtasks_progress"
+                                [style.width.%]="(getCompletedSubtasksCount(task) / task.subTask.length) * 100">
+                            </div>
+                        </div>
+                        <div class="subtasks_count">
+                            <div class="count_number">
+                                {{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length }}
+                            </div>
+                            <div class="count_text">Subtasks</div>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="task_footer">
+                        <div class="assignees">
+                            @for (assignee of task.assignedTo; track $index; let i = $index)
+                            {
+
+                                @for (contact of this.contact_service.contactList; track $index; let index = $index)
+                                {
+                                    @if(task.assignedTo.length > 3)
+                                    {
+                                        @if(i == 3 && index == 3)
+                                        {
+                                            +{{ task.assignedTo.length - 3 }}
+                                        }
+                                        @else if(i < 3) 
+                                        { 
+                                            @if(assignee==this.getFullName(contact.surname,contact.lastname)) 
+                                            { 
+                                                <div class="frame-initials">
+                                                <span class="initials" [style.background-color]="contact.color">{{ getInitials(assignee)}}</span>
+                                                </div>
+                                            }
+
+                                        }
+
+                                    }
+                                    @else
+                                    {
+                                        @if(assignee == this.getFullName(contact.surname,contact.lastname))
+                                        {
+                                        <div class="frame-initials">
+                                        <span class="initials" [style.background-color]="contact.color">{{getInitials(assignee)}}</span>
+                                        </div>
+                                        }
+                                    }
+                                }
+                            }
+                    </div>
+
+                    @if (task.priority) {
+                    <span class="priority_icon">
+                        <img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                    </span>
+                    }
+                </div>
+            </div>
+
+            }
+        </div>
+    </div>
+    }
+</div>
+
+<app-card-details [selectedTask]="selectedTask" [isTaskDetailsOpen]="isTaskDetailsOpen"
+    (close)="closeTaskDetails()"></app-card-details>
+<div class="overlay" (click)="closeAddTaskComponent()"
+    [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}">
+    <div class="add_task_frame">
+        <button class="close_btn" (click)="closeAddTaskComponent()"><img src="./assets/icons/close.svg" alt=""></button>
+        <app-add-task #taskRef (click)="$event.stopPropagation()" class="frame"
+            [ngClass]="{'show': board_service.isAddTaskOpen , 'hide': !board_service.isAddTaskOpen}"></app-add-task>
+    </div>
+</div>
+
+</div>
+
+<!-- <div class="example_list" cdkDropList [id]="title" [cdkDropListData]="getTasksForColumn(title)"
+                [cdkDropListConnectedTo]="this.columnsTitel" (cdkDropListDropped)="drop($event, title)">
+                @for (task of getTasksForColumn(title); track $index) {
+                @if(title == task.columnCategory){
+                @if (this.board_service.taskList.length === 0) {
+                <div class="no_tasks">
+                    No tasks {{ title }}
+                </div>
+                }
+                <div class="example_box" cdkDrag [cdkDragData]="task" (click)="openTaskDetails(task)">
+                    <div class="task_category" [ngClass]="task.taskCategory.replace(' ', '')">{{ task.taskCategory
+                        }}
+                    </div>
+                    <h3 class="task_title">{{ task.title }}</h3>
+                    <p class="task_description">{{ task.description }}</p>
+                    @if (task.subTask.length > 0) {
+                    <div class="subtasks_line">
+                        <div class="subtasks_bar">
+                            <div class="subtasks_progress"
+                                [style.width.%]="(getCompletedSubtasksCount(task)/task.subTask.length)*100">
+                            </div>
+                        </div>
+                        <div class="subtasks_count">
+                            <div class="count_number">{{ getCompletedSubtasksCount(task) }}/{{ task.subTask.length
+                                }}
+                            </div>
+                            <div class="count_text">
+                                Subtasks</div>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="task_footer">
+                        <div class="assignees">
+                            @for (assignees of task.assignedTo; track $index; let index = $index) {
+                            @if(task.assignedTo.length > 3){
+                            @if(index == 3){
+                            +{{task.assignedTo.length - 3}}
+                            }
+                            @else if(index > 3){
+                            }
+                            @else {
+                            <span class="initials">{{getInitials(assignees)}}
+                            </span>
+                            }
+                            }
+                            @else {
+                            <span class="initials">{{getInitials(assignees)}}
+                            </span>
+                            }
+                            }
+                        </div>
+                        @if (task.priority) {
+                        <span class="priority_icon">
+                            {{task.priority}}<img [src]="getPriorityIcon(task.priority)" alt="Priority icon">
+                        </span>
+                        }
+                    </div>
+                </div>
+                }
+                }
+            </div> -->

@@ -1,325 +1,359 @@
 @use 'variables' as *;
 
-body, html {
-    overflow-x: hidden;
+body,
+html {
+  overflow-x: hidden;
 }
 
 #contact_details {
-    height: calc(100vh - 96px);
-    padding-top: 120px;
-    padding-left: 40px;
-    background-color: #f6f7f8;
+  margin-top: 96px;
+  height: calc(100vh - 96px);
+  padding-top: 120px;
+  padding-left: 40px;
+  background-color: #f6f7f8;
 }
 
 #details_head {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
 }
 
 #headline_span {
-    font-size: 64px;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 1);   
+  font-size: 64px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
 }
 
 #slogan_span {
-    font-size: 27px;
+  font-size: 27px;
 }
 
 #profile_circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 120px;
-    height: 120px;
-    border: 3px solid white;
-    border-radius: 100px;
-    color: $white;
-    font-size: 47px;
-    font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border: 3px solid white;
+  border-radius: 100px;
+  color: $white;
+  font-size: 47px;
+  font-weight: 500;
 }
 
 #contact_details_name {
-    display: flex;
-    align-items: center;
-    gap:32px;
-    margin: 24px 0;
-    font-size: 47px;
-    font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 24px 0;
+  font-size: 47px;
+  font-weight: 500;
+  word-break: break-all;
 }
 
 hr {
-    width: 0px;
-    height: 64px;
-    border: 2px solid $secondary;
-    margin: 0 16px;
-    border-radius: 8px;
+  width: 0px;
+  height: 64px;
+  border: 2px solid $secondary;
+  margin: 0 16px;
+  border-radius: 8px;
 }
 
 h3 {
-    font-size: 20px;
-    font-weight: 400;
-    margin: 24px 0;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 24px 0;
 }
 
 h4 {
-    margin: 16px 0;
-    font-size: 16px;
+  margin: 16px 0;
+  font-size: 16px;
 }
 
 p {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 a {
-    color: rgba(0, 124, 238, 1);
+  color: rgba(0, 124, 238, 1);
 }
 
-
+.email {
+  word-break: break-all;
+}
 
 button {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    >img {
-        width: 24px;
-        height: 24px;
-    }
-    &:hover {
-        font-weight: 700;
-        color: $secondary
-    }
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  >img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    font-weight: 700;
+    color: $secondary;
+  }
 }
 
 #contact_details_button {
-    display: flex;
-    gap: 32px;
+  display: flex;
+  margin-top: 16px;
+  >button{
+    width: 70px;
+  }
 }
 
 .contact {
-    width: 200px;
-    background-color: $secondary;
-    border-radius: 32px;
-    margin: 32px;
-    padding: 16px;
+  width: 200px;
+  background-color: $secondary;
+  border-radius: 32px;
+  margin: 32px;
+  padding: 16px;
 }
 
 .d_none {
-    display: none;
+  display: none;
 }
 
 #arrow_back {
-    display: none;
-    position: relative;
-    top: 40px;
-    width: 32px;
-    height: 32px;
-    align-self: flex-end;
-    margin-right: 16px;
+  display: none;
+  position: relative;
+  top: 40px;
+  width: 32px;
+  height: 32px;
+  align-self: flex-end;
+  margin-right: 16px;
 }
 
 #burger_edit {
-    width: 56px;
-    height: 56px;
-    position: absolute;
-    bottom: 20px;
-    right: 16px;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background-color: $primary;
-    border-radius: 100px;
-    cursor: pointer;
-    > img {
-        width: 32px;
-        height: 32px;
-    }
-    &:hover {
-        background-color: $secondary;
-    }
+  width: 56px;
+  height: 56px;
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary;
+  border-radius: 100px;
+  cursor: pointer;
+
+  >img {
+    width: 32px;
+    height: 32px;
+  }
+
+  &:hover {
+    background-color: $secondary;
+  }
 }
 
 .burger_menu_details {
-    width: 116px;
-    height: 100px;
-    position: fixed;
-    bottom: 100px;
-    right: -120px;
-    background-color: $white;
-    border-radius: 20px 20px 0 20px;
-    box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.1);
+  width: 116px;
+  height: 100px;
+  position: fixed;
+  bottom: 100px;
+  right: -120px;
+  background-color: $white;
+  border-radius: 20px 20px 0 20px;
+  box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  >button {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    >button {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        font-size: 16px;
-        margin-bottom: 8px;
-        margin-top: 8px;
-        margin-left: 8px;
-    }
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-left: 8px;
+  }
 }
 
 .burger_menu_details.slide_in_burger {
-    animation: slideInBurger 0.4s ease-out forwards;
+  animation: slideInBurger 0.4s ease-out forwards;
 }
 
 @keyframes slideInBurger {
-    from {
-        right: -120px
-    }
-    to {
-        right: 16px;
-    }
+  from {
+    right: -120px;
+  }
+
+  to {
+    right: 16px;
+  }
 }
 
-.burger_menu_details.slide_out_burger {
-    animation: slideOutBurger 0.4s ease-out forwards;
-}
+// .burger_menu_details.slide_out_burger {
+//   animation: slideOutBurger 0.4s ease-out forwards;
+// }
 
 @keyframes slideOutBurger {
-    from { right: 16px; }
-    to { right: -120px; }
+  from {
+    right: 16px;
+  }
+
+  to {
+    right: -120px;
+  }
 }
 
-
 .slide_in {
-    animation: slideIn 0.4s ease-out forwards;
+  animation: slideIn 0.4s ease-out forwards;
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(150%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-
-
 
 .overlay {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.4);
-    inset: 0;
-    z-index: 150;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-    app-edit-contact-overlay.slide_edit {
-        animation: slideInEdit 0.4s ease-out forwards;
-    }   
+app-edit-contact-overlay.slide_edit {
+  animation: slideInEdit 0.4s ease-out forwards;
+}
 
-    @keyframes slideInEdit {
-        from {
-            opacity: 0;
-            transform: translateY(150%);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+@keyframes slideInEdit {
+  from {
+    opacity: 0;
+    transform: translateY(150%);
+  }
 
-    app-edit-contact-overlay.slide_out_edit {
-        animation: slideOutEdit 0.4s ease-out forwards;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    @keyframes slideOutEdit {
-        from {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateY(150%);
-        }
-    }
+app-edit-contact-overlay.slide_out_edit {
+  animation: slideOutEdit 0.4s ease-out forwards;
+}
+
+@keyframes slideOutEdit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+}
 
 @media (max-width: 1236px) {
-    #details_head {
-        display: block;
-    }
+  #details_head {
+    display: block;
+  }
 
-    hr {
-        position: relative;
-        top: 40px;
-        width: 120px;
-        height: 0px;
-        border: 2px solid $secondary;
-        margin: 0;
-        border-radius: 8px;
-    }
+ #contact_details_button {
+  margin-top: 8px;
+ }
 
-    #contact_details {
-        padding-left: 16px;
-    }
+  hr {
+    position: relative;
+    top: 40px;
+    width: 120px;
+    height: 0px;
+    border: 2px solid $secondary;
+    margin: 0;
+    border-radius: 8px;
+  }
 
-    #contact_content_div span{
-        font-size: 36px;        
-    }
+  #contact_details {
+    padding-left: 16px;
+  }
 
-    #profile_circle {
-        width: 70px;
-        height: 70px;
-        font-size: 27px;
-        font-weight: 400;
-    }
+  #contact_details {
+    overflow-x: hidden;
+  }
 
-    #contact_details_name {
-        gap:8px;
-        margin: 24px 0;
-        font-weight: 500;
-    }
+  #contact_content_div span {
+    font-size: 36px;
+    line-height: 38px;
+    word-break: keep-all;
+  }
+
+  #profile_circle {
+    width: 70px;
+    height: 70px;
+    font-size: 27px;
+    font-weight: 400;
+  }
+
+  #contact_details_name {
+    gap: 8px;
+    margin: 24px 0;
+    font-weight: 500;
+  }
 }
 
 @media (max-width: 936px) {
-    app-edit-contact-overlay {
-        height: 600px;
-
-    }
+  #contact_details {
+    margin-top: 70px;
+    height: calc(100vh - 160px);
+  }
 }
 
 @media (max-width: 700px) {
-    #contact_details {
-        width: 100%;
-        height: calc(100vh - 152px );
-        display: none;
-        padding-top: 20px;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        margin-bottom: 80px;
-    }
-
-    #burger_edit {
-        display: flex;
-    }
-
-    #arrow_back.open {
-        display: flex;
-        cursor: pointer;
-    }
-
-    #contact_details.open {
+  #contact_details {
+    width: 100%;
+    height: calc(100vh - 140px);
+    display: none;
+    padding-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  #burger_edit {
+    display: flex;
+  }
+  
+  #arrow_back.open {
+    display: flex;
+    cursor: pointer;
+  }
+  
+  #contact_details.open {
     display: flex;
     flex-direction: column;
-
+    
     #contact_details_button {
-        display: none;
+      display: none;
     }
+  }
 }
+
+@media (max-width: 500px) {
+  #profile_circle {
+    aspect-ratio: 1/1;
+  }
 }
 

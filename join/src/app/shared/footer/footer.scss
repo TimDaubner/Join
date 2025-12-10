@@ -1,5 +1,9 @@
 @use 'variables' as *;
 
+.limitation {
+  max-width: 1920px;
+}
+
 .navbar_container {
   min-height: 100dvh;
   height: auto;
@@ -10,6 +14,7 @@
   justify-content: space-between;
   padding: 64px 0;
   align-items: stretch;
+  z-index: 103;
 
   .logo_and_menu {
     width: 100%;
@@ -163,6 +168,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    height: 100%;
     padding: 0;
     gap: 0;
   }
@@ -184,6 +190,14 @@
   }
 
   .navbar_container {
-    height: 7.5%;
+    height: 70px;
+  }
+}
+
+@media (min-width: 2300px) {
+
+  .limitation{
+    position: absolute;
+    left: calc(50vw - 232px * 2.7);
   }
 }

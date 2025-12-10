@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Contact } from '../../../interfaces/contact.interface';
 import { NgClass } from '@angular/common';
+import { ContactService } from '../../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -10,18 +10,18 @@ import { NgClass } from '@angular/common';
   styleUrl: './contact-list.scss',
 })
 export class ContactList{
-  firebase = inject(FirebaseService)
-  contactList: Contact[] = this.firebase.contactList;
+  contact_service = inject(ContactService);
+  contactList: Contact[] = this.contact_service.contactList;
   selectedIndex!: number;
 
   constructor() {
-    this.firebase;
+    this.contact_service;
   }
 
   showContact(index: number) {
     this.selectedIndex = index;
-    this.firebase.detailsOpen = true;
-    this.firebase.showContactDetails(index);
+    this.contact_service.detailsOpen = true;
+    this.contact_service.showContactDetails(index);
   }
 
   @Output() addContact = new EventEmitter<void>();

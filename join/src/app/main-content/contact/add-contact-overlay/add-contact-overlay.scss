@@ -28,6 +28,7 @@
         font-size: 61px;
         font-weight: 700;
         margin: 16px 0;
+        line-height: 48px;
     }
 
     >p {
@@ -112,14 +113,13 @@ form {
     top: 50%;
     transform: translateY(-50%);
     width: 20px;
-    /* adjust icon size */
     height: 20px;
     pointer-events: none;
-    /* allows clicking inside input */
 }
 
 #form_buttons {
     display: flex;
+    justify-content: center;
     gap: 32px;
 }
 
@@ -168,10 +168,16 @@ form {
     color: $red;
 }
 
+@media (max-width: 1010px) {
+    #overlay_right_content{
+        gap: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
 @media (max-width: 936px) {
     #add_contact {
         flex-direction: column;
-        margin: 64px;
     }
 
     #cancel_button{
@@ -180,8 +186,9 @@ form {
 
     #overlay_left {
         justify-content: center;
-        align-items: center;
         border-radius: 24px 24px 0 0;
+        flex: none;
+        height: 285px;
     }
 
     #add_contact {
@@ -199,29 +206,88 @@ form {
 
     hr {
         position: relative;
-        left: -85px;
     }
 
     #close_button {
-        top: 100px;
-
+        position: relative;
+        top:-285px;
+        margin-right: 24px;
         >img {
             filter: invert(1);
         }
     }
 
+    #overlay_right_content {
+        flex: none;
+        flex-direction: column;
+    }
+
     #profile_picture {
-        position: absolute;
-        top: 32vh;
+        position: relative;
+        top: -140px;
         width: 125px;
         height: 125px;
         border: 3px solid white;
     }
+
+
+    #contact_form_div{
+        position: relative;
+        top: -140px;
+    }
+    
 }
 
-@media(max-width:460px){
+@media(max-width:550px){
      #add_contact {
         margin: 32px;
+    }
+    #overlay_left{
+        h2{
+            font-size: 40px;
+        }
+        p{
+            font-size: 16px;
+        }
+        hr{
+            left:0;
+        }
+    }
+    #add_contact {
+       margin: 32px;
+    }
+}
+
+@media(max-width:400px){
+    #contact_form_div{
+        position: relative;
+        top: -140px;
+    }
+    .input-group{
+        >input{
+            height: 40px;
+        }
+    }
+    
+    #profile_picture{
+        top: -140px;
+    }
+    #close_button{
+        position: relative;
+        top:-230px;
+        margin-right: 16px;
+    }
+    #add_contact{
+        height: 666px;
+    }
+    #overlay_left{
+        flex: none;
+        height: 200px;
+        justify-content: flex-start;
+        h2{
+            margin:0;
+            margin-top: 32px;
+        }
     }
 }
 

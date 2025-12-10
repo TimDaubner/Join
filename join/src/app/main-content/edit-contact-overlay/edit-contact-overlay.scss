@@ -9,7 +9,6 @@ button {
   height: 550px;
   display: flex;
   margin: 64px;
-  border: 2px solid $primary;
   border-radius: 32px;
 }
 
@@ -30,6 +29,7 @@ button {
     font-size: 61px;
     font-weight: 700;
     margin: 16px 0;
+    line-height: 48px;
   }
   > p {
     font-size: 21px;
@@ -86,6 +86,7 @@ button {
   align-items: center;
   flex: 1;
   gap: 32px;
+  padding: 8px;
 }
 
 form {
@@ -98,6 +99,7 @@ form {
     border-radius: 8px;
     padding-left: 8px;
     font-size: 20px;
+    border: 1px solid #D1D1D1;
   }
 }
 
@@ -122,11 +124,11 @@ form {
 }
 
 #close_button_white {
-    // display: none;
+    display: none;
     position: relative;
-    top: -180px;
+    top: -165px;
     align-self: flex-end;
-    right: 0px;
+    right: 15px;
     background: none;
     border: none;
     cursor: pointer;
@@ -147,6 +149,7 @@ form {
     color: black;
     font-size: 21px;
     border-radius: 10px;
+    border: 1px solid #2A3647;
 }
 
 .error_msg {
@@ -162,10 +165,11 @@ form {
 
 @media(max-width:936px) {
     #edit_contact {
-        width: 320px;
-        height: 600px;
+        width: 600px;
+        height: 780px;
         flex-direction: column;
-        margin:0;
+        margin:16px;
+        ;
     }
 
     #overlay_left {
@@ -174,15 +178,19 @@ form {
         border-radius: 28px 28px 0 0 ;
         justify-content: center;
         align-items: flex-start;
-        flex: auto;
+        flex: none;
         >h2 {
             font-size: 47px;
+            
         }
     }
 
+    #close_button_white {
+      display: flex;
+    }
+
     #overlay_right {
-        height: 350px;
-        flex: auto;
+        flex: none;
         border-radius: 0 0 32px 32px ;
         align-items: center;
     }
@@ -209,7 +217,7 @@ form {
 
     #profile_picture {
         position: relative;
-        top: -80px;
+        top: -70px;
         height: 120px;
         width: 120px;
         border: 2px solid white;
@@ -219,6 +227,7 @@ form {
         flex-direction: column;
         align-items: center;
         gap: 0;
+        flex: none;
     }
 
     #join_logo {
@@ -250,10 +259,20 @@ form {
         margin-top: 16px;
     }
 
+    @media(max-width:620px) {
+      #edit_contact {
+        width: 315px;
+      }
+    }
+
     @media(max-width:400px) {
         #edit_contact {
-            height: 500px;
+            height: 666px;
             margin:0;
+        }
+
+        #overlay_right {
+          max-height: 486px;
         }
     }
 

@@ -1,16 +1,21 @@
 @use 'variables' as *;
 
 .help_container {
-  padding: 96px 40px 20px calc(clamp(180px, 16.1vw, 232px) + 116px);
+  margin-top: 100px;
+  margin-left: 320px;
+  margin-right: 100px;
 }
 
 .help_headline {
   font-size: 60px;
+  margin-top: 40px;
 }
 
 .header_back_btn {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 .back_btn {
@@ -18,10 +23,72 @@
   padding-right: 30px;
 }
 
-@media (max-width: 1120px) {
-  .help_container {
-    padding: 96px 30px 20px 295px;
-  }
+.help_headline {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 16px;
+  max-width: 900px;
+}
+
+p .welcome {
+  margin: 0 !important;
+}
+
+.join {
+  color: $secondary;
+}
+
+strong {
+  font-size: 18px;
+}
+
+.remember {
+  padding-left: 24px;
+}
+
+.enjoy {
+  margin-bottom: 30px;
+}
+
+.help_container ol {
+  list-style: none;
+  counter-reset: step;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.help_container ol li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 16px;
+  align-items: start;
+}
+
+.help_container ol li::before {
+  content: counter(step) '.';
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  grid-column: 1;
+}
+
+.help_container ol li > * {
+  grid-column: 2;
+}
+
+.help_container ol li strong {
+  font-size: 18px;
 }
 
 @media (max-width: 936px) {

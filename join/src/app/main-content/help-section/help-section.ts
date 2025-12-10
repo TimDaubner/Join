@@ -1,12 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-help-section',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './help-section.html',
   styleUrl: './help-section.scss',
 })
-export class HelpSection {}
+export class HelpSection {
+  constructor(private location: Location) {}
+
+  goBack() {
+    this.location.back();
+  }
+}

@@ -1,0 +1,86 @@
+<diagram program="umletino" version="15.1"><zoom_level>13</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>650</x><y>39</y><w>377</w><h>377</h></coordinates><panel_attributes>board.service.ts
+--
+inject contact service
+--
+functions:
+this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) =&gt; {
+
+this.conactservice.getInitials();
+setInitials();
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1079</x><y>39</y><w>312</w><h>377</h></coordinates><panel_attributes>Task
+bg=blue
+keys:
+-title
+-description
+-dueDate
+-priority
+-assignedTo
+-taskCategory
+-subtask
+--
+extra database only:
+-progressBar
+-columnCategory</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>1274</x><y>260</y><w>78</w><h>143</h></coordinates><panel_attributes>Malte</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLInterface</id><coordinates><x>1274</x><y>65</y><w>104</w><h>104</h></coordinates><panel_attributes>Interface
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>221</x><y>455</y><w>247</w><h>377</h></coordinates><panel_attributes>board.ts
+--
+inject TaskInterface
+--
+
+--
+functions:
+showAddTaskComponent( ); 
+updateTasks(type);
+dragDropTask();
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1144</x><y>455</y><w>247</w><h>377</h></coordinates><panel_attributes>addTask.ts
+--
+inject firebase service
+imports: fromModule
+--
+Task
+{
+	+ title
+	+ description
+	+ duesDate
+	+ priority
+	+ assignedTo
+	+ taskCategory
+	+ subtask
+}
+--
+functions:
+addTask(Task); 
+(!communicate with firestore)
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>221</x><y>39</y><w>377</w><h>377</h></coordinates><panel_attributes>firebase.service.ts
+--
+
+--
+functions:
+addTaskToDatabase(Task);
+editTaskToDatabase(Task);
+editTaskToDatabase(type);
+deleteTaskToDatabase(id or index)
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>533</x><y>455</y><w>247</w><h>377</h></coordinates><panel_attributes>board-card.ts
+--
+inject TaskInterface
+--
+
+--
+functions:
+showCardDetails();
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>845</x><y>455</y><w>247</w><h>377</h></coordinates><panel_attributes>card-details.ts
+--
+inject firebase service
+--
+
+--
+functions:
+editCard();
+deleteCard();
+updateTask(Task);
+
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

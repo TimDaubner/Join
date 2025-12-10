@@ -1,57 +1,56 @@
-<div id="contact_details" [class.open]="firebase.detailsOpen">
-    <img id="arrow_back" [class.open]="firebase.detailsOpen" src="./assets/icons/arrow-left-line.svg" alt="" (click)="firebase.closeDetails()">
+<div id="contact_details" [class.open]="contact_service.detailsOpen">
+    <img id="arrow_back" [class.open]="contact_service.detailsOpen" src="./assets/icons/arrow-left-line.svg" alt=""
+        (click)="contact_service.closeDetails()">
     <div id="details_head">
-        <span id="headline_span">Contacts</span> <hr> <span id="slogan_span">Better with a team</span>
+        <span id="headline_span">Contacts</span>
+        <hr> <span id="slogan_span">Better with a team</span>
     </div>
-    <div id="contact_content_div" [class.d_none]="!firebase.contactSelected" [class.slide_in]="firebase.contactSelected">
+    <div id="contact_content_div" [class.d_none]="!contact_service.contactSelected"
+        [class.slide_in]="contact_service.contactSelected">
         <div id="contact_details_name">
-            <div id="profile_circle" [style.background-color]="firebase.currentContact.color">
-                <span>{{firebase.initials}}</span>
+            <div id="profile_circle" [style.background-color]="contact_service.currentContact.color">
+                <span>{{contact_service.initials}}</span>
             </div>
             <div>
-                <span>{{firebase.currentContact.surname}} </span> <span>{{firebase.currentContact.lastname}}</span>
+                <span>{{contact_service.currentContact.surname}} </span> <span>{{contact_service.currentContact.lastname}}</span>
                 <div id="contact_details_button">
-                    <button
-                     (mouseover)="hoverEdit = true" 
-                     (mouseleave)="hoverEdit = false"
-                     (click)="firebase.editContact(firebase.currentIndex)">
-                    <img [src]="hoverEdit ? './assets/icons/edit_hover.svg' : './assets/icons/edit.svg'" alt="" >Edit</button>
-                    <button 
-                    (mouseover)="hoverDelete = true" 
-                    (mouseleave)="hoverDelete = false"
-                    (click)="firebase.deleteContact(firebase.currentIndex)">
-                    <img [src]="hoverDelete ? './assets/icons/delete_hover.svg' : './assets/icons/delete.svg'" alt="" >Delete</button>
+                    <button (mouseover)="hoverEdit = true" (mouseleave)="hoverEdit = false"
+                        (click)="contact_service.editContact(contact_service.currentIndex)">
+                        <img [src]="hoverEdit ? './assets/icons/edit_hover.svg' : './assets/icons/edit.svg'"
+                            alt="">Edit</button>
+                    <button (mouseover)="hoverDelete = true" (mouseleave)="hoverDelete = false"
+                        (click)="contact_service.deleteContact(contact_service.currentIndex)">
+                        <img [src]="hoverDelete ? './assets/icons/delete_hover.svg' : './assets/icons/delete.svg'"
+                            alt="">Delete</button>
                 </div>
             </div>
         </div>
         <h3>Contact Information</h3>
         <div>
             <h4>Email</h4>
-            <a href="mailto:{{firebase.currentContact.mail}}">{{firebase.currentContact.mail}}</a>
+            <a class="email" href="mailto:{{contact_service.currentContact.mail}}">{{contact_service.currentContact.mail}}</a>
         </div>
         <div>
             <h4>Phone</h4>
-            <a href="tel:+4915123456789">{{firebase.currentContact.phone}}</a>
+            <a href="tel:+4915123456789">{{contact_service.currentContact.phone}}</a>
         </div>
     </div>
     <div id="burger_edit" (click)="toggleBurger()">
-        <img  src="./assets/icons/burger_details.svg" alt="">
+        <img src="./assets/icons/burger_details.svg" alt="">
     </div>
     <div class="burger_menu_details" [class.slide_in_burger]="burgerOpen" [class.slide_out_burger]="!burgerOpen">
-        <button
-            (mouseover)="hoverEdit = true" 
-            (mouseleave)="hoverEdit = false"
-            (click)="firebase.editContact(firebase.currentIndex)">
-        <img [src]="hoverEdit ? './assets/icons/edit_hover.svg' : './assets/icons/edit.svg'" alt="" >Edit</button>
-        <button 
-        (mouseover)="hoverDelete = true" 
-        (mouseleave)="hoverDelete = false"
-        (click)="firebase.deleteContact(firebase.currentIndex)">
-        <img [src]="hoverDelete ? './assets/icons/delete_hover.svg' : './assets/icons/delete.svg'" alt="" >Delete</button>                
+        <button (mouseover)="hoverEdit = true" (mouseleave)="hoverEdit = false"
+            (click)="contact_service.editContact(contact_service.currentIndex)">
+            <img [src]="hoverEdit ? './assets/icons/edit_hover.svg' : './assets/icons/edit.svg'" alt="">Edit</button>
+        <button (mouseover)="hoverDelete = true" (mouseleave)="hoverDelete = false"
+            (click)="contact_service.deleteContact(contact_service.currentIndex)">
+            <img [src]="hoverDelete ? './assets/icons/delete_hover.svg' : './assets/icons/delete.svg'"
+                alt="">Delete</button>
     </div>
-    @if (firebase.editing) {
-        <div class="overlay">
-            <app-edit-contact-overlay [class.slide_edit]="firebase.editing" [class.slide_out_edit]="!firebase.editing"></app-edit-contact-overlay>
-        </div>
+    @if (contact_service.editing) {
+    <div class="overlay">
+        <app-edit-contact-overlay [class.slide_edit]="contact_service.editing"
+            [class.slide_out_edit]="!contact_service.editing"></app-edit-contact-overlay>
+    </div>
     }
 </div>
