@@ -24,9 +24,10 @@ export class Header {
   }
 
   logoutFromJoin(){
-    if(this.auth_service.isLoggedIn()){
-      this.router.navigate(['/']);
-      this.auth_service.logout();
-    }
+    this.auth_service.logoutUser();
+    this.router.navigate(['/']);
+    // if(this.auth_service.isLoggedIn()){
+    //   this.auth_service.logout();
+    // }
   }
 }

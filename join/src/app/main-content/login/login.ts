@@ -1,22 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
   auth_service = inject(AuthService);
-  private router = inject(Router);
-  loginAsGuest(){
-    this.auth_service.login();
-      this.router.navigate(['/summary']);
+  
+  async loginAsGuest() {
+  this.auth_service.loginAsGuest();
   }
 
-  logoutFromJoin(){
+  loginUser() {
+    this.auth_service.loginUser();
+  }
+
+  logoutFromJoin() {
     this.auth_service.logout();
   }
 }
