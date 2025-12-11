@@ -18,7 +18,6 @@ export class AuthService {
   private unsubscribe;
   private accountList: Account[] = [];
 
-
   authFirestore: Auth;
 
   input_mail = "";

@@ -30,23 +30,10 @@ export class Board {
   private router = inject(Router);
   @ViewChild('taskRef') task!: AddTask;
 
-  constructor() {
-    this.init();
-  }
-
   columnsTitel: ColumnCategory[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   filteredTasks: Task[] = [];
   isVisible: boolean = false;
   isDragging: boolean = false;
-
-  async init() {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    this.renderTasks();
-  }
-
-  renderTasks() {
-    console.log(this.board_service.taskList[0].id);
-  }
 
   searchTask(keyWord: string) {
     if (keyWord.trim() === '') {
