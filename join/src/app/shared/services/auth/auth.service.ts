@@ -109,8 +109,6 @@ export class AuthService {
   }
 
   login(): void {
-
-    // Hier würde normalerweise die tatsächliche Authentifizierungslogik stehen
     this.isAuthenticated = true;
   }
 

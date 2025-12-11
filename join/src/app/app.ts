@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { EditContactOverlay } from './main-content/edit-contact-overlay/edit-contact-overlay';
 import { BoardService } from './shared/services/board/board.service';
 import { ContactService } from './shared/services/contact/contact.service';
+import { AuthService } from './shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,9 @@ import { ContactService } from './shared/services/contact/contact.service';
 })
 export class App {
   protected readonly title = signal('join');
-  // firebase = inject(FirebaseService);
   board = inject(BoardService);
   contact = inject(ContactService);
+  auth = inject(AuthService);
+
+  
 }
