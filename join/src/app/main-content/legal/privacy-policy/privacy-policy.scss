@@ -76,3 +76,15 @@ strong {
     margin: 100px 20px 100px 20px;
   }
 }
+
+@media (max-width: 460px) {
+  .privacy_headline {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 350px) {
+  .privacy_headline {
+    font-size: 32px;
+  }
+}
