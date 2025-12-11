@@ -22,7 +22,7 @@ export class BoardService {
   unsubscribe;
   taskList: Task[] = [];
   taskColumnType: ColumnCategory = 'To do'
-  isAddTaskOpen:boolean = false;
+  isAddTaskOpen: boolean = false;
 
   // Overlay
   isClosing: boolean = true;
@@ -33,6 +33,8 @@ export class BoardService {
       tasksSnapshot.forEach((task) => {
         this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
+    }, (error) => {
+      console.error(`connection to firestore permission-denied -> ${error}`)
     });
   }
 
