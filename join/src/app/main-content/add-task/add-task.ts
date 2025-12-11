@@ -67,9 +67,7 @@ export class AddTask {
   };
 
   submitTask() {
-    console.log(this.newTask);
     this.taskService.addTaskToDatabase(this.newTask);
-    console.log(this.taskService.taskColumnType);
     
     this.newTask = {
       title: "",
@@ -124,7 +122,6 @@ export class AddTask {
   selectCategory(value: string) {
     this.newTask.taskCategory = value;
     this.categoryDropdown = false;
-    console.log(this.newTask.taskCategory);
 
   }
 
@@ -138,12 +135,6 @@ export class AddTask {
 
   setTaskPriority(prio: string) {
     this.newTask.priority = prio
-    console.log(this.newTask.priority);
-  }
-
-  logID(id: string | undefined) {
-    console.log(id);
-
   }
 
   getInitials(name: string) {
@@ -185,7 +176,6 @@ export class AddTask {
       this.selectedContacts.push(name);
     }
     this.newTask.assignedTo = [...this.selectedContacts];
-    console.log(this.newTask.assignedTo);
   }
 
   clearSubtaskInput() {
@@ -202,7 +192,6 @@ export class AddTask {
         subDescription: this.subtaskInput,
       })
     this.subtaskInput = "";
-    console.log(this.newTask.subTask);
   }
 
   deleteSubtask(id: string) {

@@ -42,10 +42,6 @@ export class EditCardDetails {
       { id: '', status: false, subDescription: 'Start Page layout' },
     ],
   };
-  submitTask() {
-    console.log("Changed task");
-
-  }
 
   // closeWithAnimation() {
   //   this.isClosing = true;
@@ -64,7 +60,6 @@ export class EditCardDetails {
 
   setTaskPriority(prio: string) {
     this.newTask.priority = prio
-    console.log(this.newTask.priority);
   }
 
   getIcon(prio: string) {
@@ -100,8 +95,6 @@ export class EditCardDetails {
     } else {
       this.selectedContacts.push(name);
     }
-    // this.newTask.assignedTo = [...this.selectedContacts];
-    // console.log(this.newTask.assignedTo);
   }
 
   getFullName(surname: string, lastname: string) {

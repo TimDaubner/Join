@@ -55,7 +55,6 @@ export class CardDetails {
   getEditPriorityIcon(prio: string): string {
     const isActive = this.editedTask.priority === prio;
     const path = isActive ? `prio_${prio.toLowerCase()}_white.svg` : `prio_${prio.toLowerCase()}.svg`;
-        console.log(this.selectedTask);
 
     return `./assets/icons/${path}`;
     
