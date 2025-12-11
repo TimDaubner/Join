@@ -63,7 +63,7 @@ export class AuthService {
   callUserData() {
     onAuthStateChanged(this.authFirestore, (user) => {
       if (user) {
-        console.log("logged in!");
+        console.log(`logged in! ${user}`);
         
       } else {
         console.error("NOT logged in!");

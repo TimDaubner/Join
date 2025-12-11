@@ -1,9 +1,15 @@
-<div>
-    <button (click)="loginAsGuest()">Guest Login</button>
-    <button (click)="auth_service.createNewAccount()">Create new Account</button>
-    <form (ngSubmit)="loginUser()">
-        <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
-        <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
-        <button>Einloggen</button>
-    </form>
-</div>
+<section>
+    <div class="frame-logo" [ngClass]="{'rePositioning' : isNewPos}">
+        <img class="dark" src="./assets/icons/favicon.svg" alt="join_logo">
+        <img class="light" src="./assets/icons/join_logo_white.svg" alt="join_logo">
+    </div>
+    <div>
+        <button (click)="loginAsGuest()">Guest Login</button>
+        <button (click)="auth_service.createNewAccount()">Create new Account</button>
+        <form (ngSubmit)="loginUser()">
+            <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
+            <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
+            <button>Einloggen</button>
+        </form>
+    </div>
+</section>
