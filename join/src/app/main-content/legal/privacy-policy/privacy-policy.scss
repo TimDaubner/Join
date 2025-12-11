@@ -35,7 +35,7 @@ a:hover {
 
 .back_btn {
   cursor: pointer;
-  padding-right: 30px;
+  padding-right: 20px;
 }
 
 ul {
@@ -63,4 +63,16 @@ strong {
 
 .date {
   margin-bottom: 10px;
+}
+
+@media (max-width: 936px) {
+  .main_container {
+    margin: 100px 20px 120px 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .main_container {
+    margin: 100px 20px 100px 20px;
+  }
 }
