@@ -1,0 +1,220 @@
+@use 'variables' as *;
+
+section {
+    margin-left: 300px;
+    margin-top: 150px;
+}
+
+.task_overview {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section_header {
+    display: flex;
+    align-items: center; 
+    >hr {
+        color: $secondary;
+        width: 1px;
+        margin: 0 10px;
+        align-self: stretch;
+    }
+}
+
+.headline {
+    font-size: 61px;
+    font-weight: 700;
+    line-height:normal;
+}
+
+.slogan {
+    font-size: 27px;
+}
+
+.task_overview {
+    display: flex; 
+    margin-top: 32px;
+} 
+
+.top_row_window {
+    width: 45%;
+    background: white;
+    border-radius: 10px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.top_row_overview {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit_icon {
+    width: 69px;
+    height: 69px;
+    background: $primary;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >img {
+        padding: 8px;
+    }
+}
+
+.check_icon {
+    width: 69px;
+    height: 69px;
+    background: $primary;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >img {
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+    }
+}
+
+.to_do_number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    p {
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 64px;
+    }
+}
+
+.middle_row_overview {
+    width: 100%;
+    display: flex;
+    margin-top: 32px;
+}
+
+.upcoming_deadline {
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    padding: 16px 64px;
+    border-radius: 10px;
+
+}
+
+.priority {
+    display: flex;
+
+    align-items: center;
+    gap: 32px;
+    hr {
+        color: #D1D1D1;
+        align-self: stretch;
+    }
+}
+
+.prio_icon {
+    width: 60px;
+    height: 60px;
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    >img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.upcoming_deadline_date {
+    p {
+        font-size: 21px;
+        font-weight: 700;
+    }
+    span {
+        font-size: 16px;
+    }
+}
+
+.overview_board_tasks {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.done {
+    background: white;
+    border-radius: 10px;
+}
+
+.bottom_row_overview {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.tasks_in_board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 24px 48px;
+    >p {
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 64px;
+    }
+    >span {
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+.tasks_in_progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 24px 48px;
+    >p {
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 64px;
+    }
+    >span {
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+.awaiting_feedback {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 24px 48px;
+    >p {
+        font-size: 64px;
+        font-weight: 600;
+        line-height: 64px;
+    }
+    >span {
+        font-size: 20px;
+        text-align: center;
+    }
+}

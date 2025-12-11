@@ -172,11 +172,6 @@
                     <div class="subtask-input-container">
                         <input name="subtaskInput" type="text" placeholder="Add new subtask" 
                                [(ngModel)]="subtaskInput" (keydown.enter)="addSubtask(); $event.preventDefault()">
-                        <!-- <div>
-                            <button type="button" (click)="addSubtask()" *ngIf="subtaskInput">
-                                <img src="./assets/icons/subtask_check.svg" alt="Add">
-                            </button>
-                        </div> -->
                         @if(subtaskInput){
                                 <button type="button" id="btn_sub_clear" (click)="clearSubtaskInput()"><img src="./assets/icons/subtask_clear.svg" alt=""></button>
                                 <hr>
@@ -205,7 +200,7 @@
                                             </div>
                                         </div>    
                                     }
-                                </li>
+                            </li>
                         }
                     </ul>
                 </div>

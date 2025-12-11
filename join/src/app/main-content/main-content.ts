@@ -6,7 +6,7 @@ import { CardDetails } from './board/board-card/card-details/card-details';
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [CommonModule, EditCardDetails, CardDetails],
+  imports: [CommonModule],
   templateUrl: './main-content.html',
   styleUrl: './main-content.scss',
 })
