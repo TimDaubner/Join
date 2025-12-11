@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+.main_container {
+  margin: 190px 100px 30px 320px;
+}
+
+.legal_headline {
+  font-size: 60px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.header_back_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.back_btn {
+  cursor: pointer;
+  padding-right: 30px;
+}
+
+h2 {
+  margin-top: 10px;
+}
+
+a {
+  color: $secondary;
+}
+
+.mail {
+  color: black;
+}
+
+.join {
+  color: $secondary;
+}

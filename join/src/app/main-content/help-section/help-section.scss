@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .help_container {
-  margin-top: 100px;
+  margin-top: 190px;
   margin-left: 320px;
   margin-right: 100px;
 }
@@ -9,6 +9,7 @@
 .help_headline {
   font-size: 60px;
   margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .header_back_btn {
@@ -23,21 +24,11 @@
   padding-right: 30px;
 }
 
-.help_headline {
-  margin-bottom: 20px;
-}
-
 h2 {
   font-size: 24px;
   font-weight: 700;
-  margin-top: 48px;
-  margin-bottom: 16px;
-}
-
-p {
-  line-height: 1.5;
-  margin-bottom: 16px;
-  max-width: 900px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 p .welcome {
@@ -67,28 +58,37 @@ strong {
   margin-left: 0;
 }
 
+li {
+  margin-top: 20px;
+}
+
 .help_container ol li {
   counter-increment: step;
   display: grid;
   grid-template-columns: 40px 1fr;
   column-gap: 16px;
-  align-items: start;
+  align-items: end;
 }
 
 .help_container ol li::before {
   content: counter(step) '.';
   font-weight: 800;
   font-size: 28px;
-  line-height: 1;
+  line-height: 0.5;
   grid-column: 1;
 }
 
 .help_container ol li > * {
   grid-column: 2;
+  margin-top: 0;
 }
 
-.help_container ol li strong {
-  font-size: 18px;
+.mail {
+  color: black;
+}
+
+.mail:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 936px) {
