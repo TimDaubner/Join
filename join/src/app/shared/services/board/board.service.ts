@@ -66,8 +66,6 @@ export class BoardService {
     task.columnCategory = this.taskColumnType;
     this.isAddTaskOpen = false;
     await addDoc(collection(this.firestore, 'tasks'), task);
-    console.log(' Task ist hochgeladen');
-    console.log(task);
   }
 
   getInitials(names: string[]) {

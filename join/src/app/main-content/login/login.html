@@ -1,0 +1,9 @@
+<div>
+    <button (click)="loginAsGuest()">Guest Login</button>
+    <button (click)="auth_service.createNewAccount()">Create new Account</button>
+    <form (ngSubmit)="loginUser()">
+        <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
+        <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
+        <button>Einloggen</button>
+    </form>
+</div>
