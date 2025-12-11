@@ -5,6 +5,11 @@ section {
     margin-top: 150px;
 }
 
+.summary_content {
+    display: flex;
+    align-items: center;
+}
+
 .task_overview {
     width: 600px;
     display: flex;
@@ -216,5 +221,22 @@ section {
     >span {
         font-size: 20px;
         text-align: center;
+    }
+}
+
+.greeting_user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 80px;
+    >p {
+        font-size: 47px;
+        font-weight: 500;
+        line-height: 47px;
+    }
+    >span {
+        font-size: 64px;
+        font-weight: 700;
+        color: $secondary;
+        line-height: 64px;
     }
 }

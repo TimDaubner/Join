@@ -4,7 +4,7 @@
         <hr>
         <span class="slogan">Key Metrics at a Glance</span>
     </div>
-    <div>
+    <div class="summary_content">
         <div class="task_overview">
             <div class="top_row_overview">
                 <div class="top_row_window">
@@ -47,7 +47,7 @@
             <div class="bottom_row_overview">
                 <div class="overview_board_tasks">
                     <div class="tasks_in_board">
-                        <p>13</p>
+                        <p>{{boardService.taskList.length}}</p>
                         <span>Tasks in <br> Board</span> 
                     </div>
                     <div class="tasks_in_progress">
@@ -60,7 +60,12 @@
                     </div>
                 </div>
             </div>
-            <div class="greeting_user"></div>
+            
         </div>
+
+        <div class="greeting_user">
+                <p>Good morning,</p>
+                <span>Rainer Wahnsinn</span>
+            </div>
     </div>
 </section>

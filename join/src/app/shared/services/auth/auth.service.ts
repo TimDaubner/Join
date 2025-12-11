@@ -11,7 +11,7 @@ export class AuthService {
   private router = inject(Router);
 
   //Auth Angular
-  private isAuthenticated = true;
+  private isAuthenticated = false;
 
   //Auth Firebase
   firestore: Firestore = inject(Firestore);
