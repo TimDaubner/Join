@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private router = inject(Router);
+  private authFirestore = inject(Auth);
 
   //Auth Angular
   private isAuthenticated = false;
@@ -17,8 +18,6 @@ export class AuthService {
   firestore: Firestore = inject(Firestore);
   private unsubscribe;
   private accountList: Account[] = [];
-
-  authFirestore: Auth;
 
   input_mail = "";
   input_passwort = "";
@@ -35,6 +34,8 @@ export class AuthService {
   async loginAsGuest() {
     await signInWithEmailAndPassword(this.authFirestore, "guest@web.com", "dackel").then((input) => {
       console.log("login successfull");
+      console.log(this.authFirestore);
+      
       this.router.navigate(['/summary']);
       this.login();
       this.startFirestoreConnection();
@@ -89,8 +90,6 @@ export class AuthService {
   }
 
   constructor() {
-    this.authFirestore = getAuth();
-
     if (this.isLoggedIn()) {
       this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
         this.accountList = [];
