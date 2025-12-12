@@ -2,6 +2,7 @@
 
 .main_container {
   margin: 190px 100px 30px 320px;
+  font-size: 16px;
 }
 
 .privacy_headline {
@@ -63,6 +64,14 @@ strong {
 
 .date {
   margin-bottom: 10px;
+}
+
+.consent {
+  padding-top: 10px;
+}
+
+.data {
+  padding-top: 10px;
 }
 
 @media (max-width: 936px) {
