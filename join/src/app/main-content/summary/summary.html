@@ -29,18 +29,36 @@
             <div class="middle_row_overview">
                 <div class="upcoming_deadline">
                     <div class="priority">
+                        @if (highestPrioTask == "Urgent") {
                         <div class="prio_icon">
                             <img src="./assets/icons/prio_urgent_white.svg" alt="">
                         </div>
                         <div class="to_do_number">
-                        <p>13</p>
+                        <p>{{urgentTasks.length}}</p>
                         <span>Urgent</span>
-                    </div>
-                    <hr>
-                    <div class="upcoming_deadline_date">
-                        <p>December 24, 2025</p>
-                        <span>Upcoming Deadline</span>
-                    </div>
+                        </div>
+                        } @else if (highestPrioTask == "medium") {
+                           <div class="prio_icon">
+                                <img src="./assets/icons/prio_medium_white.svg" alt="">
+                            </div>
+                            <div class="to_do_number">
+                                <p>{{mediumTasks.length}}</p>
+                                <span>Medium</span>
+                            </div> 
+                        } @else if (highestPrioTask == "medium") {
+                           <div class="prio_icon">
+                                <img src="./assets/icons/prio_low_white.svg" alt="">
+                            </div>
+                            <div class="to_do_number">
+                                <p>{{lowTasks.length}}</p>
+                                <span>Low</span>
+                            </div> 
+                        }
+                        <hr>
+                        <div class="upcoming_deadline_date">
+                            <p>{{getHighestPrioTask()}}</p>
+                            <span>Upcoming Deadline</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,8 +82,9 @@
         </div>
 
         <div class="greeting_user">
-                <p>Good morning,</p>
-                <span>Rainer Wahnsinn</span>
-            </div>
+            <p>Good morning,</p>
+            <span>Rainer Wahnsinn</span>
+        </div>
     </div>
+    <button (click)="getNextDueDate(boardService.taskList)">DueDate</button>
 </section>
