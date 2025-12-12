@@ -185,11 +185,13 @@
 }
 
 .add_btn:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
+    brightness(96%) contrast(97%);
 }
 
 .add_btn_responsive:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
+    brightness(96%) contrast(97%);
 }
 
 .add_task_frame {
@@ -436,7 +438,7 @@
   cursor: grabbing;
 }
 
-@media(min-width:2300px) {
+@media (min-width: 2300px) {
   .add_task_frame {
     top: 10vh;
     left: 40vw;
@@ -451,7 +453,6 @@
 }
 
 @media (max-width: 1440px) {
-
   .board_header_wrapper {
     padding: 0;
   }
@@ -467,7 +468,6 @@
 }
 
 @media (max-width: 1050px) {
-
   .content_container {
     flex-direction: column;
     gap: 32px;
@@ -583,19 +583,23 @@
   .no_tasks {
     height: 48px;
   }
+
+  .board_container {
+    margin-bottom: 40px;
+  }
 }
 
 @media (min-width: 2300px) {
-  .board_container{
+  .board_container {
     margin-left: 180px;
     width: 900px;
   }
 }
 
 @media (max-width: 936px) {
-
   .board_container {
     margin-left: 0;
+    margin-bottom: 120px;
   }
 
   .board_header_wrapper {
@@ -632,6 +636,10 @@
   .example_list::-webkit-scrollbar-thumb {
     background: #aaa;
     border-radius: 10px;
+  }
+
+  .board_container {
+    margin-bottom: 120px;
   }
 }
 

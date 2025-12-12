@@ -2,6 +2,7 @@
 
 .main_container {
   margin: 190px 100px 30px 320px;
+  font-size: 16px;
 }
 
 .privacy_headline {
@@ -35,7 +36,7 @@ a:hover {
 
 .back_btn {
   cursor: pointer;
-  padding-right: 30px;
+  padding-right: 20px;
 }
 
 ul {
@@ -63,4 +64,36 @@ strong {
 
 .date {
   margin-bottom: 10px;
+}
+
+.consent {
+  padding-top: 10px;
+}
+
+.data {
+  padding-top: 10px;
+}
+
+@media (max-width: 936px) {
+  .main_container {
+    margin: 100px 20px 120px 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .main_container {
+    margin: 100px 20px 100px 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .privacy_headline {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 350px) {
+  .privacy_headline {
+    font-size: 32px;
+  }
 }

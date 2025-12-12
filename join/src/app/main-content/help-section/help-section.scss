@@ -1,15 +1,12 @@
 @use 'variables' as *;
 
 .help_container {
-  margin-top: 190px;
-  margin-left: 320px;
-  margin-right: 100px;
+  margin: 190px 100px 0 320px;
 }
 
 .help_headline {
   font-size: 60px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin: 40px 0 20px 0;
 }
 
 .header_back_btn {
@@ -21,7 +18,7 @@
 
 .back_btn {
   cursor: pointer;
-  padding-right: 30px;
+  padding-right: 20px;
 }
 
 h2 {
@@ -39,12 +36,17 @@ p .welcome {
   color: $secondary;
 }
 
+p {
+  font-size: 16px;
+}
+
 strong {
   font-size: 18px;
 }
 
 .remember {
-  padding-left: 24px;
+  padding-left: 56px;
+  margin-top: 30px;
 }
 
 .enjoy {
@@ -92,11 +94,13 @@ li {
 }
 
 @media (max-width: 936px) {
-  .back_btn {
-    padding-right: 20px;
-  }
-
   .help_container {
-    padding: 72px 16px 0 16px;
+    margin: 100px 20px 120px 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .help_container {
+    margin: 100px 20px 100px 20px;
   }
 }

@@ -2,6 +2,7 @@
 
 .main_container {
   margin: 190px 100px 30px 320px;
+  font-size: 16px;
 }
 
 .legal_headline {
@@ -19,7 +20,16 @@
 
 .back_btn {
   cursor: pointer;
-  padding-right: 30px;
+  padding-right: 20px;
+}
+
+.headline {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.imprint {
+  font-size: 30px;
 }
 
 h2 {
@@ -36,4 +46,46 @@ a {
 
 .join {
   color: $secondary;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.date {
+  padding-top: 20px;
+}
+
+.main_container ul {
+  list-style-position: outside;
+  padding-left: 20px;
+  margin: 15px 0;
+}
+
+@media (max-width: 936px) {
+  .main_container {
+    margin: 100px 20px 120px 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .main_container {
+    margin: 100px 20px 100px 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .legal_headline {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 350px) {
+  .legal_headline {
+    font-size: 32px;
+  }
+
+  .imprint {
+    font-size: 26px;
+  }
 }
