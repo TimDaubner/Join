@@ -1,16 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormsModule, NgModel } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
   auth_service = inject(AuthService);
+
+  isNewPos = false;
   
+  ngOnInit(){
+    setTimeout(()=>{
+      this.isNewPos = true;
+    },300)
+  }
+
   async loginAsGuest() {
   this.auth_service.loginAsGuest();
   }

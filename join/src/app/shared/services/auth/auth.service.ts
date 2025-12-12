@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private router = inject(Router);
+  private authFirestore = inject(Auth);
 
   //Auth Angular
   private isAuthenticated = false;
@@ -18,16 +19,14 @@ export class AuthService {
   private unsubscribe;
   private accountList: Account[] = [];
 
-  authFirestore: Auth;
-
   input_mail = "";
   input_passwort = "";
 
-  createNewAccount() {
-    createUserWithEmailAndPassword(this.authFirestore, "tester@1234.com", "Hunden123").then((userCredentials) => {
-      let user = userCredentials.user;
-      let id = userCredentials.providerId;
-      let operationType = userCredentials.operationType;
+  async createNewAccount() {
+    await createUserWithEmailAndPassword(this.authFirestore, "tester@1234.com", "Hunden123").then((userCredentials) => {
+      console.log(userCredentials);
+    }).catch((error) => {
+      console.error(error);
     });
 
   }
@@ -35,26 +34,29 @@ export class AuthService {
   async loginAsGuest() {
     await signInWithEmailAndPassword(this.authFirestore, "guest@web.com", "dackel").then((input) => {
       console.log("login successfull");
+      console.log(this.authFirestore);
+      
       this.router.navigate(['/summary']);
       this.login();
-      
+      this.startFirestoreConnection();
+
     }).catch((error) => {
       console.log(error);
     });
   }
-  
-  loginUser() {
-    signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_passwort).then((input) => {
+
+  async loginUser() {
+    await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_passwort).then((input) => {
       console.log("login successfull");
       this.router.navigate(['/summary']);
       this.login();
-      
+
     }).catch((error) => {
       console.log(error);
     });
   }
-  
-  logoutUser(){
+
+  logoutUser() {
     this.authFirestore.signOut();
     this.logout();
   }
@@ -62,23 +64,41 @@ export class AuthService {
   callUserData() {
     onAuthStateChanged(this.authFirestore, (user) => {
       if (user) {
-        const uid = user.uid;
+        console.log(`logged in! ${user}`);
+        
       } else {
-        // code blah
+        console.error("NOT logged in!");
       }
     });
   }
 
+  startFirestoreConnection(){
+
+    if (this.isLoggedIn()) {
+      this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
+        this.accountList = [];
+        accountsSnapshot.forEach((account) => {
+          this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
+          console.log(account.data());
+        });
+      },(error) =>{
+        if(this.isLoggedIn()){
+          console.error(`connection to firestore permission-denied -> ${error}`)
+        }
+      });
+    }
+  }
 
   constructor() {
-    this.authFirestore = getAuth();
-    this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
-      this.accountList = [];
-      accountsSnapshot.forEach((account) => {
-        this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
-        console.log(account.data());
+    if (this.isLoggedIn()) {
+      this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
+        this.accountList = [];
+        accountsSnapshot.forEach((account) => {
+          this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
+          console.log(account.data());
+        });
       });
-    });
+    }
   }
 
   ngOnDestroy() {
@@ -88,8 +108,6 @@ export class AuthService {
   }
 
   login(): void {
-
-    // Hier würde normalerweise die tatsächliche Authentifizierungslogik stehen
     this.isAuthenticated = true;
   }
 

@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../../../interfaces/contact.interface';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class ContactService {
   isAdded = false;
 
   firestore: Firestore = inject(Firestore);
+  auth_service: AuthService = inject(AuthService);
 
   initials = "";
   contactSelected = false;
@@ -58,6 +60,10 @@ export class ContactService {
         this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact));
         this.sortFunc();
       });
+    }, (error) => {
+      if(this.auth_service.isLoggedIn()){ 
+        console.error(`connection to firestore permission-denied -> ${error}`)
+      }
     });
   }
 
@@ -127,9 +133,9 @@ export class ContactService {
 
   async addContactToDatabase(contact: Contact) {
     this.isAdded = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.isAdded = false;
-    },3000);
+    }, 3000);
     await addDoc(collection(this.firestore, "contacts"), contact);
   }
 

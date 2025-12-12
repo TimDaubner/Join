@@ -11,18 +11,20 @@ import {
 } from '@angular/fire/firestore';
 import { ColumnCategory, Task } from '../../../interfaces/task.interface';
 import { ContactService } from '../contact/contact.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
   firestore: Firestore = inject(Firestore);
+  auth_service: AuthService = inject(AuthService);
   contact_service: ContactService = inject(ContactService);
   initials: string[] = [];
   unsubscribe;
   taskList: Task[] = [];
   taskColumnType: ColumnCategory = 'To do'
-  isAddTaskOpen:boolean = false;
+  isAddTaskOpen: boolean = false;
 
   // Overlay
   isClosing: boolean = true;
@@ -33,6 +35,10 @@ export class BoardService {
       tasksSnapshot.forEach((task) => {
         this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
+    }, (error) => {
+      if(this.auth_service.isLoggedIn()){
+        console.error(`connection to firestore permission-denied -> ${error}`)
+      }
     });
   }
 
