@@ -5,6 +5,7 @@
                 <img src="./assets/icons/join_logo_white.svg" class="logo_join" alt="logo Join" />
             </div>
 
+            @if (authService.isLoggedIn()) {
             <div class="menu_elements">
                 <a routerLink="/summary" routerLinkActive="active" class="nav_link">
                     <img src="./assets/icons/summary.svg" alt="summary" aria-hidden="true" />
@@ -26,7 +27,18 @@
                     <span>Contacts</span>
                 </a>
             </div>
+            }
         </div>
+
+        @if (!authService.isLoggedIn()) {
+        <div class="login_icon">
+            <a routerLink="/login" routerLinkActive="active" class="nav_link">
+                <img src="./assets/icons/login.svg" alt="Log In" />
+                <span>Log In</span>
+            </a>
+        </div>
+        }
+
         <div class="legal">
             <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a>
             <a routerLink="/legal-notice" routerLinkActive="active">Legal notice</a>

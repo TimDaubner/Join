@@ -4,6 +4,10 @@
   max-width: 1920px;
 }
 
+.login_icon {
+  display: none;
+}
+
 .navbar_container {
   min-height: 100dvh;
   height: auto;
@@ -195,8 +199,7 @@
 }
 
 @media (min-width: 2300px) {
-
-  .limitation{
+  .limitation {
     position: absolute;
     left: calc(50vw - 232px * 2.7);
   }

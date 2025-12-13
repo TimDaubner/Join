@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 // import { FirebaseService } from './shared/services/firebase.service';
 import { Header } from './shared/header/header';
 import { Footer } from './shared/footer/footer';
@@ -11,7 +11,7 @@ import { AuthService } from './shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, Header, Footer,],
+  imports: [CommonModule, RouterOutlet, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -21,5 +21,9 @@ export class App {
   contact = inject(ContactService);
   auth = inject(AuthService);
 
-  
+  constructor(private router: Router) {}
+
+  get hideFooterHeader(): boolean {
+    return this.router.url === '/login';
+  }
 }
