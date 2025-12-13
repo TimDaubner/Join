@@ -28,16 +28,17 @@
                 </a>
             </div>
             }
+            @if (!authService.isLoggedIn()) {
+            <div class="login_icon">
+                <a routerLink="/login" routerLinkActive="active" class="nav_link">
+                    <img src="./assets/icons/login.svg" alt="Log In" />
+                    <span>Log In</span>
+                </a>
+            </div>
+            }
         </div>
 
-        @if (!authService.isLoggedIn()) {
-        <div class="login_icon">
-            <a routerLink="/login" routerLinkActive="active" class="nav_link">
-                <img src="./assets/icons/login.svg" alt="Log In" />
-                <span>Log In</span>
-            </a>
-        </div>
-        }
+
 
         <div class="legal">
             <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a>
