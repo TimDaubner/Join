@@ -2,8 +2,10 @@
     <div class="main_container">
         <div class="header_back_btn">
             <h1 class="privacy_headline">Privacy Policy</h1>
+            @if (authService.isLoggedIn()) {
             <img src="./assets/icons/arrow_back.svg" alt="back button" aria-hidden="true" class="back_btn"
                 (click)="goBack()" aria-label="Back" />
+            }
         </div>
 
         <h2>Controller</h2>
