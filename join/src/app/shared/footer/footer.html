@@ -29,20 +29,26 @@
             </div>
             }
             @if (!authService.isLoggedIn()) {
-            <div class="login_icon">
-                <a routerLink="/login" routerLinkActive="active" class="nav_link">
-                    <img src="./assets/icons/login.svg" alt="Log In" />
-                    <span>Log In</span>
-                </a>
+            <div class="logged_out_bar">
+                <div class="login_icon">
+                    <a routerLink="/login" routerLinkActive="active" class="nav_link">
+                        <img src="./assets/icons/login.svg" alt="Log In" />
+                        <div>Log In</div>
+                    </a>
+                </div>
+
+                <div class="legal_logged_out">
+                    <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a>
+                    <a routerLink="/legal-notice" routerLinkActive="active">Legal notice</a>
+                </div>
             </div>
             }
         </div>
-
-
 
         <div class="legal">
             <a routerLink="/privacy-policy" routerLinkActive="active">Privacy Policy</a>
             <a routerLink="/legal-notice" routerLinkActive="active">Legal notice</a>
         </div>
+
     </nav>
 </div>

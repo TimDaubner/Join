@@ -196,6 +196,53 @@
     .legal {
       display: none;
     }
+
+    .logged_out_bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 20px;
+      font-size: 16px;
+    }
+
+    .logged_out_bar .legal_logged_out {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      gap: 20px;
+    }
+
+    .logged_out_bar .legal_logged_out a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-radius: 13px;
+      font-size: 16px;
+      white-space: nowrap;
+      width: auto;
+      height: 100%;
+      color: $nav-button;
+    }
+
+    .logged_out_bar .legal_logged_out a.active {
+      background-color: $darkblue;
+      color: $white;
+    }
+
+    .login_icon .nav_link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+    }
+
+    .legal_logged_out {
+      display: flex;
+      flex-direction: row;
+    }
   }
 }
 
@@ -227,6 +274,21 @@
 
   .navbar_container {
     height: 70px;
+  }
+}
+
+@media (max-width: 376px) {
+  .navbar_container .logged_out_bar {
+    white-space: nowrap;
+    padding: 0 0 0 20px;
+  }
+
+  .logged_out_bar .login_icon a {
+    font-size: 14px;
+  }
+
+  .logged_out_bar .legal_logged_out a {
+    font-size: 14px !important;
   }
 }
 
