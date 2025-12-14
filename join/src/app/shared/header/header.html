@@ -3,6 +3,8 @@
     <div class="header_container">
         <p class="title" aria-hidden="true">Kanban Project Management Tool</p>
         <a class="logo_responsive"><img class="img_logo_responsive" src="./assets/icons/favicon.svg" alt="logo"></a>
+        @if (auth_service.isLoggedIn()) {
+
         <div class="header_icons">
             <a routerLink="/help" routerLinkActive="hidden" class="btn_help" aria-label="open help"></a>
             <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
@@ -17,27 +19,30 @@
                     Notice</a>
                 <a routerLink="/privacy-policy" routerLinkActive="active" class="btn_menu"
                     (click)="toggleMenu()">Privacy Policy</a>
-                <a routerLink="/logout" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()" (click)="logoutFromJoin()">Log
+                <a routerLink="/logout" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()"
+                    (click)="logoutFromJoin()">Log
                     out</a>
             </div>
             }
         </div>
+        }
     </div>
     <div class="header_icons responsive">
         <a routerLink="/help" routerLinkActive="hidden" class="btn_help" aria-label="open help"></a>
         <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
             [class.active]="menu_open" (click)="toggleMenu()">G
         </a>
-    
+
         @if (menu_open) {
         <div class="menu_overlay" (click)="closeMenu()"></div>
         <div class="open_burger_menu">
             <a routerLink="/help" routerLinkActive="active" class="btn_menu help" (click)="toggleMenu()">Help</a>
             <a routerLink="/legal-notice" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()">Legal
                 Notice</a>
-            <a routerLink="/privacy-policy" routerLinkActive="active" class="btn_menu"
-                (click)="toggleMenu()">Privacy Policy</a>
-            <a routerLink="/logout" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()" (click)="logoutFromJoin()">Log
+            <a routerLink="/privacy-policy" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()">Privacy
+                Policy</a>
+            <a routerLink="/logout" routerLinkActive="active" class="btn_menu" (click)="toggleMenu()"
+                (click)="logoutFromJoin()">Log
                 out</a>
         </div>
         }
