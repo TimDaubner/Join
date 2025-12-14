@@ -3,6 +3,7 @@
         <img class="dark" src="./assets/icons/favicon.svg" alt="join_logo">
         <img class="light" src="./assets/icons/join_logo_white.svg" alt="join_logo">
     </div>
+    @if(!isSignUp){
     <div class="sign-up">
         Not a Join user?
         <button class="sign-up-btn" (click)="changeOverlayToSignUp()">Sign up</button>
@@ -10,35 +11,97 @@
     <div class="frame-login">
         <div class="login">
             <div class="head-login">
-                <h1>Log in <hr></h1>
+                <h1>Log in
+                    <hr>
+                </h1>
             </div>
-            <form (ngSubmit)="loginUser()">
+            <form [ngClass]="{ 'margin-bottom': !mail.valid && mail.touched || !password.valid  && password.touched}"
+                (ngSubmit)="loginUser()">
                 <div class="input-group">
-                    <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
+                    <input #mail="ngModel" type="text" name="email" placeholder="E-mail"
+                        [(ngModel)]="auth_service.input_mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                        required>
                     <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
-                    <img src="./assets/icons/lock.svg" alt="Mail Icon" class="input-icon">
+                    <input #password="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
+                        name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort" required
+                        minlength="4">
+                    <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>
+                @if(!mail.valid && mail.touched || !password.valid && password.touched) {
+                <div class="error_msg"><span>Check your email and password (min. 4). Please try again</span></div>
+                }
             </form>
             <div class="login-btns">
-                <button class="login-btn">Log in</button>
+                <button [disabled]="!mail.valid || !password.valid " (click)="loginUser()" class="login-btn">Log
+                    in</button>
                 <button (click)="loginAsGuest()" class="guest-login-btn">Guest Log in</button>
             </div>
         </div>
     </div>
+    }
+    @else {
+    <div class="frame-signup">
+        <div class="signup">
+            <img (click)="goBackToLogin()" src="./assets/icons/arrow_back.svg" alt="">
+            <div class="head-login">
+                <h1>Sign up
+                    <hr>
+                </h1>
+            </div>
+            <form [ngClass]="{ 'margin-bottom': !mail.valid && mail.touched || !password.valid  && password.touched}"
+                (ngSubmit)="loginUser()">
+                <div class="input-group">
+                    <input name="surname" placeholder="First name" [(ngModel)]="contact.surname" type="text"
+                        minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <input name="lastname" placeholder="Last name" [(ngModel)]="contact.lastname" type="text"
+                        minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <input #mail="ngModel" type="text" name="email" placeholder="E-mail"
+                        [(ngModel)]="auth_service.input_mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                        required>
+                    <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <input #password="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
+                        name="password" placeholder="Password" [(ngModel)]="firstPassword" required
+                        minlength="4">
+                    <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
+                </div>
+                <div class="input-group">
+                    <input #confirm_password="ngModel" (input)="onPasswordInput()"
+                        [type]="isVisible ? 'text' : 'password'" name="password" placeholder="Confirm Password"
+                        [(ngModel)]="confirmPassword" required minlength="4">
+                    <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
+                </div>
+                @if(!password.valid && password.touched && password !== confirm_password && !confirm_password.valid && confirm_password.touched) {
+                <div class="error_msg_signup"><span>Your passwords don't match. Please try again.</span></div>
+                }
+                <div class="input-group row">
+                    <img (click)="toggleCheckbox()" class="checkbox" 
+                         [src]="isChecked ? '/assets/icons/checked.svg' : '/assets/icons/unchecked.svg'" 
+                         alt="Checkbox" /> 
+                    <div class="text">
+                        i accept the <a href="/privacy-policy">Privacy policy</a>
+                    </div>
+                </div>
+            </form>
+            <div class="signup-btn">
+                <button [disabled]="!mail.valid || !password.valid " (click)="SignUp()" class="login-btn">Sign
+                    up</button>
+            </div>
+        </div>
+    </div>
+    }
     <div class="links">
         <a href="/privacy-policy">Privacy policy</a>
         <a href="/legal-notice">Legal notice</a>
     </div>
 </section>
 <div class="overlay"></div>
-
-<!-- <button (click)="loginAsGuest()">Guest Login</button>
-<button (click)="auth_service.createNewAccount()">Create new Account</button>
-<form (ngSubmit)="loginUser()">
-    <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
-    <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
-    <button>Einloggen</button>
-</form> -->
