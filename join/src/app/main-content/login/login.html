@@ -3,13 +3,42 @@
         <img class="dark" src="./assets/icons/favicon.svg" alt="join_logo">
         <img class="light" src="./assets/icons/join_logo_white.svg" alt="join_logo">
     </div>
-    <div>
-        <button (click)="loginAsGuest()">Guest Login</button>
-        <button (click)="auth_service.createNewAccount()">Create new Account</button>
-        <form (ngSubmit)="loginUser()">
-            <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
-            <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
-            <button>Einloggen</button>
-        </form>
+    <div class="sign-up">
+        Not a Join user?
+        <button class="sign-up-btn" (click)="changeOverlayToSignUp()">Sign up</button>
+    </div>
+    <div class="frame-login">
+        <div class="login">
+            <div class="head-login">
+                <h1>Log in <hr></h1>
+            </div>
+            <form (ngSubmit)="loginUser()">
+                <div class="input-group">
+                    <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
+                    <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
+                    <img src="./assets/icons/lock.svg" alt="Mail Icon" class="input-icon">
+                </div>
+            </form>
+            <div class="login-btns">
+                <button class="login-btn">Log in</button>
+                <button (click)="loginAsGuest()" class="guest-login-btn">Guest Log in</button>
+            </div>
+        </div>
+    </div>
+    <div class="links">
+        <a href="/privacy-policy">Privacy policy</a>
+        <a href="/legal-notice">Legal notice</a>
     </div>
 </section>
+<div class="overlay"></div>
+
+<!-- <button (click)="loginAsGuest()">Guest Login</button>
+<button (click)="auth_service.createNewAccount()">Create new Account</button>
+<form (ngSubmit)="loginUser()">
+    <input type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.input_mail">
+    <input type="password" name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort">
+    <button>Einloggen</button>
+</form> -->

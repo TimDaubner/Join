@@ -13,6 +13,7 @@ export class Login {
   auth_service = inject(AuthService);
 
   isNewPos = false;
+  isSignUp = false;
   
   ngOnInit(){
     setTimeout(()=>{
@@ -30,5 +31,13 @@ export class Login {
 
   logoutFromJoin() {
     this.auth_service.logout();
+  }
+
+  changeOverlayToSignUp(){
+    this.isSignUp = true;
+  }
+  
+  goBackToLogin(){
+    this.isSignUp = false;
   }
 }
