@@ -1,7 +1,13 @@
-<app-header [ngClass]="{'hide' : !this.auth.isLoggedIn()}"></app-header>
+<!-- <app-header [ngClass]="{'hide' : !this.auth.isLoggedIn()}"></app-header> -->
+@if (!hideFooterHeader) {
+<app-header></app-header>
+}
 <div class="responsive4k">
     <div id="main_content">
         <router-outlet />
     </div>
 </div>
-<app-footer [ngClass]="{'hide' : !this.auth.isLoggedIn()}"></app-footer>
+<!-- <app-footer [ngClass]="{'hide' : !this.auth.isLoggedIn()}"></app-footer> -->
+@if (!hideFooterHeader) {
+<app-footer></app-footer>
+}
