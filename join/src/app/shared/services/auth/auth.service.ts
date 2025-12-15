@@ -3,6 +3,7 @@ import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Account } from '../../../interfaces/account.interface';
 import { Auth, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { ContactService } from '../contact/contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class AuthService {
     this.input_mail = mail;
     this.input_password = password;
     await createUserWithEmailAndPassword(this.authFirestore, mail, password).then((userCredentials) => {
-      console.log(userCredentials);
+      console.log(userCredentials.user.uid);
     }).catch((error) => {
       console.error(error);
     });
@@ -47,7 +48,10 @@ export class AuthService {
     });
   }
 
-  async loginUser() {
+  async loginUser(mail:string,password:string) {
+    this.input_mail = mail;
+    this.input_password = password;
+
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password).then((input) => {
       console.log("login successfull");
       this.router.navigate(['/summary']);
@@ -66,7 +70,7 @@ export class AuthService {
   callUserData() {
     onAuthStateChanged(this.authFirestore, (user) => {
       if (user) {
-        console.log(`logged in! ${user}`);
+        console.log(`logged in! ${user.uid}`);
         
       } else {
         console.error("NOT logged in!");

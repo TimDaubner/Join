@@ -7,13 +7,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
   auth_service = inject(AuthService);
   contact_service = inject(ContactService);
+
+  //uid quick access
+
+  userLoggedIn: string = 'Guest';
 
   contact = {
     surname: "",
@@ -23,8 +27,8 @@ export class Login {
     color: "",
   }
 
-  @ViewChild('mail') mail!: NgModel;
-  @ViewChild('password') password!: NgModel;
+  @ViewChild('mail') mailModel!: NgModel;
+  @ViewChild('passwordModel') passwordModel!: NgModel;
 
 
   @ViewChild('firstName') firstName!: NgModel;
@@ -35,6 +39,8 @@ export class Login {
   @ViewChild('checkbox') checkbox!: NgModel;
 
   passwordIcon = './assets/icons/lock.svg';
+  passwordValue: string = '';
+  mailValue: string = '';
 
   isNewPos = false;
   isSignUp = false;
@@ -51,7 +57,7 @@ export class Login {
   }
 
   SignUp() {
-    this.auth_service.createNewAccount(this.mail.value,this.password.value);
+    this.auth_service.createNewAccount("tim.daubner@gmx.de", "dackel123");
   }
 
   async loginAsGuest() {
@@ -59,7 +65,7 @@ export class Login {
   }
 
   loginUser() {
-    this.auth_service.loginUser();
+    this.auth_service.loginUser(this.mailValue, this.passwordValue);
   }
 
   logoutFromJoin() {
@@ -85,7 +91,7 @@ export class Login {
   }
 
   onPasswordInput() {
-    let input = this.auth_service.input_password;
+    let input = this.passwordValue;
     if (input == '') {
       this.passwordIcon = './assets/icons/lock.svg'
     }
@@ -98,7 +104,7 @@ export class Login {
   }
 
   checkCorrectInput() {
-    if (this.mail.valid && this.password.valid) {
+    if (this.mailModel.valid && this.passwordModel.valid) {
       return true;
     }
     return false;
@@ -114,9 +120,9 @@ export class Login {
   }
 
   resetForm() {
-    this.mail.control.markAsUntouched();
-    this.mail.control.markAsPristine();
-    this.password.control.markAsUntouched();
-    this.password.control.markAsPristine();
+    this.mailModel.control.markAsUntouched();
+    this.mailModel.control.markAsPristine();
+    this.passwordModel.control.markAsUntouched();
+    this.passwordModel.control.markAsPristine();
   }
 }
