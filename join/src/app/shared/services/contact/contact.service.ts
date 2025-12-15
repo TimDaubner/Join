@@ -15,7 +15,7 @@ export class ContactService {
   isAdded = false;
 
   firestore: Firestore = inject(Firestore);
-  auth_service: AuthService = inject(AuthService);
+  // auth_service: AuthService = inject(AuthService);
 
   initials = "";
   contactSelected = false;
@@ -61,9 +61,11 @@ export class ContactService {
         this.sortFunc();
       });
     }, (error) => {
-      if(this.auth_service.isLoggedIn()){ 
-        console.error(`connection to firestore permission-denied -> ${error}`)
-      }
+      console.log(error);
+      
+      // if(this.auth_service.isLoggedIn()){ 
+      //   console.error(`connection to firestore permission-denied -> ${error}`)
+      // }
     });
   }
 

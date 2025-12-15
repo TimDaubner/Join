@@ -4,6 +4,7 @@ import { Account } from '../../../interfaces/account.interface';
 import { Auth, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ContactService } from '../contact/contact.service';
+import { Contact } from '../../../main-content/contact/contact';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { ContactService } from '../contact/contact.service';
 export class AuthService {
   private router = inject(Router);
   private authFirestore = inject(Auth);
+  private contact_service = inject(ContactService);
 
   //Auth Angular
   private isAuthenticated = false;
@@ -23,22 +25,41 @@ export class AuthService {
   input_mail = "";
   input_password = "";
 
-  async createNewAccount(mail:string,password:string) {
+  contact = {
+    surname: "",
+    lastname: "",
+    mail: "",
+    phone: "",
+    color: "",
+  }
+
+  async createNewAccount(mail: string, password: string) {
     this.input_mail = mail;
     this.input_password = password;
     await createUserWithEmailAndPassword(this.authFirestore, mail, password).then((userCredentials) => {
       console.log(userCredentials.user.uid);
+      this.createContactObject(userCredentials.user.uid, "Karin", "Gottlob", "kago@gmail.com", "");
     }).catch((error) => {
       console.error(error);
     });
+  }
 
+  createContactObject(uid: string, firstName: string, LastName: string, mail: string, phone: string) {
+    this.contact.color = this.contact_service.getRandomColor();
+    this.contact.surname = firstName;
+    this.contact.lastname = LastName;
+    this.contact.mail = mail;
+    let newContact = this.contact_service.setContactObject(uid, this.contact);
+    console.log(this.contact);
+    
+    this.contact_service.addContactToDatabase(newContact);
   }
 
   async loginAsGuest() {
     await signInWithEmailAndPassword(this.authFirestore, "guest@web.com", "dackel").then((input) => {
       console.log("login successfull");
       console.log(this.authFirestore);
-      
+
       this.router.navigate(['/summary']);
       this.login();
       this.startFirestoreConnection();
@@ -48,7 +69,7 @@ export class AuthService {
     });
   }
 
-  async loginUser(mail:string,password:string) {
+  async loginUser(mail: string, password: string) {
     this.input_mail = mail;
     this.input_password = password;
 
@@ -71,14 +92,14 @@ export class AuthService {
     onAuthStateChanged(this.authFirestore, (user) => {
       if (user) {
         console.log(`logged in! ${user.uid}`);
-        
+
       } else {
         console.error("NOT logged in!");
       }
     });
   }
 
-  startFirestoreConnection(){
+  startFirestoreConnection() {
 
     if (this.isLoggedIn()) {
       this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
@@ -87,8 +108,8 @@ export class AuthService {
           this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
           console.log(account.data());
         });
-      },(error) =>{
-        if(this.isLoggedIn()){
+      }, (error) => {
+        if (this.isLoggedIn()) {
           console.error(`connection to firestore permission-denied -> ${error}`)
         }
       });
