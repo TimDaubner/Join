@@ -25,7 +25,7 @@
                 </div>
                 <div class="input-group">
                     <input #password="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
-                        name="password" placeholder="Password" [(ngModel)]="auth_service.input_passwort" required
+                        name="password" placeholder="Password" [(ngModel)]="password" required
                         minlength="4">
                     <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>

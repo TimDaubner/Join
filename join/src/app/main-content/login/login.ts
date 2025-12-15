@@ -50,7 +50,7 @@ export class Login {
   }
 
   SignUp() {
-
+    this.auth_service.createNewAccount(this.mail.value,this.password.value);
   }
 
   async loginAsGuest() {
@@ -84,7 +84,7 @@ export class Login {
   }
 
   onPasswordInput() {
-    let input = this.auth_service.input_passwort;
+    let input = this.auth_service.input_password;
     if (input == '') {
       this.passwordIcon = './assets/icons/lock.svg'
     }
