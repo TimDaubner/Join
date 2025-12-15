@@ -28,9 +28,6 @@
                                 minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
                             <img src="./assets/icons/person_gray.svg" alt="Person Icon" class="input-icon">
                         </div>
-                        @if(!lastName.valid && lastName.touched) {
-                        <div class="error_msg"><span>Please enter a valid last name</span></div>
-                        }
 
                         <div class="input-group">
                             <input name="mail" placeholder="Email" [(ngModel)]="contact.mail" type="text"
@@ -38,7 +35,7 @@
                             <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                         </div>
                         @if(!mail.valid && mail.touched) {
-                        <div class="error_msg"><span>Please enter a valid email address</span></div>
+                        <div class="error_msg"><span>Check your email and password. Please try again.</span></div>
                         }
 
                         <div class="input-group">

@@ -20,10 +20,12 @@ export class AuthService {
   private accountList: Account[] = [];
 
   input_mail = "";
-  input_passwort = "";
+  input_password = "";
 
-  async createNewAccount() {
-    await createUserWithEmailAndPassword(this.authFirestore, "tester@1234.com", "Hunden123").then((userCredentials) => {
+  async createNewAccount(mail:string,password:string) {
+    this.input_mail = mail;
+    this.input_password = password;
+    await createUserWithEmailAndPassword(this.authFirestore, mail, password).then((userCredentials) => {
       console.log(userCredentials);
     }).catch((error) => {
       console.error(error);
@@ -46,7 +48,7 @@ export class AuthService {
   }
 
   async loginUser() {
-    await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_passwort).then((input) => {
+    await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password).then((input) => {
       console.log("login successfull");
       this.router.navigate(['/summary']);
       this.login();
