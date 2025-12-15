@@ -5,4 +5,5 @@ export interface Contact {
     mail:string;
     phone:string;
     color:string;
+    uid:string | undefined;
 }

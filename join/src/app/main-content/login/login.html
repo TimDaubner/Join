@@ -52,18 +52,18 @@
             <form [ngClass]="{ 'margin-bottom': !mail.valid && mail.touched || !password.valid  && password.touched}"
                 (ngSubmit)="SignUp()">
                 <div class="input-group">
-                    <input name="surname" placeholder="First name" [(ngModel)]="contact.surname" type="text"
+                    <input name="surname" placeholder="First name" [(ngModel)]="auth_service.contact.surname" type="text"
                         minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input name="lastname" placeholder="Last name" [(ngModel)]="contact.lastname" type="text"
+                    <input name="lastname" placeholder="Last name" [(ngModel)]="auth_service.contact.lastname" type="text"
                         minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
                     <input #mail="ngModel" type="text" name="email" placeholder="E-mail"
-                        [(ngModel)]="auth_service.input_mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                        [(ngModel)]="auth_service.contact.mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                         required>
                     <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>

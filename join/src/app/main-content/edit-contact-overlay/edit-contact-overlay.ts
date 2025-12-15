@@ -18,6 +18,7 @@ export class EditContactOverlay {
     mail: '',
     phone: '',
     color: '',
+    uid: '',
   };
 
   @ViewChild('firstName') firstName!: NgModel;
@@ -36,6 +37,7 @@ export class EditContactOverlay {
         mail: '',
         phone: '',
         color: '',
+        uid: '',
       };
       this.contact_service.editing = false;
     }
@@ -48,6 +50,7 @@ export class EditContactOverlay {
       mail: '',
       phone: '',
       color: '',
+      uid: '',
     };
     this.contact_service.editing = false;
     this.resetForm();

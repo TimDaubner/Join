@@ -1,6 +1,5 @@
 import { Component, EventEmitter, inject, Output, ViewChild } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
-import { NgClass } from '@angular/common';
 import { ContactService } from '../../../shared/services/contact/contact.service';
 
 @Component({
@@ -26,6 +25,7 @@ export class AddContactOverlay {
     mail: "",
     phone: "",
     color: "",
+    uid: "",
   }
 
   submitContact() {
@@ -90,6 +90,7 @@ export class AddContactOverlay {
       mail: "",
       phone: "",
       color: "",
+      uid: "",
     }
   }
 

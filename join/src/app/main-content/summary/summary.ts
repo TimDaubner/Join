@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { BoardService } from '../../shared/services/board/board.service';
 import { Task } from '../../interfaces/task.interface';
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-summary',
@@ -11,6 +12,7 @@ import { Task } from '../../interfaces/task.interface';
 export class Summary {
 
 boardService = inject(BoardService)
+authService = inject(AuthService)
 
 highestPrioTask = "";
 
@@ -18,8 +20,11 @@ urgentTasks: Task[] = [];
 mediumTasks: Task[] = [];
 lowTasks: Task[] = [];
 
+shownDueDate = "";
+
 constructor() {
   this.fillTaskLists()
+  this.getHighestPrioTask()
 }
 
 fillTaskLists() {
@@ -35,20 +40,20 @@ fillTaskLists() {
 }
 
 getHighestPrioTask() {
-  if (this.urgentTasks) {
+  if (this.urgentTasks.length > 0) {
     this.highestPrioTask = "Urgent"
-    return this.getNextDueDate(this.urgentTasks)
+    this.shownDueDate = this.getNextDueDate(this.urgentTasks)
   }
-  else if (!this.urgentTasks) {
+  else if (this.urgentTasks.length == 0 && this.mediumTasks.length > 0) {
     this.highestPrioTask = "Medium"
-    return this.getNextDueDate(this.mediumTasks)
+    this.shownDueDate = this.getNextDueDate(this.mediumTasks)
   }
-  else if (!this.urgentTasks && !this.mediumTasks) {
+  else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0) {
     this.highestPrioTask = "Low"
-    return (this.getNextDueDate(this.lowTasks))
+    this.shownDueDate = (this.getNextDueDate(this.lowTasks))
   }
   else {
-    return "There are no open Tasks with deadlines"
+    this.shownDueDate = "There are no open Tasks with deadlines"
   }
 }
 
@@ -61,7 +66,6 @@ getNextDueDate(prioList: Task[]) {
         taskTitle = prioList[i].title
       }
   }
-  console.log("nächste Deadline: " + closestDeadline.toDate() + "für " + taskTitle );
   return closestDeadline.toDate().toLocaleDateString('en-UK');
 }
 

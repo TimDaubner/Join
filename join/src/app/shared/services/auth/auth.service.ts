@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { Account } from '../../../interfaces/account.interface';
-import { Auth, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, onIdTokenChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ContactService } from '../contact/contact.service';
-import { Contact } from '../../../main-content/contact/contact';
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +19,11 @@ export class AuthService {
 
   //Auth Firebase
   firestore: Firestore = inject(Firestore);
-  private unsubscribe;
   private accountList: Account[] = [];
+
+  currentuser  = "";
+  currentUserName = "";
+
 
   input_mail = "";
   input_password = "";
@@ -31,28 +34,45 @@ export class AuthService {
     mail: "",
     phone: "",
     color: "",
+    uid: "",
   }
 
+  constructor() {
+    this.callUserData()
+  }
+
+
   async createNewAccount(mail: string, password: string) {
-    this.input_mail = mail;
-    this.input_password = password;
     await createUserWithEmailAndPassword(this.authFirestore, mail, password).then((userCredentials) => {
       console.log(userCredentials.user.uid);
-      this.createContactObject(userCredentials.user.uid, "Karin", "Gottlob", "kago@gmail.com", "");
+      this.createContactObject(userCredentials.user.uid);
     }).catch((error) => {
       console.error(error);
     });
   }
 
-  createContactObject(uid: string, firstName: string, LastName: string, mail: string, phone: string) {
+  createContactObject(uid: string) {
     this.contact.color = this.contact_service.getRandomColor();
-    this.contact.surname = firstName;
-    this.contact.lastname = LastName;
-    this.contact.mail = mail;
+    this.contact.surname = this.correctInput(this.contact.surname)
+    this.contact.lastname = this.correctInput(this.contact.lastname)
     let newContact = this.contact_service.setContactObject(uid, this.contact);
-    console.log(this.contact);
     
+    console.log(this.contact);
+
     this.contact_service.addContactToDatabase(newContact);
+  }
+
+  correctInput(data: string) {
+    let cache: string = "";
+    for (let i = 0; i < data.length; i++) {
+      if (i == 0) {
+        cache += data.charAt(i).toUpperCase();
+      }
+      else {
+        cache += data.charAt(i).toLowerCase();
+      }
+    }
+    return cache;
   }
 
   async loginAsGuest() {
@@ -62,7 +82,6 @@ export class AuthService {
 
       this.router.navigate(['/summary']);
       this.login();
-      this.startFirestoreConnection();
 
     }).catch((error) => {
       console.log(error);
@@ -89,49 +108,16 @@ export class AuthService {
   }
 
   callUserData() {
-    onAuthStateChanged(this.authFirestore, (user) => {
+    onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {
         console.log(`logged in! ${user.uid}`);
-
+        this.currentuser = user.uid;
+        this.getUserName(this.currentuser)  
       } else {
         console.error("NOT logged in!");
       }
+      
     });
-  }
-
-  startFirestoreConnection() {
-
-    if (this.isLoggedIn()) {
-      this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
-        this.accountList = [];
-        accountsSnapshot.forEach((account) => {
-          this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
-          console.log(account.data());
-        });
-      }, (error) => {
-        if (this.isLoggedIn()) {
-          console.error(`connection to firestore permission-denied -> ${error}`)
-        }
-      });
-    }
-  }
-
-  constructor() {
-    if (this.isLoggedIn()) {
-      this.unsubscribe = onSnapshot(collection(this.firestore, "accounts"), (accountsSnapshot) => {
-        this.accountList = [];
-        accountsSnapshot.forEach((account) => {
-          this.accountList.push(this.setAccountObject(account.id, account.data() as Account));
-          console.log(account.data());
-        });
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
   }
 
   login(): void {
@@ -153,6 +139,24 @@ export class AuthService {
       isLoggedIn: obj.isLoggedIn,
       password: obj.password,
     }
+  }
+
+  getUserName(currentuser: string) {
+    console.log("getUser wied gecalled");
+    console.log(this.contact_service.contactList);
+    
+    
+    this.contact_service.contactList.filter((c) => {
+      console.log(c.uid + "gesuchte ID ist: " + currentuser);
+      
+      if(c.uid === currentuser) {
+        this.currentUserName = c.surname + " " + c.lastname;
+      }
+      else {
+        console.log("no user found" + this.currentuser);
+        
+      }
+    })
   }
 
 }

@@ -56,7 +56,7 @@
                         }
                         <hr>
                         <div class="upcoming_deadline_date">
-                            <p>{{getHighestPrioTask()}}</p>
+                            <p>{{shownDueDate}}</p>
                             <span>Upcoming Deadline</span>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
 
         <div class="greeting_user">
             <p>Good morning,</p>
-            <span>Rainer Wahnsinn</span>
+            <span>{{authService.currentUserName}}</span>
         </div>
     </div>
     <button (click)="getNextDueDate(boardService.taskList)">DueDate</button>

@@ -19,13 +19,7 @@ export class Login {
 
   userLoggedIn: string = 'Guest';
 
-  contact = {
-    surname: "",
-    lastname: "",
-    mail: "",
-    phone: "",
-    color: "",
-  }
+
 
   @ViewChild('mail') mailModel!: NgModel;
   @ViewChild('passwordModel') passwordModel!: NgModel;
@@ -57,7 +51,7 @@ export class Login {
   }
 
   SignUp() {
-    this.auth_service.createNewAccount("tim.daubner@gmx.de", "dackel123");
+    this.auth_service.createNewAccount(this.auth_service.contact.mail, this.firstPassword);
   }
 
   async loginAsGuest() {

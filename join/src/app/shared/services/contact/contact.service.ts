@@ -25,6 +25,7 @@ export class ContactService {
     mail: "",
     phone: "",
     color: "",
+    uid: "",
   };
 
   editedContact: Contact = {
@@ -33,6 +34,7 @@ export class ContactService {
     mail: "",
     phone: "",
     color: "",
+    uid: "",
   }
 
   colors = [
@@ -97,7 +99,7 @@ export class ContactService {
     return this.colors[index];
   }
 
-  setContactObject(idParam: string, obj: Contact): Contact {
+  setContactObject(idParam: string, obj: Contact, uidParam?: string | undefined): Contact {
     return {
       id: idParam,
       surname: obj.surname,
@@ -105,6 +107,7 @@ export class ContactService {
       mail: obj.mail,
       phone: obj.phone,
       color: obj.color,
+      uid: uidParam,
     }
   }
 
@@ -130,6 +133,7 @@ export class ContactService {
       mail: this.contactList[index].mail,
       phone: this.contactList[index].phone,
       color: this.contactList[index].color,
+      uid: this.contactList[index].uid,
     }
   }
 
