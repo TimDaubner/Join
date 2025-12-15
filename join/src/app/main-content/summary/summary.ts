@@ -69,6 +69,15 @@ getNextDueDate(prioList: Task[]) {
   return closestDeadline.toDate().toLocaleDateString('en-UK');
 }
 
+getTaskQuantity(type:string) {
+  let counter = 0
+  this.boardService.taskList.filter((t) => {
+    if(t.columnCategory == type) {
+      counter ++;
+    }
+  })
+  return counter
+}
 
 
 }

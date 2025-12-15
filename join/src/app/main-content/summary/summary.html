@@ -12,7 +12,7 @@
                         <img src="./assets/icons/edit_white.svg" alt="">
                     </div>
                     <div class="to_do_number">
-                        <p>99</p>
+                        <p>{{getTaskQuantity("To do")}}</p>
                         <span>To-do</span>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                         <img src="./assets/icons/check.svg" alt="">
                     </div>
                     <div class="to_do_number">
-                        <p>97</p>
+                        <p>{{getTaskQuantity("Done")}}</p>
                         <span>Done</span>
                     </div>
                 </div>
@@ -69,11 +69,11 @@
                         <span>Tasks in <br> Board</span> 
                     </div>
                     <div class="tasks_in_progress">
-                        <p>23</p>
+                        <p>{{getTaskQuantity("In progress")}}</p>
                         <span>Tasks in <br> Progress</span>
                     </div>
                     <div class="awaiting_feedback">
-                        <p>0</p>
+                        <p>{{getTaskQuantity("Await feedback")}}</p>
                         <span>Awaiting<br>Feedback</span>
                     </div>
                 </div>

@@ -151,6 +151,8 @@ export class AuthService {
       
       if(c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;
+        console.warn("Treffer");
+        
         return
       }
       else {
