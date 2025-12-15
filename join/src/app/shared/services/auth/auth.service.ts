@@ -147,13 +147,14 @@ export class AuthService {
     
     
     this.contact_service.contactList.filter((c) => {
-      console.log(c.uid + "gesuchte ID ist: " + currentuser);
+      console.log(c.surname + "; " + "gesuchte ID ist: " + c.uid + " derzeitiger User: " + currentuser);
       
       if(c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;
+        return
       }
       else {
-        console.log("no user found" + this.currentuser);
+        console.log("no user found" + " " + this.currentuser);
         
       }
     })

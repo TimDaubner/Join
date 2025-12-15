@@ -19,7 +19,7 @@ export class ContactService {
 
   initials = "";
   contactSelected = false;
-  currentContact = {
+  currentContact: Contact = {
     surname: "",
     lastname: "",
     mail: "",
@@ -59,7 +59,7 @@ export class ContactService {
     this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
       this.contactList = []
       contactsSnapshot.forEach((contact) => {
-        this.contactList.push(this.setContactObject(contact.id, contact.data() as Contact));
+        this.contactList.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
         this.sortFunc();
       });
     }, (error) => {
@@ -108,6 +108,18 @@ export class ContactService {
       phone: obj.phone,
       color: obj.color,
       uid: uidParam,
+    }
+  }
+
+  setContactObjectSnapshot(idParam: string, obj: Contact,) {
+    return {
+      id: idParam,
+      surname: obj.surname,
+      lastname: obj.lastname,
+      mail: obj.mail,
+      phone: obj.phone,
+      color: obj.color,
+      uid: obj.uid,
     }
   }
 
