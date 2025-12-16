@@ -157,7 +157,6 @@ export class AuthService {
       }
       else {
         console.log("no user found" + " " + this.currentuser);
-        
       }
     })
   }

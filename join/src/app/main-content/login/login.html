@@ -42,6 +42,10 @@
             </div>
         </div>
     </div>
+    <div class="responsive-sign-up">
+        Not a Join user?
+        <button class="sign-up-btn" (click)="changeOverlayToSignUp()">Sign up</button>
+    </div>
     }
     @else {
     <div class="frame-signup">
@@ -101,7 +105,8 @@
                 </div>
             </form>
             <div class="signup-btn">
-                <button (click)="SignUp()" class="login-btn" [disabled]="!firstName.valid || !lastName.valid || !mailSignUp.valid || !password.valid || !confirm_password.valid || !isChecked">Sign
+                <button (click)="SignUp()" class="login-btn"
+                    [disabled]="!firstName.valid || !lastName.valid || !mailSignUp.valid || !password.valid || !confirm_password.valid || !isChecked">Sign
                     up</button>
             </div>
         </div>
