@@ -101,6 +101,20 @@ export class BoardService {
     });
   }
 
+  async editedTaskToDB(task: Task) {
+    await updateDoc(doc(this.firestore, 'tasks', task.id!), {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      dueDate: task.dueDate,
+      priority: task.priority,
+      assignedTo: task.assignedTo,
+      taskCategory: task.taskCategory,
+      subTask: task.subTask,
+      columnCategory: task.columnCategory,
+    });
+  }
+
   async deleteTask(task: Task) {
     const index = this.taskList.findIndex((t) => t.id === task.id);
     await deleteDoc(doc(this.firestore, 'tasks', this.taskList[index].id!));

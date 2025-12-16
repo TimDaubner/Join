@@ -55,7 +55,7 @@ export class AuthService {
     this.contact.color = this.contact_service.getRandomColor();
     this.contact.surname = this.correctInput(this.contact.surname)
     this.contact.lastname = this.correctInput(this.contact.lastname)
-    let newContact = this.contact_service.setContactObject(uid, this.contact);
+    let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
     
     console.log(this.contact);
 

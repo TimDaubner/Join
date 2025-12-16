@@ -117,7 +117,9 @@ export class CardDetails {
     // falls dein Service das erwartet.
     
     Object.assign(this.selectedTask!, this.editedTask);
+    this.board_service.editedTaskToDB(this.selectedTask!)
     
+    // this.board_service.editTaskToDatabase()
     // Service Update Call hier:
     // this.board_service.updateTask(this.selectedTask).subscribe(...)
     
