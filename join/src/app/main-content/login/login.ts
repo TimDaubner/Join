@@ -83,9 +83,52 @@ export class Login {
     }
     this.onPasswordInput();
   }
+  toggleVisibilityP() {
+    if (this.isVisible) {
+      this.isVisible = false
+    }
+    else {
+      this.isVisible = true;
+    }
+    this.onPasswordInputP();
+  }
+
+  toggleVisibilityCP() {
+    if (this.isVisible) {
+      this.isVisible = false
+    }
+    else {
+      this.isVisible = true;
+    }
+    this.onPasswordInputCP();
+  }
 
   onPasswordInput() {
     let input = this.passwordValue;
+    if (input == '') {
+      this.passwordIcon = './assets/icons/lock.svg'
+    }
+    else if (input.length > 0 && !this.isVisible) {
+      this.passwordIcon = './assets/icons/visibility_off.svg'
+    }
+    else if (input.length > 0 && this.isVisible) {
+      this.passwordIcon = './assets/icons/visibility.svg'
+    }
+  }
+  onPasswordInputP() {
+    let input = this.firstPassword;
+    if (input == '') {
+      this.passwordIcon = './assets/icons/lock.svg'
+    }
+    else if (input.length > 0 && !this.isVisible) {
+      this.passwordIcon = './assets/icons/visibility_off.svg'
+    }
+    else if (input.length > 0 && this.isVisible) {
+      this.passwordIcon = './assets/icons/visibility.svg'
+    }
+  }
+  onPasswordInputCP() {
+    let input = this.confirmPassword;
     if (input == '') {
       this.passwordIcon = './assets/icons/lock.svg'
     }
@@ -119,4 +162,5 @@ export class Login {
     this.passwordModel.control.markAsUntouched();
     this.passwordModel.control.markAsPristine();
   }
+
 }

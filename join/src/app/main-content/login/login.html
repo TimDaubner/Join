@@ -15,16 +15,18 @@
                     <hr>
                 </h1>
             </div>
-            <form [ngClass]="{ 'margin-bottom': !mailModel.valid && mailModel.touched || !passwordModel.valid  && passwordModel.touched}"
+            <form
+                [ngClass]="{ 'margin-bottom': !mailModel.valid && mailModel.touched || !passwordModel.valid  && passwordModel.touched}"
                 (ngSubmit)="loginUser()">
                 <div class="input-group">
-                    <input #mailModel="ngModel" type="text" name="email" placeholder="E-mail"
-                        [(ngModel)]="mailValue" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-                        required>
+                    <input [ngClass]="{'red-border':!mailModel.valid && mailModel.touched}" #mailModel="ngModel"
+                        type="text" name="email" placeholder="E-mail" [(ngModel)]="mailValue"
+                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
                     <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input #passwordModel="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
+                    <input [ngClass]="{'red-border':!passwordModel.valid && passwordModel.touched}"
+                        #passwordModel="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
                         name="password" placeholder="Password" [(ngModel)]="passwordValue" required minlength="4">
                     <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>
@@ -33,7 +35,8 @@
                 }
             </form>
             <div class="login-btns">
-                <button [disabled]="!mailModel.valid || !passwordModel.valid " (click)="loginUser()" class="login-btn">Log
+                <button [disabled]="!mailModel.valid || !passwordModel.valid" (click)="loginUser()"
+                    class="login-btn">Log
                     in</button>
                 <button (click)="loginAsGuest()" class="guest-login-btn">Guest Log in</button>
             </div>
@@ -49,37 +52,43 @@
                     <hr>
                 </h1>
             </div>
-            <form [ngClass]="{ 'margin-bottom': !mail.valid && mail.touched || !password.valid  && password.touched}"
+            <form
+                [ngClass]="{ 'margin-bottom': !mailSignUp.valid && mailSignUp.touched || !password.valid  && password.touched}"
                 (ngSubmit)="SignUp()">
                 <div class="input-group">
-                    <input name="surname" placeholder="First name" [(ngModel)]="auth_service.contact.surname" type="text"
-                        minlength="3" #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    <input [ngClass]="{'red-border':!firstName.valid && firstName.touched}" name="surname"
+                        placeholder="First name" [(ngModel)]="auth_service.contact.surname" type="text" minlength="3"
+                        #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input name="lastname" placeholder="Last name" [(ngModel)]="auth_service.contact.lastname" type="text"
-                        minlength="3" #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                    <input [ngClass]="{'red-border':!lastName.valid && lastName.touched}" name="lastname"
+                        placeholder="Last name" [(ngModel)]="auth_service.contact.lastname" type="text" minlength="3"
+                        #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input #mail="ngModel" type="text" name="email" placeholder="E-mail"
-                        [(ngModel)]="auth_service.contact.mail" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-                        required>
+                    <input [ngClass]="{'red-border':!mailSignUp.valid && mailSignUp.touched}" #mailSignUp="ngModel"
+                        type="text" name="email" placeholder="E-mail" [(ngModel)]="auth_service.contact.mail"
+                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required>
                     <img src="./assets/icons/mail_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <input #password="ngModel" (input)="onPasswordInput()" [type]="isVisible ? 'text' : 'password'"
-                        name="password" placeholder="Password" [(ngModel)]="firstPassword" required minlength="4">
-                    <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
+                    <input
+                        [ngClass]="{'red-border':!confirm_password.valid && confirm_password.touched || firstPassword !== confirmPassword}"
+                        #password="ngModel" (input)="onPasswordInputP()" [type]="isVisible ? 'text' : 'password'"
+                        name="password" placeholder="Password" [(ngModel)]="firstPassword" required minlength="6">
+                    <img (click)="toggleVisibilityP()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>
                 <div class="input-group">
-                    <input #confirm_password="ngModel" (input)="onPasswordInput()"
-                        [type]="isVisible ? 'text' : 'password'" name="password" placeholder="Confirm Password"
-                        [(ngModel)]="confirmPassword" required minlength="4">
-                    <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
+                    <input
+                        [ngClass]="{'red-border':!confirm_password.valid && confirm_password.touched || firstPassword !== confirmPassword}"
+                        #confirm_password="ngModel" (input)="onPasswordInputCP()"
+                        [type]="isVisible ? 'text' : 'password'" name="confirmPassword" placeholder="Confirm Password"
+                        [(ngModel)]="confirmPassword" required minlength="6">
+                    <img (click)="toggleVisibilityCP()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>
-                @if(!password.valid && password.touched && password !== confirm_password && !confirm_password.valid &&
-                confirm_password.touched) {
+                @if(password.value !== confirm_password.value) {
                 <div class="error_msg_signup"><span>Your passwords don't match. Please try again.</span></div>
                 }
                 <div class="input-group row">
@@ -92,7 +101,7 @@
                 </div>
             </form>
             <div class="signup-btn">
-                <button  (click)="SignUp()" class="login-btn">Sign
+                <button (click)="SignUp()" class="login-btn" [disabled]="!firstName.valid || !lastName.valid || !mailSignUp.valid || !password.valid || !confirm_password.valid || !isChecked">Sign
                     up</button>
             </div>
         </div>

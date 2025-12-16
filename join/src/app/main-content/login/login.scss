@@ -211,12 +211,17 @@ form {
 
 .text {
     width: 500px;
-    >a{
+
+    >a {
         color: #29ABE2;
     }
 }
 
-.checkbox{
+.red-border {
+    border: 1px solid red !important;
+}
+
+.checkbox {
     width: 18px !important;
     cursor: pointer;
     margin-right: 16px;
@@ -226,7 +231,7 @@ form {
     cursor: pointer;
 }
 
-.signup-btn{
+.signup-btn {
     margin-top: 24px;
     display: flex;
     justify-content: center;
