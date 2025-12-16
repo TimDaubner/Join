@@ -7,7 +7,7 @@
     <div class="summary_content">
         <div class="task_overview">
             <div class="top_row_overview">
-                <div class="top_row_window">
+                <div class="top_row_window"  (click)="linkToBoard()">
                     <div class="edit_icon">
                         <img src="./assets/icons/edit_white.svg" alt="">
                     </div>
@@ -16,18 +16,18 @@
                         <span>To-do</span>
                     </div>
                 </div>
-                <div class="top_row_window">
+                <div class="top_row_window" (click)="linkToBoard()">
                     <div class="check_icon">
                         <img src="./assets/icons/check.svg" alt="">
                     </div>
-                    <div class="to_do_number">
+                    <div class="to_do_number" >
                         <p>{{getTaskQuantity("Done")}}</p>
                         <span>Done</span>
                     </div>
                 </div>
             </div>
             <div class="middle_row_overview">
-                <div class="upcoming_deadline">
+                <div class="upcoming_deadline" (click)="linkToBoard()">
                     <div class="priority">
                         @if (highestPrioTask == "Urgent") {
                         <div class="prio_icon">
@@ -63,16 +63,16 @@
                 </div>
             </div>
             <div class="bottom_row_overview">
-                <div class="overview_board_tasks">
-                    <div class="tasks_in_board">
+                <div class="overview_board_tasks" >
+                    <div class="tasks_in_board" (click)="linkToBoard()">
                         <p>{{boardService.taskList.length}}</p>
                         <span>Tasks in <br> Board</span> 
                     </div>
-                    <div class="tasks_in_progress">
+                    <div class="tasks_in_progress" (click)="linkToBoard()">
                         <p>{{getTaskQuantity("In progress")}}</p>
                         <span>Tasks in <br> Progress</span>
                     </div>
-                    <div class="awaiting_feedback">
+                    <div class="awaiting_feedback" (click)="linkToBoard()">
                         <p>{{getTaskQuantity("Await feedback")}}</p>
                         <span>Awaiting<br>Feedback</span>
                     </div>
@@ -82,9 +82,12 @@
         </div>
 
         <div class="greeting_user">
-            <p>Good morning,</p>
-            <span>{{authService.currentUserName}}</span>
+            <p>{{greeting}}</p>
+            @if(authService.currentUserName) {
+                <span>{{authService.currentUserName}}</span>
+            } @else {
+                <span>Guest</span>
+            }
         </div>
     </div>
-    <button (click)="getNextDueDate(boardService.taskList)">DueDate</button>
 </section>

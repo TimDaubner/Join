@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { BoardService } from '../../shared/services/board/board.service';
 import { Task } from '../../interfaces/task.interface';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -14,7 +15,11 @@ export class Summary {
 boardService = inject(BoardService)
 authService = inject(AuthService)
 
+private router = inject(Router)
+
 highestPrioTask = "";
+
+greeting = "";
 
 urgentTasks: Task[] = [];
 mediumTasks: Task[] = [];
@@ -25,6 +30,7 @@ shownDueDate = "";
 constructor() {
   this.fillTaskLists()
   this.getHighestPrioTask()
+  this.setGreeting()
 }
 
 fillTaskLists() {
@@ -79,5 +85,21 @@ getTaskQuantity(type:string) {
   return counter
 }
 
+linkToBoard() {
+  this.router.navigate(['/board']);
+}
+
+setGreeting() {
+    const hour = new Date().getHours();
+    
+    if (hour < 12) {
+      this.greeting = "Good morning";
+    } else if (hour < 18) {
+      this.greeting = "Good afternoon";
+    } else {
+      this.greeting = "Good evening";
+    }
+  }
 
 }
+

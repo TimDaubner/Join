@@ -11,7 +11,6 @@ section {
 }
 
 .task_overview {
-    width: 600px;
     display: flex;
     flex-direction: column;
 }
@@ -51,14 +50,25 @@ section {
     justify-content: center;
     align-items: center;
     gap: 16px;
-}
-
-.top_row_overview {
-    display: flex;
-    justify-content: space-between;
-}
-
-.edit_icon {
+    transition: all 150ms ease-in-out;
+    &:hover {
+        scale: 1.05;
+        background: $primary;
+        color: white;
+        .edit_icon {
+            background-color: white;
+            img {
+                filter: invert(1)
+            }
+        }
+        .check_icon {
+            background-color: white;
+            img {
+                filter: invert(1)
+            }
+        }
+    }
+    .edit_icon {
     width: 69px;
     height: 69px;
     background: $primary;
@@ -70,6 +80,14 @@ section {
         padding: 8px;
     }
 }
+}
+
+.top_row_overview {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 
 .check_icon {
     width: 69px;
@@ -111,7 +129,16 @@ section {
     justify-content: center;
     padding: 16px 64px;
     border-radius: 10px;
-
+    transition: all 150ms ease-in-out;
+    &:hover {
+        scale: 1.05;
+        background: $primary;
+        color: white;
+        .priority hr {
+            color: white;
+            border: 1px solid white;
+        }
+    }
 }
 
 .priority {
@@ -120,6 +147,8 @@ section {
     align-items: center;
     gap: 32px;
     hr {
+        width: 1px;
+        border: 1px solid #D1D1D1;
         color: #D1D1D1;
         align-self: stretch;
     }
@@ -176,6 +205,7 @@ section {
     background: white;
     border-radius: 10px;
     padding: 24px 48px;
+    transition: all 150ms ease-in-out;
     >p {
         font-size: 64px;
         font-weight: 600;
@@ -184,6 +214,12 @@ section {
     >span {
         font-size: 20px;
         text-align: center;
+    }
+
+    &:hover {
+        scale: 1.05;
+        background: $primary;
+        color: white;
     }
 }
 
@@ -195,6 +231,7 @@ section {
     background: white;
     border-radius: 10px;
     padding: 24px 48px;
+    transition: all 150ms ease-in-out;
     >p {
         font-size: 64px;
         font-weight: 600;
@@ -203,6 +240,11 @@ section {
     >span {
         font-size: 20px;
         text-align: center;
+    }
+    &:hover {
+        scale: 1.05;
+        background: $primary;
+        color: white;
     }
 }
 
@@ -214,6 +256,7 @@ section {
     background: white;
     border-radius: 10px;
     padding: 24px 48px;
+    transition: all 150ms ease-in-out;
     >p {
         font-size: 64px;
         font-weight: 600;
@@ -222,6 +265,11 @@ section {
     >span {
         font-size: 20px;
         text-align: center;
+    }
+    &:hover {
+        scale: 1.1;
+        background: $primary;
+        color: white;
     }
 }
 
@@ -241,3 +289,142 @@ section {
         line-height: 64px;
     }
 }
+
+@media (max-width: 1450px) {
+    .greeting_user {
+        margin-left: 0;
+    }
+
+    .top_row_overview {
+        width: 80%;
+    }
+
+    .top_row_window {
+        padding: 8px 16px;
+    }
+
+    .middle_row_overview {
+        width: 80%;
+    }
+
+    .bottom_row_overview {
+        width: 80%;
+        gap: 8px;
+        .tasks_in_board {
+            padding: 8px 20px;
+
+        }
+        .tasks_in_progress {
+            padding: 8px 20px;
+
+        }
+        .awaiting_feedback {
+            padding: 8px 20px;
+
+        }
+    }
+
+    .prio_icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        >img {
+            width: 30px;
+            height: 30px;
+        }
+}
+}
+
+@media (max-width: 1100px) {
+    .greeting_user {
+        display: none;
+    }
+
+    .bottom_row_overview {
+        width: 100%;
+        .tasks_in_board {
+            padding: 24px 48px;
+            margin: 0 8px;
+        }
+        .tasks_in_progress {
+            padding: 24px 48px;
+            margin: 0 8px;
+        }
+        .awaiting_feedback {
+            padding: 24px 48px;
+            margin: 0 8px;
+        }
+    }
+
+    .top_row_overview {
+        width: 100%
+    }
+
+    .middle_row_overview {
+        width: 100%;
+    }
+
+    .prio_icon {
+    width: 60px;
+    height: 60px;
+    >img {
+        width: 40px;
+        height: 40px;
+    }
+}
+}
+
+@media (max-width: 936px) {
+    section {
+        margin-left: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .section_header {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        hr {
+            width: 150px;
+            height: 2px;
+            border: 2px solid $secondary;
+            position: absolute;
+            top: 110px;
+            left: -10px;
+        }
+    }
+
+    .top_row_overview {
+        width: 75%
+    }
+
+    .middle_row_overview {
+        width: 75%;
+    }
+
+    .bottom_row_overview {
+        width: 75%;
+        .tasks_in_board {
+            padding: 8px 12px;
+        }
+        .tasks_in_progress {
+            padding: 8px 12px;
+        } 
+        .awaiting_feedback {
+            padding: 8px 12px;   
+        } 
+    }
+
+    
+
+    
+
+    
+}
+
