@@ -197,7 +197,7 @@ export class AuthService {
     const contact = this.contact_service.contactList.find((c) => c.uid === currentuser);
 
     if (!contact) {
-      this.userInitials.set('G'); // Guest User
+      this.userInitials.set('G');
       return;
     }
 
