@@ -1,5 +1,8 @@
 <section>
-    <div class="frame-logo" [ngClass]="{'rePositioning' : isNewPos}">
+    <div [ngClass]="{
+    'rePositioning': isNewPos,
+    'hide-mobile-logo': isSignUp
+  }" class="frame-logo">
         <img class="dark" src="./assets/icons/favicon.svg" alt="join_logo">
         <img class="light" src="./assets/icons/join_logo_white.svg" alt="join_logo">
     </div>

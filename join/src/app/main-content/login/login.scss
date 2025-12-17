@@ -399,15 +399,14 @@ form {
     .responsive-sign-up {
         display: flex;
     }
-
-    .input-group {
-        >img {
-            left: 80% !important;
-        }
-    }
 }
 
 @media(max-width:750px) {
+
+    .hide-mobile-logo {
+        display: none !important;
+    }
+
     .signup {
         >form {
             margin-bottom: 8px;
@@ -418,33 +417,22 @@ form {
         padding-left: 16px !important;
     }
 
-    .frame-signup {
-        padding-left: 64px;
-    }
-
     .signup {
-        width: 70%;
+        width: 100%;
     }
 
     .text {
         min-width: 100px;
     }
-    .input-group{
-        width: 75%;
-    }
 }
 
 @media(max-width:650px) {
+    .frame-signup {
+        padding: 8px;
+    }
+
     .login {
         width: 85%;
-    }
-
-    .input-group{
-        width: 90% !important;
-    }
-
-    .input-group .input-icon {
-        left: 80%;
     }
 
     h1 {
@@ -462,29 +450,28 @@ form {
     }
 }
 
-@media(max-width:490px){
-     .signup {
-        width: 60%;
+@media(max-width:490px) {
+    .signup {
+        width: 100%;
     }
-    h1{
+
+    h1 {
         font-size: 40px !important;
+    }
+
+    .input-group {
+        width: 70%;
+
+        >img {
+            left: 85% !important;
+        }
     }
 }
 
 @media(max-width:400px) {
 
     .signup {
-        width: 70%;
-    }
-
-    .input-group {
-        width: 125%;
-        >input{
-            padding-left: 8px;
-        }
-        >img{
-            left: 85% !important;
-        }
+        width: 100%;
     }
 
     h1 {
@@ -498,35 +485,36 @@ form {
     }
 }
 
-@media(min-width:1920px){
-    section{
+@media(min-width:1920px) {
+    section {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         max-width: 1920px;
-        >.frame-logo{
-            >img{
+
+        >.frame-logo {
+            >img {
                 margin-left: -480px;
             }
         }
     }
 
-    .sign-up{
+    .sign-up {
         margin-right: 37vw;
     }
 
-    .frame-login{
+    .frame-login {
         min-width: 1920px;
     }
 
 
-    .login{
+    .login {
         height: 35%;
     }
 
     .signup {
-    height: 55%;
-    width: 65%;
-}
+        height: 55%;
+        width: 65%;
+    }
 }
