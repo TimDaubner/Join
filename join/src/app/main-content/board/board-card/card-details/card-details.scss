@@ -2,58 +2,62 @@
 
 // --- Overlay & Container (Basis für View & Edit) ---
 .overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  transition: all 400ms ease-in-out;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: all 400ms ease-in-out;
 }
 
 .task_details {
-  width: 525px;
-  max-width: 95vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: white;
-  border-radius: 30px;
-  padding: 48px 40px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: all 400ms ease-in-out;
+    width: 525px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 30px;
+    padding: 48px 40px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 400ms ease-in-out;
 
-  // Scrollbar ausblenden für Clean Look
-  &::-webkit-scrollbar { display: none; }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    // Scrollbar ausblenden für Clean Look
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 // Animationen
-.slide_in_right { 
+.slide_in_right {
     opacity: 1;
     transform: translateX(0);
 }
-.slide_out_right { 
+
+.slide_out_right {
     opacity: 0;
     transform: translateX(1000px);
- }
+}
 
- .overlay.show {
+.overlay.show {
     opacity: 1;
- }
+}
 
- .overlay.hide {
+.overlay.hide {
     opacity: 0;
- }
+}
 
 
 .close_container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    position: absolute; 
+    position: absolute;
     top: 45px;
     right: 40px;
     z-index: 5;
@@ -67,14 +71,14 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    
+
     img {
         width: 32px;
         height: 32px;
     }
-    
+
     &:hover {
-        background-color: rgba(0,0,0,0.05);
+        background-color: rgba(0, 0, 0, 0.05);
         border-radius: 50%;
     }
 }
@@ -99,8 +103,13 @@
 }
 
 // Farben
-.task_category.UserStory { background-color: #0038FF; }
-.task_category.TechnicalTask { background-color: #1FD7C1; }
+.task_category.UserStory {
+    background-color: #0038FF;
+}
+
+.task_category.TechnicalTask {
+    background-color: #1FD7C1;
+}
 
 .task_title_large {
     font-size: 61px; // Sehr groß, wie im Design
@@ -124,7 +133,7 @@
     gap: 25px;
     margin-bottom: 16px;
     font-size: 20px;
-    
+
     .label {
         color: #424242;
         min-width: 100px;
@@ -132,14 +141,17 @@
 }
 
 .assigned-to {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .priority_icon {
     display: flex;
     align-items: center;
     gap: 10px;
-    img { margin-left: 10px; }
+
+    img {
+        margin-left: 10px;
+    }
 }
 
 // Assigned List (View Mode)
@@ -150,19 +162,30 @@
     margin-top: 16px;
     margin-bottom: 16px;
     padding-left: 8px;
-    
+    overflow-y: auto;
+    max-height: 120px;
+
     .frame-initials {
         display: flex;
         align-items: center;
         gap: 16px;
-        
+
         .initials {
-            width: 42px; height: 42px;
-            border-radius: 50%; color: white;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 14px; border: 2px solid white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            border: 2px solid white;
         }
-        .worker { font-size: 19px; color: black; }
+
+        .worker {
+            font-size: 19px;
+            color: black;
+        }
     }
 }
 
@@ -171,6 +194,8 @@
 }
 
 .subtask_list {
+    overflow-y: auto;
+    max-height: 100px;
     padding-top: 4px;
     padding-left: 16px;
     font-size: 16px;
@@ -185,8 +210,9 @@
     padding: 6px 0;
     padding-left: 8px;
     padding-right: 8px;
-    &:hover { 
-        background-color: rgba(0,0,0,0.02); 
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
     }
 }
 
@@ -196,6 +222,7 @@
     align-items: center;
     gap: 8px;
     margin-top: 48px;
+
     button {
         display: flex;
         align-items: center;
@@ -205,22 +232,25 @@
         cursor: pointer;
         color: #2a3647;
         font-size: 16px;
-        &:hover { 
+
+        &:hover {
             color: #29abe2;
-            img { 
-                filter: brightness(0) saturate(100%) invert(62%) sepia(66%) saturate(1476%) hue-rotate(167deg) brightness(91%) contrast(92%); 
-            } 
+
+            img {
+                filter: brightness(0) saturate(100%) invert(62%) sepia(66%) saturate(1476%) hue-rotate(167deg) brightness(91%) contrast(92%);
+            }
         }
     }
-    .divider { 
-        width: 1px; 
-        height: 24px; 
-        background-color: #D1D1D1; 
-        margin: 0 8px; 
+
+    .divider {
+        width: 1px;
+        height: 24px;
+        background-color: #D1D1D1;
+        margin: 0 8px;
     }
 }
 
-.edit_input_window{
+.edit_input_window {
     width: 100%;
     height: 32px;
     font-size: 16px;
@@ -229,6 +259,7 @@
 .editing_subtask {
     width: 100%;
     position: relative;
+
     >input {
         border-radius: 0;
     }
@@ -240,15 +271,18 @@
     position: absolute;
     top: 8px;
     right: 4px;
+
     >button {
         border: none;
         background: none;
         cursor: pointer;
+
         >img {
             width: 16px;
             height: 16px;
         }
     }
+
     >input {
         margin-bottom: 0;
         border-radius: 0;
@@ -270,16 +304,17 @@
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px; // Abstand zwischen den Feldern
-    
+
     label {
         font-size: 20px; // Label Größe aus View Mode übernehmen
-        color: black;    // Oder #2a3647
+        color: black; // Oder #2a3647
         font-weight: 400;
     }
 }
 
 // Style für ALLE Inputs und Textareas
-input, textarea {
+input,
+textarea {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 13px 21px;
@@ -290,8 +325,13 @@ input, textarea {
     font-family: 'Inter', sans-serif; // Oder deine Font
     background: white;
 
-    &::placeholder { color: #D1D1D1; }
-    &:focus { border-color: #29abe2; }
+    &::placeholder {
+        color: #D1D1D1;
+    }
+
+    &:focus {
+        border-color: #29abe2;
+    }
 }
 
 .textarea_desciption {
@@ -304,7 +344,7 @@ input, textarea {
     position: relative;
     display: flex;
     align-items: center;
-    
+
     ::ng-deep .mat-datepicker-toggle {
         position: absolute;
         right: 10px;
@@ -316,7 +356,7 @@ input, textarea {
 .priority_buttons {
     display: flex;
     gap: 16px;
-    
+
     button {
         flex: 1;
         display: flex;
@@ -330,29 +370,57 @@ input, textarea {
         border: 1px solid #D1D1D1; // Standard Border
         cursor: pointer;
         transition: all 100ms ease-in-out;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 
-        img { width: 20px; height: 14px; object-fit: contain;}
+        img {
+            width: 20px;
+            height: 14px;
+            object-fit: contain;
+        }
 
-        &:hover { box-shadow: 0 4px 4px rgba(0,0,0,0.1); }
+        &:hover {
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        }
     }
 
     // Active States (Farben aus Screenshot)
-    .urgent_active { background-color: #FF3D00; color: white; border-color: #FF3D00; font-weight: 700; }
-    .medium_active { background-color: #FFA800; color: white; border-color: #FFA800; font-weight: 700; }
-    .low_active { background-color: #7AE229; color: white; border-color: #7AE229; font-weight: 700; }
+    .urgent_active {
+        background-color: #FF3D00;
+        color: white;
+        border-color: #FF3D00;
+        font-weight: 700;
+    }
+
+    .medium_active {
+        background-color: #FFA800;
+        color: white;
+        border-color: #FFA800;
+        font-weight: 700;
+    }
+
+    .low_active {
+        background-color: #7AE229;
+        color: white;
+        border-color: #7AE229;
+        font-weight: 700;
+    }
 }
 
 // Assigned Dropdown
 .assigned_contacts {
     position: relative;
-    
+
     .dropdown-input-container {
         position: relative;
         cursor: pointer;
-        
-        input { cursor: pointer; padding-right: 40px; } // Platz für Pfeil
-        
+
+        input {
+            cursor: pointer;
+            padding-right: 40px;
+        }
+
+        // Platz für Pfeil
+
         .dropdown_icon {
             position: absolute;
             right: 16px;
@@ -372,32 +440,49 @@ input, textarea {
     overflow-y: auto;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 100;
     border: 1px solid #f0f0f0;
-    
+
     .single_contact_dd {
-        display: flex; justify-content: space-between; align-items: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: 12px 20px;
         cursor: pointer;
         font-size: 19px;
-        
+
         &:hover {
             background-color: #e4e1e1; // Dunkler Hover wie oft bei Join
         }
+
         &.selected {
             background-color: $primary; // Dunkler Hover wie oft bei Join
             color: white;
         }
-        
+
         // Wenn selektiert/hovered, muss Icon weiß werden (Filter oder SVG Tausch nötig)
         // Hier einfach halten:
-        .checkbox-icon { width: 20px; height: 20px; }
-        
-        .contact-name { display: flex; align-items: center; gap: 12px; }
+        .checkbox-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .initials-small {
-            width: 36px; height: 36px; border-radius: 50%; color: white;
-            display: flex; justify-content: center; align-items: center; font-size: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
             border: 2px solid white;
         }
     }
@@ -408,44 +493,63 @@ input, textarea {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 12px;
-    padding-left: 4px; 
-    
+    padding-left: 4px;
+
     .initials {
-        width: 40px; height: 40px; border-radius: 50%; color: white;
-        display: flex; justify-content: center; align-items: center;
-        font-size: 14px; border: 2px solid white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        border: 2px solid white;
     }
 }
 
 // Subtasks Edit Section
 .subtask-input-container {
     position: relative;
-    input { padding-right: 40px; }
-    
+
+    input {
+        padding-right: 40px;
+    }
+
     hr {
         width: 1px;
         height: 24px;
-        position: absolute; right: 35px; top: 12px;
+        position: absolute;
+        right: 35px;
+        top: 12px;
         color: #eeeeee;
     }
 }
 
 #btn_sub_clear {
-    position: absolute; right: 40px; top: 12px;
-    border: none; background: none; cursor: pointer;
+    position: absolute;
+    right: 40px;
+    top: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
     border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    img { width: 24px; }
-    &:hover{
+
+    img {
+        width: 24px;
+    }
+
+    &:hover {
         background-color: #eeeeee;
     }
 }
 
 .subtask_item:hover .sub_actions {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .sub_actions {
@@ -462,10 +566,12 @@ input, textarea {
     background: none;
     border: none;
     border-radius: 8px;
+
     &:hover {
         background: #e4e1e1;
         cursor: pointer;
     }
+
     >img {
         width: 16px;
         height: 16px;
@@ -473,33 +579,60 @@ input, textarea {
 }
 
 #btn_sub_check {
-    position: absolute; right: 10px; top: 12px;
-    border: none; background: none; cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
     border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    img { width: 24px; }
-     &:hover{
+
+    img {
+        width: 24px;
+    }
+
+    &:hover {
         background-color: #eeeeee;
     }
 }
 
 .subtask_edit_list {
-    list-style: none; padding: 0; margin-top: 12px;
-    
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+    overflow-y: auto;
+    max-height: 100px;
+
     .subtask_edit_item {
-        display: flex; justify-content: space-between; align-items: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: 8px 12px;
         border-bottom: 1px solid #eee;
         font-size: 16px;
-        
-        &:hover { background-color: #f9f9f9; }
-        
+
+        &:hover {
+            background-color: #f9f9f9;
+        }
+
         button {
-            border: none; background: none; cursor: pointer;
-            img { width: 18px; filter: grayscale(100%); opacity: 0.6; }
-            &:hover img { filter: none; opacity: 1; }
+            border: none;
+            background: none;
+            cursor: pointer;
+
+            img {
+                width: 18px;
+                filter: grayscale(100%);
+                opacity: 0.6;
+            }
+
+            &:hover img {
+                filter: none;
+                opacity: 1;
+            }
         }
     }
 }
@@ -520,9 +653,13 @@ input, textarea {
         font-size: 21px;
         font-weight: 700;
         cursor: pointer;
-        &:hover { border-color: #29abe2; color: #29abe2; }
+
+        &:hover {
+            border-color: #29abe2;
+            color: #29abe2;
+        }
     }
-    
+
     .ok_btn {
         background-color: #2A3647;
         color: white;
@@ -535,12 +672,12 @@ input, textarea {
         display: flex;
         align-items: center;
         gap: 8px;
-        
+
         &:hover {
             background-color: #29abe2;
-            box-shadow: 0 4px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         &:disabled {
             background-color: #ccc;
             cursor: not-allowed;
@@ -550,8 +687,8 @@ input, textarea {
 }
 
 .d_none {
-        display: none;
-    }
+    display: none;
+}
 
 // Keyframes
 // @keyframes slide_in_right { from { transform: translateX(100vw); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
