@@ -42,7 +42,7 @@ export class AuthService {
   isNew: boolean = false;
 
   constructor() {
-    this.callUserData()
+    this.callUserData();
   }
 
 
@@ -64,7 +64,10 @@ export class AuthService {
     this.contact.surname = this.correctInput(this.contact.surname)
     this.contact.lastname = this.correctInput(this.contact.lastname)
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-
+    if (uid) {
+      this.currentuser = uid;
+      this.getUserName(this.currentuser);
+    }
     await this.contact_service.addContactToDatabase(newContact);
   }
 
@@ -99,10 +102,12 @@ export class AuthService {
 
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password).then((input) => {
       console.log("login successfull");
-      if (!this.isNew) {
-        this.router.navigate(['/summary']);
+      if (input.user) {
+        this.login();
+        if (!this.isNew) {
+          this.router.navigate(['/summary']);
+        }
       }
-      this.login();
 
     }).catch((error) => {
       console.log(error);
@@ -118,12 +123,12 @@ export class AuthService {
     onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {
         this.currentuser = user.uid;
-        this.getUserName(this.currentuser)
+        this.getUserName(this.currentuser);
       }
     });
   }
 
-  login(): void {
+  login() {
     this.isAuthenticated = true;
   }
 
@@ -147,6 +152,7 @@ export class AuthService {
   }
 
   getUserName(currentuser: string) {
+
     this.contact_service.contactList.filter((c) => {
 
       if (c.uid === currentuser) {
