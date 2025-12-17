@@ -4,6 +4,7 @@ import { Account } from '../../../interfaces/account.interface';
 import { Auth, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, onIdTokenChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ContactService } from '../contact/contact.service';
+import { BoardService } from '../board/board.service';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class AuthService {
   private router = inject(Router);
   private authFirestore = inject(Auth);
   private contact_service = inject(ContactService);
+  private board_service = inject(BoardService);
 
   //Auth Angular
   private isAuthenticated = false;
@@ -21,7 +23,7 @@ export class AuthService {
   firestore: Firestore = inject(Firestore);
   private accountList: Account[] = [];
 
-  currentuser  = "";
+  currentuser = "";
   currentUserName = "";
 
 
@@ -37,6 +39,8 @@ export class AuthService {
     uid: "",
   }
 
+  isNew: boolean = false;
+
   constructor() {
     this.callUserData()
   }
@@ -44,20 +48,24 @@ export class AuthService {
 
   async createNewAccount(mail: string, password: string) {
     await createUserWithEmailAndPassword(this.authFirestore, mail, password).then((userCredentials) => {
+      this.isNew = true;
       console.log(userCredentials.user.uid);
+      this.loginUser(mail, password);
       this.createContactObject(userCredentials.user.uid);
+      this.isNew = false;
+      this.router.navigate(['/summary']);
     }).catch((error) => {
       console.error(error);
     });
   }
 
-  createContactObject(uid: string) {
+  async createContactObject(uid: string) {
     this.contact.color = this.contact_service.getRandomColor();
     this.contact.surname = this.correctInput(this.contact.surname)
     this.contact.lastname = this.correctInput(this.contact.lastname)
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-  
-    this.contact_service.addContactToDatabase(newContact);
+
+    await this.contact_service.addContactToDatabase(newContact);
   }
 
   correctInput(data: string) {
@@ -91,7 +99,9 @@ export class AuthService {
 
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password).then((input) => {
       console.log("login successfull");
-      this.router.navigate(['/summary']);
+      if (!this.isNew) {
+        this.router.navigate(['/summary']);
+      }
       this.login();
 
     }).catch((error) => {
@@ -108,8 +118,8 @@ export class AuthService {
     onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {
         this.currentuser = user.uid;
-        this.getUserName(this.currentuser)  
-      }      
+        this.getUserName(this.currentuser)
+      }
     });
   }
 
@@ -119,6 +129,8 @@ export class AuthService {
 
   logout(): void {
     this.isAuthenticated = false;
+    this.contact_service.unsubscribe();
+    this.board_service.unsubscribe();
   }
 
   isLoggedIn(): boolean {
@@ -137,7 +149,7 @@ export class AuthService {
   getUserName(currentuser: string) {
     this.contact_service.contactList.filter((c) => {
 
-      if(c.uid === currentuser) {
+      if (c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;
         return
       }

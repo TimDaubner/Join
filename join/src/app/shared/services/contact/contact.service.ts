@@ -63,7 +63,7 @@ export class ContactService {
         this.sortFunc();
       });
     }, (error) => {
-      console.log(error);
+      // console.log('');
       
       // if(this.auth_service.isLoggedIn()){ 
       //   console.error(`connection to firestore permission-denied -> ${error}`)
