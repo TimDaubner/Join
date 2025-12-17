@@ -8,7 +8,7 @@
         <div class="header_icons">
             <a routerLink="/help" routerLinkActive="hidden" class="btn_help" aria-label="open help"></a>
             <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
-                [class.active]="menu_open" (click)="toggleMenu()">G
+                [class.active]="menu_open" (click)="toggleMenu()">{{ auth_service.userInitials() }}
             </a>
 
             @if (menu_open) {
