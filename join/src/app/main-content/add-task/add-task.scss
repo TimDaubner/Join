@@ -190,6 +190,9 @@ mat-datepicker-toggle {
 
 #assigned_worker_input {
     width: 100%;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 #assigned_dropdown {

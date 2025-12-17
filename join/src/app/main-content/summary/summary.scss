@@ -53,6 +53,7 @@ section {
     transition: all 150ms ease-in-out;
     &:hover {
         scale: 1.05;
+        cursor: pointer;
         background: $primary;
         color: white;
         .edit_icon {
@@ -68,6 +69,7 @@ section {
             }
         }
     }
+
     .edit_icon {
     width: 69px;
     height: 69px;
@@ -132,6 +134,7 @@ section {
     transition: all 150ms ease-in-out;
     &:hover {
         scale: 1.05;
+        cursor: pointer;
         background: $primary;
         color: white;
         .priority hr {
@@ -220,6 +223,7 @@ section {
     &:hover {
         scale: 1.05;
         background: $primary;
+        cursor: pointer;
         color: white;
     }
 }
@@ -247,6 +251,7 @@ section {
         scale: 1.05;
         background: $primary;
         color: white;
+        cursor: pointer;
     }
 }
 
@@ -272,6 +277,7 @@ section {
         scale: 1.1;
         background: $primary;
         color: white;
+        cursor: pointer;
     }
 }
 
