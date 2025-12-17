@@ -1,5 +1,8 @@
 <section>
-    <div class="frame-logo" [ngClass]="{'rePositioning' : isNewPos}">
+    <div [ngClass]="{
+    'rePositioning': isNewPos,
+    'hide-mobile-logo': isSignUp
+  }" class="frame-logo">
         <img class="dark" src="./assets/icons/favicon.svg" alt="join_logo">
         <img class="light" src="./assets/icons/join_logo_white.svg" alt="join_logo">
     </div>
@@ -62,13 +65,13 @@
                 <div class="input-group">
                     <input [ngClass]="{'red-border':!firstName.valid && firstName.touched}" name="surname"
                         placeholder="First name" [(ngModel)]="auth_service.contact.surname" type="text" minlength="3"
-                        #firstName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                        #firstName="ngModel" pattern="^[a-zA-ZäöüÄÖÜ\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">
                     <input [ngClass]="{'red-border':!lastName.valid && lastName.touched}" name="lastname"
                         placeholder="Last name" [(ngModel)]="auth_service.contact.lastname" type="text" minlength="3"
-                        #lastName="ngModel" pattern="^[a-zA-Z\s]*$" required>
+                        #lastName="ngModel" pattern="^[a-zA-ZäöüÄÖÜ\s]*$" required>
                     <img src="./assets/icons/person_gray.svg" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-group">

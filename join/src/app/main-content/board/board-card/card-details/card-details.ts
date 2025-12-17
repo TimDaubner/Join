@@ -82,6 +82,7 @@ export class CardDetails {
   toggleSubtaskStatus(sub: any, event: Event) {
     event.preventDefault();
     sub.status = !sub.status;
+    this.saveTask();
     // Hier optional direkt speichern, falls gewünscht:
     // this.board_service.updateTask(this.selectedTask);
   }
@@ -117,7 +118,7 @@ export class CardDetails {
     // falls dein Service das erwartet.
     
     Object.assign(this.selectedTask!, this.editedTask);
-    this.board_service.editedTaskToDB(this.selectedTask!)
+    this.board_service.editedTaskToDB(this.selectedTask!);
     
     // this.board_service.editTaskToDatabase()
     // Service Update Call hier:
