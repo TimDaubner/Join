@@ -281,7 +281,7 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 400px) {
   .navbar_container .logged_out_bar {
     white-space: nowrap;
     padding: 0 0 0 20px;
@@ -293,6 +293,16 @@
 
   .logged_out_bar .legal_logged_out a {
     font-size: 14px !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .logged_out_bar .legal_logged_out a {
+    padding: 10px 20px;
+  }
+
+  .navbar_container .logged_out_bar .legal_logged_out {
+    gap: 0;
   }
 }
 
