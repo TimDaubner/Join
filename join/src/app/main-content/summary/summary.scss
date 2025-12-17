@@ -143,7 +143,7 @@ section {
 
 .priority {
     display: flex;
-
+    justify-content: center;
     align-items: center;
     gap: 32px;
     hr {
@@ -401,13 +401,7 @@ section {
         }
     }
 
-    .top_row_overview {
-        
-    }
-
-    .middle_row_overview {
-        
-    }
+    
 
     .bottom_row_overview {
         .tasks_in_board {
@@ -420,19 +414,87 @@ section {
             padding: 8px 12px;   
         } 
     }
+}
 
 @media (max-width: 550px) {
-    .top_row_window{
-        width: 35%;
-    }
     
     .to_do_number p{
         font-size: 47px;
     }
+
+    .upcoming_deadline {
+        padding: 8px 16px;
+    }
+
+    .tasks_in_board {
+        p {
+            font-size: 47px;
+        }
+        span {
+            font-size: 16px;
+        }
+    }
+
+    .tasks_in_progress  {
+        p {
+            font-size: 47px;
+        }
+        span {
+            font-size: 16px;
+        }
+    }
+
+    .awaiting_feedback {
+        p {
+            font-size: 47px;
+        }
+        span {
+            font-size: 16px;
+        }
+    }
 }
 
-    
+@media (max-width: 430px) {
+    section {
+        margin-left: 8px;
+    }
 
+    .prio_icon {
+        display: none;
+    }
+
+    .top_row_overview {
+        width: 300px;
+    }
+
+    .middle_row_overview {
+        width: 300px;
+    }
+
+    .upcoming_deadline {
+        width: 300px;
+        padding: 8px 0;
+    }
     
+    .top_row_window .edit_icon{
+        width: 50px;
+        height: 50px;
+    }
+
+    .top_row_window .check_icon{
+        width: 50px;
+        height: 50px;
+    }
+
+     .bottom_row_overview .tasks_in_board {
+        padding: 8px 8px;
+    }
+
+     .bottom_row_overview .tasks_in_progress  {
+        padding: 8px 8px;
+    }
+
+     .bottom_row_overview .awaiting_feedback {
+        padding: 8px 8px;
+    }
 }
-
