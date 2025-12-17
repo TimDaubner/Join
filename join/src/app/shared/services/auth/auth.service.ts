@@ -56,9 +56,7 @@ export class AuthService {
     this.contact.surname = this.correctInput(this.contact.surname)
     this.contact.lastname = this.correctInput(this.contact.lastname)
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-    
-    console.log(this.contact);
-
+  
     this.contact_service.addContactToDatabase(newContact);
   }
 
@@ -78,7 +76,6 @@ export class AuthService {
   async loginAsGuest() {
     await signInWithEmailAndPassword(this.authFirestore, "guest@web.com", "dackel").then((input) => {
       console.log("login successfull");
-      console.log(this.authFirestore);
 
       this.router.navigate(['/summary']);
       this.login();
@@ -110,13 +107,9 @@ export class AuthService {
   callUserData() {
     onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {
-        console.log(`logged in! ${user.uid}`);
         this.currentuser = user.uid;
         this.getUserName(this.currentuser)  
-      } else {
-        console.error("NOT logged in!");
-      }
-      
+      }      
     });
   }
 
@@ -142,21 +135,11 @@ export class AuthService {
   }
 
   getUserName(currentuser: string) {
-    console.log("getUser wied gecalled");
-    console.log(this.contact_service.contactList);
-    
-    
     this.contact_service.contactList.filter((c) => {
-      console.log(c.surname + "; " + "gesuchte ID ist: " + c.uid + " derzeitiger User: " + currentuser);
-      
+
       if(c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;
-        console.warn("Treffer");
-        
         return
-      }
-      else {
-        console.log("no user found" + " " + this.currentuser);
       }
     })
   }
