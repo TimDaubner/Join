@@ -60,10 +60,12 @@
             <div class="subtask_list">
                 @for (sub of selectedTask?.subTask; track sub.id) {
                 <label class="subtask_item" (click)="toggleSubtaskStatus(sub, $event)">
-                    <img class="checkbox_icon" 
-                         [src]="sub.status ? '/assets/icons/checked.svg' : '/assets/icons/unchecked.svg'" 
-                         alt="Checkbox" /> 
-                    <span class="subtask_description">{{ sub.subDescription }}</span>
+                    <div id="no_edit_subtask">
+                        <img class="checkbox_icon" 
+                            [src]="sub.status ? '/assets/icons/checked.svg' : '/assets/icons/unchecked.svg'" 
+                            alt="Checkbox" /> 
+                        <span class="subtask_description">{{ sub.subDescription }}</span>
+                    </div>
                 </label>
                 }
             </div>
