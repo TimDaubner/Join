@@ -88,7 +88,7 @@ export class AddTask {
     }, 2900);
     setTimeout(() => {
       this.router.navigate(['/board']);
-    }, 3000);
+    }, 2000);
 
   };
 
