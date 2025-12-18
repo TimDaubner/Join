@@ -23,8 +23,7 @@ export class AuthService {
   private board_service = inject(BoardService);
 
   //Auth Angular
-  // private isAuthenticated = false;
-  isAuthenticated = signal(false);
+  private isAuthenticated = false;
 
   //Auth Firebase
   firestore: Firestore = inject(Firestore);
@@ -124,57 +123,28 @@ export class AuthService {
     this.logout();
   }
 
-  // callUserData() {
-  //   onIdTokenChanged(this.authFirestore, (user) => {
-  //     if (user) {
-  //       this.currentuser = user.uid;
-  //       this.getUserName(this.currentuser);
-  //     }
-  //   });
-  // }
-
   callUserData() {
     onIdTokenChanged(this.authFirestore, (user) => {
-      if (!user) return;
-
-      this.currentuser = user.uid;
-
-      const interval = setInterval(() => {
-        if (this.contact_service.contactList.length > 0) {
-          this.getUserName(this.currentuser);
-          clearInterval(interval);
-        }
-      }, 50);
+      if (user) {
+        this.currentuser = user.uid;
+        this.getUserName(this.currentuser);
+      }
     });
   }
 
-  login() {
-    this.isAuthenticated.set(true);
+  login(): void {
+    this.isAuthenticated = true;
   }
 
-  logout() {
-    this.isAuthenticated.set(false);
+  logout(): void {
+    this.isAuthenticated = false;
     this.contact_service.unsubscribe();
     this.board_service.unsubscribe();
   }
 
-  isLoggedIn() {
-    return this.isAuthenticated();
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
   }
-
-  // login(): void {
-  //   this.isAuthenticated = true;
-  // }
-
-  // logout(): void {
-  //   this.isAuthenticated = false;
-  //   this.contact_service.unsubscribe();
-  //   this.board_service.unsubscribe();
-  // }
-
-  // isLoggedIn(): boolean {
-  //   return this.isAuthenticated;
-  // }
 
   setAccountObject(idPram: string, obj: Account): Account {
     return {
@@ -185,27 +155,14 @@ export class AuthService {
     };
   }
 
-  // getUserName(currentuser: string) {
-  //   this.contact_service.contactList.filter((c) => {
-
-  //     if (c.uid === currentuser) {
-  //       this.currentUserName = c.surname + " " + c.lastname;
-  //       return
-  //     }
-  //   })
-  // }
-
   getUserName(currentuser: string) {
-    const contact = this.contact_service.contactList.find((c) => c.uid === currentuser);
+    this.contact_service.contactList.filter((c) => {
 
-    if (!contact) {
-      this.userInitials.set('G');
-      return;
-    }
-
-    const first = contact.surname.charAt(0).toUpperCase();
-    const last = contact.lastname.charAt(0).toUpperCase();
-
-    this.userInitials.set(first + last);
+      if (c.uid === currentuser) {
+        this.currentUserName = c.surname + " " + c.lastname;
+        return
+      }
+    })
   }
+
 }
