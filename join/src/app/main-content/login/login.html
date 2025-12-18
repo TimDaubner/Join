@@ -34,7 +34,10 @@
                     <img (click)="toggleVisibility()" [src]="passwordIcon" alt="Mail Icon" class="input-icon pointer">
                 </div>
                 @if(!mailModel.valid && mailModel.touched || !passwordModel.valid && passwordModel.touched) {
-                <div class="error_msg"><span>Check your email and password (min. 4). Please try again</span></div>
+                <div class="error_msg"><span>Check your email and password (min. 6). Please try again</span></div>
+                }
+                @if(!this.auth_service.isLoginValid) {
+                <div class="error_msg"><span>Wrong login and/or password!</span></div>
                 }
             </form>
             <div class="login-btns">

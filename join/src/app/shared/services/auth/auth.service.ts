@@ -48,7 +48,9 @@ export class AuthService {
 
   isNew: boolean = false;
 
-  isDebugging = true;
+  isDebugging = false;
+
+  isLoginValid = true;
 
   constructor() {
     this.callUserData();
@@ -162,12 +164,14 @@ export class AuthService {
               console.warn(timeWithMs + " just login");
             }
             console.log('login successfull');
+            this.isLoginValid = true;
             this.router.navigate(['/summary']);
           }
         }
       })
       .catch((error) => {
         console.log(error);
+        this.isLoginValid = false;
       });
   }
 
@@ -186,10 +190,11 @@ export class AuthService {
 
   callUserData() {
     // call user data
-
-    let now = new Date();
-    let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-    console.warn(timeWithMs + " call user data");
+    if(this.isDebugging){
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " call user data");
+    }
 
     onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {

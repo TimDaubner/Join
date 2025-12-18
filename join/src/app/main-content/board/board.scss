@@ -185,13 +185,11 @@
 }
 
 .add_btn:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
-    brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
 .add_btn_responsive:hover img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg)
-    brightness(96%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(98%) saturate(748%) hue-rotate(164deg) brightness(96%) contrast(97%);
 }
 
 .add_task_frame {
@@ -586,6 +584,22 @@
 
   .board_container {
     margin-bottom: 40px;
+  }
+
+  .add_btn {
+    display: none;
+  }
+
+  .add_btn_responsive {
+    display: flex;
+  }
+
+  .add_task_btn_responsive {
+    display: none;
+  }
+
+  .add_task_btn_responsive_small {
+    display: flex;
   }
 }
 
