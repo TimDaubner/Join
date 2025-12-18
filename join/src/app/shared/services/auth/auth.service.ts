@@ -73,10 +73,7 @@ export class AuthService {
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-    if (uid) {
-      this.currentuser = uid;
-      this.getUserName(this.currentuser);
-    }
+
     await this.contact_service.addContactToDatabase(newContact);
   }
 
@@ -112,12 +109,10 @@ export class AuthService {
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password)
       .then((input) => {
         console.log('login successfull');
-        if (input.user) {
-          this.login();
-          if (!this.isNew) {
-            this.router.navigate(['/summary']);
-          }
+        if (!this.isNew) {
+          this.router.navigate(['/summary']);
         }
+        this.login();
       })
       .catch((error) => {
         console.log(error);
@@ -190,12 +185,27 @@ export class AuthService {
     };
   }
 
+  // getUserName(currentuser: string) {
+  //   this.contact_service.contactList.filter((c) => {
+
+  //     if (c.uid === currentuser) {
+  //       this.currentUserName = c.surname + " " + c.lastname;
+  //       return
+  //     }
+  //   })
+  // }
+
   getUserName(currentuser: string) {
-    this.contact_service.contactList.filter((c) => {
-      if (c.uid === currentuser) {
-        this.currentUserName = c.surname + ' ' + c.lastname;
-        return;
-      }
-    });
+    const contact = this.contact_service.contactList.find((c) => c.uid === currentuser);
+
+    if (!contact) {
+      this.userInitials.set('G');
+      return;
+    }
+
+    const first = contact.surname.charAt(0).toUpperCase();
+    const last = contact.lastname.charAt(0).toUpperCase();
+
+    this.userInitials.set(first + last);
   }
 }

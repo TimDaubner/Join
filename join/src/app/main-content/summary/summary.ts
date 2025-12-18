@@ -54,7 +54,7 @@ getHighestPrioTask() {
     this.highestPrioTask = "Medium"
     this.shownDueDate = this.getNextDueDate(this.mediumTasks)
   }
-  else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0 && this.lowTasks.length > 0) {
+  else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0) {
     this.highestPrioTask = "Low"
     this.shownDueDate = (this.getNextDueDate(this.lowTasks))
   }
@@ -64,19 +64,15 @@ getHighestPrioTask() {
 }
 
 getNextDueDate(prioList: Task[]) {
-  if(prioList[0]){
-
-    let closestDeadline = prioList[0].dueDate;
-    let taskTitle = "";
+  let closestDeadline = prioList[0].dueDate;
+  let taskTitle = "";
     for (let i = 1; i < prioList.length; i++) {
       if (closestDeadline > prioList[i].dueDate) {
         closestDeadline = prioList[i].dueDate;
         taskTitle = prioList[i].title
       }
-    }
-    return closestDeadline.toDate().toLocaleDateString('en-UK');
   }
-  return 'No upcoming deadline';
+  return closestDeadline.toDate().toLocaleDateString('en-UK');
 }
 
 getTaskQuantity(type:string) {
