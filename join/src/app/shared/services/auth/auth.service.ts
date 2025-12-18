@@ -154,6 +154,8 @@ export class AuthService {
 
   logout() {
     this.isAuthenticated.set(false);
+    this.contact_service.unsubscribe();
+    this.board_service.unsubscribe();
   }
 
   isLoggedIn() {
