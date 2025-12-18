@@ -94,11 +94,11 @@ export class AuthService {
       let now = new Date();
       let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
       console.warn(timeWithMs + " set conatct object fields");
-    }
-    this.currentUserName = this.contact.surname + "" + this. contact.lastname; 
-    this.contact.color = this.contact_service.getRandomColor();
+    } 
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
+    this.currentUserName = this.contact.surname + " " + this. contact.lastname; 
+    this.contact.color = this.contact_service.getRandomColor();
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
     if (uid) {
       this.currentuser = uid;
