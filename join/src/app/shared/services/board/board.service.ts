@@ -113,7 +113,6 @@ export class BoardService {
   }
 
   async deleteTask(task: Task) {
-    const index = this.taskList.findIndex((t) => t.id === task.id);
-    await deleteDoc(doc(this.firestore, 'tasks', this.taskList[index].id!));
+    await deleteDoc(doc(this.firestore, 'tasks', task.id!));
   }
 }

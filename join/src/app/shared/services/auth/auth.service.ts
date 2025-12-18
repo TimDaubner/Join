@@ -75,8 +75,9 @@ export class AuthService {
 
         this.isNew = true;
         console.log(userCredentials.user.uid);
+        await this.createContactObject(userCredentials.user.uid);
         await this.loginUser(mail, password);
-        this.createContactObject(userCredentials.user.uid);
+        
         this.isNew = false;
         this.router.navigate(['/summary']);
       })
@@ -92,6 +93,7 @@ export class AuthService {
       let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
       console.warn(timeWithMs + " set conatct object fields");
     }
+    this.currentUserName = this.contact.surname + "" + this. contact.lastname; 
     this.contact.color = this.contact_service.getRandomColor();
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
