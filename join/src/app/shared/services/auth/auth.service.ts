@@ -140,6 +140,7 @@ export class AuthService {
     this.isAuthenticated = false;
     this.contact_service.unsubscribe();
     this.board_service.unsubscribe();
+    this.currentUserName = '';
   }
 
   isLoggedIn(): boolean {

@@ -7,9 +7,16 @@
 
         <div class="header_icons">
             <a routerLink="/help" routerLinkActive="hidden" class="btn_help" aria-label="open help"></a>
+            @if (auth_service.currentUserName){
             <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
-                [class.active]="menu_open" (click)="toggleMenu()">{{ auth_service.userInitials() }}
+                [class.active]="menu_open" (click)="toggleMenu()">{{ getInitials(auth_service.currentUserName) }}
             </a>
+            }
+            @else {
+            <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
+                [class.active]="menu_open" (click)="toggleMenu()">G
+            </a>
+            }
 
             @if (menu_open) {
             <div class="menu_overlay" (click)="closeMenu()"></div>
@@ -29,9 +36,16 @@
     </div>
     <div class="header_icons responsive">
         <a routerLink="/help" routerLinkActive="hidden" class="btn_help" aria-label="open help"></a>
+        @if (auth_service.currentUserName){
         <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
-            [class.active]="menu_open" (click)="toggleMenu()">{{ auth_service.userInitials() }}
+            [class.active]="menu_open" (click)="toggleMenu()">{{ getInitials(auth_service.currentUserName) }}
         </a>
+        }
+        @else {
+        <a class="link_initials" role="button" tabindex="0" aria-haspopup="true" [attr.aria-expanded]="menu_open"
+            [class.active]="menu_open" (click)="toggleMenu()">G
+        </a>
+        }
 
         @if (menu_open) {
         <div class="menu_overlay" (click)="closeMenu()"></div>

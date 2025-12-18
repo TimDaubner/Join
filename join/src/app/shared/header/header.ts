@@ -23,11 +23,20 @@ export class Header {
     this.menu_open = false;
   }
 
-  logoutFromJoin(){
+  logoutFromJoin() {
     this.auth_service.logoutUser();
     this.router.navigate(['/']);
     // if(this.auth_service.isLoggedIn()){
     //   this.auth_service.logout();
     // }
+  }
+
+  getInitials(name: string) {
+    let firstInitial = "";
+    let secondInitial = "";
+    firstInitial = name.charAt(0);
+    secondInitial = name.charAt(name.indexOf(" ") + 1);
+    let initials = firstInitial + secondInitial;
+    return initials;
   }
 }
