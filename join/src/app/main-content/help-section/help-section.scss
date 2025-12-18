@@ -108,3 +108,14 @@ li {
     margin: 100px 20px 100px 20px;
   }
 }
+
+@media (min-width: 2300px) {
+  .help_container {
+    margin-left: 300px;
+    width: 800px;
+    margin-top: 120px;
+    height: calc(100vh - 96px);
+    overflow-y: auto;
+    padding-bottom: 20px;
+  }
+}

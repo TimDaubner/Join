@@ -143,9 +143,9 @@
   }
 }
 
-.responsive{
-    display: none;
-  }
+.responsive {
+  display: none;
+}
 
 @media (max-width: 936px) {
   .header {
@@ -211,15 +211,14 @@
     display: flex;
     width: 23%;
   }
-  
-  .header_icons
-  {
+
+  .header_icons {
     display: none;
     position: absolute;
     right: calc(50vw);
   }
 
-  .responsive{
+  .responsive {
     display: flex;
     position: absolute;
     top: 16px;
