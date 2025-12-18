@@ -1,6 +1,5 @@
 @use 'variables' as *;
 
-// --- Overlay & Container (Basis für View & Edit) ---
 .overlay {
     position: fixed;
     inset: 0;
@@ -24,7 +23,6 @@
     position: relative;
     transition: all 400ms ease-in-out;
 
-    // Scrollbar ausblenden für Clean Look
     &::-webkit-scrollbar {
         display: none;
     }
@@ -33,7 +31,6 @@
     scrollbar-width: none;
 }
 
-// Animationen
 .slide_in_right {
     opacity: 1;
     transform: translateX(0);
@@ -88,11 +85,6 @@
     gap: 16px;
 }
 
-
-// ###############################################
-// VIEW MODE STYLES (Große Schrift, Lese-Ansicht)
-// ###############################################
-
 .category {
     display: flex;
     align-items: flex-start;
@@ -107,7 +99,6 @@
     font-weight: 400;
 }
 
-// Farben
 .task_category.UserStory {
     background-color: #0038FF;
 }
@@ -117,7 +108,7 @@
 }
 
 .task_title_large {
-    font-size: 61px; // Sehr groß, wie im Design
+    font-size: 61px; 
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 24px 0;
@@ -159,7 +150,6 @@
     }
 }
 
-// Assigned List (View Mode)
 .assigned-worker {
     display: flex;
     flex-direction: column;
@@ -206,7 +196,6 @@
     font-size: 16px;
 }
 
-// Subtasks (View Mode)
 .subtask_item {
     display: flex;
     align-items: center;
@@ -294,40 +283,34 @@
     }
 }
 
-// ###############################################
-// EDIT MODE STYLES (Inputs, Buttons, Formular)
-// ###############################################
-
 .edit_view_container {
     display: flex;
     flex-direction: column;
-    margin-top: 20px; // Abstand zum Top (da wo sonst Titel ist)
+    margin-top: 20px; 
 }
 
 .frame {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 24px; // Abstand zwischen den Feldern
+    margin-bottom: 24px; 
 
     label {
-        font-size: 20px; // Label Größe aus View Mode übernehmen
-        color: black; // Oder #2a3647
-        font-weight: 400;
+        font-size: 20px; 
+        color: black; 
     }
 }
 
-// Style für ALLE Inputs und Textareas
 input,
 textarea {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     padding: 13px 21px;
-    font-size: 20px; // Große Schrift im Input
+    font-size: 20px; 
     outline: none;
     width: 100%;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif; // Oder deine Font
+    font-family: 'Inter', sans-serif; 
     background: white;
 
     &::placeholder {
@@ -344,7 +327,6 @@ textarea {
     min-height: 120px;
 }
 
-// Datepicker Fixes (Material Design überschreiben)
 .date-input-wrapper {
     position: relative;
     display: flex;
@@ -357,7 +339,6 @@ textarea {
     }
 }
 
-// Priority Buttons (Edit Mode)
 .priority_buttons {
     display: flex;
     gap: 16px;
@@ -369,10 +350,10 @@ textarea {
         align-items: center;
         gap: 10px;
         padding: 16px 10px;
-        font-size: 20px; // Wie View Mode
+        font-size: 20px; 
         background: white;
         border-radius: 10px;
-        border: 1px solid #D1D1D1; // Standard Border
+        border: 1px solid #D1D1D1; 
         cursor: pointer;
         transition: all 100ms ease-in-out;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -388,7 +369,6 @@ textarea {
         }
     }
 
-    // Active States (Farben aus Screenshot)
     .urgent_active {
         background-color: #FF3D00;
         color: white;
@@ -411,7 +391,6 @@ textarea {
     }
 }
 
-// Assigned Dropdown
 .assigned_contacts {
     position: relative;
 
@@ -423,8 +402,6 @@ textarea {
             cursor: pointer;
             padding-right: 40px;
         }
-
-        // Platz für Pfeil
 
         .dropdown_icon {
             position: absolute;
@@ -438,7 +415,7 @@ textarea {
 
 #assigned_dropdown {
     position: absolute;
-    top: 110%; // Direkt unter Input
+    top: 110%; 
     left: 0;
     width: 100%;
     max-height: 250px;
@@ -458,16 +435,15 @@ textarea {
         font-size: 19px;
 
         &:hover {
-            background-color: #e4e1e1; // Dunkler Hover wie oft bei Join
+            background-color: #e4e1e1;
         }
 
         &.selected {
-            background-color: $primary; // Dunkler Hover wie oft bei Join
+            background-color: $primary; 
             color: white;
         }
 
-        // Wenn selektiert/hovered, muss Icon weiß werden (Filter oder SVG Tausch nötig)
-        // Hier einfach halten:
+    
         .checkbox-icon {
             width: 20px;
             height: 20px;
@@ -513,7 +489,6 @@ textarea {
     }
 }
 
-// Subtasks Edit Section
 .subtask-input-container {
     position: relative;
 
@@ -642,7 +617,6 @@ textarea {
     }
 }
 
-// Footer Button (OK)
 .btn_footer_edit {
     display: flex;
     justify-content: flex-end;
@@ -694,7 +668,3 @@ textarea {
 .d_none {
     display: none;
 }
-
-// Keyframes
-// @keyframes slide_in_right { from { transform: translateX(100vw); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-// @keyframes slide_out_right { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100vw); opacity: 0; } }
