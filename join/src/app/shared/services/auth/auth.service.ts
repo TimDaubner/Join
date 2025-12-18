@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, Timestamp } from '@angular/fire/firestore';
 import { Account } from '../../../interfaces/account.interface';
 import {
   Auth,
@@ -48,16 +48,34 @@ export class AuthService {
 
   isNew: boolean = false;
 
+  isDebugging = true;
+
   constructor() {
     this.callUserData();
   }
 
   async createNewAccount(mail: string, password: string) {
+
+    //call create account
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + "call create account");
+    }
     await createUserWithEmailAndPassword(this.authFirestore, mail, password)
-      .then((userCredentials) => {
+      .then(async (userCredentials) => {
+
+        //after creating account
+        if (this.isDebugging) {
+
+          let now = new Date();
+          let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+          console.warn(timeWithMs + " after creating account");
+        }
+
         this.isNew = true;
         console.log(userCredentials.user.uid);
-        this.loginUser(mail, password);
+        await this.loginUser(mail, password);
         this.createContactObject(userCredentials.user.uid);
         this.isNew = false;
         this.router.navigate(['/summary']);
@@ -68,11 +86,20 @@ export class AuthService {
   }
 
   async createContactObject(uid: string) {
+    //set conatct object fields
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " set conatct object fields");
+    }
     this.contact.color = this.contact_service.getRandomColor();
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-
+    if (uid) {
+      this.currentuser = uid;
+      this.getUserName(this.currentuser);
+    }
     await this.contact_service.addContactToDatabase(newContact);
   }
 
@@ -102,16 +129,40 @@ export class AuthService {
   }
 
   async loginUser(mail: string, password: string) {
+    //call loginUser function
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " call loginUser function");
+    }
     this.input_mail = mail;
     this.input_password = password;
 
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password)
       .then((input) => {
-        console.log('login successfull');
-        if (!this.isNew) {
-          this.router.navigate(['/summary']);
+        //
+        if (input.user) {
+          // login with new account
+          if (this.isDebugging) {
+
+            let now = new Date();
+            let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+            console.warn(timeWithMs + " login with new account");
+          }
+          console.log('login successfull');
+          this.login();
+          if (!this.isNew) {
+            // just login
+            if (this.isDebugging) {
+
+              let now = new Date();
+              let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+              console.warn(timeWithMs + " just login");
+            }
+            console.log('login successfull');
+            this.router.navigate(['/summary']);
+          }
         }
-        this.login();
       })
       .catch((error) => {
         console.log(error);
@@ -119,13 +170,34 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.authFirestore.signOut();
+    //call logout user
+    if (this.isDebugging) {
+
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " call logout user + auth firestore unsubscribe");
+    }
     this.logout();
+    //auth firestore unsubscribe
+    this.authFirestore.signOut();
   }
 
   callUserData() {
+    // call user data
+
+    let now = new Date();
+    let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+    console.warn(timeWithMs + " call user data");
+
     onIdTokenChanged(this.authFirestore, (user) => {
       if (user) {
+        //cache uid in currentuser
+        if (this.isDebugging) {
+          let now = new Date();
+          let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+          console.warn(timeWithMs + " cache uid in currentuser");
+          console.log(user.uid);
+        }
         this.currentuser = user.uid;
         this.getUserName(this.currentuser);
       }
@@ -137,6 +209,13 @@ export class AuthService {
   }
 
   logout(): void {
+    // logout user
+
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " logout user");
+    }
     this.isAuthenticated = false;
     this.contact_service.unsubscribe();
     this.board_service.unsubscribe();
@@ -144,10 +223,22 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    //return loggedIn state
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " return loggedIn state");
+    }
     return this.isAuthenticated;
   }
 
   setAccountObject(idPram: string, obj: Account): Account {
+    //create acc object
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " create acc object");
+    }
     return {
       email: obj.email,
       id: idPram,
@@ -157,8 +248,18 @@ export class AuthService {
   }
 
   getUserName(currentuser: string) {
-    this.contact_service.contactList.filter((c) => {
+    //get User Initials + Name
+    if (this.isDebugging) {
+      let now = new Date();
+      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+      console.warn(timeWithMs + " get User Initials + Name");
+      console.warn(this.contact_service.contactList);
+      console.warn(this.currentuser);
+      console.warn(this.currentUserName);
+    }
 
+    this.contact_service.contactList.filter((c) => {
+      
       if (c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;
         return
@@ -167,3 +268,7 @@ export class AuthService {
   }
 
 }
+
+// const now = new Date();
+// const timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+// console.log(timeWithMs);
