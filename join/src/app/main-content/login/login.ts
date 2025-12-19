@@ -13,7 +13,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Login {
   auth_service = inject(AuthService);
-  contact_service = inject(ContactService);
+  // contact_service = inject(ContactService);
 
   //uid quick access
 

@@ -18,7 +18,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class BoardService {
   firestore: Firestore = inject(Firestore);
-  contact_service: ContactService = inject(ContactService);
+  // contact_service: ContactService = inject(ContactService);
   initials: string[] = [];
   unsubscribe;
   taskList: Task[] = [];

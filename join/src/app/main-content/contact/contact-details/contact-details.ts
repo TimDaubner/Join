@@ -20,7 +20,7 @@ contact_service = inject(ContactService)
   hoverDelete = false;
 
   constructor(private eRef: ElementRef) {
-    this.contact_service;
+    // this.contact_service;
   }
 
 

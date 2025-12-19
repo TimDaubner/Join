@@ -224,8 +224,6 @@ export class AuthService {
       console.warn(timeWithMs + " logout user");
     }
     this.isAuthenticated = false;
-    this.contact_service.unsubscribe();
-    this.board_service.unsubscribe();
     this.currentUserName = '';
   }
 

@@ -15,7 +15,8 @@ export class ContactList{
   selectedIndex!: number;
 
   constructor() {
-    this.contact_service;
+    this.contactList = this.contact_service.contactList;
+    // this.contact_service;
   }
 
   showContact(index: number) {
