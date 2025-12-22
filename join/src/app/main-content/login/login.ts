@@ -13,7 +13,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Login {
   auth_service = inject(AuthService);
-  // contact_service = inject(ContactService);
 
   //uid quick access
 
@@ -41,6 +40,7 @@ export class Login {
   isVisible = false;
   isChecked = false;
 
+  
   firstPassword: string = '';
   confirmPassword: string = '';
 

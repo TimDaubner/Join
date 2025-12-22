@@ -10,8 +10,8 @@ import {
   deleteDoc,
 } from '@angular/fire/firestore';
 import { ColumnCategory, Task } from '../../../interfaces/task.interface';
-import { ContactService } from '../contact/contact.service';
-import { AuthService } from '../auth/auth.service';
+// import { ContactService } from '../contact/contact.service';
+// import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +35,7 @@ export class BoardService {
         this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
       });
     }, (error) => {
-      
+      console.log(error);
     });
   }
 

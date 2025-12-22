@@ -27,10 +27,10 @@ lowTasks: Task[] = [];
 
 shownDueDate = "";
 
-constructor() {
-  this.fillTaskLists()
-  this.getHighestPrioTask()
-  this.setGreeting()
+ngOnInit(){
+  this.fillTaskLists();
+  this.getHighestPrioTask();
+  this.setGreeting();
 }
 
 fillTaskLists() {

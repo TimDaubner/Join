@@ -94,7 +94,7 @@
                             @for (assignee of task.assignedTo; track $index; let i = $index)
                             {
 
-                                @for (contact of this.contact_service.contactList; track $index; let index = $index)
+                                @for (contact of contact_service.contactList; track $index; let index = $index)
                                 {
                                     @if(task.assignedTo.length > 3)
                                     {

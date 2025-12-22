@@ -16,7 +16,6 @@ export class ContactList{
 
   constructor() {
     this.contactList = this.contact_service.contactList;
-    // this.contact_service;
   }
 
   showContact(index: number) {

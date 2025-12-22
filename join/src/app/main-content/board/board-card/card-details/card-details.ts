@@ -26,8 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './card-details.scss',
 })
 export class CardDetails {
-  contact_service = inject(ContactService);
   board_service = inject(BoardService);
+  contact_service = inject(ContactService);
   
   @Input() selectedTask: Task | null = null;
   @Input() isTaskDetailsOpen: boolean = false;

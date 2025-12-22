@@ -8,12 +8,11 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Timestamp } from '@angular/fire/firestore';
 import { BoardService } from '../../shared/services/board/board.service';
 import { CardDetails } from './board-card/card-details/card-details';
-import { ContactService } from '../../shared/services/contact/contact.service';
 import { AddTask } from "../add-task/add-task";
 import { Router } from '@angular/router';
+import { ContactService } from '../../shared/services/contact/contact.service';
 
 @Component({
   selector: 'app-board',

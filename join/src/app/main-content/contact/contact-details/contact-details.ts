@@ -12,7 +12,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
 })
 
 export class ContactDetails {
-contact_service = inject(ContactService)
+contact_service = inject(ContactService);
 
   burgerOpen = false;
 
@@ -20,7 +20,6 @@ contact_service = inject(ContactService)
   hoverDelete = false;
 
   constructor(private eRef: ElementRef) {
-    // this.contact_service;
   }
 
 
