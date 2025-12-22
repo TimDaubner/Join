@@ -16,7 +16,7 @@ import { ContactService } from '../contact/contact.service';
 export class AuthService {
   private router = inject(Router);
   private authFirestore = inject(Auth);
-  private contact_service = inject(ContactService);
+  // private contact_service = inject(ContactService);
 
   //Auth Angular
   private isAuthenticated = false;
@@ -62,7 +62,7 @@ async createNewAccount(mail: string, password: string) {
         console.log("User created:", uid);
 
         // 2. Kontakt erstellen und WARTEN
-        await this.createContactObject(uid);
+        // await this.createContactObject(uid);
 
         // WICHTIG: Kein this.loginUser() hier aufrufen! 
         // Der User ist durch createUserWithEmailAndPassword bereits eingeloggt.
@@ -83,21 +83,21 @@ async createNewAccount(mail: string, password: string) {
     // Felder setzen
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
-    this.contact.color = this.contact_service.getRandomColor();
+    // this.contact.color = this.contact_service.getRandomColor();
     
     // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
     this.currentUserName = this.contact.surname + " " + this.contact.lastname;
     this.currentuser = uid;
 
     // Kontakt Objekt für DB vorbereiten
-    let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
+    // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
 
     // PROBLEM LÖSUNG: Optimistisches Update
     // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
-    this.contact_service.contactList().push(newContact); 
+    // this.contact_service.contactList().push(newContact); 
 
     // Jetzt in die Datenbank schreiben
-    await this.contact_service.addContactToDatabase(newContact);
+    // await this.contact_service.addContactToDatabase(newContact);
     
     // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
     // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
@@ -206,7 +206,7 @@ async createNewAccount(mail: string, password: string) {
           console.log(user.uid);
         }
         this.currentuser = user.uid;
-        this.getUserName(this.currentuser);
+        // this.getUserName(this.currentuser);
       }
     });
   }
@@ -252,25 +252,25 @@ async createNewAccount(mail: string, password: string) {
     };
   }
 
-  getUserName(currentuser: string) {
-    //get User Initials + Name
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " get User Initials + Name");
-      console.warn(this.contact_service.contactList);
-      console.warn(this.currentuser);
-      console.warn(this.currentUserName);
-    }
+  // getUserName(currentuser: string) {
+  //   //get User Initials + Name
+  //   if (this.isDebugging) {
+  //     let now = new Date();
+  //     let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
+  //     console.warn(timeWithMs + " get User Initials + Name");
+  //     // console.warn(this.contact_service.contactList);
+  //     console.warn(this.currentuser);
+  //     console.warn(this.currentUserName);
+  //   }
 
-    this.contact_service.contactList().filter((c) => {
+  //   this.contact_service.contactList().filter((c) => {
       
-      if (c.uid === currentuser) {
-        this.currentUserName = c.surname + " " + c.lastname;
-        return
-      }
-    })
-  }
+  //     if (c.uid === currentuser) {
+  //       this.currentUserName = c.surname + " " + c.lastname;
+  //       return
+  //     }
+  //   })
+  // }
 
 }
 

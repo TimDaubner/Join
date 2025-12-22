@@ -3,6 +3,8 @@ import { BoardService } from '../../shared/services/board/board.service';
 import { Task } from '../../interfaces/task.interface';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ContactService } from '../../shared/services/contact/contact.service';
+import { Auth, onIdTokenChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-summary',
@@ -12,90 +14,125 @@ import { Router } from '@angular/router';
 })
 export class Summary {
 
-boardService = inject(BoardService)
-authService = inject(AuthService)
+  boardService = inject(BoardService);
+  authService = inject(AuthService);
+  contactService = inject(ContactService);
+  auth = inject(Auth);
 
-private router = inject(Router)
+  private router = inject(Router)
 
-highestPrioTask = "";
+  highestPrioTask = "";
 
-greeting = "";
+  greeting = "";
 
-urgentTasks: Task[] = [];
-mediumTasks: Task[] = [];
-lowTasks: Task[] = [];
+  urgentTasks: Task[] = [];
+  mediumTasks: Task[] = [];
+  lowTasks: Task[] = [];
 
-shownDueDate = "";
+  shownDueDate = "";
 
-ngOnInit(){
-  this.fillTaskLists();
-  this.getHighestPrioTask();
-  this.setGreeting();
-}
+  ngOnInit() {
+    this.fillTaskLists();
+    this.getHighestPrioTask();
+    this.setGreeting();
+    const intervalId = setInterval(() => {
+      if (this.contactService.contactList().length > 0) {
+        this.getUserName(this.authService.currentuser);
 
-fillTaskLists() {
-  for(let i= 0; i < this.boardService.taskList.length; i++) {
-    if(this.boardService.taskList()[i].priority == 'Low') {
-      this.lowTasks.push(this.boardService.taskList()[i]);
-    } else if (this.boardService.taskList()[i].priority == 'Medium') {
-      this.mediumTasks.push(this.boardService.taskList()[i]);
-    } else if (this.boardService.taskList()[i].priority == 'Urgent') {
-      this.urgentTasks.push(this.boardService.taskList()[i]);
-    }
-  }    
-}
-
-getHighestPrioTask() {
-  if (this.urgentTasks.length > 0) {
-    this.highestPrioTask = "Urgent"
-    this.shownDueDate = this.getNextDueDate(this.urgentTasks)
+        clearInterval(intervalId);
+      }
+    }, 50);
   }
-  else if (this.urgentTasks.length == 0 && this.mediumTasks.length > 0) {
-    this.highestPrioTask = "Medium"
-    this.shownDueDate = this.getNextDueDate(this.mediumTasks)
-  }
-  else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0 && this.lowTasks.length > 0) {
-    this.highestPrioTask = "Low"
-    this.shownDueDate = (this.getNextDueDate(this.lowTasks))
-  }
-  else {
-    this.shownDueDate = "There are no open Tasks with deadlines"
-  }
-}
 
-getNextDueDate(prioList: Task[]) {
-  if(prioList[0]){
+  async createContactObject(uid: string) {
+    // Felder setzen
+    this.authService.contact.surname = this.authService.correctInput(this.authService.contact.surname);
+    this.authService.contact.lastname = this.authService.correctInput(this.authService.contact.lastname);
+    this.authService.contact.color = this.contactService.getRandomColor();
 
-    let closestDeadline = prioList[0].dueDate;
-    let taskTitle = "";
-    for (let i = 1; i < prioList.length; i++) {
-      if (closestDeadline > prioList[i].dueDate) {
-        closestDeadline = prioList[i].dueDate;
-        taskTitle = prioList[i].title
+    // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
+    this.authService.currentUserName = this.authService.contact.surname + " " + this.authService.contact.lastname;
+    this.authService.currentuser = uid;
+
+
+    // Kontakt Objekt für DB vorbereiten
+    // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
+
+    // PROBLEM LÖSUNG: Optimistisches Update
+    // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
+    // this.contact_service.contactList().push(newContact); 
+
+    // Jetzt in die Datenbank schreiben
+    // await this.contact_service.addContactToDatabase(newContact);
+
+    // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
+    // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
+    // this.getUserName(this.currentuser);
+  }
+
+  fillTaskLists() {
+    for (let i = 0; i < this.boardService.taskList.length; i++) {
+      if (this.boardService.taskList()[i].priority == 'Low') {
+        this.lowTasks.push(this.boardService.taskList()[i]);
+      } else if (this.boardService.taskList()[i].priority == 'Medium') {
+        this.mediumTasks.push(this.boardService.taskList()[i]);
+      } else if (this.boardService.taskList()[i].priority == 'Urgent') {
+        this.urgentTasks.push(this.boardService.taskList()[i]);
       }
     }
-    return closestDeadline.toDate().toLocaleDateString('en-UK');
   }
-  return 'No upcoming deadline';
-}
 
-getTaskQuantity(type:string) {
-  let counter = 0
-  this.boardService.taskList().filter((t) => {
-    if(t.columnCategory == type) {
-      counter ++;
+  getHighestPrioTask() {
+    if (this.urgentTasks.length > 0) {
+      this.highestPrioTask = "Urgent"
+      this.shownDueDate = this.getNextDueDate(this.urgentTasks)
     }
-  })
-  return counter
-}
+    else if (this.urgentTasks.length == 0 && this.mediumTasks.length > 0) {
+      this.highestPrioTask = "Medium"
+      this.shownDueDate = this.getNextDueDate(this.mediumTasks)
+    }
+    else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0 && this.lowTasks.length > 0) {
+      this.highestPrioTask = "Low"
+      this.shownDueDate = (this.getNextDueDate(this.lowTasks))
+    }
+    else {
+      this.shownDueDate = "There are no open Tasks with deadlines"
+    }
+  }
 
-linkToBoard() {
-  this.router.navigate(['/board']);
-}
+  getNextDueDate(prioList: Task[]) {
+    if (prioList[0]) {
 
-setGreeting() {
+      let closestDeadline = prioList[0].dueDate;
+      let taskTitle = "";
+      for (let i = 1; i < prioList.length; i++) {
+        if (closestDeadline > prioList[i].dueDate) {
+          closestDeadline = prioList[i].dueDate;
+          taskTitle = prioList[i].title
+        }
+      }
+      return closestDeadline.toDate().toLocaleDateString('en-UK');
+    }
+    return 'No upcoming deadline';
+  }
+
+  getTaskQuantity(type: string) {
+    let counter = 0
+    this.boardService.taskList().filter((t) => {
+      if (t.columnCategory == type) {
+        counter++;
+      }
+    })
+    return counter
+  }
+
+  linkToBoard() {
+    this.router.navigate(['/board']);
+  }
+
+  setGreeting() {
     const hour = new Date().getHours();
-    
+
     if (hour < 12) {
       this.greeting = "Good morning,";
     } else if (hour < 18) {
@@ -105,4 +142,16 @@ setGreeting() {
     }
   }
 
+  getUserName(currentuser: string) {
+    console.log(currentuser);
+    console.log(this.contactService.contactList());
+
+    this.contactService.contactList().filter((c) => {
+
+      if (c.uid === currentuser) {
+        this.authService.currentUserName = c.surname + " " + c.lastname;
+        return
+      }
+    });
+  }
 }

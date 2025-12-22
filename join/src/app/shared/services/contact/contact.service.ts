@@ -55,16 +55,21 @@ export class ContactService {
 
   constructor() {
     this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
-      const contacts:Contact[] = [];
+      const contacts: Contact[] = [];
       contactsSnapshot.forEach((contact) => {
         contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
         this.sortFunc();
       });
       this.contactList.set(contacts);
+      console.log(this.contactList());
     }, (error) => {
-        console.error(`connection to firestore permission-denied -> ${error}`);
+      console.error(`connection to firestore permission-denied -> ${error}`);
+      console.log(this.contactList());
+      setTimeout(()=>{
+        console.log(this.contactList());
+      },1000)
       // console.log('');
-      
+
       // if(this.auth_service.isLoggedIn()){ 
       // }
     });
@@ -79,7 +84,7 @@ export class ContactService {
   //   });
   // }
 
-  
+
 
   closeDetails() {
     this.detailsOpen = false;

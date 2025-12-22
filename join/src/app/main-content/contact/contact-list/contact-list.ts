@@ -11,12 +11,7 @@ import { ContactService } from '../../../shared/services/contact/contact.service
 })
 export class ContactList{
   contact_service = inject(ContactService);
-  contactList: Contact[] = this.contact_service.contactList();
   selectedIndex!: number;
-
-  constructor() {
-    this.contactList = this.contact_service.contactList();
-  }
 
   showContact(index: number) {
     this.selectedIndex = index;
