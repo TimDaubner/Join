@@ -62,10 +62,10 @@ export class ContactService {
       });
       this.contactList.set(contacts);
     }, (error) => {
+        console.error(`connection to firestore permission-denied -> ${error}`);
       // console.log('');
       
       // if(this.auth_service.isLoggedIn()){ 
-      //   console.error(`connection to firestore permission-denied -> ${error}`)
       // }
     });
   }
