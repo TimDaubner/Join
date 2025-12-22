@@ -35,6 +35,9 @@ export class Summary {
     this.fillTaskLists();
     this.getHighestPrioTask();
     this.setGreeting();
+    if(this.authService.isNewUser){
+      this.createContactObject(this.authService.currentuser);
+    }
     const intervalId = setInterval(() => {
       if (this.contactService.contactList().length > 0) {
         this.getUserName(this.authService.currentuser);
@@ -53,7 +56,12 @@ export class Summary {
     // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
     this.authService.currentUserName = this.authService.contact.surname + " " + this.authService.contact.lastname;
     this.authService.currentuser = uid;
+    this.authService.contact.uid = this.authService.currentuser;
+    this.authService.isNewUser = false;
 
+    await this.contactService.addContactToDatabase(this.authService.contact);
+    console.log(this.authService.contact);
+    
 
     // Kontakt Objekt für DB vorbereiten
     // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
@@ -63,7 +71,6 @@ export class Summary {
     // this.contact_service.contactList().push(newContact); 
 
     // Jetzt in die Datenbank schreiben
-    // await this.contact_service.addContactToDatabase(newContact);
 
     // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
     // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
@@ -147,7 +154,6 @@ export class Summary {
     console.log(this.contactService.contactList());
 
     this.contactService.contactList().filter((c) => {
-
       if (c.uid === currentuser) {
         this.authService.currentUserName = c.surname + " " + c.lastname;
         return

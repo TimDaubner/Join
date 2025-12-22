@@ -46,6 +46,8 @@ export class AuthService {
 
   isLoginValid = true;
 
+  isNewUser = false;
+
   constructor() {
     this.callUserData();
   }
@@ -54,16 +56,17 @@ async createNewAccount(mail: string, password: string) {
     if (this.isDebugging) console.log("Start Registration");
 
     try {
-        // 1. User erstellen (Das loggt den User AUTOMATISCH ein!)
-        const userCredentials = await createUserWithEmailAndPassword(this.authFirestore, mail, password);
-        const uid = userCredentials.user.uid;
+      this.isNewUser = true;
+      // 1. User erstellen (Das loggt den User AUTOMATISCH ein!)
+      const userCredentials = await createUserWithEmailAndPassword(this.authFirestore, mail, password);
+      const uid = userCredentials.user.uid;
 
-        this.isNew = true;
-        console.log("User created:", uid);
-
+      this.isNew = true;
+      console.log("User created:", uid);
+      
         // 2. Kontakt erstellen und WARTEN
         // await this.createContactObject(uid);
-
+        
         // WICHTIG: Kein this.loginUser() hier aufrufen! 
         // Der User ist durch createUserWithEmailAndPassword bereits eingeloggt.
         
@@ -72,8 +75,7 @@ async createNewAccount(mail: string, password: string) {
         
         // 4. Weiterleiten
         this.isNew = false;
-        this.router.navigate(['/summary']);
-
+        this.router.navigate(['/summary']);        
     } catch (error) {
         console.error("Registration failed:", error);
     }
@@ -86,7 +88,7 @@ async createNewAccount(mail: string, password: string) {
     // this.contact.color = this.contact_service.getRandomColor();
     
     // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
-    this.currentUserName = this.contact.surname + " " + this.contact.lastname;
+    // this.currentUserName = this.contact.surname + " " + this.contact.lastname;
     this.currentuser = uid;
 
     // Kontakt Objekt für DB vorbereiten
