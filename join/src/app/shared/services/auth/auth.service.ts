@@ -1,12 +1,10 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { collection, Firestore, onSnapshot, Timestamp } from '@angular/fire/firestore';
+import { Injectable, inject} from '@angular/core';
+import { Firestore} from '@angular/fire/firestore';
 import { Account } from '../../../interfaces/account.interface';
 import {
   Auth,
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
   onIdTokenChanged,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -29,8 +27,6 @@ export class AuthService {
 
   currentuser = '';
   currentUserName = '';
-
-  userInitials = signal('');
 
   input_mail = '';
   input_password = '';
