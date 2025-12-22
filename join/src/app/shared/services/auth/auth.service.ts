@@ -8,7 +8,6 @@ import {
   onIdTokenChanged,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { ContactService } from '../contact/contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +15,6 @@ import { ContactService } from '../contact/contact.service';
 export class AuthService {
   private router = inject(Router);
   private authFirestore = inject(Auth);
-  // private contact_service = inject(ContactService);
-
-  //Auth Angular
   private isAuthenticated = false;
 
   //Auth Firebase
@@ -42,7 +38,7 @@ export class AuthService {
 
   isNew: boolean = false;
 
-  isDebugging = true;
+  isDebugging = false;
 
   isLoginValid = true;
 
