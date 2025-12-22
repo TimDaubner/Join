@@ -41,7 +41,7 @@
                 <div class="assigned-to margin-btm">Assigned To:</div>
                 <span class="assigned-worker">
                     @for(assignee of selectedTask?.assignedTo; track $index) {
-                         @for (contact of contact_service.contactList; track $index) {
+                         @for (contact of contact_service.contactList(); track $index) {
                             @if(assignee == getFullName(contact.surname, contact.lastname)) {
                                 <span class="frame-initials">
                                     <span class="initials" [style.background-color]="contact.color">
@@ -136,7 +136,7 @@
                         </div>
                         
                         <div id="assigned_dropdown" [class.d_none]="!workerDropdown">
-                            @for (contact of contact_service.contactList; track $index) {
+                            @for (contact of contact_service.contactList(); track $index) {
                                 <div class="single_contact_dd"
                                      [class.selected]="isAssigned(contact)"
                                      (click)="toggleContact(contact); $event.stopPropagation()">
@@ -158,7 +158,7 @@
 
                     <div class="list_assigned_preview">
                         @for (assignee of editedTask.assignedTo; track $index) {
-                             @for (contact of contact_service.contactList; track $index) {
+                             @for (contact of contact_service.contactList(); track $index) {
                                 @if(assignee == getFullName(contact.surname, contact.lastname)) {
                                     <div class="initials" [style.background-color]="contact.color">
                                         {{ getInitials(assignee) }}

@@ -1,27 +1,24 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import {
   collection,
   Firestore,
   onSnapshot,
-  Timestamp,
   addDoc,
   updateDoc,
   doc,
   deleteDoc,
 } from '@angular/fire/firestore';
 import { ColumnCategory, Task } from '../../../interfaces/task.interface';
-// import { ContactService } from '../contact/contact.service';
-// import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
   firestore: Firestore = inject(Firestore);
-  // contact_service: ContactService = inject(ContactService);
   initials: string[] = [];
   unsubscribe;
-  taskList: Task[] = [];
+  // taskList: Task[] = [];
+  taskList = signal<Task[]>([]);
   taskColumnType: ColumnCategory = 'To do'
   isAddTaskOpen: boolean = false;
 
@@ -30,10 +27,12 @@ export class BoardService {
 
   constructor() {
     this.unsubscribe = onSnapshot(collection(this.firestore, 'tasks'), (tasksSnapshot) => {
-      this.taskList = [];
+      
+      const tasks:Task[] = [];
       tasksSnapshot.forEach((task) => {
-        this.taskList.push(this.setTaskObject(task.id, task.data() as Task));
+        tasks.push(this.setTaskObject(task.id, task.data() as Task));
       });
+      this.taskList.set(tasks);
     }, (error) => {
       console.log(error);
     });
@@ -85,7 +84,7 @@ export class BoardService {
   }
 
   async editTaskToDatabase($index: number, task: Task) {
-    await updateDoc(doc(this.firestore, 'tasks', this.taskList[$index].id!), {
+    await updateDoc(doc(this.firestore, 'tasks', this.taskList()[$index].id!), {
       id: task.id,
       title: task.title,
       description: task.description,

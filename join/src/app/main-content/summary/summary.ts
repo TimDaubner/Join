@@ -35,12 +35,12 @@ ngOnInit(){
 
 fillTaskLists() {
   for(let i= 0; i < this.boardService.taskList.length; i++) {
-    if(this.boardService.taskList[i].priority == 'Low') {
-      this.lowTasks.push(this.boardService.taskList[i]);
-    } else if (this.boardService.taskList[i].priority == 'Medium') {
-      this.mediumTasks.push(this.boardService.taskList[i]);
-    } else if (this.boardService.taskList[i].priority == 'Urgent') {
-      this.urgentTasks.push(this.boardService.taskList[i]);
+    if(this.boardService.taskList()[i].priority == 'Low') {
+      this.lowTasks.push(this.boardService.taskList()[i]);
+    } else if (this.boardService.taskList()[i].priority == 'Medium') {
+      this.mediumTasks.push(this.boardService.taskList()[i]);
+    } else if (this.boardService.taskList()[i].priority == 'Urgent') {
+      this.urgentTasks.push(this.boardService.taskList()[i]);
     }
   }    
 }
@@ -81,7 +81,7 @@ getNextDueDate(prioList: Task[]) {
 
 getTaskQuantity(type:string) {
   let counter = 0
-  this.boardService.taskList.filter((t) => {
+  this.boardService.taskList().filter((t) => {
     if(t.columnCategory == type) {
       counter ++;
     }

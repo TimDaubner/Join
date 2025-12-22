@@ -36,11 +36,11 @@ export class Board {
 
   searchTask(keyWord: string) {
     if (keyWord.trim() === '') {
-      this.filteredTasks = this.board_service.taskList;
+      this.filteredTasks = this.board_service.taskList();
     }
     else {
       keyWord = keyWord.toLowerCase();
-      this.filteredTasks = this.board_service.taskList.filter(task =>
+      this.filteredTasks = this.board_service.taskList().filter(task =>
         task.title.toLowerCase().includes(keyWord) ||
         task.description.toLowerCase().includes(keyWord)
       );
@@ -122,7 +122,7 @@ export class Board {
   }
 
   changeColumnType(id: string, task: Task) {
-    const index = this.board_service.taskList.findIndex((t) => t.id === task.id);
+    const index = this.board_service.taskList().findIndex((t) => t.id === task.id);
     task.columnCategory = id as ColumnCategory;
     this.board_service.editTaskToDatabase(index, task);
   }
@@ -132,7 +132,7 @@ export class Board {
       return this.filteredTasks.filter(task => task.columnCategory === title);
     }
     else {
-      return this.board_service.taskList.filter(t => t.columnCategory === title);
+      return this.board_service.taskList().filter(t => t.columnCategory === title);
     }
   }
 

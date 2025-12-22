@@ -94,7 +94,7 @@ async createNewAccount(mail: string, password: string) {
 
     // PROBLEM LÖSUNG: Optimistisches Update
     // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
-    this.contact_service.contactList.push(newContact); 
+    this.contact_service.contactList().push(newContact); 
 
     // Jetzt in die Datenbank schreiben
     await this.contact_service.addContactToDatabase(newContact);
@@ -263,7 +263,7 @@ async createNewAccount(mail: string, password: string) {
       console.warn(this.currentUserName);
     }
 
-    this.contact_service.contactList.filter((c) => {
+    this.contact_service.contactList().filter((c) => {
       
       if (c.uid === currentuser) {
         this.currentUserName = c.surname + " " + c.lastname;

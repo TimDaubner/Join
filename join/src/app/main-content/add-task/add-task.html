@@ -63,7 +63,7 @@
                     <input id="assigned_worker_input" class="margin_bottom_16" type="text" value="Select contacts to assign" readonly (click)="toggleDropdown(); $event.stopPropagation() ">
                     <img class="dropdown_icon" src="./assets/icons/arrow_drop_downaa.svg" alt="" (click)="toggleDropdown(); $event.stopPropagation()">
                     <div #assigned_dropdown id="assigned_dropdown"  [class.d_none]="!workerDropdown">
-                        @for (contact of firebase.contactList; track $index) {
+                        @for (contact of firebase.contactList(); track $index) {
                             <div
                                 class="single_contact_dd"
                                 [class.selected]="isSelected(contact)"
@@ -84,7 +84,7 @@
                     <div class="list_assigned">
                         @for (assignee of newTask.assignedTo; track newTask.id; let i = $index) {
                 
-                            @for (contact of this.firebase.contactList; track $index; let index = $index)
+                            @for (contact of this.firebase.contactList(); track $index; let index = $index)
                             {
                                 @if(i == assigneesInitialsCount && index == assigneesInitialsCount)
                                 {

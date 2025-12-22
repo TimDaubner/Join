@@ -65,7 +65,7 @@
             <div class="bottom_row_overview">
                 <div class="overview_board_tasks" >
                     <div class="tasks_in_board" (click)="linkToBoard()">
-                        <p>{{boardService.taskList.length}}</p>
+                        <p>{{boardService.taskList().length}}</p>
                         <span>Tasks in <br> Board</span> 
                     </div>
                     <div class="tasks_in_progress" (click)="linkToBoard()">

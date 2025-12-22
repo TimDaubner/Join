@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../../../interfaces/contact.interface';
 
@@ -7,7 +7,7 @@ import { Contact } from '../../../interfaces/contact.interface';
 })
 export class ContactService {
   contact: Contact[] = [];
-  contactList: Contact[] = [];
+  contactList = signal<Contact[]>([]);
   currentIndex!: number;
   editing = false;
   detailsOpen = false;
@@ -55,11 +55,12 @@ export class ContactService {
 
   constructor() {
     this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
-      this.contactList = []
+      const contacts:Contact[] = [];
       contactsSnapshot.forEach((contact) => {
-        this.contactList.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
+        contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
         this.sortFunc();
       });
+      this.contactList.set(contacts);
     }, (error) => {
       // console.log('');
       
@@ -85,7 +86,7 @@ export class ContactService {
   }
 
   sortFunc() {
-    this.contactList.sort((a, b) => a.lastname?.localeCompare(b.lastname));
+    this.contactList().sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
   ngOnDestroy() {
@@ -125,27 +126,27 @@ export class ContactService {
 
   showContactDetails($index: number) {
     this.contactSelected = false;
-    this.currentContact = this.contactList[$index];
+    this.currentContact = this.contactList()[$index];
     this.contactSelected = true;
     this.getInitials($index);
     this.currentIndex = $index;
   }
 
   getInitials($index: number) {
-    let firstInitial = this.contactList[$index].surname.trim().charAt(0).toUpperCase();
-    let secondInitial = this.contactList[$index].lastname.trim().charAt(0).toUpperCase();
+    let firstInitial = this.contactList()[$index].surname.trim().charAt(0).toUpperCase();
+    let secondInitial = this.contactList()[$index].lastname.trim().charAt(0).toUpperCase();
     this.initials = firstInitial + secondInitial;
   }
 
   editContact(index: number) {
     this.editing = true;
     this.editedContact = {
-      surname: this.contactList[index].surname,
-      lastname: this.contactList[index].lastname,
-      mail: this.contactList[index].mail,
-      phone: this.contactList[index].phone,
-      color: this.contactList[index].color,
-      uid: this.contactList[index].uid,
+      surname: this.contactList()[index].surname,
+      lastname: this.contactList()[index].lastname,
+      mail: this.contactList()[index].mail,
+      phone: this.contactList()[index].phone,
+      color: this.contactList()[index].color,
+      uid: this.contactList()[index].uid,
     }
   }
 
@@ -158,7 +159,7 @@ export class ContactService {
   }
 
   async editContactToDatabase($index: number, contact: Contact) {
-    await updateDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!), {
+    await updateDoc(doc(this.firestore, 'contacts', this.contactList()[$index].id!), {
       surname: contact.surname,
       lastname: contact.lastname,
       mail: contact.mail,
@@ -170,7 +171,7 @@ export class ContactService {
   }
 
   async deleteContact($index: number) {
-    await deleteDoc(doc(this.firestore, 'contacts', this.contactList[$index].id!));
+    await deleteDoc(doc(this.firestore, 'contacts', this.contactList()[$index].id!));
     this.contactSelected = false;
     this.editing = false;
     this.detailsOpen = false;
