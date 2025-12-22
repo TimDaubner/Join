@@ -56,56 +56,59 @@ export class AuthService {
     this.callUserData();
   }
 
-  async createNewAccount(mail: string, password: string) {
+async createNewAccount(mail: string, password: string) {
+    if (this.isDebugging) console.log("Start Registration");
 
-    //call create account
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + "call create account");
-    }
-    await createUserWithEmailAndPassword(this.authFirestore, mail, password)
-      .then(async (userCredentials) => {
-
-        //after creating account
-        if (this.isDebugging) {
-
-          let now = new Date();
-          let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-          console.warn(timeWithMs + " after creating account");
-        }
+    try {
+        // 1. User erstellen (Das loggt den User AUTOMATISCH ein!)
+        const userCredentials = await createUserWithEmailAndPassword(this.authFirestore, mail, password);
+        const uid = userCredentials.user.uid;
 
         this.isNew = true;
-        console.log(userCredentials.user.uid);
-        await this.createContactObject(userCredentials.user.uid);
-        await this.loginUser(mail, password);
+        console.log("User created:", uid);
+
+        // 2. Kontakt erstellen und WARTEN
+        await this.createContactObject(uid);
+
+        // WICHTIG: Kein this.loginUser() hier aufrufen! 
+        // Der User ist durch createUserWithEmailAndPassword bereits eingeloggt.
         
+        // 3. Kurz warten, damit Auth State sicher gesetzt ist (optional, aber sicher ist sicher)
+        this.login(); // Setzt dein lokales isAuthenticated = true
+        
+        // 4. Weiterleiten
         this.isNew = false;
         this.router.navigate(['/summary']);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
 
-  async createContactObject(uid: string) {
-    //set conatct object fields
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " set conatct object fields");
-    } 
+    } catch (error) {
+        console.error("Registration failed:", error);
+    }
+}
+
+async createContactObject(uid: string) {
+    // Felder setzen
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
-    this.currentUserName = this.contact.surname + " " + this. contact.lastname; 
     this.contact.color = this.contact_service.getRandomColor();
+    
+    // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
+    this.currentUserName = this.contact.surname + " " + this.contact.lastname;
+    this.currentuser = uid;
+
+    // Kontakt Objekt für DB vorbereiten
     let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-    if (uid) {
-      this.currentuser = uid;
-      this.getUserName(this.currentuser);
-    }
+
+    // PROBLEM LÖSUNG: Optimistisches Update
+    // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
+    this.contact_service.contactList.push(newContact); 
+
+    // Jetzt in die Datenbank schreiben
     await this.contact_service.addContactToDatabase(newContact);
-  }
+    
+    // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
+    // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
+    // this.getUserName(this.currentuser);
+}
 
   correctInput(data: string) {
     let cache: string = '';
