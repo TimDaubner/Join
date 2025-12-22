@@ -124,8 +124,8 @@ export class AuthService {
       .then((input) => {
         console.log('login successfull');
 
-        this.router.navigate(['/summary']);
         this.login();
+        this.router.navigate(['/summary']);
       })
       .catch((error) => {
         console.log(error);
@@ -178,7 +178,6 @@ export class AuthService {
   logoutUser() {
     //call logout user
     if (this.isDebugging) {
-
       let now = new Date();
       let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
       console.warn(timeWithMs + " call logout user + auth firestore unsubscribe");
@@ -186,6 +185,7 @@ export class AuthService {
     this.logout();
     //auth firestore unsubscribe
     this.authFirestore.signOut();
+    this.router.navigate(['/']);
   }
 
   callUserData() {

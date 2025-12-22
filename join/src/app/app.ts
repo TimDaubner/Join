@@ -16,12 +16,7 @@ import { AuthService } from './shared/services/auth/auth.service';
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('join');
-  board = inject(BoardService);
-  contact = inject(ContactService);
-  auth = inject(AuthService);
-
-  constructor(private router: Router) {}
+  router:Router = inject(Router);
 
   get hideFooterHeader(): boolean {
     return this.router.url === '/login';

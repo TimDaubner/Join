@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../../../interfaces/contact.interface';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +14,6 @@ export class ContactService {
   isAdded = false;
 
   firestore: Firestore = inject(Firestore);
-  // auth_service: AuthService = inject(AuthService);
 
   initials = "";
   contactSelected = false;

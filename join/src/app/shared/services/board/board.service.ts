@@ -3,22 +3,18 @@ import {
   collection,
   Firestore,
   onSnapshot,
-  Timestamp,
   addDoc,
   updateDoc,
   doc,
   deleteDoc,
 } from '@angular/fire/firestore';
 import { ColumnCategory, Task } from '../../../interfaces/task.interface';
-import { ContactService } from '../contact/contact.service';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
   firestore: Firestore = inject(Firestore);
-  // contact_service: ContactService = inject(ContactService);
   initials: string[] = [];
   unsubscribe;
   taskList: Task[] = [];

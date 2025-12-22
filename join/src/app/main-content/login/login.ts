@@ -2,7 +2,6 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactService } from '../../shared/services/contact/contact.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Login {
   auth_service = inject(AuthService);
-  // contact_service = inject(ContactService);
 
   //uid quick access
 
@@ -50,20 +48,20 @@ export class Login {
     }, 300)
   }
 
-  SignUp() {
-    this.auth_service.createNewAccount(this.auth_service.contact.mail, this.firstPassword);
+  async SignUp() {
+    await this.auth_service.createNewAccount(this.auth_service.contact.mail, this.firstPassword);
   }
 
   async loginAsGuest() {
-    this.auth_service.loginAsGuest();
+    await this.auth_service.loginAsGuest();
   }
 
-  loginUser() {
-    this.auth_service.loginUser(this.mailValue, this.passwordValue);
+  async loginUser() {
+    await this.auth_service.loginUser(this.mailValue, this.passwordValue);
   }
 
-  logoutFromJoin() {
-    this.auth_service.logout();
+  async logoutFromJoin() {
+    await this.auth_service.logout();
   }
 
   changeOverlayToSignUp() {
@@ -83,6 +81,7 @@ export class Login {
     }
     this.onPasswordInput();
   }
+
   toggleVisibilityP() {
     if (this.isVisible) {
       this.isVisible = false
@@ -115,6 +114,7 @@ export class Login {
       this.passwordIcon = './assets/icons/visibility.svg'
     }
   }
+
   onPasswordInputP() {
     let input = this.firstPassword;
     if (input == '') {
@@ -127,6 +127,7 @@ export class Login {
       this.passwordIcon = './assets/icons/visibility.svg'
     }
   }
+
   onPasswordInputCP() {
     let input = this.confirmPassword;
     if (input == '') {

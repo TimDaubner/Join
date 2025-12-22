@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -11,5 +11,5 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrl: './footer.scss',
 })
 export class Footer {
-  constructor(public authService: AuthService) {}
+  authService:AuthService = inject(AuthService);
 }

@@ -25,10 +25,6 @@ export class Header {
 
   logoutFromJoin() {
     this.auth_service.logoutUser();
-    this.router.navigate(['/']);
-    // if(this.auth_service.isLoggedIn()){
-    //   this.auth_service.logout();
-    // }
   }
 
   getInitials(name: string) {
