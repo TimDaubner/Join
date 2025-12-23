@@ -17,7 +17,6 @@ export class AuthService {
   private authFirestore = inject(Auth);
   private isAuthenticated = false;
 
-  //Auth Firebase
   firestore: Firestore = inject(Firestore);
   private accountList: Account[] = [];
 
@@ -38,8 +37,6 @@ export class AuthService {
 
   isNew: boolean = false;
 
-  isDebugging = false;
-
   isLoginValid = true;
 
   isNewUser = false;
@@ -49,27 +46,15 @@ export class AuthService {
   }
 
 async createNewAccount(mail: string, password: string) {
-    if (this.isDebugging) console.log("Start Registration");
 
     try {
       this.isNewUser = true;
-      // 1. User erstellen (Das loggt den User AUTOMATISCH ein!)
       const userCredentials = await createUserWithEmailAndPassword(this.authFirestore, mail, password);
       const uid = userCredentials.user.uid;
 
       this.isNew = true;
-      console.log("User created:", uid);
-      
-        // 2. Kontakt erstellen und WARTEN
-        // await this.createContactObject(uid);
+        this.login(); 
         
-        // WICHTIG: Kein this.loginUser() hier aufrufen! 
-        // Der User ist durch createUserWithEmailAndPassword bereits eingeloggt.
-        
-        // 3. Kurz warten, damit Auth State sicher gesetzt ist (optional, aber sicher ist sicher)
-        this.login(); // Setzt dein lokales isAuthenticated = true
-        
-        // 4. Weiterleiten
         this.isNew = false;
         this.router.navigate(['/summary']);        
     } catch (error) {
@@ -78,28 +63,9 @@ async createNewAccount(mail: string, password: string) {
 }
 
   async createContactObject(uid: string) {
-    // Felder setzen
     this.contact.surname = this.correctInput(this.contact.surname);
     this.contact.lastname = this.correctInput(this.contact.lastname);
-    // this.contact.color = this.contact_service.getRandomColor();
-    
-    // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
-    // this.currentUserName = this.contact.surname + " " + this.contact.lastname;
     this.currentuser = uid;
-
-    // Kontakt Objekt für DB vorbereiten
-    // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-
-    // PROBLEM LÖSUNG: Optimistisches Update
-    // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
-    // this.contact_service.contactList().push(newContact); 
-
-    // Jetzt in die Datenbank schreiben
-    // await this.contact_service.addContactToDatabase(newContact);
-    
-    // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
-    // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
-    // this.getUserName(this.currentuser);
 }
 
   correctInput(data: string) {
@@ -118,8 +84,6 @@ async createNewAccount(mail: string, password: string) {
   async loginAsGuest() {
     await signInWithEmailAndPassword(this.authFirestore, 'guest@web.com', 'dackel')
       .then((input) => {
-        console.log('login successfull');
-
         this.login();
         this.router.navigate(['/summary']);
       })
@@ -129,37 +93,14 @@ async createNewAccount(mail: string, password: string) {
   }
 
   async loginUser(mail: string, password: string) {
-    //call loginUser function
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " call loginUser function");
-    }
     this.input_mail = mail;
     this.input_password = password;
 
     await signInWithEmailAndPassword(this.authFirestore, this.input_mail, this.input_password)
       .then((input) => {
-        //
         if (input.user) {
-          // login with new account
-          if (this.isDebugging) {
-
-            let now = new Date();
-            let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-            console.warn(timeWithMs + " login with new account");
-          }
-          console.log('login successfull');
           this.login();
           if (!this.isNew) {
-            // just login
-            if (this.isDebugging) {
-
-              let now = new Date();
-              let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-              console.warn(timeWithMs + " just login");
-            }
-            console.log('login successfull');
             this.isLoginValid = true;
             this.router.navigate(['/summary']);
           }
@@ -172,40 +113,17 @@ async createNewAccount(mail: string, password: string) {
   }
 
   async logoutUser() {
-    //call logout user
-    if (this.isDebugging) {
-
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " call logout user + auth firestore unsubscribe");
-    }
     this.contact.surname = '';
     this.contact.lastname = '';
     this.contact.mail = '';
     this.logout();
-    //auth firestore unsubscribe
     await this.authFirestore.signOut();
   }
 
   callUserData() {
-    // call user data
-    if(this.isDebugging){
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " call user data");
-    }
-
     onIdTokenChanged(this.authFirestore, (user) => {      
       if (user) {
-        //cache uid in currentuser
-        if (this.isDebugging) {
-          let now = new Date();
-          let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-          console.warn(timeWithMs + " cache uid in currentuser");
-          console.log(user.uid);
-        }
         this.currentuser = user.uid;
-        // this.getUserName(this.currentuser);
       }
     });
   }
@@ -215,34 +133,15 @@ async createNewAccount(mail: string, password: string) {
   }
 
   logout(): void {
-    // logout user
-
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " logout user");
-    }
     this.isAuthenticated = false;
     this.currentUserName = '';
   }
 
   isLoggedIn(): boolean {
-    //return loggedIn state
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " return loggedIn state");
-    }
     return this.isAuthenticated;
   }
 
   setAccountObject(idPram: string, obj: Account): Account {
-    //create acc object
-    if (this.isDebugging) {
-      let now = new Date();
-      let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-      console.warn(timeWithMs + " create acc object");
-    }
     return {
       email: obj.email,
       id: idPram,
@@ -250,29 +149,4 @@ async createNewAccount(mail: string, password: string) {
       password: obj.password,
     };
   }
-
-  // getUserName(currentuser: string) {
-  //   //get User Initials + Name
-  //   if (this.isDebugging) {
-  //     let now = new Date();
-  //     let timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-  //     console.warn(timeWithMs + " get User Initials + Name");
-  //     // console.warn(this.contact_service.contactList);
-  //     console.warn(this.currentuser);
-  //     console.warn(this.currentUserName);
-  //   }
-
-  //   this.contact_service.contactList().filter((c) => {
-      
-  //     if (c.uid === currentuser) {
-  //       this.currentUserName = c.surname + " " + c.lastname;
-  //       return
-  //     }
-  //   })
-  // }
-
 }
-
-// const now = new Date();
-// const timeWithMs = now.toLocaleTimeString("de-DE") + "." + now.getMilliseconds();
-// console.log(timeWithMs);

@@ -17,12 +17,10 @@ export class BoardService {
   firestore: Firestore = inject(Firestore);
   initials: string[] = [];
   unsubscribe;
-  // taskList: Task[] = [];
   taskList = signal<Task[]>([]);
   taskColumnType: ColumnCategory = 'To do'
   isAddTaskOpen: boolean = false;
 
-  // Overlay
   isClosing: boolean = true;
 
   constructor() {
@@ -31,7 +29,6 @@ export class BoardService {
       const tasks:Task[] = [];
       tasksSnapshot.forEach((task) => {
         tasks.push(this.setTaskObject(task.id, task.data() as Task));
-        // console.log(task);
       });
       this.taskList.set(tasks);
     }, (error) => {
@@ -44,8 +41,6 @@ export class BoardService {
       this.unsubscribe();
     }
   }
-
-  // sortTasks
 
   setTaskObject(idParam: string, obj: Task): Task {
     return {

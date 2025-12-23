@@ -13,8 +13,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class Login {
   auth_service = inject(AuthService);
 
-  //uid quick access
-
   userLoggedIn: string = 'Guest';
 
 

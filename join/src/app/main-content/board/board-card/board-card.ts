@@ -9,9 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './board-card.scss',
 })
 export class BoardCard {
-  //(drag)
-  //(dragover)
-  //https://angular.dev/guide/drag-drop
-
   showCardDetails() {} 
 }

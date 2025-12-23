@@ -32,14 +32,12 @@ export class Summary {
   shownDueDate = "";
 
   constructor() {
-    // Der Effect läuft automatisch, wenn sich boardService.taskList() ändert
     effect(() => {
       const tasks = this.boardService.taskList();
       
-      // Nur ausführen, wenn Aufgaben da sind
       if (tasks.length > 0) {
         this.fillTaskLists();
-        this.getHighestPrioTask(); // Direkt berechnen, wenn Daten da sind
+        this.getHighestPrioTask(); 
       }
     });
   }
@@ -61,12 +59,10 @@ export class Summary {
   }
 
   async createContactObject(uid: string) {
-    // Felder setzen
     this.authService.contact.surname = this.authService.correctInput(this.authService.contact.surname);
     this.authService.contact.lastname = this.authService.correctInput(this.authService.contact.lastname);
     this.authService.contact.color = this.contactService.getRandomColor();
 
-    // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
     setTimeout(() => {
         this.authService.currentUserName = this.authService.contact.surname + " " + this.authService.contact.lastname;
     }, 0);
@@ -75,20 +71,6 @@ export class Summary {
     this.authService.isNewUser = false;
 
     await this.contactService.addContactToDatabase(this.authService.contact,false);
-    // console.log(this.authService.contact);
-
-    // Kontakt Objekt für DB vorbereiten
-    // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
-
-    // PROBLEM LÖSUNG: Optimistisches Update
-    // Füge den Kontakt sofort zur lokalen Liste hinzu, damit er auf der nächsten Seite da ist!
-    // this.contact_service.contactList().push(newContact); 
-
-    // Jetzt in die Datenbank schreiben
-
-    // getUserName ist hier eigentlich überflüssig, da wir die Namen oben schon haben,
-    // aber wenn du es brauchst, wird es jetzt funktionieren, da wir gepusht haben.
-    // this.getUserName(this.currentuser);
   }
 
   fillTaskLists() {
@@ -104,9 +86,6 @@ export class Summary {
         this.urgentTasks.push(this.boardService.taskList()[i]);
       }
     }
-    console.log(this.boardService.taskList());
-    
-    console.log('filledTaskList');
   }
   
   getHighestPrioTask() {
@@ -125,7 +104,6 @@ export class Summary {
     else {
       this.shownDueDate = "There are no open Tasks with deadlines"
     }
-    console.log('set Prio');
   }
   
   getNextDueDate(prioList: Task[]) {
@@ -139,10 +117,8 @@ export class Summary {
           taskTitle = prioList[i].title
         }
       }
-      console.log('get date');
       return closestDeadline.toDate().toLocaleDateString('en-UK');
     }
-    console.log('get date');
     return 'No upcoming deadline';
   }
 
@@ -173,9 +149,6 @@ export class Summary {
   }
 
   getUserName(currentuser: string) {
-    // console.log(currentuser);
-    // console.log(this.contactService.contactList());
-
     this.contactService.contactList().filter((c) => {
       if (c.uid === currentuser) {
         this.authService.currentUserName = c.surname + " " + c.lastname;

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './shared/services/auth/auth-guard';
-import { MainContent } from './main-content/main-content';
 import { Login } from './main-content/login/login';
 import { PrivacyPolicy } from './main-content/legal/privacy-policy/privacy-policy';
 import { LegalNotice } from './main-content/legal/legal-notice/legal-notice';
@@ -20,5 +19,4 @@ export const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicy},
   { path: 'help', component: HelpSection, canActivate: [authGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
-  // { path: 'logout', component: Logout },
 ];

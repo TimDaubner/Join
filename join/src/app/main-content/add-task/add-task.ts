@@ -182,7 +182,6 @@ export class AddTask {
     this.subtaskInput = "";
   }
 
-  //note (hier könnte die ID probleme aufwerfen weil sie nicht eindeutig ist)
   addSubtask() {
     let newId = this.newTask.subTask.length;
     this.newTask.subTask.push(

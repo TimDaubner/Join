@@ -25,7 +25,6 @@ app-footer {
     display: flex;
     justify-content: center;
     max-width: 1920px;
-    // margin-left: clamp(180px, 16.1vw, 232px);
   }
 }
 
@@ -40,9 +39,3 @@ app-footer {
 .hide {
   display: none;
 }
-
-// @media (max-width: 936px) {
-//     #main_content {
-//         margin-top: 70px;
-//     }
-// }

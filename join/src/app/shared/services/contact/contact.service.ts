@@ -60,33 +60,12 @@ export class ContactService {
   unsubscribe:any;
 
   constructor() {
-    // this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
-    //   console.log("Contact Service läuft jetzt");
-
-    //   const contacts: Contact[] = [];
-    //   contactsSnapshot.forEach((contact) => {
-    //     contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
-    //   });
-    //   this.sortFunc(contacts);
-    //   this.contactList.set(contacts);
-    // }, (error) => {
-    //   console.error(`connection to firestore permission-denied -> ${error}`);
-    //   // console.log('');
-
-    //   // if(this.auth_service.isLoggedIn()){ 
-    //   // }
-    // });
-
     onIdTokenChanged(this.auth, (user) => {
       if (user?.uid == null) {
-        console.log("token refreshed");
-
         this.unsubscribe();
       }
       else {
         this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
-          console.log("Contact Service läuft jetzt");
-
           const contacts: Contact[] = [];
           contactsSnapshot.forEach((contact) => {
             contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
@@ -95,26 +74,10 @@ export class ContactService {
           this.contactList.set(contacts);
         }, (error) => {
           console.error(`connection to firestore permission-denied -> ${error}`);
-          // console.log('');
-
-          // if(this.auth_service.isLoggedIn()){ 
-          // }
         });
       }
     });
   }
-
-
-  // fetchDatabase(collectionData : string, collectionArray : [], type: any){
-  //   this.unsubscribe = onSnapshot(collection(this.firestore, collectionData), (dataSnapshot) => {
-  //     collectionArray = [];
-  //     dataSnapshot.forEach((data) => {
-  //       collectionArray.push(this.setContactObject(data.id, data.data() as type))
-  //     });
-  //   });
-  // }
-
-
 
   closeDetails() {
     this.detailsOpen = false;
@@ -197,11 +160,6 @@ export class ContactService {
       }, 3000);
     }
     await addDoc(collection(this.firestore, "contacts"), contact);
-    console.log(contact);
-    console.log("Hier wurde ein Kontakt erstellt");
-
-
-    // this.sortFunc();
   }
 
   async editContactToDatabase($index: number, contact: Contact) {

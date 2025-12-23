@@ -26,7 +26,6 @@ export class EditContactOverlay {
   @ViewChild('mail') mail!: NgModel;
   @ViewChild('phone') phone!: NgModel;
 
-  // eigentliche Idee wäre die currentIndex variable wieder leer zu machen. Da aber eine number erwartet wird...
   saveContact() {
     if (this.checkCorrectInput()) {
       this.checkInputs();

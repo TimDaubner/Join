@@ -26,20 +26,17 @@ app-add-contact-overlay {
     position: fixed;
     z-index: 101;
     opacity: 0;
-    // display: none;
     transition: all 600ms ease-in-out;
 }
 
 app-add-contact-overlay.show {
     transform: translateX(0);
     opacity: 1;
-    // display: flex;
 }
 
 app-add-contact-overlay.hide {
     transform: translateX(100vw);
     opacity: 0;
-    // display: none;
 }
 
 .black {
@@ -82,7 +79,6 @@ app-add-contact-overlay.hide {
     border-radius: 24px;
     opacity: 0;
     transition: all 1500ms ease-in-out;
-    // display: none;
 }
 
 .message.show {

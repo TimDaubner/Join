@@ -33,17 +33,11 @@ export class CardDetails {
   @Input() isTaskDetailsOpen: boolean = false;
   @Output() close = new EventEmitter<void>();
 
-  // State
   isEditing = false;
-  editedTask: any = {}; // Kopie für das Formular
+  editedTask: any = {}; 
   
-  // Edit UI States
   workerDropdown = false;
   subtaskInput = "";
-
-  // ##########################################
-  // # LOGIC: VIEW MODE
-  // ##########################################
 
   getPriorityIcon(priority?: string): string {
     if (!priority) return '';
@@ -51,7 +45,6 @@ export class CardDetails {
     return `./assets/icons/prio_${p}.svg`;    
   }
 
-  // Für die Edit-Buttons (Unterscheidung active/inactive Icons)
   getEditPriorityIcon(prio: string): string {
     const isActive = this.editedTask.priority === prio;
     const path = isActive ? `prio_${prio.toLowerCase()}_white.svg` : `prio_${prio.toLowerCase()}.svg`;
@@ -74,7 +67,6 @@ export class CardDetails {
 
   getDueDate(date: any) {
     if (!date) return '';
-    // Konvertierung falls Timestamp
     const d = date.toDate ? date.toDate() : new Date(date);
     return d.toLocaleDateString('en-UK');
   }
@@ -83,28 +75,19 @@ export class CardDetails {
     event.preventDefault();
     sub.status = !sub.status;
     this.saveTask();
-    // Hier optional direkt speichern, falls gewünscht:
-    // this.board_service.updateTask(this.selectedTask);
   }
 
-  // ##########################################
-  // # LOGIC: EDIT MODE
-  // ##########################################
-
   startEditing() {
-    // 1. Deep Copy erstellen
     this.editedTask = JSON.parse(JSON.stringify(this.selectedTask));
     
-    // 2. Datum für Datepicker vorbereiten (muss JS Date Object sein)
     if (this.editedTask.dueDate && this.editedTask.dueDate.seconds) {
-        // Fall: Firebase Timestamp
         this.editedTask.dueDate = new Date(this.editedTask.dueDate.seconds * 1000);
     } else if (typeof this.editedTask.dueDate === 'string') {
         this.editedTask.dueDate = new Date(this.editedTask.dueDate);
     }
     
     this.isEditing = true;
-    this.workerDropdown = false; // Reset dropdown
+    this.workerDropdown = false; 
   }
 
   cancelEdit() {
@@ -113,26 +96,15 @@ export class CardDetails {
   }
 
   saveTask() {
-    // Daten zurückschreiben
-    // Hinweis: Hier müsstest du ggf. das Date-Objekt wieder in einen Timestamp wandeln, 
-    // falls dein Service das erwartet.
-    
     Object.assign(this.selectedTask!, this.editedTask);
     this.board_service.editedTaskToDB(this.selectedTask!);
-    
-    // this.board_service.editTaskToDatabase()
-    // Service Update Call hier:
-    // this.board_service.updateTask(this.selectedTask).subscribe(...)
-    
     this.isEditing = false;
   }
 
-  // --- Priority Logic ---
   setPriority(prio: string) {
     this.editedTask.priority = prio;
   }
 
-  // --- Assignee Dropdown Logic ---
   toggleDropdown() {
     this.workerDropdown = !this.workerDropdown;
   }
@@ -148,18 +120,17 @@ export class CardDetails {
 
     const index = this.editedTask.assignedTo.indexOf(fullname);
     if (index > -1) {
-      this.editedTask.assignedTo.splice(index, 1); // Entfernen
+      this.editedTask.assignedTo.splice(index, 1); 
     } else {
-      this.editedTask.assignedTo.push(fullname); // Hinzufügen
+      this.editedTask.assignedTo.push(fullname); 
     }
   }
 
-  // --- Subtask Edit Logic ---
   addSubtask() {
     if(this.subtaskInput.trim()) {
         if(!this.editedTask.subTask) this.editedTask.subTask = [];
         this.editedTask.subTask.push({
-            id: Date.now().toString(), // Simple ID gen
+            id: Date.now().toString(), 
             subDescription: this.subtaskInput,
             status: false
         });
@@ -184,10 +155,6 @@ export class CardDetails {
   stopEdit(id: string) {
     this.editingState[id] = false;
   }
-
-  // ##########################################
-  // # GENERAL ACTIONS
-  // ##########################################
 
   closeTaskDetails() {
     this.isEditing = false;
