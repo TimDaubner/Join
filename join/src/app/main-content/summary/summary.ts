@@ -4,7 +4,7 @@ import { Task } from '../../interfaces/task.interface';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { ContactService } from '../../shared/services/contact/contact.service';
-import { Auth, onIdTokenChanged } from '@angular/fire/auth';
+import { Auth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-summary',
