@@ -55,19 +55,16 @@ export class ContactService {
 
   constructor() {
     this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
+      console.log("Contact Service läuft jetzt");
+      
       const contacts: Contact[] = [];
       contactsSnapshot.forEach((contact) => {
         contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
-        this.sortFunc();
       });
+      this.sortFunc(contacts);
       this.contactList.set(contacts);
-      console.log(this.contactList());
     }, (error) => {
       console.error(`connection to firestore permission-denied -> ${error}`);
-      console.log(this.contactList());
-      setTimeout(()=>{
-        console.log(this.contactList());
-      },1000)
       // console.log('');
 
       // if(this.auth_service.isLoggedIn()){ 
@@ -90,8 +87,8 @@ export class ContactService {
     this.detailsOpen = false;
   }
 
-  sortFunc() {
-    this.contactList().sort((a, b) => a.lastname?.localeCompare(b.lastname));
+  sortFunc(contacts:Contact[]) {
+    contacts.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
   ngOnDestroy() {
@@ -155,12 +152,19 @@ export class ContactService {
     }
   }
 
-  async addContactToDatabase(contact: Contact) {
-    this.isAdded = true;
-    setTimeout(() => {
-      this.isAdded = false;
-    }, 3000);
+  async addContactToDatabase(contact: Contact,timeOut:boolean = false) {
+    if(timeOut){
+      this.isAdded = true;
+      setTimeout(() => {
+        this.isAdded = false;
+      }, 3000);
+    }
     await addDoc(collection(this.firestore, "contacts"), contact);
+    console.log(contact);
+    console.log("Hier wurde ein Kontakt erstellt");
+    
+    
+    // this.sortFunc();
   }
 
   async editContactToDatabase($index: number, contact: Contact) {

@@ -31,6 +31,7 @@ export class BoardService {
       const tasks:Task[] = [];
       tasksSnapshot.forEach((task) => {
         tasks.push(this.setTaskObject(task.id, task.data() as Task));
+        // console.log(task);
       });
       this.taskList.set(tasks);
     }, (error) => {

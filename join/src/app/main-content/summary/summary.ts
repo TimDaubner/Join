@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { BoardService } from '../../shared/services/board/board.service';
 import { Task } from '../../interfaces/task.interface';
 import { AuthService } from '../../shared/services/auth/auth.service';
@@ -31,17 +31,30 @@ export class Summary {
 
   shownDueDate = "";
 
+  constructor() {
+    // Der Effect läuft automatisch, wenn sich boardService.taskList() ändert
+    effect(() => {
+      const tasks = this.boardService.taskList();
+      
+      // Nur ausführen, wenn Aufgaben da sind
+      if (tasks.length > 0) {
+        this.fillTaskLists();
+        this.getHighestPrioTask(); // Direkt berechnen, wenn Daten da sind
+      }
+    });
+  }
+
   ngOnInit() {
-    this.fillTaskLists();
-    this.getHighestPrioTask();
+  
     this.setGreeting();
+   
     if(this.authService.isNewUser){
       this.createContactObject(this.authService.currentuser);
     }
     const intervalId = setInterval(() => {
       if (this.contactService.contactList().length > 0) {
         this.getUserName(this.authService.currentuser);
-
+        
         clearInterval(intervalId);
       }
     }, 50);
@@ -54,14 +67,15 @@ export class Summary {
     this.authService.contact.color = this.contactService.getRandomColor();
 
     // Name sofort setzen (nicht erst über getUserName suchen, der User ist ja noch nicht in der Liste)
-    this.authService.currentUserName = this.authService.contact.surname + " " + this.authService.contact.lastname;
+    setTimeout(() => {
+        this.authService.currentUserName = this.authService.contact.surname + " " + this.authService.contact.lastname;
+    }, 0);
     this.authService.currentuser = uid;
     this.authService.contact.uid = this.authService.currentuser;
     this.authService.isNewUser = false;
 
-    await this.contactService.addContactToDatabase(this.authService.contact);
-    console.log(this.authService.contact);
-    
+    await this.contactService.addContactToDatabase(this.authService.contact,false);
+    // console.log(this.authService.contact);
 
     // Kontakt Objekt für DB vorbereiten
     // let newContact = this.contact_service.setContactObject(uid, this.contact, uid);
@@ -78,7 +92,7 @@ export class Summary {
   }
 
   fillTaskLists() {
-    for (let i = 0; i < this.boardService.taskList.length; i++) {
+    for (let i = 0; i < this.boardService.taskList().length; i++) {
       if (this.boardService.taskList()[i].priority == 'Low') {
         this.lowTasks.push(this.boardService.taskList()[i]);
       } else if (this.boardService.taskList()[i].priority == 'Medium') {
@@ -87,29 +101,33 @@ export class Summary {
         this.urgentTasks.push(this.boardService.taskList()[i]);
       }
     }
+    console.log(this.boardService.taskList());
+    
+    console.log('filledTaskList');
   }
-
+  
   getHighestPrioTask() {
     if (this.urgentTasks.length > 0) {
       this.highestPrioTask = "Urgent"
-      this.shownDueDate = this.getNextDueDate(this.urgentTasks)
+      this.shownDueDate = this.getNextDueDate(this.urgentTasks);
     }
     else if (this.urgentTasks.length == 0 && this.mediumTasks.length > 0) {
       this.highestPrioTask = "Medium"
-      this.shownDueDate = this.getNextDueDate(this.mediumTasks)
+      this.shownDueDate = this.getNextDueDate(this.mediumTasks);
     }
     else if (this.urgentTasks.length == 0 && this.mediumTasks.length == 0 && this.lowTasks.length > 0) {
       this.highestPrioTask = "Low"
-      this.shownDueDate = (this.getNextDueDate(this.lowTasks))
+      this.shownDueDate = (this.getNextDueDate(this.lowTasks));
     }
     else {
       this.shownDueDate = "There are no open Tasks with deadlines"
     }
+    console.log('set Prio');
   }
-
+  
   getNextDueDate(prioList: Task[]) {
     if (prioList[0]) {
-
+      
       let closestDeadline = prioList[0].dueDate;
       let taskTitle = "";
       for (let i = 1; i < prioList.length; i++) {
@@ -118,8 +136,10 @@ export class Summary {
           taskTitle = prioList[i].title
         }
       }
+      console.log('get date');
       return closestDeadline.toDate().toLocaleDateString('en-UK');
     }
+    console.log('get date');
     return 'No upcoming deadline';
   }
 
@@ -150,8 +170,8 @@ export class Summary {
   }
 
   getUserName(currentuser: string) {
-    console.log(currentuser);
-    console.log(this.contactService.contactList());
+    // console.log(currentuser);
+    // console.log(this.contactService.contactList());
 
     this.contactService.contactList().filter((c) => {
       if (c.uid === currentuser) {

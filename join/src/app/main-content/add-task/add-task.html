@@ -84,7 +84,7 @@
                     <div class="list_assigned">
                         @for (assignee of newTask.assignedTo; track newTask.id; let i = $index) {
                 
-                            @for (contact of this.firebase.contactList(); track $index; let index = $index)
+                            @for (contact of firebase.contactList(); track $index; let index = $index)
                             {
                                 @if(i == assigneesInitialsCount && index == assigneesInitialsCount)
                                 {

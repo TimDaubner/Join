@@ -2,7 +2,6 @@ import { Component, inject, ViewChild } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactService } from '../../shared/services/contact/contact.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({

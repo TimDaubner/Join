@@ -32,7 +32,7 @@ export class AddContactOverlay {
     if (this.checkCorrectInput()) {
       this.checkInputs();
       this.contact.color = this.contact_service.getRandomColor();
-      this.contact_service.addContactToDatabase(this.contact);
+      this.contact_service.addContactToDatabase(this.contact,true);
       this.clearInputs();
       this.isNewContactAdded = true;
       this.callCloseOverlay();

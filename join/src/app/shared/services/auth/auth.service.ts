@@ -194,7 +194,7 @@ async createNewAccount(mail: string, password: string) {
       console.warn(timeWithMs + " call user data");
     }
 
-    onIdTokenChanged(this.authFirestore, (user) => {
+    onIdTokenChanged(this.authFirestore, (user) => {      
       if (user) {
         //cache uid in currentuser
         if (this.isDebugging) {
