@@ -92,6 +92,9 @@ export class Summary {
   }
 
   fillTaskLists() {
+    this.urgentTasks = [];
+    this.mediumTasks = [];
+    this.lowTasks = [];
     for (let i = 0; i < this.boardService.taskList().length; i++) {
       if (this.boardService.taskList()[i].priority == 'Low') {
         this.lowTasks.push(this.boardService.taskList()[i]);

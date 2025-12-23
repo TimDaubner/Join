@@ -103,6 +103,7 @@ async createNewAccount(mail: string, password: string) {
 }
 
   correctInput(data: string) {
+    data = data.trim();
     let cache: string = '';
     for (let i = 0; i < data.length; i++) {
       if (i == 0) {
@@ -170,7 +171,7 @@ async createNewAccount(mail: string, password: string) {
       });
   }
 
-  logoutUser() {
+  async logoutUser() {
     //call logout user
     if (this.isDebugging) {
 
@@ -183,7 +184,7 @@ async createNewAccount(mail: string, password: string) {
     this.contact.mail = '';
     this.logout();
     //auth firestore unsubscribe
-    this.authFirestore.signOut();
+    await this.authFirestore.signOut();
   }
 
   callUserData() {

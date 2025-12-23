@@ -1,11 +1,18 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { addDoc, collection, Firestore, onSnapshot, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import {
+  Auth,
+  onIdTokenChanged,
+} from '@angular/fire/auth';
 import { Contact } from '../../../interfaces/contact.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
+  firestore: Firestore = inject(Firestore);
+  auth: Auth = inject(Auth);
+
   contact: Contact[] = [];
   contactList = signal<Contact[]>([]);
   currentIndex!: number;
@@ -13,7 +20,6 @@ export class ContactService {
   detailsOpen = false;
   isAdded = false;
 
-  firestore: Firestore = inject(Firestore);
 
   initials = "";
   contactSelected = false;
@@ -51,26 +57,53 @@ export class ContactService {
     '#FFBB2B'
   ]
 
-  unsubscribe;
+  unsubscribe:any;
 
   constructor() {
-    this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
-      console.log("Contact Service läuft jetzt");
-      
-      const contacts: Contact[] = [];
-      contactsSnapshot.forEach((contact) => {
-        contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
-      });
-      this.sortFunc(contacts);
-      this.contactList.set(contacts);
-    }, (error) => {
-      console.error(`connection to firestore permission-denied -> ${error}`);
-      // console.log('');
+    // this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
+    //   console.log("Contact Service läuft jetzt");
 
-      // if(this.auth_service.isLoggedIn()){ 
-      // }
+    //   const contacts: Contact[] = [];
+    //   contactsSnapshot.forEach((contact) => {
+    //     contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
+    //   });
+    //   this.sortFunc(contacts);
+    //   this.contactList.set(contacts);
+    // }, (error) => {
+    //   console.error(`connection to firestore permission-denied -> ${error}`);
+    //   // console.log('');
+
+    //   // if(this.auth_service.isLoggedIn()){ 
+    //   // }
+    // });
+
+    onIdTokenChanged(this.auth, (user) => {
+      if (user?.uid == null) {
+        console.log("token refreshed");
+
+        this.unsubscribe();
+      }
+      else {
+        this.unsubscribe = onSnapshot(collection(this.firestore, "contacts"), (contactsSnapshot) => {
+          console.log("Contact Service läuft jetzt");
+
+          const contacts: Contact[] = [];
+          contactsSnapshot.forEach((contact) => {
+            contacts.push(this.setContactObjectSnapshot(contact.id, contact.data() as Contact));
+          });
+          this.sortFunc(contacts);
+          this.contactList.set(contacts);
+        }, (error) => {
+          console.error(`connection to firestore permission-denied -> ${error}`);
+          // console.log('');
+
+          // if(this.auth_service.isLoggedIn()){ 
+          // }
+        });
+      }
     });
   }
+
 
   // fetchDatabase(collectionData : string, collectionArray : [], type: any){
   //   this.unsubscribe = onSnapshot(collection(this.firestore, collectionData), (dataSnapshot) => {
@@ -87,7 +120,7 @@ export class ContactService {
     this.detailsOpen = false;
   }
 
-  sortFunc(contacts:Contact[]) {
+  sortFunc(contacts: Contact[]) {
     contacts.sort((a, b) => a.lastname?.localeCompare(b.lastname));
   }
 
@@ -95,6 +128,10 @@ export class ContactService {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+  }
+
+  unsubscribeContactSnapshot() {
+    this.unsubscribe();
   }
 
   getRandomColor() {
@@ -152,8 +189,8 @@ export class ContactService {
     }
   }
 
-  async addContactToDatabase(contact: Contact,timeOut:boolean = false) {
-    if(timeOut){
+  async addContactToDatabase(contact: Contact, timeOut: boolean = false) {
+    if (timeOut) {
       this.isAdded = true;
       setTimeout(() => {
         this.isAdded = false;
@@ -162,8 +199,8 @@ export class ContactService {
     await addDoc(collection(this.firestore, "contacts"), contact);
     console.log(contact);
     console.log("Hier wurde ein Kontakt erstellt");
-    
-    
+
+
     // this.sortFunc();
   }
 
